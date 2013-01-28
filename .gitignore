@@ -3,5 +3,7 @@
 
 # Whitelist certain files
 !.gitignore
+!.vim/
+!.vim/*
 !.vim/*/*
 !.vimrc

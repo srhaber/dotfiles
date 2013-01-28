@@ -15,7 +15,7 @@ set autoindent              " Preserve current indent on new line
 set backspace=indent,eol,start
 set cmdheight=1
 set expandtab               " Convert all tabs to spaces
-set hidden                  " Allow unsaved background buffers  
+set hidden                  " Allow unsaved background buffers
 set history=10000
 set hlsearch                " Highlight search terms
 set ignorecase smartcase    " Case-sensitivity when search has uppercase chars
@@ -29,7 +29,7 @@ set shiftwidth=2            " Set 2-column shifts
 set showcmd
 set showmatch
 set showtabline=2
-set softtabstop=2           
+set softtabstop=2
 set switchbuf=useopen
 set tabstop=2               " Set 2-column indents
 set textwidth=0             " Don't wrap words
@@ -72,19 +72,55 @@ set listchars=tab:▸\ ,eol:¬
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 " Only do this part when compiled with support for autocommands
-if has("autocmd")
-  augroup vimrcEx
-    " Clear all autocmds in the group
-    autocmd!
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
 
-    " enable file type detection
-    filetype on
-     
-    " syntax of these languages is fussy over tabs vs spaces
-    autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
-     
-    autocmd BufNewFile,BufRead *.god setfiletype ruby
-    autocmd BufNewFile,BufRead *.md setfiletype markdown
-  augroup END
-endif
+  " enable file type detection
+  filetype on
+
+  " syntax of these languages is fussy over tabs vs spaces
+  autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
+
+  autocmd BufNewFile,BufRead *.god setfiletype ruby
+
+  " FIXME This is not overriding the default filetype
+  autocmd BufNewFile,BufRead *.md setfiletype markdown
+
+  " FIXME This is not working
+  " Strip trailing whitespace before saving certain files
+  autocmd BufWritePre *.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.py,*.c :call StripTrailingWhitespaces()
+
+  " Auto-source .vimrc after saving
+  autocmd BufWritePost .vimrc source $MYVIMRC
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STRIP TRAILING WHITESPACE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" http://vimcasts.org/episodes/tidying-whitespace/
+
+function! StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+nnoremap <leader>s :call StripTrailingWhitespaces()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TEXTMATE-STYLE SHIFT INDENTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" http://vimcasts.org/episodes/indentation-commands/
+" FIXME Doesn't seem to work in Mac Terminal
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
 
