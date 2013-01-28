@@ -1,6 +1,8 @@
 [user]
 	name = Shaun Haber
 	email = srhaber@gmail.com
+[color]
+  ui = true
 [alias]
   amend = commit --amend
 	br = branch

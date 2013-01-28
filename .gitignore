@@ -4,6 +4,7 @@
 # Whitelist certain files
 !.gitconfig
 !.gitignore
+!.oh-my-zsh
 !.osx
 !.tomorrow-theme
 !.vim/

@@ -13,3 +13,6 @@
 [submodule ".tomorrow-theme"]
 	path = .tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme.git
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
