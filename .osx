@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Reference: https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
 # Show hidden files in Finder
 defaults write com.apple.Finder AppleShowAllFiles YES
 
