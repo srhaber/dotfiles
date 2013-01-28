@@ -2,11 +2,13 @@
 *
 
 # Whitelist certain files
+!.gitconfig
 !.gitignore
 !.vim/
 !.vim/*
 !.vim/*/*
 !.vimrc
+!.zshrc
 
 # Ignore more stuff
 .vim/.netrwhist 

@@ -1,0 +1,8 @@
+[user]
+	name = Shaun Haber
+	email = srhaber@gmail.com
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
