@@ -2,14 +2,16 @@
 " vim:set ts=2 sts=2 sw=2 expandtab:
 " Inspired by https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PATHOGEN
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
+execute pathogen#helptags()
+filetype plugin indent on
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 set autoindent              " Preserve current indent on new line
 set backspace=indent,eol,start
@@ -36,30 +38,29 @@ set textwidth=0             " Don't wrap words
 set wrap                    " Wrap long lines
 set wildmenu
 
-filetype plugin indent on
-
-syntax on         " Syntax highlighting for vim
+" Synax highlighting
+syntax on
 
 let mapleader=","
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DISABLE ARROW KEYS (FOR TRAINING)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256        " 256 colors
 set background=dark
 color twilight256
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INVISIBLES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vimcasts.org/episodes/show-invisibles/
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
@@ -67,9 +68,9 @@ nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOCOMMANDS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 " Only do this part when compiled with support for autocommands
 augroup vimrcEx
@@ -95,11 +96,10 @@ augroup vimrcEx
   autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STRIP TRAILING WHITESPACE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vimcasts.org/episodes/tidying-whitespace/
-
 function! StripTrailingWhitespaces()
   " Preparation: save last search, and cursor position.
   let _s=@/
@@ -114,13 +114,40 @@ endfunction
 
 nnoremap <leader>s :call StripTrailingWhitespaces()<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXTMATE-STYLE SHIFT INDENTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" http://vimcasts.org/episodes/indentation-commands/
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIXME Doesn't seem to work in Mac Terminal
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
+" http://vimcasts.org/episodes/indentation-commands/
+nmap <d-[> <<
+nmap <d-]> >>
+vmap <d-[> <gv
+vmap <d-]> >gv
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MISC KEY MAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" Easy toggling of splits
+nnoremap <leader>w <c-w>w
+
+" Clear the search buffer when hitting return
+function! MapCR()
+  nnoremap <cr> :nohlsearch<cr>
+endfunction
+call MapCR()
+
+" Easy switching to alternate file
+nnoremap <leader><leader> <c-^>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OPEN FILES IN DIRECTORY OF CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
