@@ -27,6 +27,7 @@ set number                  " Show line numbers
 set numberwidth=4
 set ruler                   " Show current line,col
 set scrolloff=3             " Prevent cursor from reaching screen edges
+set shell=bash              " Vim doesn't work well with ZSH, it seems
 set shiftwidth=2            " Set 2-column shifts
 set showcmd
 set showmatch
