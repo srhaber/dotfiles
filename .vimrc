@@ -85,15 +85,13 @@ augroup vimrcEx
   " syntax of these languages is fussy over tabs vs spaces
   autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
 
-  autocmd BufNewFile,BufRead *.god setfiletype ruby
+  autocmd BufNewFile,BufRead *.god set filetype=ruby
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
 
-  " FIXME This is not overriding the default filetype
-  autocmd BufNewFile,BufRead *.md setfiletype markdown
-
-  " FIXME This is not working
   " Strip trailing whitespace before saving certain files
-  autocmd BufWritePre *.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.py,*.c :call StripTrailingWhitespaces()
+  autocmd BufWritePre .vimrc,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.py,*.c :call <SID>StripTrailingWhitespaces()
 
+  " TODO Prevent cursor from jumping to top after save
   " Auto-source .vimrc after saving
   autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
@@ -102,7 +100,7 @@ augroup END
 " STRIP TRAILING WHITESPACE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vimcasts.org/episodes/tidying-whitespace/
-function! StripTrailingWhitespaces()
+function! <SID>StripTrailingWhitespaces()
   " Preparation: save last search, and cursor position.
   let _s=@/
   let l = line(".")
@@ -117,16 +115,6 @@ endfunction
 nnoremap <leader>s :call StripTrailingWhitespaces()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TEXTMATE-STYLE SHIFT INDENTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FIXME Doesn't seem to work in Mac Terminal
-" http://vimcasts.org/episodes/indentation-commands/
-nmap <d-[> <<
-nmap <d-]> >>
-vmap <d-[> <gv
-vmap <d-]> >gv
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move around splits with <c-hjkl>
@@ -139,6 +127,7 @@ nnoremap <c-l> <c-w>l
 nnoremap <leader>w <c-w>w
 
 " Clear the search buffer when hitting return
+
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
@@ -146,6 +135,12 @@ call MapCR()
 
 " Easy switching to alternate file
 nnoremap <leader><leader> <c-^>
+
+" Easy editing of .vimrc
+nmap <leader>c :tabedit $MYVIMRC<cr>
+
+" Easy commenting (relies on vim-commentary plugin)
+nmap <leader>/ \\\
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
