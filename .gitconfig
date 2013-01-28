@@ -2,7 +2,11 @@
 	name = Shaun Haber
 	email = srhaber@gmail.com
 [alias]
-	st = status
-	co = checkout
-	ci = commit
+  amend = commit --amend
 	br = branch
+	ci = commit
+	co = checkout
+  dc = diff --cached
+  di = diff
+  pom = push origin master
+	st = status
