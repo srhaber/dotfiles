@@ -93,7 +93,7 @@ augroup vimrcEx
 
   " TODO Prevent cursor from jumping to top after save
   " Auto-source .vimrc after saving
-  autocmd BufWritePost .vimrc source $MYVIMRC
+  " autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,7 +127,6 @@ nnoremap <c-l> <c-w>l
 nnoremap <leader>w <c-w>w
 
 " Clear the search buffer when hitting return
-
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
