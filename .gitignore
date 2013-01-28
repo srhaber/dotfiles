@@ -4,6 +4,8 @@
 # Whitelist certain files
 !.gitconfig
 !.gitignore
+!.osx
+!.tomorrow-theme
 !.vim/
 !.vim/*
 !.vim/*/*
@@ -11,4 +13,4 @@
 !.zshrc
 
 # Ignore more stuff
-.vim/.netrwhist 
+.vim/.netrwhist
