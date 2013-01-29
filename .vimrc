@@ -16,6 +16,7 @@ set nocompatible
 set autoindent              " Preserve current indent on new line
 set backspace=indent,eol,start
 set cmdheight=1
+" set cursorline
 set expandtab               " Convert all tabs to spaces
 set hidden                  " Allow unsaved background buffers
 set history=10000
@@ -85,7 +86,7 @@ augroup vimrcEx
   " syntax of these languages is fussy over tabs vs spaces
   autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
 
-  autocmd BufNewFile,BufRead *.god set filetype=ruby
+  autocmd BufNewFile,BufRead Gemfile,*.god set filetype=ruby
   autocmd BufNewFile,BufRead *.md set filetype=markdown
 
   " Strip trailing whitespace before saving certain files
@@ -163,3 +164,7 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>r <Esc>:w\|:!rspec --color %<cr>

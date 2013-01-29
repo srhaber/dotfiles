@@ -12,3 +12,5 @@
   di = diff
   pom = push origin master
 	st = status
+[core]
+	excludesfile = /Users/shaber/.gitignore_global
