@@ -1,4 +1,4 @@
- ~/.vimrc
+" ~/.vimrc
 " vim:set ts=2 sts=2 sw=2 expandtab:
 " Inspired by https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 
