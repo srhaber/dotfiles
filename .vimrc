@@ -1,4 +1,4 @@
-" ~/.vimrc
+ ~/.vimrc
 " vim:set ts=2 sts=2 sw=2 expandtab:
 " Inspired by https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 
@@ -15,8 +15,8 @@ filetype plugin indent on
 set nocompatible
 set autoindent              " Preserve current indent on new line
 set backspace=indent,eol,start
-set cmdheight=1
-" set cursorline
+set cmdheight=2
+set cursorline
 set expandtab               " Convert all tabs to spaces
 set hidden                  " Allow unsaved background buffers
 set history=10000
@@ -26,6 +26,7 @@ set incsearch               " Jump to matches while typing
 set laststatus=2
 set number                  " Show line numbers
 set numberwidth=4
+set pastetoggle=<leader>p
 set ruler                   " Show current line,col
 set scrolloff=3             " Prevent cursor from reaching screen edges
 set shell=bash              " Vim doesn't work well with ZSH, it seems
@@ -60,6 +61,11 @@ map <Down> <Nop>
 set t_Co=256        " 256 colors
 set background=dark
 color twilight256
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" HIGHLIGHTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi CursorLine guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INVISIBLES
