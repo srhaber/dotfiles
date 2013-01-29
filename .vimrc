@@ -146,7 +146,7 @@ nnoremap <leader><leader> <c-^>
 nmap <leader>c :tabedit $MYVIMRC<cr>
 
 " Easy commenting (relies on vim-commentary plugin)
-nmap <leader>/ \\\
+map <leader>/ \\\
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -169,6 +169,12 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COMMAND-T
+" Always reload file list to avoid getting stale
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
