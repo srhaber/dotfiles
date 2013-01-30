@@ -174,9 +174,47 @@ inoremap <s-tab> <c-n>
 " COMMAND-T
 " Always reload file list to avoid getting stale
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
+" RUNNING CODE AND TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>r <Esc>:w\|:!rspec --color %<cr>
+map <leader>r :call RunCode()<cr>
+map <leader>t :call RunTests()<cr>
+
+function! RunCode()
+  let filename = expand("%")
+
+  if match(filename, '\.rb$') >= 0
+    let cmd = "ruby -I./lib " . filename
+  end
+
+  call RunCommand(cmd)
+endfunction
+
+function! RunTests()
+  let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') >= 0
+
+  if in_test_file
+    " Save test file in tabpage variable
+    let t:filename = @%
+  elseif !exists("t:filename")
+    return
+  end
+
+  if match(t:filename, '_spec.rb$') >= 0
+    let cmd = "rspec -I./spec --color " . t:filename
+  elseif match(t:filename, '_test.rb$') >= 0
+    let cmd = "ruby -I./test " . t:filename
+  else
+    return
+  end
+
+  call RunCommand(cmd)
+endfunction
+
+function! RunCommand(cmd)
+  :w
+  :silent !clear
+  exec ":!echo $ " . a:cmd . " && " . a:cmd
+endfunction
