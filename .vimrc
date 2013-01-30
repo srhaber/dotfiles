@@ -187,6 +187,8 @@ function! RunCode()
 
   if match(filename, '\.rb$') >= 0
     let cmd = "ruby -I./lib " . filename
+  else
+    return
   end
 
   call RunCommand(cmd)
