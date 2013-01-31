@@ -89,14 +89,20 @@ augroup vimrcEx
   " enable file type detection
   filetype on
 
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
   " syntax of these languages is fussy over tabs vs spaces
   autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
 
-  autocmd BufNewFile,BufRead Gemfile,*.god set filetype=ruby
+  autocmd BufNewFile,BufRead Gemfile,*.god,*.rake set filetype=ruby
   autocmd BufNewFile,BufRead *.md set filetype=markdown
 
   " Strip trailing whitespace before saving certain files
-  autocmd BufWritePre .vimrc,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.py,*.c :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre .vimrc,Gemfile,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.rake,*.py,*.c :call <SID>StripTrailingWhitespaces()
 
   " TODO Prevent cursor from jumping to top after save
   " Auto-source .vimrc after saving
