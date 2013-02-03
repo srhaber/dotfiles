@@ -211,7 +211,7 @@ function! RunTests()
   end
 
   if match(t:filename, '_spec.rb$') >= 0
-    let cmd = "rspec -I./spec --color " . t:filename
+    let cmd = "rspec --color " . t:filename
   elseif match(t:filename, '_test.rb$') >= 0
     let cmd = "ruby -I./test " . t:filename
   else
