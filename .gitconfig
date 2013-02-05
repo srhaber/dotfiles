@@ -10,7 +10,8 @@
 	co = checkout
   dc = diff --cached
   di = diff
+  lg = log --oneline --decorate
   pom = push origin master
-	st = status
+	st = status -sb
 [core]
 	excludesfile = /Users/shaber/.gitignore_global
