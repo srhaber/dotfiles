@@ -2,6 +2,7 @@
 *
 
 # Whitelist certain files
+!.gemrc
 !.gitconfig
 !.gitignore
 !.gitignore_global
