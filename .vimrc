@@ -1,6 +1,9 @@
 " ~/.vimrc
 " vim:set ts=2 sts=2 sw=2 expandtab:
-" Inspired by https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+"
+" Inspired By
+"   https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+"   https://github.com/mislav/vimfiles/blob/master/.vimrc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PATHOGEN
@@ -35,6 +38,8 @@ set showcmd
 set showmatch
 set showtabline=2
 set softtabstop=2
+set splitbelow              " Open horizontal splits on bottom
+set splitright              " Open vertical splits on right
 set switchbuf=useopen
 set tabstop=2               " Set 2-column indents
 set textwidth=0             " Don't wrap words
@@ -153,6 +158,9 @@ nmap <leader>c :tabedit $MYVIMRC<cr>
 
 " Easy commenting (relies on vim-commentary plugin)
 map <leader>/ \\\
+
+" Toggle the current fold
+nnoremap <Space> za
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
