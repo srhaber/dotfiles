@@ -1,6 +1,9 @@
 " ~/.vimrc
 " vim:set ts=2 sts=2 sw=2 expandtab:
-" Inspired by https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+"
+" Inspired By
+"   https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+"   https://github.com/mislav/vimfiles/blob/master/.vimrc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PATHOGEN
@@ -35,6 +38,8 @@ set showcmd
 set showmatch
 set showtabline=2
 set softtabstop=2
+set splitbelow              " Open horizontal splits on bottom
+set splitright              " Open vertical splits on right
 set switchbuf=useopen
 set tabstop=2               " Set 2-column indents
 set textwidth=0             " Don't wrap words
@@ -89,14 +94,20 @@ augroup vimrcEx
   " enable file type detection
   filetype on
 
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
   " syntax of these languages is fussy over tabs vs spaces
   autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
 
-  autocmd BufNewFile,BufRead Gemfile,*.god set filetype=ruby
+  autocmd BufNewFile,BufRead Gemfile,*.god,*.rake set filetype=ruby
   autocmd BufNewFile,BufRead *.md set filetype=markdown
 
   " Strip trailing whitespace before saving certain files
-  autocmd BufWritePre .vimrc,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.py,*.c :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre .vimrc,Gemfile,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.rake,*.py,*.c :call <SID>StripTrailingWhitespaces()
 
   " TODO Prevent cursor from jumping to top after save
   " Auto-source .vimrc after saving
@@ -147,6 +158,9 @@ nmap <leader>c :tabedit $MYVIMRC<cr>
 
 " Easy commenting (relies on vim-commentary plugin)
 map <leader>/ \\\
+
+" Toggle the current fold
+nnoremap <Space> za
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -205,7 +219,7 @@ function! RunTests()
   end
 
   if match(t:filename, '_spec.rb$') >= 0
-    let cmd = "rspec -I./spec --color " . t:filename
+    let cmd = "rspec --color --format d " . t:filename
   elseif match(t:filename, '_test.rb$') >= 0
     let cmd = "ruby -I./test " . t:filename
   else
@@ -234,3 +248,16 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>

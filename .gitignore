@@ -2,7 +2,9 @@
 *
 
 # Whitelist certain files
+!.gemrc
 !.gitconfig
+!.githelpers
 !.gitignore
 !.gitignore_global
 !.oh-my-zsh
