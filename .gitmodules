@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule ".vim/bundle/vim-varnish"]
+	path = .vim/bundle/vim-varnish
+	url = https://github.com/empanda/vim-varnish.git
