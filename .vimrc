@@ -163,7 +163,7 @@ map <leader>/ \\\
 nnoremap <Space> za
 
 " Tabularize
-cmap T Tabularize
+cnoremap T Tabularize
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -191,7 +191,7 @@ inoremap <s-tab> <c-n>
 " COMMAND-T
 " Always reload file list to avoid getting stale
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+noremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING CODE AND TESTS
