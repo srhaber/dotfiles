@@ -196,8 +196,8 @@ map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING CODE AND TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>r :call RunCode()<cr>
-map <leader>t :call RunTests()<cr>
+noremap <leader>r :call RunCode()<cr>
+noremap <leader>t :call RunTests()<cr>
 
 function! RunCode()
   let filename = expand("%")
