@@ -162,6 +162,9 @@ map <leader>/ \\\
 " Toggle the current fold
 nnoremap <Space> za
 
+" Tabularize
+cmap T Tabularize
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
