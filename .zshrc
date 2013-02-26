@@ -11,6 +11,7 @@ ZSH_THEME="simple"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias grep="grep --exclude=\"*.swp\" --exclude-dir=.git"
+alias mou="open -a /Applications/Mou.app"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
