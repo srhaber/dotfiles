@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/vim-varnish"]
 	path = .vim/bundle/vim-varnish
 	url = https://github.com/empanda/vim-varnish.git
+[submodule ".vim/bundle/puppet"]
+	path = .vim/bundle/puppet
+	url = git://github.com/rodjek/vim-puppet.git
