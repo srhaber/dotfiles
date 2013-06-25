@@ -41,4 +41,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$HOME/bin
 
+[ -e $HOME/.aws_credentials ] && source $HOME/.aws_credentials
+
 eval "$(rbenv init -)"
+
