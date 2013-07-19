@@ -39,7 +39,7 @@ plugins=(brew bundler capistrano gem git redis-cli)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$HOME/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:$HOME/bin
 
 [ -e $HOME/.aws_credentials ] && source $HOME/.aws_credentials
 
