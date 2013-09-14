@@ -12,6 +12,7 @@ ZSH_THEME="simple"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias grep="grep --exclude=\"*.swp\" --exclude-dir=.git"
 alias mou="open -a /Applications/Mou.app"
+alias aws="nocorrect aws"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -45,3 +46,5 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/lo
 
 eval "$(rbenv init -)"
 
+# Autoenv
+source /usr/local/opt/autoenv/activate.sh
