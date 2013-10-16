@@ -19,3 +19,4 @@
 
 # Ignore more stuff
 .vim/.netrwhist
+.Rproj.user
