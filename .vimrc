@@ -43,9 +43,10 @@ set splitright              " Open vertical splits on right
 set switchbuf=useopen
 set tabstop=2               " Set 2-column indents
 set textwidth=0             " Don't wrap words
-set wrap                    " Wrap long lines
+set wildignore+=tmp
 set wildmode=longest,list
 set wildmenu                " Bash-style tab completion
+set wrap                    " Wrap long lines
 
 " Synax highlighting
 syntax on
@@ -192,6 +193,7 @@ inoremap <s-tab> <c-n>
 " Always reload file list to avoid getting stale
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 noremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING CODE AND TESTS
