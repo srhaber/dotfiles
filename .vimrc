@@ -144,6 +144,7 @@ nnoremap <c-l> <c-w>l
 
 " Easy toggling of splits
 nnoremap <leader>w <c-w>w
+nnoremap <leader>q <c-w>W
 
 " Clear the search buffer when hitting return
 function! MapCR()
