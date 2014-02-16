@@ -9,6 +9,7 @@
 !.gitignore_global
 !.oh-my-zsh
 !.osx
+!.sublime-settings
 !.tmux.conf
 !.tomorrow-theme
 !.vim/
