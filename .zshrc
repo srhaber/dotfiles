@@ -35,7 +35,7 @@ alias aws="nocorrect aws"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew bundler capistrano gem git redis-cli)
+plugins=(brew bundler gem git redis-cli)
 
 source $ZSH/oh-my-zsh.sh
 
