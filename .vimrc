@@ -64,15 +64,15 @@ map <Down> <Nop>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256        " 256 colors
-set background=dark
-color grb256
+"set t_Co=256        " 256 colors
+"set background=dark
+"color grb256
 "color Tomorrow
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HIGHLIGHTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi CursorLine guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
+"hi CursorLine guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INVISIBLES
