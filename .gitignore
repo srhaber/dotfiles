@@ -2,6 +2,7 @@
 *
 
 # Whitelist certain files
+!atom
 !.gemrc
 !.gitconfig
 !.githelpers
