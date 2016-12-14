@@ -1,0 +1,34 @@
+"*":
+  "autocomplete-plus": {}
+  "autocomplete-ruby":
+    rsensePath: "~/.rbenv/shims/rsense"
+  core:
+    disabledPackages: [
+      "docker"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "atom-light-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontSize: 12
+    invisibles: {}
+    softWrap: true
+  "exception-reporting":
+    userId: "0b511319-0ddb-db5b-26e9-aa77d3d6b8d9"
+  "git-diff":
+    showIconsInEditorGutter: true
+  "markdown-preview":
+    useGitHubStyle: true
+  minimap: {}
+  "one-dark-ui": {}
+  "one-light-ui": {}
+  "status-bar": {}
+  tabs:
+    usePreviewTabs: true
+  "tree-view":
+    hideVcsIgnoredFiles: true
+    squashDirectoryNames: true
+  welcome:
+    showOnStartup: false
