@@ -1,270 +1,130 @@
-" ~/.vimrc
-" vim:set ts=2 sts=2 sw=2 expandtab:
-"
-" Inspired By
-"   https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
-"   https://github.com/mislav/vimfiles/blob/master/.vimrc
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PATHOGEN
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BASIC EDITING CONFIGURATION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-set autoindent              " Preserve current indent on new line
-set backspace=indent,eol,start
-set cmdheight=2
-set cursorline
-set expandtab               " Convert all tabs to spaces
-set hidden                  " Allow unsaved background buffers
-set history=10000
-set hlsearch                " Highlight search terms
-set ignorecase smartcase    " Case-sensitivity when search has uppercase chars
-set incsearch               " Jump to matches while typing
-set laststatus=2
-set number                  " Show line numbers
-set numberwidth=4
-set pastetoggle=<leader>p
-set ruler                   " Show current line,col
-set scrolloff=3             " Prevent cursor from reaching screen edges
-set shell=bash              " Vim doesn't work well with ZSH, it seems
-set shiftwidth=2            " Set 2-column shifts
-set showcmd
-set showmatch
-set showtabline=2
-set softtabstop=2
-set splitbelow              " Open horizontal splits on bottom
-set splitright              " Open vertical splits on right
-set switchbuf=useopen
-set tabstop=2               " Set 2-column indents
-set textwidth=0             " Don't wrap words
-set wildignore+=tmp
-set wildmode=longest,list
-set wildmenu                " Bash-style tab completion
-set wrap                    " Wrap long lines
+" From /etc/vimrc
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=ucs-bom,utf-8,latin1
+endif
 
-" Synax highlighting
-syntax on
+set nocompatible	" Use Vim defaults (much better!)
+set bs=indent,eol,start		" allow backspacing over everything in insert mode
+set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+			" than 50 lines of registers
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
 
-let mapleader=","
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DISABLE ARROW KEYS (FOR TRAINING)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COLOR
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set t_Co=256        " 256 colors
-"set background=dark
-"color grb256
-"color Tomorrow
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" HIGHLIGHTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"hi CursorLine guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" INVISIBLES
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" http://vimcasts.org/episodes/show-invisibles/
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AUTOCOMMANDS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
 " Only do this part when compiled with support for autocommands
-augroup vimrcEx
-  " Clear all autocmds in the group
+if has("autocmd")
+  augroup redhat
   autocmd!
-
-  " enable file type detection
-  filetype on
-
-  " Jump to last cursor position unless it's invalid or in an event handler
+  " In text files, always limit the width of text to 78 characters
+  autocmd BufRead *.txt set tw=78
+  autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+  " Remove any trailing whitespace that is in the file
+  autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+  " When editing a file, always jump to the last cursor position
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
+  " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
+  autocmd BufNewFile,BufReadPre /media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
+  " start with spec file template
+  autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
+  augroup END
+endif
 
-  " syntax of these languages is fussy over tabs vs spaces
-  autocmd filetype make setlocal ts=8 sts=8 sw=8 noexpandtab
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
 
-  autocmd BufNewFile,BufRead Gemfile,*.god,*.rake set filetype=ruby
-  autocmd BufNewFile,BufRead *.md set filetype=markdown
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
 
-  " Strip trailing whitespace before saving certain files
-  autocmd BufWritePre .vimrc,Gemfile,*.rb,*.erb,*.html,*.css,*.scss,*.js,*.coffee,*.conf,*.god,*.rake,*.py,*.c :call <SID>StripTrailingWhitespaces()
+filetype plugin on
 
-  " TODO Prevent cursor from jumping to top after save
-  " Auto-source .vimrc after saving
-  " autocmd BufWritePost .vimrc source $MYVIMRC
-augroup END
+if &term=="xterm"
+     set t_Co=8
+     set t_Sb=%dm
+     set t_Sf=%dm
+endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" STRIP TRAILING WHITESPACE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" http://vimcasts.org/episodes/tidying-whitespace/
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
+" Custom vimrc
+" Don't wake up system with blinking cursor:
+" http://www.linuxpowertop.org/known.php
+let &guicursor = &guicursor . ",a:blinkon0"
 
-nnoremap <leader>s :call StripTrailingWhitespaces()<CR>
+filetype indent plugin on
+filetype on " Automatically detect file types.
+syntax enable
+set cf " Enable error files & error jumping.
+set clipboard+=unnamed " Yanks go on clipboard instead.
+set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay)
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MISC KEY MAPS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Move around splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" Formatting
+set ts=2 " Tabs are 2 spaces
+set shiftwidth=2 " Tabs under smart indent
+set nocp incsearch
 
-" Easy toggling of splits
-nnoremap <leader>w <c-w>w
-nnoremap <leader>q <c-w>W
+set formatoptions=tcqr
+set smarttab
+set expandtab
+set smartindent
 
-" Clear the search buffer when hitting return
-function! MapCR()
-  nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
+" Visual
+set showmatch " Show matching brackets.
+set mat=5 " Bracket blinking.
+" Show $ at end of line and trailing space as ~
+set lcs=tab:\ \ ,eol:$,trail:~,extends:>,precedes:<
+set noerrorbells " No noise.
+set laststatus=2 " Always show status line.
+set background=dark
 
-" Easy switching to alternate file
-nnoremap <leader><leader> <c-^>
+set hidden
+set wildmenu
+set showcmd
+set hlsearch
+set ignorecase
+set smartcase
+set backspace=indent,eol,start
+set nostartofline
+set confirm
+set visualbell
+set cmdheight=2
+set notimeout ttimeout ttimeoutlen=200
+set magic
+nnoremap <CR> :noh<CR><CR>
+set t_Co=256
+set encoding=utf8
+set ffs=unix,dos,mac
+set nobackup
+set nowb
+set noswapfile
 
-" Easy editing of .vimrc
-nmap <leader>c :tabedit $MYVIMRC<cr>
+" Toggle paste mode on/off with F6
+set pastetoggle=<F6>
+set paste
 
-" Easy commenting (relies on vim-commentary plugin)
-map <leader>/ \\\
+map <C-l> <C-W>l
+map <C-j> <C-W>j
+map <C-h> <C-W>h
+map <C-k> <C-W>k
+map <C-n>  :set invnu<CR>
+colorscheme molokai
 
-" Toggle the current fold
-nnoremap <Space> za
-
-" Tabularize
-cnoremap T Tabularize
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COMMAND-T
-" Always reload file list to avoid getting stale
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING CODE AND TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <leader>r :call RunCode()<cr>
-noremap <leader>t :call RunTests()<cr>
-
-function! RunCode()
-  let filename = expand("%")
-
-  if match(filename, '\.rb$') >= 0
-    let cmd = "ruby -I./lib " . filename
-  else
-    return
-  end
-
-  call RunCommand(cmd)
-endfunction
-
-function! RunTests()
-  let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') >= 0
-
-  if in_test_file
-    " Save test file in tabpage variable
-    let t:filename = @%
-  elseif !exists("t:filename")
-    return
-  end
-
-  if match(t:filename, '_spec.rb$') >= 0
-    let cmd = "rspec --color --format d " . t:filename
-  elseif match(t:filename, '_test.rb$') >= 0
-    let cmd = "ruby -I./test " . t:filename
-  else
-    return
-  end
-
-  call RunCommand(cmd)
-endfunction
-
-function! RunCommand(cmd)
-  :w
-  :silent !clear
-  exec ":!echo $ " . a:cmd . " && " . a:cmd
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>n :call RenameFile()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:noremap <leader>p :PromoteToLet<cr>
