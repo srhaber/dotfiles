@@ -41,3 +41,7 @@ Thumbs.db
 #######
 *.swp
 *.swo
+
+# Private key files #
+#####################
+*.pem
