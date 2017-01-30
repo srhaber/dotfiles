@@ -1,11 +1,32 @@
 "*":
+  aligner:
+    ",-rightSpace": false
+    ":-rightSpace": false
+  "atom-alignment":
+    addSpacePostfix: true
+    alignBy: [
+      "=>"
+      "="
+      ":="
+      ":"
+      "{"
+    ]
+    alignmentSpaceChars: [
+      "=>"
+      "="
+    ]
+  "atom-beautify":
+    general:
+      _analyticsUserId: "1360d0ff-ce01-4226-989d-412f420c5cc1"
   "autocomplete-plus": {}
   "autocomplete-ruby":
     rsensePath: "~/.rbenv/shims/rsense"
   core:
     disabledPackages: [
       "docker"
+      "language-diff"
     ]
+    packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"
     themes: [
       "atom-light-ui"
