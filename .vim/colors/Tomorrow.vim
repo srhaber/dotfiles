@@ -1,1 +1,1 @@
-/Users/shaber/.tomorrow-theme/vim/colors/Tomorrow.vim
+../../.tomorrow-theme/vim/colors/Tomorrow.vim
