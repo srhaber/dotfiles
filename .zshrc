@@ -80,9 +80,11 @@ export ARCHFLAGS="-arch x86_64"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-for file in ~/.bash_profile_includes/*.sh; do
-  [[ -r $file ]] && source $file;
-done
+if [ -d ~/.bash_profile_includes ]; then
+	for file in ~/.bash_profile_includes/*.sh; do
+	  [[ -r $file ]] && source $file;
+	done
+fi
 export PATH="/usr/local/sbin:$PATH"
 
 PROMPT='
