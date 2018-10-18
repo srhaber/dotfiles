@@ -1,0 +1,11 @@
+'scopeName': 'text.song'
+'name': 'Song'
+'fileTypes': [
+  'song'
+]
+'patterns': [
+  {
+    'match': 'Intro'
+    'name': 'entity.name.section'
+  }
+]

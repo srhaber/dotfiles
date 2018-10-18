@@ -1,0 +1,22 @@
+@import "syntax-variables";
+atom-text-editor {
+  .syntax--diff {
+    &.syntax--inserted {
+      color: @syntax-color-added;
+    }
+
+    &.syntax--changed {
+      color: @syntax-color-modified;
+    }
+
+    &.syntax--deleted {
+      color: @syntax-color-removed;
+    }
+
+    &.syntax--only-in {
+      // we don't have any methods in diff, so we can safely use this color
+      color: @syntax-color-method;
+      font-weight: bold;
+    }
+  }
+}
