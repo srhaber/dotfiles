@@ -8,7 +8,7 @@ export ZSH="/Users/shaber/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="srh-agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -39,7 +39,10 @@ export UPDATE_ZSH_DAYS=7
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+
+# NOTE: Enabling this creates bug with autocompletion eating newline in prompt
+# Reference: https://github.com/robbyrussell/oh-my-zsh/issues/6226
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -101,6 +104,12 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 [[ -r ~/.dotfiles/aliases.sh ]] && source ~/.dotfiles/aliases.sh
 
-# PROMPT='
-#[%{$fg[green]%}%~%{$reset_color%}]%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%}
-#%D{%a %b %d %H:%M:%S} [%h]$ '
+# Prompt expansion reference:
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+
+# Prompts for agnoster theme
+PROMPT='
+%{%f%b%k%}$(build_prompt) '
+
+# Current datetime and history event number
+RPROMPT='%{$fg[yellow]%}%D{%a %b %d %H:%M:%S}%{$reset_color%} [%h]'
