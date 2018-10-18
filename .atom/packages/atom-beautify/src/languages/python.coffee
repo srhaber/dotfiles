@@ -8,7 +8,8 @@ module.exports = {
   Supported Grammars
   ###
   grammars: [
-    "Python"
+    "Python",
+    "MagicPython"
   ]
 
   ###
@@ -34,11 +35,11 @@ module.exports = {
       items:
         type: 'string'
       description: "do not fix these errors/warnings"
-    formater:
+    formatter:
       type: 'string'
       default: 'autopep8'
       enum: ['autopep8', 'yapf']
-      description: "formater used by pybeautifier"
+      description: "formatter used by pybeautifier"
     style_config:
       type: 'string'
       default: 'pep8'

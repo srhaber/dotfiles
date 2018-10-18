@@ -8,7 +8,8 @@ adjust_space = (line) ->
   # replace all whitespaces inside the string with one space, WARNING: the whitespaces in string will be replace too!
   line = line.replace /\s?(==|>=|<=|~=|[=><\+\*\/])\s?/g, ' $1 '
   # add whitespace around the operator
-  line = line.replace /([^=|\-|(|\s])\s?\-\s?([^\-|\[])/g, '$1 - $2'
+  line = line.replace /([^=e\-\(\s])\s?\-\s?([^\-\[])/g, '$1 - $2'
+  line = line.replace /([^\d])e\s?\-\s?([^\-\[])/g, '$1e - $2'
   # just format minus, not for -- or negative number or commentary.
   line = line.replace /,([^\s])/g, ', $1'
   # adjust ','
@@ -25,7 +26,8 @@ adjust_space = (line) ->
 DEFAULT_WARN_FN = (msg) ->
   console.log('WARNING:', msg)
 
-module.exports = (str, indent, warn_fn) ->
+module.exports = (str, indent, warn_fn, opts = {}) ->
+  eol = opts?.eol or '\n'
   indent = indent or DEFAULT_INDENT
   warn_fn = if typeof warn_fn == 'function' then warn_fn else DEFAULT_WARN_FN
   indent = ' '.repeat(indent) if Number.isInteger(indent)
@@ -51,7 +53,7 @@ module.exports = (str, indent, warn_fn) ->
       else
         return line
     res1 = line.match(/\[(=*)\[/)
-    if res1
+    if res1 and (not new RegExp("\\]#{'='.repeat res1[1].length}\\]").test line)
       $template = res1[1].length + 1
     if !$template_flag
       line = line.trim()
@@ -60,9 +62,9 @@ module.exports = (str, indent, warn_fn) ->
     if !line.length
       return ''
     raw_line = line
-    line = line.replace(/(['"])[^\1]*?\1/, '')
+    line = line.replace(/(['"])[^\1]*?\1/g, '')
     # remove all quoted fragments for proper bracket processing
-    line = line.replace(/\s*--.+/, '')
+    line = line.replace(/\s*--.+$/, '')
     # remove all comments; this ignores long bracket style comments
     if /^((local )?function|repeat|while)\b/.test(line) and !/\bend\s*[\),;]*$/.test(line) or /\b(then|do)$/.test(line) and !/^elseif\b/.test(line) or /^if\b/.test(line) and /\bthen\b/.test(line) and !/\bend$/.test(line) or /\bfunction ?(?:\w+ )?\([^\)]*\)$/.test(line) and !/\bend$/.test(line)
       $nextIndent = $currIndent + 1
@@ -100,4 +102,4 @@ module.exports = (str, indent, warn_fn) ->
     new_line or undefined
 
   warn_fn 'positive indentation at the end' if $currIndent > 0
-  new_code.join '\n'
+  new_code.join eol

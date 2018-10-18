@@ -1,14 +1,145 @@
-# Next
-- ...
+# v0.33.3 (2018-09-28)
+
+- Fix [#2204](https://github.com/Glavin001/atom-beautify/issues/2204). Auto-remove docker containers after run.
+
+You can clean up old Docker containers by running:
+
+```bash
+docker ps --all | grep "unibeautify/" | awk '{ print $1 }' | xargs docker rm
+```
+
+# v0.33.2 (2018-09-26)
+- (BREAKING CHANGE) Added `inline` and `content_unformatted` options from `js-beautify` html settings and cleared `unformatted`.  Breaking change but generally improves the behavior to more accurately beautify html. ([#2210](https://github.com/Glavin001/atom-beautify/issues/2210), [#2215](https://github.com/Glavin001/atom-beautify/pull/2215), [js-beautify#1407](https://github.com/beautify-web/js-beautify/pull/1407))
+- ocamlformat formatter added for OCaml [#2207](https://github.com/Glavin001/atom-beautify/pull/2207)
+- [Black](https://github.com/ambv/black) beautifier added [#2189](https://github.com/Glavin001/atom-beautify/pull/2189)
+
+# v0.33.1 (2018-09-09)
+- Remove dependency marko-prettyprint in an effort to resolve installation and update issues
+
+# v0.33.0 (2018-08-10)
+- Fixes an issue where Atom Beautify would display a Docker error instead of an executable error ([#2146](https://github.com/Glavin001/atom-beautify/issues/2146))
+- Fixes Rubocop not excluding files with an exact pattern match (`db/schema.rb` vs `db/**/*`)
+- Add [Black](http://github.com/ambv/black) beautifier for Python.
+
+# v0.32.5 (2018-05-28)
+- Fixes an issue with Rubocop not working on Windows ([#2092](https://github.com/Glavin001/atom-beautify/issues/2092))
+- Fixes an issue with PHPCBF not running when specifying a path to it ([#2140](https://github.com/Glavin001/atom-beautify/issues/2140))
+- Fixes the repository link to Atom Beautify within Atom's settings ([#2086](https://github.com/Glavin001/atom-beautify/pull/2086))
+
+# v0.32.4 (2018-05-15)
+- Fix php-cs-fixer not running when using `.phar` files ([#2134](https://github.com/Glavin001/atom-beautify/pull/2134))
+- Fix error `Error is not defined` ([#2134](https://github.com/Glavin001/atom-beautify/pull/2134))
+
+# v0.32.3 (2018-05-14)
+- Issue [#448](https://github.com/Glavin001/atom-beautify/issues/448) Add support for Laravel Blade templates (beta)
+- Fix Docker Executable with optional Executable, PHP-CS-Fixer ([#2129](https://github.com/Glavin001/atom-beautify/pull/2129))
+
+# v0.32.2 (2018-03-10)
+- Revert fix package.json repository field (#2062)
+
+# v0.32.1 (2018-03-10)
+- Update Prettier to 1.11.1. (#2060)
+- Fix package.json repository field (#2062)
+- Fix "Reindent" option for sqlformat. (#2064)
+
+# v0.32.0 (2018-03-02)
+- See [#2026](https://github.com/Glavin001/atom-beautify/issues/2026) Add Vue support to ESLint Fixer beautifier. Should be used with [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue).
+- Fix Beauify File option for .lua files
+- Switch to Remark as a default markdown beautifier due to a more active state of its community compared to Tidy Markdown ([#2004](https://github.com/Glavin001/atom-beautify/pull/2004)).
+  This is a __breaking change__ for Tidy Markdown users:
+     - list indentation is now four characters per level (three spaces after `-` for unordered lists and two spaces after `N.` in ordered lists)
+     - the contents of frontmatter are no longer formatted
+
+  You can easily switch back to the old behaviour by choosing _Tidy Markdown_ in package preferences.
+  Alternatively, you can customise Remark beautifier with `.jsbeautifyrc` (see [available options](https://github.com/remarkjs/remark/tree/master/packages/remark-stringify#options)).
+- Add GN language and beautifier
+- Add the option to indent Bash with tabs [#1951](https://github.com/Glavin001/atom-beautify/issues/1951)
+- See [#1980](https://github.com/Glavin001/atom-beautify/pull/1980). Add VHDL beautifier and language support.
+- Implement Verilog/SystemVerilog beautification via emacs verilog-mode
+- Add support for MagicPython grammar [#1851](https://github.com/Glavin001/atom-beautify/issues/1851)
+- Add "Reindent" option for sqlformat. See [#1926](https://github.com/Glavin001/atom-beautify/pull/1926).
+- Add hindent and brittany beautifiers for haskell
+- Breaking change to `pybeautifier`: Fix typo, change `formater` to `formatter`. See [#1898](https://github.com/Glavin001/atom-beautify/pull/1898).
+- Fixes [#1773](https://github.com/Glavin001/atom-beautify/issues/1773) and [#793](https://github.com/Glavin001/atom-beautify/issues/793). ruby-beautify with Rubocop now respects `Exclude` settings, and properly loads inherited config files (like `~/.rubocop.yml`)
+- Add hindent and brittany beautifiers for haskell
+- Fix [#1862](https://github.com/Glavin001/atom-beautify/issues/1862) Add support for ocp-indent as an executable
+- See [#601](https://github.com/Glavin001/atom-beautify/issues/1862) Add support for tsx files
+- See [#1497](https://github.com/Glavin001/atom-beautify/issues/1497) and [#802](https://github.com/Glavin001/atom-beautify/issues/802)
+
+# v0.30.9 (2017-11-22)
+- Fix [#1949](https://github.com/Glavin001/atom-beautify/issues/1949): Fix beautify on save when text has not changed.
+
+# v0.30.8 (2017-11-22)
+- Fix [#1949](https://github.com/Glavin001/atom-beautify/issues/1949): Fix beautify on save when text has not changed.
+
+# v0.30.7 (2017-11-21)
+- Refactor handleSaveEvent to use onWillSave async ([#1924](https://github.com/Glavin001/atom-beautify/pull/1924), [#1895](https://github.com/Glavin001/atom-beautify/issues/1895))
+
+# v0.30.6 (2017-10-30)
+- See [#645](https://github.com/Glavin001/atom-beautify/issues/645). Add support for Terraform fmt.
+- See [#881](https://github.com/Glavin001/atom-beautify/issues/881). Update to Prettydiff version 2!
+- Fix for [#1888](https://github.com/Glavin001/atom-beautify/issues/1888). Allow 0 for minor and patch versions of Docker
+- Add Atom-Beautify package settings menu item to Packages menu [#1869](https://github.com/Glavin001/atom-beautify/issues/1869)
+- Add `.ttslua` file extension to Lua language
+- Fix [#1638](https://github.com/Glavin001/atom-beautify/issues/1638). Update TypeScript Formatter dependency
+- Fix [#1833](https://github.com/Glavin001/atom-beautify/issues/1833) `os.tmpDir` deprecation warning
+
+# v0.30.5 (2017-08-11)
+- Fix for [#1721](https://github.com/Glavin001/atom-beautify/issues/1721). Changes required due to TextBuffer.save becoming async in Atom 1.19
+- Fixes [#1638](https://github.com/Glavin001/atom-beautify/issues/1638). Update type-formatter and Fixes indent size not supported
+- See [#358](https://github.com/Glavin001/atom-beautify/issues/358). Add support for rustfmt-nightly
+
+# v0.30.4 (2017-07-14)
+- Fixes #1732. Improve deprecation message for old options for new Executables
+- Fixes #1751. Fix for latexindent v3
+
+# v0.30.3 (2017-06-21)
+- Improve command not found error message
+- Add goimports beautifier for Go language
+- Fixes [#1728](https://github.com/Glavin001/atom-beautify/issues/1728). Remove Shell-Env from Executable, use Atom's process.env instead. See [#1735](https://github.com/Glavin001/atom-beautify/pull/1735).
+
+# v0.30.2 (2017-06-20)
+- Fixes [#1030](https://github.com/Glavin001/atom-beautify/issues/1030). Add support for alpha versions of autopep8
+- Fixes [#1725](https://github.com/Glavin001/atom-beautify/issues/1725). Fix version parsing of PHP executable
+- Fixes [#1730](https://github.com/Glavin001/atom-beautify/issues/1730). Correctly parse PHPCBF version and improve handling of Executable
+
+# v0.30.1 (2017-06-19)
+- Fix [#1703](https://github.com/Glavin001/atom-beautify/issues/1703). Now Fortran 2003/2008 file extensions are available for Fortran beautifier.
+- Fix [#1030](https://github.com/Glavin001/atom-beautify/issues/1030). Autopep8 Executable did not handle older and newer versions.
+- Fixes [#1725](https://github.com/Glavin001/atom-beautify/issues/1725). Improve PHP-CS-Fixer support with handling script path
+  Detect if the executable path is either .phar (PHP) or not and
+  run the executable PHP-CS-Fixer differently considering.
+
+# v0.30.0 (2017-06-17)
+- Close [#1687](https://github.com/Glavin001/atom-beautify/issues/1687). Introducing Executables with Docker support! Executables wrap any non-preinstalled application, check if it is installed, and provide additional configuration options, including Docker support! See [#1687](https://github.com/Glavin001/atom-beautify/issues/1687) for more information.
+- Fix [#1652](https://github.com/Glavin001/atom-beautify/issues/1652) and [#1653](https://github.com/Glavin001/atom-beautify/issues/1653). Add `.rb` to temp files passed in to the `rubocop` executable so they are not excluded.
+- Fixes [#1361](https://github.com/Glavin001/atom-beautify/issues/1361). Add file extension to temporary files for Uncrustify beautifier
+- Fixed #1613 and #1588. Add EOL, scientific notation, and adjust whitespace support for Lua Beautifier
+
+# v0.29.26 (2017-05-28)
+- Fix #116. Switch from setText to setTextViaDiff, preserve folds
+- Add more perl filetypes (#1603)
+- Add more LaTeX extensions (#1617)
+- Don't specify file extension when requiring modules (#1631)
+- Update CSSComb to v4.0.1. (#1660)
+- Fix #1682. Removed --no-patch flag from phpcbf beautifier version 3 (#1683)
+- Fix [#1524](https://github.com/Glavin001/atom-beautify/issues/1524). Add PHP-CS-Fixer config file setting and improve automatic detection of standard config files. See [#1661](https://github.com/Glavin001/atom-beautify/pull/1661)
+- Add .php extension to temp files (#1649)
+- Add support for files with '.config' extension. Add extension to the XML language to support XML config files. (#1285)
+
+# v0.29.25 (2017-05-12)
+- Fix [#1547](https://github.com/Glavin001/atom-beautify/issues/1547), [#1630](https://github.com/Glavin001/atom-beautify/issues/1630). Update CSSComb to latest version.
 
 # v0.29.24 (2017-05-06)
 - Fix [#1643](https://github.com/Glavin001/atom-beautify/issues/1643). Add PHPCBF Version setting and remove "--no-patch" option from version 3.0 of PHPCBF. See [#1645](https://github.com/Glavin001/atom-beautify/pull/1645).
 - Close [#27](https://github.com/Glavin001/atom-beautify/issues/27). Add commands for beautifying a specific language
 - Add "Allow Risky" option for PHP-CS-Fixer. See [#1614](https://github.com/Glavin001/atom-beautify/pull/1614)
+- Set Yaml padding default value to 0, removing Atom warning message "'atom-beautify.yaml.padding' could not set the default."  See [#1647](https://github.com/Glavin001/atom-beautify/issues/1647).
 
 # v0.29.23 (2017-04-20)
 - See #1607. Add support for PHP-CS-Fixer 1, along with version 2.
 - Closes #1179. Replace atom-beautify.general.analytics option with configuration option
+- Add more LaTeX extensions
 
 # v0.29.3 to v0.29.22 (2016-04-16 to 2017-04-15)
 - Add support for additional wrap attribute options of js-beautify (html): force-aligned and force-expand-multiline.
@@ -19,7 +150,7 @@
 - Add [clang-format](http://clang.llvm.org/docs/ClangFormat.html) beautifier for C/C++/Obj-C languages.
 - Add [yapf](http://github.com/google/yapf) beautifier for Python.
 - Add [ESLint](https://github.com/eslint/eslint) beautifier for Javascript
-- Closes [#776] (https://github.com/Glavin001/atom-beautify/issues/776) Add support for `collapse-preserve-inline` brace_style for javascript.
+- Closes [#776](https://github.com/Glavin001/atom-beautify/issues/776) Add support for `collapse-preserve-inline` brace_style for javascript.
 - Closes [#786](https://github.com/Glavin001/atom-beautify/issues/786) YAPF configuration files are ignored.
 - Fix phpcbf hanging issue by closing stdin. See [#893](https://github.com/Glavin001/atom-beautify/issues/893)
 - Add warning notification when parsing `.jsbeautifyrc` as JSON or YAML fails. See [#1106](https://github.com/Glavin001/atom-beautify/issues/1106)

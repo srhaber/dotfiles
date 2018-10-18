@@ -23,8 +23,9 @@
     rsensePath: "~/.rbenv/shims/rsense"
   core:
     disabledPackages: [
-      "docker"
       "language-diff"
+      "atom-live-grammar-reload"
+      "language-song"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"

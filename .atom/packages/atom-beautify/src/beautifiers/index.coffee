@@ -37,20 +37,26 @@ module.exports = class Beautifiers extends EventEmitter
     'uncrustify'
     'align-yaml'
     'autopep8'
+    'brittany'
     'coffee-formatter'
     'coffee-fmt'
     'cljfmt'
     'clang-format'
     'crystal'
+    'black'
     'dfmt'
     'elm-format'
     'hh_format'
     'htmlbeautifier'
     'csscomb'
     'gherkin'
+    'gn'
     'gofmt'
+    'goimports'
     'latex-beautify'
     'fortran-beautifier'
+    'hindent'
+    'vhdl-beautifier'
     'js-beautify'
     'jscs'
     'eslint'
@@ -60,6 +66,7 @@ module.exports = class Beautifiers extends EventEmitter
     'perltidy'
     'php-cs-fixer'
     'phpcbf'
+    'prettier'
     'prettydiff'
     'pybeautifier'
     'pug-beautify'
@@ -79,6 +86,9 @@ module.exports = class Beautifiers extends EventEmitter
     'marko-beautifier'
     'formatR'
     'beautysh'
+    'terraformfmt'
+    'verilog-mode'
+    'ocamlformat'
   ]
 
   ###
@@ -258,8 +268,8 @@ module.exports = class Beautifiers extends EventEmitter
         logger.info("Analytics is enabled.")
         # Setup Analytics
         unless atom.config.get("atom-beautify.general._analyticsUserId")
-          uuid = require("node-uuid")
-          atom.config.set "atom-beautify.general._analyticsUserId", uuid.v4()
+          uuidv4 = require("uuid/v4")
+          atom.config.set "atom-beautify.general._analyticsUserId", uuidv4()
         # Setup Analytics User Id
         userId = atom.config.get("atom-beautify.general._analyticsUserId")
         @analytics ?= new ua(trackingId, userId, {
@@ -278,10 +288,11 @@ module.exports = class Beautifiers extends EventEmitter
     return Promise.all(allOptions)
     .then((allOptions) =>
       return new Promise((resolve, reject) =>
-        logger.info('beautify', text, allOptions, grammar, filePath, onSave, language)
+        logger.debug('beautify', text, allOptions, grammar, filePath, onSave, language)
         logger.verbose(allOptions)
 
         language ?= @getLanguage(grammar, filePath)
+        fileExtension = @getExtension(filePath)
 
         # Check if unsupported language
         if !language
@@ -343,38 +354,44 @@ module.exports = class Beautifiers extends EventEmitter
 
             context =
               filePath: filePath
+              fileExtension: fileExtension
 
             startTime = new Date()
-            beautifier.beautify(text, language.name, options, context)
-            .then((result) =>
-              resolve(result)
-              # Track Timing
-              @trackTiming({
-                utc: "Beautify" # Category
-                utv: language?.name # Variable
-                utt: (new Date() - startTime) # Value
-                utl: version # Label
-              })
-              # Track Empty beautification results
-              if not result
+            beautifier.loadExecutables()
+              .then((executables) ->
+                logger.verbose('executables', executables)
+                beautifier.beautify(text, language.name, options, context)
+              )
+              .then((result) =>
+                resolve(result)
+                # Track Timing
+                @trackTiming({
+                  utc: "Beautify" # Category
+                  utv: language?.name # Variable
+                  utt: (new Date() - startTime) # Value
+                  utl: version # Label
+                })
+                # Track Empty beautification results
+                if not result
+                  @trackEvent({
+                    ec: version, # Category
+                    ea: "Beautify:Empty" # Action
+                    el: language?.name # Label
+                  })
+              )
+              .catch((error) =>
+                logger.error(error)
+                reject(error)
+                # Track Errors
                 @trackEvent({
                   ec: version, # Category
-                  ea: "Beautify:Empty" # Action
+                  ea: "Beautify:Error" # Action
                   el: language?.name # Label
                 })
-            )
-            .catch((error) =>
-              reject(error)
-              # Track Errors
-              @trackEvent({
-                ec: version, # Category
-                ea: "Beautify:Error" # Action
-                el: language?.name # Label
-              })
-            )
-            .finally(=>
-              @emit "beautify::end"
-            )
+              )
+              .finally(=>
+                @emit "beautify::end"
+              )
 
         # Check if Analytics is enabled
         @trackEvent({
@@ -400,7 +417,6 @@ module.exports = class Beautifiers extends EventEmitter
           if atom.config.get("atom-beautify.general.muteUnsupportedLanguageErrors")
             return resolve( null )
           else
-            fileExtension = @getExtension(filePath)
             repoBugsUrl = pkg.bugs.url
             title = "Atom Beautify could not find a supported beautifier for this file"
             detail = """

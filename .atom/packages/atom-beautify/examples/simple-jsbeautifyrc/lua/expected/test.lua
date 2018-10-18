@@ -2,6 +2,7 @@
 -- and return a closure which can be used for continuing the sort.
 local a = 'a  b   c'
 local b = '12345678'
+local x = 1.99e-07
 local c = 'a  b   c' + 'a  b   c'
 local t = {
   a = 1,
@@ -18,7 +19,7 @@ function aaa(a, b, c)
   -- comment 2     1231
   -- comment 1     123 123 123123 12
   -- [[ comment 1    ]]
-    --[[
+  --[[
         muli comments
             ssss
             @asdasd   sad

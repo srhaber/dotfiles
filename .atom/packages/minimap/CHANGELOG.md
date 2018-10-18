@@ -1,3 +1,82 @@
+<a name="v4.29.9"></a>
+# v4.29.9 (2018-02-23)
+
+## :bug: Bug Fixes
+
+- Fix documentation ([#646](https://github.com/atom-minimap/minimap/pull/646), [#670](https://github.com/atom-minimap/minimap/pull/670))
+
+## :sparkles: Features
+
+- Use default cursor on minimap ([#650](https://github.com/atom-minimap/minimap/pull/650))
+
+<a name="v4.29.8"></a>
+# v4.29.8 (2018-02-23)
+
+## :bug: Bug Fixes
+
+- Fix crash when used alongside tree-sitter grammars ([#662](https://github.com/atom-minimap/minimap/pull/662))
+
+## Others
+
+- Fix CI ([#673](https://github.com/atom-minimap/minimap/pull/673))
+
+<a name="v4.29.7"></a>
+# v4.29.7 (2017-09-18)
+
+## :bug: Bug Fixes
+
+- Guard against there being no visible screen row when the minimap is constructed ([b2012d034a](https://github.com/atom-minimap/minimap/commit/b2012d034a162e18dc4def10f9204d3d4286440d), [#626](https://github.com/atom-minimap/minimap/issues/626))
+
+<a name="v4.29.6"></a>
+# v4.29.6 (2017-08-09)
+
+## :bug: Bug Fixes
+
+- Adjust outline decoration rendering so that it doesn't leak over next lines ([8d0b51cc](https://github.com/atom-minimap/minimap/commit/8d0b51ccfb4bacab396e75cff12831daf0b6cfa3))
+- Fix issue where decorations were not properly removed from canvas ([6c856b9b](https://github.com/atom-minimap/minimap/commit/6c856b9b30653359805d8f2a587479e61b08407e))
+
+<a name="v4.29.5"></a>
+# v4.29.5 (2017-08-09)
+
+## :bug: Bug Fixes
+
+- Guard against pollDocument being something other than a function ([52273e70](https://github.com/atom-minimap/minimap/commit/52273e70a9ba60bfcc44b5fdbe28748b6ed4c9bc), [#625](https://github.com/atom-minimap/minimap/issues/625))
+
+<a name="v4.29.4"></a>
+# v4.29.4 (2017-08-09)
+
+## :bug: Bug Fixes
+
+- Fix left minimap positioning broken in Atom 1.19 ([68357079](https://github.com/atom-minimap/minimap/commit/6835707900bd52184fc81ac7d3f9b6e7c8b83ecd), [#623](https://github.com/atom-minimap/minimap/issues/623))
+
+<a name="v4.29.3"></a>
+# v4.29.3 (2017-07-27)
+
+## :bug: Bug Fixes
+
+- Guard against service usage after package is disabled in the same Atom session ([2f787bc7](https://github.com/atom-minimap/minimap/commit/2f787bc7649577df3fa9976b5b833018ac4bdccc), [#605](https://github.com/atom-minimap/minimap/issues/605))
+
+<a name="v4.29.2"></a>
+# v4.29.2 (2017-07-24)
+
+## :bug: Bug Fixes
+
+- Properly fix the issue with deprecated scroll method ([0552856a](https://github.com/atom-minimap/minimap/commit/0552856ae4250557a43bcd6dd58e84df9e24545e))
+- Fix error when redispatching scroll event ([b269eb87](https://github.com/atom-minimap/minimap/commit/b269eb87949b41a84b685f0db775f083ed44566f), [#614](https://github.com/atom-minimap/minimap/issues/614))
+- Fix independent minimap no longer working on latest atom version ([29bd6b35](https://github.com/atom-minimap/minimap/commit/29bd6b35c0e1c03ceac0ae97a6c8e493a7219f92))
+
+<a name="v4.29.1"></a>
+# v4.29.1 (2017-07-24)
+
+## :bug: Bug Fixes
+
+- Fix call of soon to be deprecated method ([1b761f2a](https://github.com/atom-minimap/minimap/commit/1b761f2ab5242bfc25652978506749fbdb75bcf2), [#598](https://github.com/atom-minimap/minimap/issues/598))
+
+<a name="v4.29.0"></a>
+# v4.29.0 (2017-07-19)
+
+Remove Kite promotion.
+
 <a name="v4.28.2"></a>
 # v4.28.2 (2017-05-02)
 

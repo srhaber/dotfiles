@@ -124,6 +124,386 @@ Show loading view when beautifying
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Show Loading View*" and change it to your desired configuration.
 
+####  [Executables](#executables) 
+
+**Description**:
+
+Configure executables used by beautifiers.
+
+#####  [autopep8](#autopep8) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for autopep8 executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*autopep8*" and change it to your desired configuration.
+
+#####  [beautysh](#beautysh) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for beautysh executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*beautysh*" and change it to your desired configuration.
+
+#####  [black](#black) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for black executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*black*" and change it to your desired configuration.
+
+#####  [ClangFormat](#clangformat) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for ClangFormat executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*ClangFormat*" and change it to your desired configuration.
+
+#####  [Crystal](#crystal) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Crystal executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Crystal*" and change it to your desired configuration.
+
+#####  [Dfmt](#dfmt) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Dfmt executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Dfmt*" and change it to your desired configuration.
+
+#####  [elm-format](#elm-format) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for elm-format executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*elm-format*" and change it to your desired configuration.
+
+#####  [Emacs](#emacs) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Emacs executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Emacs*" and change it to your desired configuration.
+
+#####  [gn](#gn) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for gn executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*gn*" and change it to your desired configuration.
+
+#####  [goimports](#goimports) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for goimports executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*goimports*" and change it to your desired configuration.
+
+#####  [isort](#isort) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for isort executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*isort*" and change it to your desired configuration.
+
+#####  [ocamlformat](#ocamlformat) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for ocamlformat executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*ocamlformat*" and change it to your desired configuration.
+
+#####  [ocp-indent](#ocp-indent) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for ocp-indent executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*ocp-indent*" and change it to your desired configuration.
+
+#####  [PHP](#php) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for PHP executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*PHP*" and change it to your desired configuration.
+
+#####  [PHP-CS-Fixer](#php-cs-fixer) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for PHP-CS-Fixer executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*PHP-CS-Fixer*" and change it to your desired configuration.
+
+#####  [PHPCBF](#phpcbf) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for PHPCBF executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*PHPCBF*" and change it to your desired configuration.
+
+#####  [puppet-lint](#puppet-lint) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for puppet-lint executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*puppet-lint*" and change it to your desired configuration.
+
+#####  [Rscript](#rscript) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Rscript executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Rscript*" and change it to your desired configuration.
+
+#####  [Rubocop](#rubocop) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Rubocop executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Rubocop*" and change it to your desired configuration.
+
+#####  [SassConvert](#sassconvert) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for SassConvert executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*SassConvert*" and change it to your desired configuration.
+
+#####  [Terraform](#terraform) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Terraform executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Terraform*" and change it to your desired configuration.
+
+#####  [Uncrustify](#uncrustify) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `object`
+
+**Description**:
+
+Options for Uncrustify executable.
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Uncrustify*" and change it to your desired configuration.
+
 
 ## Language Options
 
@@ -329,6 +709,7 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 | `default_beautifier` | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: |
 | `indent_size` | :white_check_mark: |
+| `indent_with_tabs` | :white_check_mark: |
 
 **Description**:
 
@@ -411,6 +792,572 @@ Indentation size/length (Supported by beautysh)
 {
     "bash": {
         "indent_size": 4
+    }
+}
+```
+
+#####  [Indent with tabs](#indent-with-tabs) 
+
+**Namespace**: `bash`
+
+**Key**: `indent_with_tabs`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`beautysh`](#beautysh) 
+
+**Description**:
+
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by beautysh)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "bash": {
+        "indent_with_tabs": false
+    }
+}
+```
+
+####  [Blade](#blade) 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+| Option | JS Beautify |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `brace_style` | :white_check_mark: |
+| `content_unformatted` | :white_check_mark: |
+| `end_with_newline` | :white_check_mark: |
+| `extra_liners` | :white_check_mark: |
+| `indent_char` | :white_check_mark: |
+| `indent_inner_html` | :white_check_mark: |
+| `indent_scripts` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
+| `inline` | :white_check_mark: |
+| `max_preserve_newlines` | :white_check_mark: |
+| `preserve_newlines` | :white_check_mark: |
+| `unformatted` | :white_check_mark: |
+| `wrap_attributes` | :white_check_mark: |
+| `wrap_attributes_indent_size` | :white_check_mark: |
+| `wrap_line_length` | :white_check_mark: |
+
+**Description**:
+
+Options for language Blade
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Blade Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `JS Beautify`
+
+**Type**: `string`
+
+**Enum**:  `JS Beautify` 
+
+**Description**:
+
+Default Beautifier to be used for Blade
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Blade files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Brace style](#brace-style) 
+
+**Namespace**: `html`
+
+**Key**: `brace_style`
+
+**Default**: `collapse`
+
+**Type**: `string`
+
+**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[collapse|expand|end-expand|none] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "brace_style": "collapse"
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
+    }
+}
+```
+
+#####  [End with newline](#end-with-newline) 
+
+**Namespace**: `html`
+
+**Key**: `end_with_newline`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+End output with newline (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "end_with_newline": false
+    }
+}
+```
+
+#####  [Extra liners](#extra-liners) 
+
+**Namespace**: `html`
+
+**Key**: `extra_liners`
+
+**Default**: `head,body,/html`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "extra_liners": [
+            "head",
+            "body",
+            "/html"
+        ]
+    }
+}
+```
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `html`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indentation character (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [Indent inner html](#indent-inner-html) 
+
+**Namespace**: `html`
+
+**Key**: `indent_inner_html`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent <head> and <body> sections. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_inner_html": false
+    }
+}
+```
+
+#####  [Indent scripts](#indent-scripts) 
+
+**Namespace**: `html`
+
+**Key**: `indent_scripts`
+
+**Default**: `normal`
+
+**Type**: `string`
+
+**Enum**:  `keep`  `separate`  `normal` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[keep|separate|normal] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_scripts": "normal"
+    }
+}
+```
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indentation size/length (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "inline": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "ins",
+            "strike",
+            "tt"
+        ]
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
+    }
+}
+```
+
+#####  [Wrap attributes](#wrap-attributes) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes`
+
+**Default**: `auto`
+
+**Type**: `string`
+
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes": "auto"
+    }
+}
+```
+
+#####  [Wrap attributes indent size](#wrap-attributes-indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes_indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent wrapped attributes to after N characters (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes_indent_size": 4
+    }
+}
+```
+
+#####  [Wrap line length](#wrap-line-length) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_line_length": 250
     }
 }
 ```
@@ -764,26 +1711,9 @@ Automatically beautify Clojure files on save
 | `disabled` | :white_check_mark: | :white_check_mark: |
 | `default_beautifier` | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `brace_style` | :white_check_mark: | :x: |
-| `break_chained_methods` | :white_check_mark: | :x: |
-| `end_of_line` | :white_check_mark: | :x: |
-| `end_with_comma` | :white_check_mark: | :x: |
-| `end_with_newline` | :white_check_mark: | :x: |
-| `eval_code` | :white_check_mark: | :x: |
-| `indent_char` | :white_check_mark: | :white_check_mark: |
-| `indent_level` | :white_check_mark: | :x: |
-| `indent_size` | :white_check_mark: | :white_check_mark: |
-| `indent_with_tabs` | :white_check_mark: | :white_check_mark: |
-| `jslint_happy` | :white_check_mark: | :x: |
-| `keep_array_indentation` | :white_check_mark: | :x: |
-| `keep_function_indentation` | :white_check_mark: | :x: |
-| `max_preserve_newlines` | :white_check_mark: | :x: |
-| `preserve_newlines` | :white_check_mark: | :x: |
-| `space_after_anon_function` | :white_check_mark: | :x: |
-| `space_before_conditional` | :white_check_mark: | :x: |
-| `space_in_paren` | :white_check_mark: | :x: |
-| `unescape_strings` | :white_check_mark: | :x: |
-| `wrap_line_length` | :white_check_mark: | :x: |
+| `indent_char` | :x: | :white_check_mark: |
+| `indent_size` | :x: | :white_check_mark: |
+| `indent_with_tabs` | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -844,158 +1774,6 @@ Automatically beautify CoffeeScript files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Beautify On Save*" and change it to your desired configuration.
 
-#####  [Brace style](#brace-style) 
-
-**Namespace**: `js`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-#####  [Break chained methods](#break-chained-methods) 
-
-**Namespace**: `js`
-
-**Key**: `break_chained_methods`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Break chained method calls across subsequent lines (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "break_chained_methods": false
-    }
-}
-```
-
-#####  [End of line](#end-of-line) 
-
-**Namespace**: `js`
-
-**Key**: `end_of_line`
-
-**Default**: `System Default`
-
-**Type**: `string`
-
-**Enum**:  `CRLF`  `LF`  `System Default` 
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Override EOL from line-ending-selector (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_of_line": "System Default"
-    }
-}
-```
-
-#####  [End with comma](#end-with-comma) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_comma`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_comma": false
-    }
-}
-```
-
-#####  [End with newline](#end-with-newline) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-End output with newline (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_newline": false
-    }
-}
-```
-
-#####  [Eval code](#eval-code) 
-
-**Namespace**: `js`
-
-**Key**: `eval_code`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "eval_code": false
-    }
-}
-```
-
 #####  [Indent char](#indent-char) 
 
 **Namespace**: `js`
@@ -1006,11 +1784,11 @@ End output with newline (Supported by Coffee Formatter)
 
 **Type**: `string`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation character (Supported by Coffee Formatter, coffee-fmt)
+Indentation character (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1018,30 +1796,6 @@ Indentation character (Supported by Coffee Formatter, coffee-fmt)
 {
     "js": {
         "indent_char": " "
-    }
-}
-```
-
-#####  [Indent level](#indent-level) 
-
-**Namespace**: `js`
-
-**Key**: `indent_level`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Initial indentation level (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_level": 0
     }
 }
 ```
@@ -1056,11 +1810,11 @@ Initial indentation level (Supported by Coffee Formatter)
 
 **Type**: `integer`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation size/length (Supported by Coffee Formatter, coffee-fmt)
+Indentation size/length (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1080,11 +1834,11 @@ Indentation size/length (Supported by Coffee Formatter, coffee-fmt)
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by Coffee Formatter, coffee-fmt)
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1092,252 +1846,6 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by C
 {
     "js": {
         "indent_with_tabs": false
-    }
-}
-```
-
-#####  [Jslint happy](#jslint-happy) 
-
-**Namespace**: `js`
-
-**Key**: `jslint_happy`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Enable jslint-stricter mode (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "jslint_happy": false
-    }
-}
-```
-
-#####  [Keep array indentation](#keep-array-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_array_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Preserve array indentation (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_array_indentation": false
-    }
-}
-```
-
-#####  [Keep function indentation](#keep-function-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_function_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_function_indentation": false
-    }
-}
-```
-
-#####  [Max preserve newlines](#max-preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Preserve line-breaks (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Space after anon function](#space-after-anon-function) 
-
-**Namespace**: `js`
-
-**Key**: `space_after_anon_function`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Add a space before an anonymous function's parens, ie. function () (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_after_anon_function": false
-    }
-}
-```
-
-#####  [Space before conditional](#space-before-conditional) 
-
-**Namespace**: `js`
-
-**Key**: `space_before_conditional`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_before_conditional": true
-    }
-}
-```
-
-#####  [Space in paren](#space-in-paren) 
-
-**Namespace**: `js`
-
-**Key**: `space_in_paren`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Add padding spaces within paren, ie. f( a, b ) (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_in_paren": false
-    }
-}
-```
-
-#####  [Unescape strings](#unescape-strings) 
-
-**Namespace**: `js`
-
-**Key**: `unescape_strings`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Decode printable characters encoded in xNN notation (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "unescape_strings": false
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `js`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Wrap lines at next opportunity after N characters (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "wrap_line_length": 0
     }
 }
 ```
@@ -1601,27 +2109,27 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 
 ####  [CSS](#css) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
+**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
 
-| Option | CSScomb | JS Beautify | Pretty Diff | SassConvert |
-| --- | --- | --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :x: | :white_check_mark: | :x: |
-| `configPath` | :white_check_mark: | :x: | :x: | :x: |
-| `convert_quotes` | :x: | :x: | :white_check_mark: | :x: |
-| `end_with_newline` | :x: | :white_check_mark: | :x: | :x: |
-| `force_indentation` | :x: | :x: | :white_check_mark: | :x: |
-| `indent_char` | :x: | :white_check_mark: | :white_check_mark: | :x: |
-| `indent_comments` | :x: | :x: | :white_check_mark: | :x: |
-| `indent_size` | :x: | :white_check_mark: | :white_check_mark: | :x: |
-| `newline_between_rules` | :x: | :white_check_mark: | :white_check_mark: | :x: |
-| `no_lead_zero` | :x: | :x: | :white_check_mark: | :x: |
-| `predefinedConfig` | :white_check_mark: | :x: | :x: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: | :white_check_mark: | :x: |
-| `selector_separator_newline` | :x: | :white_check_mark: | :x: | :x: |
-| `wrap_line_length` | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| Option | CSScomb | JS Beautify | Prettier | Pretty Diff | SassConvert |
+| --- | --- | --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `align_assignments` | :x: | :x: | :x: | :white_check_mark: | :x: |
+| `configPath` | :white_check_mark: | :x: | :x: | :x: | :x: |
+| `convert_quotes` | :x: | :x: | :x: | :white_check_mark: | :x: |
+| `end_with_newline` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `force_indentation` | :x: | :x: | :x: | :white_check_mark: | :x: |
+| `indent_char` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `indent_comments` | :x: | :x: | :x: | :white_check_mark: | :x: |
+| `indent_size` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `newline_between_rules` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `no_lead_zero` | :x: | :x: | :x: | :white_check_mark: | :x: |
+| `predefinedConfig` | :white_check_mark: | :x: | :x: | :x: | :x: |
+| `preserve_newlines` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `selector_separator_newline` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `wrap_line_length` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -1652,7 +2160,7 @@ Disable CSS Beautification
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `JS Beautify`  `Pretty Diff`  `SassConvert` 
+**Enum**:  `CSScomb`  `JS Beautify`  `Prettier`  `Pretty Diff`  `SassConvert` 
 
 **Description**:
 
@@ -1718,7 +2226,7 @@ If lists of assignments or properties should be vertically aligned for faster an
 
 **Description**:
 
-Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+Path to custom CSScomb config file, used in absence of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1922,7 +2430,7 @@ Add a newline between CSS rules (Supported by JS Beautify, Pretty Diff)
 
 **Description**:
 
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
+If in CSS values leading 0s immediately preceding a decimal should be removed or prevented. (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -2208,6 +2716,7 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 | `brace_style` | :white_check_mark: | :x: |
 | `break_chained_methods` | :white_check_mark: | :white_check_mark: |
+| `content_unformatted` | :white_check_mark: | :x: |
 | `end_of_line` | :white_check_mark: | :x: |
 | `end_with_comma` | :white_check_mark: | :white_check_mark: |
 | `end_with_newline` | :white_check_mark: | :x: |
@@ -2219,10 +2728,12 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 | `indent_scripts` | :white_check_mark: | :x: |
 | `indent_size` | :white_check_mark: | :white_check_mark: |
 | `indent_with_tabs` | :white_check_mark: | :white_check_mark: |
+| `inline` | :white_check_mark: | :x: |
 | `jslint_happy` | :white_check_mark: | :x: |
 | `keep_array_indentation` | :white_check_mark: | :x: |
 | `keep_function_indentation` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
+| `object_curly_spacing` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: | :white_check_mark: |
 | `space_before_conditional` | :white_check_mark: | :x: |
@@ -2340,6 +2851,35 @@ Break chained method calls across subsequent lines (Supported by JS Beautify, Pr
 {
     "js": {
         "break_chained_methods": false
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
     }
 }
 ```
@@ -2626,6 +3166,93 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by J
 }
 ```
 
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "inline": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "ins",
+            "strike",
+            "tt"
+        ]
+    }
+}
+```
+
 #####  [Jslint happy](#jslint-happy) 
 
 **Namespace**: `js`
@@ -2720,6 +3347,30 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 {
     "html": {
         "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
     }
 }
 ```
@@ -2854,91 +3505,20 @@ Decode printable characters encoded in xNN notation (Supported by JS Beautify)
 
 **Key**: `unformatted`
 
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
-
 **Type**: `array`
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
-            "a",
-            "abbr",
-            "area",
-            "audio",
-            "b",
-            "bdi",
-            "bdo",
-            "br",
-            "button",
-            "canvas",
-            "cite",
-            "code",
-            "data",
-            "datalist",
-            "del",
-            "dfn",
-            "em",
-            "embed",
-            "i",
-            "iframe",
-            "img",
-            "input",
-            "ins",
-            "kbd",
-            "keygen",
-            "label",
-            "map",
-            "mark",
-            "math",
-            "meter",
-            "noscript",
-            "object",
-            "output",
-            "progress",
-            "q",
-            "ruby",
-            "s",
-            "samp",
-            "select",
-            "small",
-            "span",
-            "strong",
-            "sub",
-            "sup",
-            "svg",
-            "template",
-            "textarea",
-            "time",
-            "u",
-            "var",
-            "video",
-            "wbr",
-            "text",
-            "acronym",
-            "address",
-            "big",
-            "dt",
-            "ins",
-            "small",
-            "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
-        ]
+        "unformatted": []
     }
 }
 ```
@@ -2953,13 +3533,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -3674,15 +4254,84 @@ Path to clang-format config file. i.e. clang-format.cfg (Supported by clang-form
 }
 ```
 
-####  [Go](#go) 
+####  [GN](#gn) 
 
-**Supported Beautifiers**:  [`gofmt`](#gofmt) 
+**Supported Beautifiers**:  [`GN`](#gn) 
 
-| Option | gofmt |
+| Option | GN |
 | --- | --- |
 | `disabled` | :white_check_mark: |
 | `default_beautifier` | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: |
+
+**Description**:
+
+Options for language GN
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable GN Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `GN`
+
+**Type**: `string`
+
+**Enum**:  `GN` 
+
+**Description**:
+
+Default Beautifier to be used for GN
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify GN files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+####  [Go](#go) 
+
+**Supported Beautifiers**:  [`gofmt`](#gofmt)  [`goimports`](#goimports) 
+
+| Option | gofmt | goimports |
+| --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 
 **Description**:
 
@@ -3713,7 +4362,7 @@ Disable Go Beautification
 
 **Type**: `string`
 
-**Enum**:  `gofmt` 
+**Enum**:  `gofmt`  `goimports` 
 
 **Description**:
 
@@ -3930,12 +4579,14 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 | `default_beautifier` | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 | `brace_style` | :white_check_mark: | :x: |
+| `content_unformatted` | :white_check_mark: | :x: |
 | `end_with_newline` | :white_check_mark: | :x: |
 | `extra_liners` | :white_check_mark: | :x: |
 | `indent_char` | :white_check_mark: | :white_check_mark: |
 | `indent_inner_html` | :white_check_mark: | :x: |
 | `indent_scripts` | :white_check_mark: | :x: |
 | `indent_size` | :white_check_mark: | :white_check_mark: |
+| `inline` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `unformatted` | :white_check_mark: | :x: |
@@ -4030,6 +4681,35 @@ Automatically beautify Handlebars files on save
 }
 ```
 
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
+    }
+}
+```
+
 #####  [End with newline](#end-with-newline) 
 
 **Namespace**: `html`
@@ -4188,65 +4868,13 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 }
 ```
 
-#####  [Max preserve newlines](#max-preserve-newlines) 
+#####  [Inline](#inline) 
 
 **Namespace**: `html`
 
-**Key**: `max_preserve_newlines`
+**Key**: `inline`
 
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Unformatted](#unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
 
 **Type**: `array`
 
@@ -4254,14 +4882,14 @@ Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -4320,17 +4948,85 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
             "big",
             "dt",
             "ins",
-            "small",
             "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "tt"
         ]
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
     }
 }
 ```
@@ -4345,13 +5041,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -4417,13 +5113,13 @@ Maximum characters per line (0 disables) (Supported by JS Beautify, Pretty Diff)
 
 ####  [Haskell](#haskell) 
 
-**Supported Beautifiers**:  [`stylish-haskell`](#stylish-haskell) 
+**Supported Beautifiers**:  [`brittany`](#brittany)  [`hindent`](#hindent)  [`stylish-haskell`](#stylish-haskell) 
 
-| Option | stylish-haskell |
-| --- | --- |
-| `disabled` | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: |
+| Option | brittany | hindent | stylish-haskell |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 **Description**:
 
@@ -4454,7 +5150,7 @@ Disable Haskell Beautification
 
 **Type**: `string`
 
-**Enum**:  `stylish-haskell` 
+**Enum**:  `brittany`  `hindent`  `stylish-haskell` 
 
 **Description**:
 
@@ -4494,12 +5190,14 @@ Automatically beautify Haskell files on save
 | `default_beautifier` | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 | `brace_style` | :white_check_mark: | :x: |
+| `content_unformatted` | :white_check_mark: | :x: |
 | `end_with_newline` | :white_check_mark: | :x: |
 | `extra_liners` | :white_check_mark: | :x: |
 | `indent_char` | :white_check_mark: | :white_check_mark: |
 | `indent_inner_html` | :white_check_mark: | :x: |
 | `indent_scripts` | :white_check_mark: | :x: |
 | `indent_size` | :white_check_mark: | :white_check_mark: |
+| `inline` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `unformatted` | :white_check_mark: | :x: |
@@ -4594,6 +5292,35 @@ Automatically beautify HTML files on save
 }
 ```
 
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
+    }
+}
+```
+
 #####  [End with newline](#end-with-newline) 
 
 **Namespace**: `html`
@@ -4752,65 +5479,13 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 }
 ```
 
-#####  [Max preserve newlines](#max-preserve-newlines) 
+#####  [Inline](#inline) 
 
 **Namespace**: `html`
 
-**Key**: `max_preserve_newlines`
+**Key**: `inline`
 
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Unformatted](#unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
 
 **Type**: `array`
 
@@ -4818,14 +5493,14 @@ Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -4884,17 +5559,85 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
             "big",
             "dt",
             "ins",
-            "small",
             "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "tt"
         ]
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
     }
 }
 ```
@@ -4909,13 +5652,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5198,33 +5941,34 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 
 ####  [JavaScript](#javascript) 
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`JSCS Fixer`](#jscs-fixer)  [`ESLint Fixer`](#eslint-fixer)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`JSCS Fixer`](#jscs-fixer)  [`ESLint Fixer`](#eslint-fixer)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
-| Option | ESLint Fixer | JS Beautify | JSCS Fixer | Pretty Diff |
-| --- | --- | --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `brace_style` | :x: | :white_check_mark: | :x: | :x: |
-| `break_chained_methods` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `end_of_line` | :x: | :white_check_mark: | :x: | :x: |
-| `end_with_comma` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `end_with_newline` | :x: | :white_check_mark: | :x: | :x: |
-| `eval_code` | :x: | :white_check_mark: | :x: | :x: |
-| `indent_char` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `indent_level` | :x: | :white_check_mark: | :x: | :x: |
-| `indent_size` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `indent_with_tabs` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `jslint_happy` | :x: | :white_check_mark: | :x: | :x: |
-| `keep_array_indentation` | :x: | :white_check_mark: | :x: | :x: |
-| `keep_function_indentation` | :x: | :white_check_mark: | :x: | :x: |
-| `max_preserve_newlines` | :x: | :white_check_mark: | :x: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `space_after_anon_function` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `space_before_conditional` | :x: | :white_check_mark: | :x: | :x: |
-| `space_in_paren` | :x: | :white_check_mark: | :x: | :white_check_mark: |
-| `unescape_strings` | :x: | :white_check_mark: | :x: | :x: |
-| `wrap_line_length` | :x: | :white_check_mark: | :x: | :white_check_mark: |
+| Option | ESLint Fixer | JS Beautify | JSCS Fixer | Prettier | Pretty Diff |
+| --- | --- | --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `brace_style` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `break_chained_methods` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
+| `end_of_line` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `end_with_comma` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
+| `end_with_newline` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `eval_code` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `indent_char` | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
+| `indent_level` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `indent_size` | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
+| `indent_with_tabs` | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
+| `jslint_happy` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `keep_array_indentation` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `keep_function_indentation` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `max_preserve_newlines` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `object_curly_spacing` | :x: | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `preserve_newlines` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
+| `space_after_anon_function` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
+| `space_before_conditional` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `space_in_paren` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
+| `unescape_strings` | :x: | :white_check_mark: | :x: | :x: | :x: |
+| `wrap_line_length` | :x: | :white_check_mark: | :x: | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -5255,7 +5999,7 @@ Disable JavaScript Beautification
 
 **Type**: `string`
 
-**Enum**:  `JS Beautify`  `JSCS Fixer`  `ESLint Fixer`  `Pretty Diff` 
+**Enum**:  `JS Beautify`  `JSCS Fixer`  `ESLint Fixer`  `Prettier`  `Pretty Diff` 
 
 **Description**:
 
@@ -5447,11 +6191,11 @@ End output with newline (Supported by JS Beautify)
 
 **Type**: `string`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Indentation character (Supported by JS Beautify, Pretty Diff)
+Indentation character (Supported by JS Beautify, Prettier, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5497,11 +6241,11 @@ Initial indentation level (Supported by JS Beautify)
 
 **Type**: `integer`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Indentation size/length (Supported by JS Beautify, Pretty Diff)
+Indentation size/length (Supported by JS Beautify, Prettier, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5521,11 +6265,11 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by JS Beautify, Pretty Diff)
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by JS Beautify, Prettier, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5631,6 +6375,30 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 {
     "js": {
         "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by JS Beautify, Prettier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
     }
 }
 ```
@@ -5785,33 +6553,34 @@ Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pre
 
 ####  [JSON](#json) 
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
-| Option | JS Beautify | Pretty Diff |
-| --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `brace_style` | :white_check_mark: | :x: |
-| `break_chained_methods` | :white_check_mark: | :white_check_mark: |
-| `end_of_line` | :white_check_mark: | :x: |
-| `end_with_comma` | :white_check_mark: | :white_check_mark: |
-| `end_with_newline` | :white_check_mark: | :x: |
-| `eval_code` | :white_check_mark: | :x: |
-| `indent_char` | :white_check_mark: | :white_check_mark: |
-| `indent_level` | :white_check_mark: | :x: |
-| `indent_size` | :white_check_mark: | :white_check_mark: |
-| `indent_with_tabs` | :white_check_mark: | :white_check_mark: |
-| `jslint_happy` | :white_check_mark: | :x: |
-| `keep_array_indentation` | :white_check_mark: | :x: |
-| `keep_function_indentation` | :white_check_mark: | :x: |
-| `max_preserve_newlines` | :white_check_mark: | :x: |
-| `preserve_newlines` | :white_check_mark: | :white_check_mark: |
-| `space_after_anon_function` | :white_check_mark: | :white_check_mark: |
-| `space_before_conditional` | :white_check_mark: | :x: |
-| `space_in_paren` | :white_check_mark: | :white_check_mark: |
-| `unescape_strings` | :white_check_mark: | :x: |
-| `wrap_line_length` | :white_check_mark: | :white_check_mark: |
+| Option | JS Beautify | Prettier | Pretty Diff |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `brace_style` | :white_check_mark: | :x: | :x: |
+| `break_chained_methods` | :white_check_mark: | :x: | :white_check_mark: |
+| `end_of_line` | :white_check_mark: | :x: | :x: |
+| `end_with_comma` | :white_check_mark: | :x: | :white_check_mark: |
+| `end_with_newline` | :white_check_mark: | :x: | :x: |
+| `eval_code` | :white_check_mark: | :x: | :x: |
+| `indent_char` | :white_check_mark: | :x: | :white_check_mark: |
+| `indent_level` | :white_check_mark: | :x: | :x: |
+| `indent_size` | :white_check_mark: | :x: | :white_check_mark: |
+| `indent_with_tabs` | :white_check_mark: | :x: | :white_check_mark: |
+| `jslint_happy` | :white_check_mark: | :x: | :x: |
+| `keep_array_indentation` | :white_check_mark: | :x: | :x: |
+| `keep_function_indentation` | :white_check_mark: | :x: | :x: |
+| `max_preserve_newlines` | :white_check_mark: | :x: | :x: |
+| `object_curly_spacing` | :white_check_mark: | :x: | :x: |
+| `preserve_newlines` | :white_check_mark: | :x: | :white_check_mark: |
+| `space_after_anon_function` | :white_check_mark: | :x: | :white_check_mark: |
+| `space_before_conditional` | :white_check_mark: | :x: | :x: |
+| `space_in_paren` | :white_check_mark: | :x: | :white_check_mark: |
+| `unescape_strings` | :white_check_mark: | :x: | :x: |
+| `wrap_line_length` | :white_check_mark: | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -5842,7 +6611,7 @@ Disable JSON Beautification
 
 **Type**: `string`
 
-**Enum**:  `JS Beautify`  `Pretty Diff` 
+**Enum**:  `JS Beautify`  `Prettier`  `Pretty Diff` 
 
 **Description**:
 
@@ -6222,6 +6991,30 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 }
 ```
 
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
+    }
+}
+```
+
 #####  [Preserve newlines](#preserve-newlines) 
 
 **Namespace**: `js`
@@ -6394,6 +7187,7 @@ Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pre
 | `keep_array_indentation` | :white_check_mark: | :x: |
 | `keep_function_indentation` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
+| `object_curly_spacing` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: | :white_check_mark: |
 | `space_before_conditional` | :white_check_mark: | :x: |
@@ -6836,6 +7630,30 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 }
 ```
 
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
+    }
+}
+```
+
 #####  [Preserve newlines](#preserve-newlines) 
 
 **Namespace**: `js`
@@ -7074,7 +7892,7 @@ Automatically beautify LaTeX files on save
 
 **Description**:
 
- (Supported by Latex Beautify)
+Aligns columns by the alignment tabs for environments specified (Supported by Latex Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -7179,7 +7997,7 @@ Indentation character (Supported by Latex Beautify)
 
 **Description**:
 
-Indent the preable (Supported by Latex Beautify)
+Indent the preamble (Supported by Latex Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -7241,25 +8059,25 @@ Remove trailing whitespace (Supported by Latex Beautify)
 
 ####  [LESS](#less) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
 
-| Option | CSScomb | Pretty Diff |
-| --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :white_check_mark: |
-| `configPath` | :white_check_mark: | :x: |
-| `convert_quotes` | :x: | :white_check_mark: |
-| `force_indentation` | :x: | :white_check_mark: |
-| `indent_char` | :x: | :white_check_mark: |
-| `indent_comments` | :x: | :white_check_mark: |
-| `indent_size` | :x: | :white_check_mark: |
-| `newline_between_rules` | :x: | :white_check_mark: |
-| `no_lead_zero` | :x: | :white_check_mark: |
-| `predefinedConfig` | :white_check_mark: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: |
-| `wrap_line_length` | :x: | :white_check_mark: |
+| Option | CSScomb | Prettier | Pretty Diff |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `align_assignments` | :x: | :x: | :white_check_mark: |
+| `configPath` | :white_check_mark: | :x: | :x: |
+| `convert_quotes` | :x: | :x: | :white_check_mark: |
+| `force_indentation` | :x: | :x: | :white_check_mark: |
+| `indent_char` | :x: | :x: | :white_check_mark: |
+| `indent_comments` | :x: | :x: | :white_check_mark: |
+| `indent_size` | :x: | :x: | :white_check_mark: |
+| `newline_between_rules` | :x: | :x: | :white_check_mark: |
+| `no_lead_zero` | :x: | :x: | :white_check_mark: |
+| `predefinedConfig` | :white_check_mark: | :x: | :x: |
+| `preserve_newlines` | :x: | :x: | :white_check_mark: |
+| `wrap_line_length` | :x: | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -7290,7 +8108,7 @@ Disable LESS Beautification
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `Pretty Diff` 
+**Enum**:  `CSScomb`  `Prettier`  `Pretty Diff` 
 
 **Description**:
 
@@ -7356,7 +8174,7 @@ If lists of assignments or properties should be vertically aligned for faster an
 
 **Description**:
 
-Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+Path to custom CSScomb config file, used in absence of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -7536,7 +8354,7 @@ Add a newline between CSS rules (Supported by Pretty Diff)
 
 **Description**:
 
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
+If in CSS values leading 0s immediately preceding a decimal should be removed or prevented. (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -7633,6 +8451,9 @@ Maximum amount of characters per line (0 = disable) (Supported by Pretty Diff)
 | `disabled` | :white_check_mark: |
 | `default_beautifier` | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: |
+| `end_of_line` | :white_check_mark: |
+| `indent_char` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
 
 **Description**:
 
@@ -7693,18 +8514,98 @@ Automatically beautify Lua files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Beautify On Save*" and change it to your desired configuration.
 
+#####  [End of line](#end-of-line) 
+
+**Namespace**: `lua`
+
+**Key**: `end_of_line`
+
+**Default**: `System Default`
+
+**Type**: `string`
+
+**Enum**:  `CRLF`  `LF`  `System Default` 
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Override EOL from line-ending-selector (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "end_of_line": "System Default"
+    }
+}
+```
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `lua`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Indentation character (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `lua`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Indentation size/length (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "indent_size": 4
+    }
+}
+```
+
 ####  [Markdown](#markdown) 
 
-**Supported Beautifiers**:  [`Remark`](#remark)  [`Tidy Markdown`](#tidy-markdown) 
+**Supported Beautifiers**:  [`Prettier`](#prettier)  [`Remark`](#remark)  [`Tidy Markdown`](#tidy-markdown) 
 
-| Option | Remark | Tidy Markdown |
-| --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `commonmark` | :white_check_mark: | :x: |
-| `gfm` | :white_check_mark: | :x: |
-| `yaml` | :white_check_mark: | :x: |
+| Option | Prettier | Remark | Tidy Markdown |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `commonmark` | :x: | :white_check_mark: | :x: |
+| `gfm` | :x: | :white_check_mark: | :x: |
+| `yaml` | :x: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -7731,11 +8632,11 @@ Disable Markdown Beautification
 
 **Important**: This option is only configurable from within Atom Beautify's setting panel.
 
-**Default**: `Tidy Markdown`
+**Default**: `Remark`
 
 **Type**: `string`
 
-**Enum**:  `Remark`  `Tidy Markdown` 
+**Enum**:  `Prettier`  `Remark`  `Tidy Markdown` 
 
 **Description**:
 
@@ -7851,12 +8752,14 @@ Enables raw YAML front matter to be detected (thus ignoring markdown-like syntax
 | `default_beautifier` | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: |
 | `brace_style` | :white_check_mark: |
+| `content_unformatted` | :white_check_mark: |
 | `end_with_newline` | :white_check_mark: |
 | `extra_liners` | :white_check_mark: |
 | `indent_char` | :white_check_mark: |
 | `indent_inner_html` | :white_check_mark: |
 | `indent_scripts` | :white_check_mark: |
 | `indent_size` | :white_check_mark: |
+| `inline` | :white_check_mark: |
 | `max_preserve_newlines` | :white_check_mark: |
 | `preserve_newlines` | :white_check_mark: |
 | `syntax` | :white_check_mark: |
@@ -7948,6 +8851,35 @@ Automatically beautify Marko files on save
 {
     "html": {
         "brace_style": "collapse"
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by Marko Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
     }
 }
 ```
@@ -8110,6 +9042,93 @@ Indentation size/length (Supported by Marko Beautifier)
 }
 ```
 
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
+
+**Description**:
+
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by Marko Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "inline": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "ins",
+            "strike",
+            "tt"
+        ]
+    }
+}
+```
+
 #####  [Max preserve newlines](#max-preserve-newlines) 
 
 **Namespace**: `html`
@@ -8196,91 +9215,20 @@ Preserve line-breaks (Supported by Marko Beautifier)
 
 **Key**: `unformatted`
 
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
-
 **Type**: `array`
 
 **Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by Marko Beautifier)
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by Marko Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
-            "a",
-            "abbr",
-            "area",
-            "audio",
-            "b",
-            "bdi",
-            "bdo",
-            "br",
-            "button",
-            "canvas",
-            "cite",
-            "code",
-            "data",
-            "datalist",
-            "del",
-            "dfn",
-            "em",
-            "embed",
-            "i",
-            "iframe",
-            "img",
-            "input",
-            "ins",
-            "kbd",
-            "keygen",
-            "label",
-            "map",
-            "mark",
-            "math",
-            "meter",
-            "noscript",
-            "object",
-            "output",
-            "progress",
-            "q",
-            "ruby",
-            "s",
-            "samp",
-            "select",
-            "small",
-            "span",
-            "strong",
-            "sub",
-            "sup",
-            "svg",
-            "template",
-            "textarea",
-            "time",
-            "u",
-            "var",
-            "video",
-            "wbr",
-            "text",
-            "acronym",
-            "address",
-            "big",
-            "dt",
-            "ins",
-            "small",
-            "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
-        ]
+        "unformatted": []
     }
 }
 ```
@@ -8295,13 +9243,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by M
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by Marko Beautifier)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by Marko Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -8375,12 +9323,14 @@ Maximum characters per line (0 disables) (Supported by Marko Beautifier)
 | `default_beautifier` | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 | `brace_style` | :white_check_mark: | :x: |
+| `content_unformatted` | :white_check_mark: | :x: |
 | `end_with_newline` | :white_check_mark: | :x: |
 | `extra_liners` | :white_check_mark: | :x: |
 | `indent_char` | :white_check_mark: | :white_check_mark: |
 | `indent_inner_html` | :white_check_mark: | :x: |
 | `indent_scripts` | :white_check_mark: | :x: |
 | `indent_size` | :white_check_mark: | :white_check_mark: |
+| `inline` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `unformatted` | :white_check_mark: | :x: |
@@ -8471,6 +9421,35 @@ Automatically beautify Mustache files on save
 {
     "html": {
         "brace_style": "collapse"
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
     }
 }
 ```
@@ -8633,65 +9612,13 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 }
 ```
 
-#####  [Max preserve newlines](#max-preserve-newlines) 
+#####  [Inline](#inline) 
 
 **Namespace**: `html`
 
-**Key**: `max_preserve_newlines`
+**Key**: `inline`
 
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Unformatted](#unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,strike,tt`
 
 **Type**: `array`
 
@@ -8699,14 +9626,14 @@ Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -8765,15 +9692,84 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
             "big",
             "dt",
             "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "tt"
         ]
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
     }
 }
 ```
@@ -8788,13 +9784,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -9306,13 +10302,13 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 
 ####  [OCaml](#ocaml) 
 
-**Supported Beautifiers**:  [`ocp-indent`](#ocp-indent) 
+**Supported Beautifiers**:  [`ocp-indent`](#ocp-indent)  [`ocamlformat`](#ocamlformat) 
 
-| Option | ocp-indent |
-| --- | --- |
-| `disabled` | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: |
+| Option | ocamlformat | ocp-indent |
+| --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 
 **Description**:
 
@@ -9343,7 +10339,7 @@ Disable OCaml Beautification
 
 **Type**: `string`
 
-**Enum**:  `ocp-indent` 
+**Enum**:  `ocp-indent`  `ocamlformat` 
 
 **Description**:
 
@@ -9571,6 +10567,7 @@ Specify a configuration file which will override the default name of .perltidyrc
 | `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | `allow_risky` | :white_check_mark: | :x: | :x: |
+| `cs_fixer_config_file` | :white_check_mark: | :x: | :x: |
 | `cs_fixer_path` | :white_check_mark: | :x: | :x: |
 | `cs_fixer_version` | :white_check_mark: | :x: | :x: |
 | `fixers` | :white_check_mark: | :x: | :x: |
@@ -9655,7 +10652,7 @@ Automatically beautify PHP files on save
 
 **Description**:
 
-allow risky rules to be applied (PHP-CS-Fixer 2 only) (Supported by PHP-CS-Fixer)
+Allow risky rules to be applied (PHP-CS-Fixer 2 only) (Supported by PHP-CS-Fixer)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -9663,6 +10660,30 @@ allow risky rules to be applied (PHP-CS-Fixer 2 only) (Supported by PHP-CS-Fixer
 {
     "php": {
         "allow_risky": "no"
+    }
+}
+```
+
+#####  [PHP-CS-Fixer Config File](#php-cs-fixer-config-file) 
+
+**Namespace**: `php`
+
+**Key**: `cs_fixer_config_file`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer) 
+
+**Description**:
+
+Path to php-cs-fixer config file. Will use local `.php_cs` or `.php_cs.dist` if found in the working directory or project root. (Supported by PHP-CS-Fixer)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "cs_fixer_config_file": ""
     }
 }
 ```
@@ -9807,7 +10828,7 @@ Path to the `phpcbf` CLI executable (Supported by PHPCBF)
 
 **Description**:
 
-undefined (Supported by PHPCBF)
+ (Supported by PHPCBF)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -9940,20 +10961,20 @@ Automatically beautify Puppet files on save
 
 ####  [Python](#python) 
 
-**Supported Beautifiers**:  [`autopep8`](#autopep8)  [`pybeautifier`](#pybeautifier)  [`yapf`](#yapf) 
+**Supported Beautifiers**:  [`autopep8`](#autopep8)  [`black`](#black)  [`pybeautifier`](#pybeautifier)  [`yapf`](#yapf) 
 
-| Option | autopep8 | pybeautifier | yapf |
-| --- | --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `formater` | :white_check_mark: | :white_check_mark: | :x: |
-| `ignore` | :white_check_mark: | :white_check_mark: | :x: |
-| `indent_size` | :white_check_mark: | :white_check_mark: | :x: |
-| `max_line_length` | :white_check_mark: | :white_check_mark: | :x: |
-| `multi_line_output` | :white_check_mark: | :white_check_mark: | :x: |
-| `sort_imports` | :white_check_mark: | :white_check_mark: | :x: |
-| `style_config` | :white_check_mark: | :white_check_mark: | :x: |
+| Option | autopep8 | black | pybeautifier | yapf |
+| --- | --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `formatter` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `ignore` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `indent_size` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `max_line_length` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `multi_line_output` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `sort_imports` | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| `style_config` | :white_check_mark: | :x: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -9984,7 +11005,7 @@ Disable Python Beautification
 
 **Type**: `string`
 
-**Enum**:  `autopep8`  `pybeautifier`  `yapf` 
+**Enum**:  `autopep8`  `black`  `pybeautifier`  `yapf` 
 
 **Description**:
 
@@ -10014,11 +11035,11 @@ Automatically beautify Python files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Beautify On Save*" and change it to your desired configuration.
 
-#####  [Formater](#formater) 
+#####  [Formatter](#formatter) 
 
 **Namespace**: `python`
 
-**Key**: `formater`
+**Key**: `formatter`
 
 **Default**: `autopep8`
 
@@ -10030,14 +11051,14 @@ Automatically beautify Python files on save
 
 **Description**:
 
-formater used by pybeautifier (Supported by autopep8, pybeautifier)
+formatter used by pybeautifier (Supported by autopep8, pybeautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "python": {
-        "formater": "autopep8"
+        "formatter": "autopep8"
     }
 }
 ```
@@ -10788,25 +11809,25 @@ Automatically beautify Sass files on save
 
 ####  [SCSS](#scss) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
+**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
 
-| Option | CSScomb | Pretty Diff | SassConvert |
-| --- | --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :white_check_mark: | :x: |
-| `configPath` | :white_check_mark: | :x: | :x: |
-| `convert_quotes` | :x: | :white_check_mark: | :x: |
-| `force_indentation` | :x: | :white_check_mark: | :x: |
-| `indent_char` | :x: | :white_check_mark: | :x: |
-| `indent_comments` | :x: | :white_check_mark: | :x: |
-| `indent_size` | :x: | :white_check_mark: | :x: |
-| `newline_between_rules` | :x: | :white_check_mark: | :x: |
-| `no_lead_zero` | :x: | :white_check_mark: | :x: |
-| `predefinedConfig` | :white_check_mark: | :x: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: | :x: |
-| `wrap_line_length` | :x: | :white_check_mark: | :x: |
+| Option | CSScomb | Prettier | Pretty Diff | SassConvert |
+| --- | --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `align_assignments` | :x: | :x: | :white_check_mark: | :x: |
+| `configPath` | :white_check_mark: | :x: | :x: | :x: |
+| `convert_quotes` | :x: | :x: | :white_check_mark: | :x: |
+| `force_indentation` | :x: | :x: | :white_check_mark: | :x: |
+| `indent_char` | :x: | :x: | :white_check_mark: | :x: |
+| `indent_comments` | :x: | :x: | :white_check_mark: | :x: |
+| `indent_size` | :x: | :x: | :white_check_mark: | :x: |
+| `newline_between_rules` | :x: | :x: | :white_check_mark: | :x: |
+| `no_lead_zero` | :x: | :x: | :white_check_mark: | :x: |
+| `predefinedConfig` | :white_check_mark: | :x: | :x: | :x: |
+| `preserve_newlines` | :x: | :x: | :white_check_mark: | :x: |
+| `wrap_line_length` | :x: | :x: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -10837,7 +11858,7 @@ Disable SCSS Beautification
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `Pretty Diff`  `SassConvert` 
+**Enum**:  `CSScomb`  `Prettier`  `Pretty Diff`  `SassConvert` 
 
 **Description**:
 
@@ -10903,7 +11924,7 @@ If lists of assignments or properties should be vertically aligned for faster an
 
 **Description**:
 
-Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+Path to custom CSScomb config file, used in absence of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -11083,7 +12104,7 @@ Add a newline between CSS rules (Supported by Pretty Diff)
 
 **Description**:
 
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
+If in CSS values leading 0s immediately preceding a decimal should be removed or prevented. (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -11360,6 +12381,7 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 | `identifiers` | :white_check_mark: |
 | `indent_size` | :white_check_mark: |
 | `keywords` | :white_check_mark: |
+| `reindent` | :white_check_mark: |
 
 **Description**:
 
@@ -11498,6 +12520,32 @@ Change case of keywords (Supported by sqlformat)
 {
     "sql": {
         "keywords": "upper"
+    }
+}
+```
+
+#####  [Reindent](#reindent) 
+
+**Namespace**: `sql`
+
+**Key**: `reindent`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
+
+**Description**:
+
+Change indentations of the statements. Uncheck this option to preserve indentation (Supported by sqlformat)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "sql": {
+        "reindent": true
     }
 }
 ```
@@ -11856,6 +12904,75 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 }
 ```
 
+####  [Terraform](#terraform) 
+
+**Supported Beautifiers**:  [`terraformfmt`](#terraformfmt) 
+
+| Option | terraformfmt |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+
+**Description**:
+
+Options for language Terraform
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Terraform Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `terraformfmt`
+
+**Type**: `string`
+
+**Enum**:  `terraformfmt` 
+
+**Description**:
+
+Default Beautifier to be used for Terraform
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Terraform files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
 ####  [TSS](#tss) 
 
 **Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
@@ -12127,7 +13244,7 @@ Add a newline between CSS rules (Supported by Pretty Diff)
 
 **Description**:
 
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
+If in CSS values leading 0s immediately preceding a decimal should be removed or prevented. (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -12183,6 +13300,127 @@ Maximum amount of characters per line (0 = disable) (Supported by Pretty Diff)
 {
     "css": {
         "wrap_line_length": 0
+    }
+}
+```
+
+####  [TSX](#tsx) 
+
+**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
+
+| Option | TypeScript Formatter |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
+| `indent_with_tabs` | :white_check_mark: |
+
+**Description**:
+
+Options for language TSX
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable TSX Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `TypeScript Formatter`
+
+**Type**: `string`
+
+**Enum**:  `TypeScript Formatter` 
+
+**Description**:
+
+Default Beautifier to be used for TSX
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify TSX files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `js`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
+
+**Description**:
+
+Indentation size/length (Supported by TypeScript Formatter)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Indent with tabs](#indent-with-tabs) 
+
+**Namespace**: `js`
+
+**Key**: `indent_with_tabs`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
+
+**Description**:
+
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by TypeScript Formatter)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_with_tabs": false
     }
 }
 ```
@@ -12491,33 +13729,15 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 
 ####  [TypeScript](#typescript) 
 
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
+**Supported Beautifiers**:  [`Prettier`](#prettier)  [`TypeScript Formatter`](#typescript-formatter) 
 
-| Option | TypeScript Formatter |
-| --- | --- |
-| `disabled` | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: |
-| `brace_style` | :white_check_mark: |
-| `break_chained_methods` | :white_check_mark: |
-| `end_of_line` | :white_check_mark: |
-| `end_with_comma` | :white_check_mark: |
-| `end_with_newline` | :white_check_mark: |
-| `eval_code` | :white_check_mark: |
-| `indent_char` | :white_check_mark: |
-| `indent_level` | :white_check_mark: |
-| `indent_size` | :white_check_mark: |
-| `indent_with_tabs` | :white_check_mark: |
-| `jslint_happy` | :white_check_mark: |
-| `keep_array_indentation` | :white_check_mark: |
-| `keep_function_indentation` | :white_check_mark: |
-| `max_preserve_newlines` | :white_check_mark: |
-| `preserve_newlines` | :white_check_mark: |
-| `space_after_anon_function` | :white_check_mark: |
-| `space_before_conditional` | :white_check_mark: |
-| `space_in_paren` | :white_check_mark: |
-| `unescape_strings` | :white_check_mark: |
-| `wrap_line_length` | :white_check_mark: |
+| Option | Prettier | TypeScript Formatter |
+| --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
+| `indent_size` | :x: | :white_check_mark: |
+| `indent_with_tabs` | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -12548,7 +13768,7 @@ Disable TypeScript Beautification
 
 **Type**: `string`
 
-**Enum**:  `TypeScript Formatter` 
+**Enum**:  `Prettier`  `TypeScript Formatter` 
 
 **Description**:
 
@@ -12577,208 +13797,6 @@ Automatically beautify TypeScript files on save
 *Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Beautify On Save*" and change it to your desired configuration.
-
-#####  [Brace style](#brace-style) 
-
-**Namespace**: `js`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-#####  [Break chained methods](#break-chained-methods) 
-
-**Namespace**: `js`
-
-**Key**: `break_chained_methods`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Break chained method calls across subsequent lines (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "break_chained_methods": false
-    }
-}
-```
-
-#####  [End of line](#end-of-line) 
-
-**Namespace**: `js`
-
-**Key**: `end_of_line`
-
-**Default**: `System Default`
-
-**Type**: `string`
-
-**Enum**:  `CRLF`  `LF`  `System Default` 
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Override EOL from line-ending-selector (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_of_line": "System Default"
-    }
-}
-```
-
-#####  [End with comma](#end-with-comma) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_comma`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_comma": false
-    }
-}
-```
-
-#####  [End with newline](#end-with-newline) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-End output with newline (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_newline": false
-    }
-}
-```
-
-#####  [Eval code](#eval-code) 
-
-**Namespace**: `js`
-
-**Key**: `eval_code`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "eval_code": false
-    }
-}
-```
-
-#####  [Indent char](#indent-char) 
-
-**Namespace**: `js`
-
-**Key**: `indent_char`
-
-**Default**: ` `
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Indentation character (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_char": " "
-    }
-}
-```
-
-#####  [Indent level](#indent-level) 
-
-**Namespace**: `js`
-
-**Key**: `indent_level`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Initial indentation level (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_level": 0
-    }
-}
-```
 
 #####  [Indent size](#indent-size) 
 
@@ -12826,252 +13844,6 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by T
 {
     "js": {
         "indent_with_tabs": false
-    }
-}
-```
-
-#####  [Jslint happy](#jslint-happy) 
-
-**Namespace**: `js`
-
-**Key**: `jslint_happy`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Enable jslint-stricter mode (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "jslint_happy": false
-    }
-}
-```
-
-#####  [Keep array indentation](#keep-array-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_array_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Preserve array indentation (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_array_indentation": false
-    }
-}
-```
-
-#####  [Keep function indentation](#keep-function-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_function_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_function_indentation": false
-    }
-}
-```
-
-#####  [Max preserve newlines](#max-preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Preserve line-breaks (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Space after anon function](#space-after-anon-function) 
-
-**Namespace**: `js`
-
-**Key**: `space_after_anon_function`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Add a space before an anonymous function's parens, ie. function () (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_after_anon_function": false
-    }
-}
-```
-
-#####  [Space before conditional](#space-before-conditional) 
-
-**Namespace**: `js`
-
-**Key**: `space_before_conditional`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_before_conditional": true
-    }
-}
-```
-
-#####  [Space in paren](#space-in-paren) 
-
-**Namespace**: `js`
-
-**Key**: `space_in_paren`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Add padding spaces within paren, ie. f( a, b ) (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_in_paren": false
-    }
-}
-```
-
-#####  [Unescape strings](#unescape-strings) 
-
-**Namespace**: `js`
-
-**Key**: `unescape_strings`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Decode printable characters encoded in xNN notation (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "unescape_strings": false
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `js`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Wrap lines at next opportunity after N characters (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "wrap_line_length": 0
     }
 }
 ```
@@ -13347,6 +14119,194 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 }
 ```
 
+####  [Verilog](#verilog) 
+
+**Supported Beautifiers**:  [`Emacs Verilog Mode`](#emacs-verilog-mode) 
+
+| Option | Emacs Verilog Mode |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `emacs_script_path` | :white_check_mark: |
+
+**Description**:
+
+Options for language Verilog
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Verilog Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Emacs Verilog Mode`
+
+**Type**: `string`
+
+**Enum**:  `Emacs Verilog Mode` 
+
+**Description**:
+
+Default Beautifier to be used for Verilog
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Verilog files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Emacs script path](#emacs-script-path) 
+
+**Namespace**: `verilog`
+
+**Key**: `emacs_script_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Emacs Verilog Mode`](#emacs-verilog-mode) 
+
+**Description**:
+
+Path to emacs init.el script with formatting settings. (Leave blank to use default one) (Supported by Emacs Verilog Mode)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "verilog": {
+        "emacs_script_path": ""
+    }
+}
+```
+
+####  [VHDL](#vhdl) 
+
+**Supported Beautifiers**:  [`VHDL Beautifier`](#vhdl-beautifier) 
+
+| Option | VHDL Beautifier |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `emacs_script_path` | :white_check_mark: |
+
+**Description**:
+
+Options for language VHDL
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable VHDL Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `VHDL Beautifier`
+
+**Type**: `string`
+
+**Enum**:  `VHDL Beautifier` 
+
+**Description**:
+
+Default Beautifier to be used for VHDL
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify VHDL files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Emacs script path](#emacs-script-path) 
+
+**Namespace**: `vhdl`
+
+**Key**: `emacs_script_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`VHDL Beautifier`](#vhdl-beautifier) 
+
+**Description**:
+
+Path to the emacs script (Supported by VHDL Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "vhdl": {
+        "emacs_script_path": ""
+    }
+}
+```
+
 ####  [Visualforce](#visualforce) 
 
 **Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
@@ -13526,39 +14486,42 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 
 ####  [Vue](#vue) 
 
-**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+**Supported Beautifiers**:  [`ESLint Fixer`](#eslint-fixer)  [`Prettier`](#prettier)  [`Vue Beautifier`](#vue-beautifier) 
 
-| Option | Vue Beautifier |
-| --- | --- |
-| `disabled` | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: |
-| `brace_style` | :white_check_mark: |
-| `break_chained_methods` | :white_check_mark: |
-| `end_of_line` | :white_check_mark: |
-| `end_with_comma` | :white_check_mark: |
-| `end_with_newline` | :white_check_mark: |
-| `eval_code` | :white_check_mark: |
-| `extra_liners` | :white_check_mark: |
-| `indent_char` | :white_check_mark: |
-| `indent_inner_html` | :white_check_mark: |
-| `indent_level` | :white_check_mark: |
-| `indent_scripts` | :white_check_mark: |
-| `indent_size` | :white_check_mark: |
-| `indent_with_tabs` | :white_check_mark: |
-| `jslint_happy` | :white_check_mark: |
-| `keep_array_indentation` | :white_check_mark: |
-| `keep_function_indentation` | :white_check_mark: |
-| `max_preserve_newlines` | :white_check_mark: |
-| `preserve_newlines` | :white_check_mark: |
-| `space_after_anon_function` | :white_check_mark: |
-| `space_before_conditional` | :white_check_mark: |
-| `space_in_paren` | :white_check_mark: |
-| `unescape_strings` | :white_check_mark: |
-| `unformatted` | :white_check_mark: |
-| `wrap_attributes` | :white_check_mark: |
-| `wrap_attributes_indent_size` | :white_check_mark: |
-| `wrap_line_length` | :white_check_mark: |
+| Option | ESLint Fixer | Prettier | Vue Beautifier |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `brace_style` | :x: | :x: | :white_check_mark: |
+| `break_chained_methods` | :x: | :x: | :white_check_mark: |
+| `content_unformatted` | :x: | :x: | :white_check_mark: |
+| `end_of_line` | :x: | :x: | :white_check_mark: |
+| `end_with_comma` | :x: | :x: | :white_check_mark: |
+| `end_with_newline` | :x: | :x: | :white_check_mark: |
+| `eval_code` | :x: | :x: | :white_check_mark: |
+| `extra_liners` | :x: | :x: | :white_check_mark: |
+| `indent_char` | :x: | :x: | :white_check_mark: |
+| `indent_inner_html` | :x: | :x: | :white_check_mark: |
+| `indent_level` | :x: | :x: | :white_check_mark: |
+| `indent_scripts` | :x: | :x: | :white_check_mark: |
+| `indent_size` | :x: | :x: | :white_check_mark: |
+| `indent_with_tabs` | :x: | :x: | :white_check_mark: |
+| `inline` | :x: | :x: | :white_check_mark: |
+| `jslint_happy` | :x: | :x: | :white_check_mark: |
+| `keep_array_indentation` | :x: | :x: | :white_check_mark: |
+| `keep_function_indentation` | :x: | :x: | :white_check_mark: |
+| `max_preserve_newlines` | :x: | :x: | :white_check_mark: |
+| `object_curly_spacing` | :x: | :x: | :white_check_mark: |
+| `preserve_newlines` | :x: | :x: | :white_check_mark: |
+| `space_after_anon_function` | :x: | :x: | :white_check_mark: |
+| `space_before_conditional` | :x: | :x: | :white_check_mark: |
+| `space_in_paren` | :x: | :x: | :white_check_mark: |
+| `unescape_strings` | :x: | :x: | :white_check_mark: |
+| `unformatted` | :x: | :x: | :white_check_mark: |
+| `wrap_attributes` | :x: | :x: | :white_check_mark: |
+| `wrap_attributes_indent_size` | :x: | :x: | :white_check_mark: |
+| `wrap_line_length` | :x: | :x: | :white_check_mark: |
 
 **Description**:
 
@@ -13589,7 +14552,7 @@ Disable Vue Beautification
 
 **Type**: `string`
 
-**Enum**:  `Vue Beautifier` 
+**Enum**:  `ESLint Fixer`  `Prettier`  `Vue Beautifier` 
 
 **Description**:
 
@@ -13667,6 +14630,35 @@ Break chained method calls across subsequent lines (Supported by Vue Beautifier)
 {
     "js": {
         "break_chained_methods": false
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
     }
 }
 ```
@@ -13953,6 +14945,93 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by V
 }
 ```
 
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "inline": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "ins",
+            "strike",
+            "tt"
+        ]
+    }
+}
+```
+
 #####  [Jslint happy](#jslint-happy) 
 
 **Namespace**: `js`
@@ -14047,6 +15126,30 @@ Number of line-breaks to be preserved in one chunk (Supported by Vue Beautifier)
 {
     "html": {
         "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
     }
 }
 ```
@@ -14181,91 +15284,20 @@ Decode printable characters encoded in xNN notation (Supported by Vue Beautifier
 
 **Key**: `unformatted`
 
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
-
 **Type**: `array`
 
 **Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by Vue Beautifier)
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by Vue Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
-            "a",
-            "abbr",
-            "area",
-            "audio",
-            "b",
-            "bdi",
-            "bdo",
-            "br",
-            "button",
-            "canvas",
-            "cite",
-            "code",
-            "data",
-            "datalist",
-            "del",
-            "dfn",
-            "em",
-            "embed",
-            "i",
-            "iframe",
-            "img",
-            "input",
-            "ins",
-            "kbd",
-            "keygen",
-            "label",
-            "map",
-            "mark",
-            "math",
-            "meter",
-            "noscript",
-            "object",
-            "output",
-            "progress",
-            "q",
-            "ruby",
-            "s",
-            "samp",
-            "select",
-            "small",
-            "span",
-            "strong",
-            "sub",
-            "sup",
-            "svg",
-            "template",
-            "textarea",
-            "time",
-            "u",
-            "var",
-            "video",
-            "wbr",
-            "text",
-            "acronym",
-            "address",
-            "big",
-            "dt",
-            "ins",
-            "small",
-            "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
-        ]
+        "unformatted": []
     }
 }
 ```
@@ -14280,13 +15312,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by V
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by Vue Beautifier)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by Vue Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -14360,12 +15392,14 @@ Maximum characters per line (0 disables) (Supported by Vue Beautifier)
 | `default_beautifier` | :white_check_mark: | :white_check_mark: |
 | `beautify_on_save` | :white_check_mark: | :white_check_mark: |
 | `brace_style` | :white_check_mark: | :x: |
+| `content_unformatted` | :white_check_mark: | :x: |
 | `end_with_newline` | :white_check_mark: | :x: |
 | `extra_liners` | :white_check_mark: | :x: |
 | `indent_char` | :white_check_mark: | :white_check_mark: |
 | `indent_inner_html` | :white_check_mark: | :x: |
 | `indent_scripts` | :white_check_mark: | :x: |
 | `indent_size` | :white_check_mark: | :white_check_mark: |
+| `inline` | :white_check_mark: | :x: |
 | `max_preserve_newlines` | :white_check_mark: | :x: |
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `unformatted` | :white_check_mark: | :x: |
@@ -14456,6 +15490,35 @@ Automatically beautify XML files on save
 {
     "html": {
         "brace_style": "collapse"
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
     }
 }
 ```
@@ -14618,65 +15681,13 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 }
 ```
 
-#####  [Max preserve newlines](#max-preserve-newlines) 
+#####  [Inline](#inline) 
 
 **Namespace**: `html`
 
-**Key**: `max_preserve_newlines`
+**Key**: `inline`
 
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Unformatted](#unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
 
 **Type**: `array`
 
@@ -14684,14 +15695,14 @@ Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -14750,17 +15761,85 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
             "big",
             "dt",
             "ins",
-            "small",
             "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "tt"
         ]
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
     }
 }
 ```
@@ -14775,13 +15854,13 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -15137,7 +16216,7 @@ Supported options for each beautifier.
 
 **Description**:
 
-Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+Path to custom CSScomb config file, used in absence of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -15178,502 +16257,28 @@ Used if neither a project or custom config file exists. (Supported by CSScomb)
 ```
 
 
-### Coffee Formatter
+### Emacs Verilog Mode
 
-#####  [Indent size](#indent-size) 
+#####  [Emacs script path](#emacs-script-path) 
 
-**Namespace**: `js`
+**Namespace**: `verilog`
 
-**Key**: `indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
-
-**Description**:
-
-Indentation size/length (Supported by Coffee Formatter, coffee-fmt)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_size": 4
-    }
-}
-```
-
-#####  [Indent char](#indent-char) 
-
-**Namespace**: `js`
-
-**Key**: `indent_char`
-
-**Default**: ` `
+**Key**: `emacs_script_path`
 
 **Type**: `string`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`Emacs Verilog Mode`](#emacs-verilog-mode) 
 
 **Description**:
 
-Indentation character (Supported by Coffee Formatter, coffee-fmt)
+Path to emacs init.el script with formatting settings. (Leave blank to use default one) (Supported by Emacs Verilog Mode)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "js": {
-        "indent_char": " "
-    }
-}
-```
-
-#####  [Indent level](#indent-level) 
-
-**Namespace**: `js`
-
-**Key**: `indent_level`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Initial indentation level (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_level": 0
-    }
-}
-```
-
-#####  [Indent with tabs](#indent-with-tabs) 
-
-**Namespace**: `js`
-
-**Key**: `indent_with_tabs`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
-
-**Description**:
-
-Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by Coffee Formatter, coffee-fmt)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_with_tabs": false
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Preserve line-breaks (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Max preserve newlines](#max-preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Space in paren](#space-in-paren) 
-
-**Namespace**: `js`
-
-**Key**: `space_in_paren`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Add padding spaces within paren, ie. f( a, b ) (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_in_paren": false
-    }
-}
-```
-
-#####  [Jslint happy](#jslint-happy) 
-
-**Namespace**: `js`
-
-**Key**: `jslint_happy`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Enable jslint-stricter mode (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "jslint_happy": false
-    }
-}
-```
-
-#####  [Space after anon function](#space-after-anon-function) 
-
-**Namespace**: `js`
-
-**Key**: `space_after_anon_function`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Add a space before an anonymous function's parens, ie. function () (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_after_anon_function": false
-    }
-}
-```
-
-#####  [Brace style](#brace-style) 
-
-**Namespace**: `js`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-#####  [Break chained methods](#break-chained-methods) 
-
-**Namespace**: `js`
-
-**Key**: `break_chained_methods`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Break chained method calls across subsequent lines (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "break_chained_methods": false
-    }
-}
-```
-
-#####  [Keep array indentation](#keep-array-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_array_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Preserve array indentation (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_array_indentation": false
-    }
-}
-```
-
-#####  [Keep function indentation](#keep-function-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_function_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_function_indentation": false
-    }
-}
-```
-
-#####  [Space before conditional](#space-before-conditional) 
-
-**Namespace**: `js`
-
-**Key**: `space_before_conditional`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_before_conditional": true
-    }
-}
-```
-
-#####  [Eval code](#eval-code) 
-
-**Namespace**: `js`
-
-**Key**: `eval_code`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
- (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "eval_code": false
-    }
-}
-```
-
-#####  [Unescape strings](#unescape-strings) 
-
-**Namespace**: `js`
-
-**Key**: `unescape_strings`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Decode printable characters encoded in xNN notation (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "unescape_strings": false
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `js`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Wrap lines at next opportunity after N characters (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "wrap_line_length": 0
-    }
-}
-```
-
-#####  [End with newline](#end-with-newline) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-End output with newline (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_newline": false
-    }
-}
-```
-
-#####  [End with comma](#end-with-comma) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_comma`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_comma": false
-    }
-}
-```
-
-#####  [End of line](#end-of-line) 
-
-**Namespace**: `js`
-
-**Key**: `end_of_line`
-
-**Default**: `System Default`
-
-**Type**: `string`
-
-**Enum**:  `CRLF`  `LF`  `System Default` 
-
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter) 
-
-**Description**:
-
-Override EOL from line-ending-selector (Supported by Coffee Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_of_line": "System Default"
+    "verilog": {
+        "emacs_script_path": ""
     }
 }
 ```
@@ -15816,6 +16421,30 @@ Indentation size/length (Supported by HTML Beautifier, Pretty Diff)
 
 ### JS Beautify
 
+#####  [Indent inner html](#indent-inner-html) 
+
+**Namespace**: `html`
+
+**Key**: `indent_inner_html`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent <head> and <body> sections. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_inner_html": false
+    }
+}
+```
+
 #####  [Indent size](#indent-size) 
 
 **Namespace**: `html`
@@ -15864,6 +16493,388 @@ Indentation character (Supported by JS Beautify, Pretty Diff)
 {
     "html": {
         "indent_char": " "
+    }
+}
+```
+
+#####  [Brace style](#brace-style) 
+
+**Namespace**: `html`
+
+**Key**: `brace_style`
+
+**Default**: `collapse`
+
+**Type**: `string`
+
+**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[collapse|expand|end-expand|none] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "brace_style": "collapse"
+    }
+}
+```
+
+#####  [Indent scripts](#indent-scripts) 
+
+**Namespace**: `html`
+
+**Key**: `indent_scripts`
+
+**Default**: `normal`
+
+**Type**: `string`
+
+**Enum**:  `keep`  `separate`  `normal` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[keep|separate|normal] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_scripts": "normal"
+    }
+}
+```
+
+#####  [Wrap line length](#wrap-line-length) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_line_length": 250
+    }
+}
+```
+
+#####  [Wrap attributes](#wrap-attributes) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes`
+
+**Default**: `auto`
+
+**Type**: `string`
+
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes": "auto"
+    }
+}
+```
+
+#####  [Wrap attributes indent size](#wrap-attributes-indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes_indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent wrapped attributes to after N characters (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes_indent_size": 4
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Max preserve newlines](#max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+#####  [Unformatted](#unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
+    }
+}
+```
+
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "inline": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "ins",
+            "strike",
+            "tt"
+        ]
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
+            "pre",
+            "textarea"
+        ]
+    }
+}
+```
+
+#####  [End with newline](#end-with-newline) 
+
+**Namespace**: `html`
+
+**Key**: `end_with_newline`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+End output with newline (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "end_with_newline": false
+    }
+}
+```
+
+#####  [Extra liners](#extra-liners) 
+
+**Namespace**: `html`
+
+**Key**: `extra_liners`
+
+**Default**: `head,body,/html`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "extra_liners": [
+            "head",
+            "body",
+            "/html"
+        ]
     }
 }
 ```
@@ -15918,82 +16929,6 @@ Add a newline between CSS rules (Supported by JS Beautify, Pretty Diff)
 }
 ```
 
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `html`
-
-**Key**: `wrap_line_length`
-
-**Default**: `250`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Maximum characters per line (0 disables) (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "wrap_line_length": 250
-    }
-}
-```
-
-#####  [End with newline](#end-with-newline) 
-
-**Namespace**: `html`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-End output with newline (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "end_with_newline": false
-    }
-}
-```
-
 #####  [Indent level](#indent-level) 
 
 **Namespace**: `js`
@@ -16038,32 +16973,6 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by J
 {
     "js": {
         "indent_with_tabs": false
-    }
-}
-```
-
-#####  [Max preserve newlines](#max-preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
     }
 }
 ```
@@ -16136,34 +17045,6 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 {
     "js": {
         "space_after_anon_function": false
-    }
-}
-```
-
-#####  [Brace style](#brace-style) 
-
-**Namespace**: `html`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-[collapse|expand|end-expand|none] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "brace_style": "collapse"
     }
 }
 ```
@@ -16366,11 +17247,11 @@ Override EOL from line-ending-selector (Supported by JS Beautify)
 }
 ```
 
-#####  [Indent inner html](#indent-inner-html) 
+#####  [Object curly spacing](#object-curly-spacing) 
 
-**Namespace**: `html`
+**Namespace**: `js`
 
-**Key**: `indent_inner_html`
+**Key**: `object_curly_spacing`
 
 **Type**: `boolean`
 
@@ -16378,221 +17259,14 @@ Override EOL from line-ending-selector (Supported by JS Beautify)
 
 **Description**:
 
-Indent <head> and <body> sections. (Supported by JS Beautify)
+Insert spaces between brackets in object literals (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "html": {
-        "indent_inner_html": false
-    }
-}
-```
-
-#####  [Indent scripts](#indent-scripts) 
-
-**Namespace**: `html`
-
-**Key**: `indent_scripts`
-
-**Default**: `normal`
-
-**Type**: `string`
-
-**Enum**:  `keep`  `separate`  `normal` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-[keep|separate|normal] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "indent_scripts": "normal"
-    }
-}
-```
-
-#####  [Wrap attributes](#wrap-attributes) 
-
-**Namespace**: `html`
-
-**Key**: `wrap_attributes`
-
-**Default**: `auto`
-
-**Type**: `string`
-
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "wrap_attributes": "auto"
-    }
-}
-```
-
-#####  [Wrap attributes indent size](#wrap-attributes-indent-size) 
-
-**Namespace**: `html`
-
-**Key**: `wrap_attributes_indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Indent wrapped attributes to after N characters (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "wrap_attributes_indent_size": 4
-    }
-}
-```
-
-#####  [Unformatted](#unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
-
-**Type**: `array`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "unformatted": [
-            "a",
-            "abbr",
-            "area",
-            "audio",
-            "b",
-            "bdi",
-            "bdo",
-            "br",
-            "button",
-            "canvas",
-            "cite",
-            "code",
-            "data",
-            "datalist",
-            "del",
-            "dfn",
-            "em",
-            "embed",
-            "i",
-            "iframe",
-            "img",
-            "input",
-            "ins",
-            "kbd",
-            "keygen",
-            "label",
-            "map",
-            "mark",
-            "math",
-            "meter",
-            "noscript",
-            "object",
-            "output",
-            "progress",
-            "q",
-            "ruby",
-            "s",
-            "samp",
-            "select",
-            "small",
-            "span",
-            "strong",
-            "sub",
-            "sup",
-            "svg",
-            "template",
-            "textarea",
-            "time",
-            "u",
-            "var",
-            "video",
-            "wbr",
-            "text",
-            "acronym",
-            "address",
-            "big",
-            "dt",
-            "ins",
-            "small",
-            "strike",
-            "tt",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
-        ]
-    }
-}
-```
-
-#####  [Extra liners](#extra-liners) 
-
-**Namespace**: `html`
-
-**Key**: `extra_liners`
-
-**Default**: `head,body,/html`
-
-**Type**: `array`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "extra_liners": [
-            "head",
-            "body",
-            "/html"
-        ]
+    "js": {
+        "object_curly_spacing": false
     }
 }
 ```
@@ -16688,7 +17362,7 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by L
 
 **Description**:
 
-Indent the preable (Supported by Latex Beautify)
+Indent the preamble (Supported by Latex Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -16788,7 +17462,7 @@ Remove trailing whitespace (Supported by Latex Beautify)
 
 **Description**:
 
- (Supported by Latex Beautify)
+Aligns columns by the alignment tabs for environments specified (Supported by Latex Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -16801,6 +17475,89 @@ Remove trailing whitespace (Supported by Latex Beautify)
             "bmatrix",
             "pmatrix"
         ]
+    }
+}
+```
+
+
+### Lua beautifier
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `lua`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Indentation size/length (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `lua`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Indentation character (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [End of line](#end-of-line) 
+
+**Namespace**: `lua`
+
+**Key**: `end_of_line`
+
+**Default**: `System Default`
+
+**Type**: `string`
+
+**Enum**:  `CRLF`  `LF`  `System Default` 
+
+**Supported Beautifiers**:  [`Lua beautifier`](#lua-beautifier) 
+
+**Description**:
+
+Override EOL from line-ending-selector (Supported by Lua beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "lua": {
+        "end_of_line": "System Default"
     }
 }
 ```
@@ -17004,13 +17761,13 @@ Maximum characters per line (0 disables) (Supported by Marko Beautifier)
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by Marko Beautifier)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by Marko Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -17106,7 +17863,31 @@ Number of line-breaks to be preserved in one chunk (Supported by Marko Beautifie
 
 **Key**: `unformatted`
 
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by Marko Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
+    }
+}
+```
+
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
 
 **Type**: `array`
 
@@ -17114,14 +17895,14 @@ Number of line-breaks to be preserved in one chunk (Supported by Marko Beautifie
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by Marko Beautifier)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by Marko Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -17180,16 +17961,37 @@ List of tags (defaults to inline) that should not be reformatted (Supported by M
             "big",
             "dt",
             "ins",
-            "small",
             "strike",
-            "tt",
+            "tt"
+        ]
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Marko Beautifier`](#marko-beautifier) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by Marko Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
             "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "textarea"
         ]
     }
 }
@@ -17409,6 +18211,30 @@ Absolute path to the `php-cs-fixer` CLI executable (Supported by PHP-CS-Fixer)
 }
 ```
 
+#####  [PHP-CS-Fixer Config File](#php-cs-fixer-config-file) 
+
+**Namespace**: `php`
+
+**Key**: `cs_fixer_config_file`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer) 
+
+**Description**:
+
+Path to php-cs-fixer config file. Will use local `.php_cs` or `.php_cs.dist` if found in the working directory or project root. (Supported by PHP-CS-Fixer)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "cs_fixer_config_file": ""
+    }
+}
+```
+
 #####  [Fixers](#fixers) 
 
 **Namespace**: `php`
@@ -17497,7 +18323,7 @@ Add rule(s). i.e. line_ending,-full_opening_tag,@PSR2 (PHP-CS-Fixer 2 only) (Sup
 
 **Description**:
 
-allow risky rules to be applied (PHP-CS-Fixer 2 only) (Supported by PHP-CS-Fixer)
+Allow risky rules to be applied (PHP-CS-Fixer 2 only) (Supported by PHP-CS-Fixer)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -17552,7 +18378,7 @@ Path to the `phpcbf` CLI executable (Supported by PHPCBF)
 
 **Description**:
 
-undefined (Supported by PHPCBF)
+ (Supported by PHPCBF)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -17613,6 +18439,109 @@ Specify a configuration file which will override the default name of .perltidyrc
 {
     "perl": {
         "perltidy_profile": ""
+    }
+}
+```
+
+
+### Prettier
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `js`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by JS Beautify, Prettier, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `js`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by JS Beautify, Prettier, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [Indent with tabs](#indent-with-tabs) 
+
+**Namespace**: `js`
+
+**Key**: `indent_with_tabs`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by JS Beautify, Prettier, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_with_tabs": false
+    }
+}
+```
+
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Prettier`](#prettier) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by JS Beautify, Prettier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
     }
 }
 ```
@@ -17864,7 +18793,7 @@ If lists of assignments or properties should be vertically aligned for faster an
 
 **Description**:
 
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
+If in CSS values leading 0s immediately preceding a decimal should be removed or prevented. (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -18269,56 +19198,6 @@ Indentation size/length (Supported by TypeScript Formatter)
 }
 ```
 
-#####  [Indent char](#indent-char) 
-
-**Namespace**: `js`
-
-**Key**: `indent_char`
-
-**Default**: ` `
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Indentation character (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_char": " "
-    }
-}
-```
-
-#####  [Indent level](#indent-level) 
-
-**Namespace**: `js`
-
-**Key**: `indent_level`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Initial indentation level (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_level": 0
-    }
-}
-```
-
 #####  [Indent with tabs](#indent-with-tabs) 
 
 **Namespace**: `js`
@@ -18339,404 +19218,6 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by T
 {
     "js": {
         "indent_with_tabs": false
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Preserve line-breaks (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "preserve_newlines": true
-    }
-}
-```
-
-#####  [Max preserve newlines](#max-preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-#####  [Space in paren](#space-in-paren) 
-
-**Namespace**: `js`
-
-**Key**: `space_in_paren`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Add padding spaces within paren, ie. f( a, b ) (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_in_paren": false
-    }
-}
-```
-
-#####  [Jslint happy](#jslint-happy) 
-
-**Namespace**: `js`
-
-**Key**: `jslint_happy`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Enable jslint-stricter mode (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "jslint_happy": false
-    }
-}
-```
-
-#####  [Space after anon function](#space-after-anon-function) 
-
-**Namespace**: `js`
-
-**Key**: `space_after_anon_function`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Add a space before an anonymous function's parens, ie. function () (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_after_anon_function": false
-    }
-}
-```
-
-#####  [Brace style](#brace-style) 
-
-**Namespace**: `js`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-#####  [Break chained methods](#break-chained-methods) 
-
-**Namespace**: `js`
-
-**Key**: `break_chained_methods`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Break chained method calls across subsequent lines (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "break_chained_methods": false
-    }
-}
-```
-
-#####  [Keep array indentation](#keep-array-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_array_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Preserve array indentation (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_array_indentation": false
-    }
-}
-```
-
-#####  [Keep function indentation](#keep-function-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_function_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_function_indentation": false
-    }
-}
-```
-
-#####  [Space before conditional](#space-before-conditional) 
-
-**Namespace**: `js`
-
-**Key**: `space_before_conditional`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_before_conditional": true
-    }
-}
-```
-
-#####  [Eval code](#eval-code) 
-
-**Namespace**: `js`
-
-**Key**: `eval_code`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
- (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "eval_code": false
-    }
-}
-```
-
-#####  [Unescape strings](#unescape-strings) 
-
-**Namespace**: `js`
-
-**Key**: `unescape_strings`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Decode printable characters encoded in xNN notation (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "unescape_strings": false
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `js`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Wrap lines at next opportunity after N characters (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "wrap_line_length": 0
-    }
-}
-```
-
-#####  [End with newline](#end-with-newline) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-End output with newline (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_newline": false
-    }
-}
-```
-
-#####  [End with comma](#end-with-comma) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_comma`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_comma": false
-    }
-}
-```
-
-#####  [End of line](#end-of-line) 
-
-**Namespace**: `js`
-
-**Key**: `end_of_line`
-
-**Default**: `System Default`
-
-**Type**: `string`
-
-**Enum**:  `CRLF`  `LF`  `System Default` 
-
-**Supported Beautifiers**:  [`TypeScript Formatter`](#typescript-formatter) 
-
-**Description**:
-
-Override EOL from line-ending-selector (Supported by TypeScript Formatter)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_of_line": "System Default"
     }
 }
 ```
@@ -18764,6 +19245,33 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 {
     "vala": {
         "configPath": ""
+    }
+}
+```
+
+
+### VHDL Beautifier
+
+#####  [Emacs script path](#emacs-script-path) 
+
+**Namespace**: `vhdl`
+
+**Key**: `emacs_script_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`VHDL Beautifier`](#vhdl-beautifier) 
+
+**Description**:
+
+Path to the emacs script (Supported by VHDL Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "vhdl": {
+        "emacs_script_path": ""
     }
 }
 ```
@@ -19271,6 +19779,30 @@ Override EOL from line-ending-selector (Supported by Vue Beautifier)
 }
 ```
 
+#####  [Object curly spacing](#object-curly-spacing) 
+
+**Namespace**: `js`
+
+**Key**: `object_curly_spacing`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+Insert spaces between brackets in object literals (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "object_curly_spacing": false
+    }
+}
+```
+
 #####  [Indent inner html](#indent-inner-html) 
 
 **Namespace**: `html`
@@ -19333,13 +19865,13 @@ Indent <head> and <body> sections. (Supported by Vue Beautifier)
 
 **Type**: `string`
 
-**Enum**:  `auto`  `force`  `force-aligned`  `force-expand-multiline` 
+**Enum**:  `auto`  `aligned-multiple`  `force`  `force-aligned`  `force-expand-multiline` 
 
 **Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
 
 **Description**:
 
-Wrap attributes to new lines [auto|force|force-aligned|force-expand-multiline] (Supported by Vue Beautifier)
+Wrap attributes to new lines [auto|aligned-multiple|force|force-aligned|force-expand-multiline] (Supported by Vue Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -19383,7 +19915,31 @@ Indent wrapped attributes to after N characters (Supported by Vue Beautifier)
 
 **Key**: `unformatted`
 
-**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,small,strike,tt,pre,h1,h2,h3,h4,h5,h6`
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+(Deprecated for most scenarios - consider inline or content_unformatted) List of tags that should not be reformatted at all.  NOTE: Set this to [] to get improved beautifier behavior. (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": []
+    }
+}
+```
+
+#####  [Inline](#inline) 
+
+**Namespace**: `html`
+
+**Key**: `inline`
+
+**Default**: `a,abbr,area,audio,b,bdi,bdo,br,button,canvas,cite,code,data,datalist,del,dfn,em,embed,i,iframe,img,input,ins,kbd,keygen,label,map,mark,math,meter,noscript,object,output,progress,q,ruby,s,samp,select,small,span,strong,sub,sup,svg,template,textarea,time,u,var,video,wbr,text,acronym,address,big,dt,ins,strike,tt`
 
 **Type**: `array`
 
@@ -19391,14 +19947,14 @@ Indent wrapped attributes to after N characters (Supported by Vue Beautifier)
 
 **Description**:
 
-List of tags (defaults to inline) that should not be reformatted (Supported by Vue Beautifier)
+List of inline tags. Behaves similar to text content, will not wrap without whitespace. (Supported by Vue Beautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "html": {
-        "unformatted": [
+        "inline": [
             "a",
             "abbr",
             "area",
@@ -19457,16 +20013,37 @@ List of tags (defaults to inline) that should not be reformatted (Supported by V
             "big",
             "dt",
             "ins",
-            "small",
             "strike",
-            "tt",
+            "tt"
+        ]
+    }
+}
+```
+
+#####  [Content unformatted](#content-unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `content_unformatted`
+
+**Default**: `pre,textarea`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`Vue Beautifier`](#vue-beautifier) 
+
+**Description**:
+
+List of tags whose contents should not be reformatted. Attributes will be reformatted, inner html will not. (Supported by Vue Beautifier)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "content_unformatted": [
             "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6"
+            "textarea"
         ]
     }
 }
@@ -19612,11 +20189,11 @@ do not fix these errors/warnings (Supported by autopep8, pybeautifier)
 }
 ```
 
-#####  [Formater](#formater) 
+#####  [Formatter](#formatter) 
 
 **Namespace**: `python`
 
-**Key**: `formater`
+**Key**: `formatter`
 
 **Default**: `autopep8`
 
@@ -19628,14 +20205,14 @@ do not fix these errors/warnings (Supported by autopep8, pybeautifier)
 
 **Description**:
 
-formater used by pybeautifier (Supported by autopep8, pybeautifier)
+formatter used by pybeautifier (Supported by autopep8, pybeautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "python": {
-        "formater": "autopep8"
+        "formatter": "autopep8"
     }
 }
 ```
@@ -19747,6 +20324,30 @@ Indentation size/length (Supported by beautysh)
 }
 ```
 
+#####  [Indent with tabs](#indent-with-tabs) 
+
+**Namespace**: `bash`
+
+**Key**: `indent_with_tabs`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`beautysh`](#beautysh) 
+
+**Description**:
+
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by beautysh)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "bash": {
+        "indent_with_tabs": false
+    }
+}
+```
+
 
 ### clang-format
 
@@ -19787,11 +20388,11 @@ Path to clang-format config file. i.e. clang-format.cfg (Supported by clang-form
 
 **Type**: `integer`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation size/length (Supported by Coffee Formatter, coffee-fmt)
+Indentation size/length (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -19813,11 +20414,11 @@ Indentation size/length (Supported by Coffee Formatter, coffee-fmt)
 
 **Type**: `string`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation character (Supported by Coffee Formatter, coffee-fmt)
+Indentation character (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -19837,11 +20438,11 @@ Indentation character (Supported by Coffee Formatter, coffee-fmt)
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
+**Supported Beautifiers**:  [`coffee-fmt`](#coffee-fmt) 
 
 **Description**:
 
-Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by Coffee Formatter, coffee-fmt)
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by coffee-fmt)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -19965,11 +20566,11 @@ do not fix these errors/warnings (Supported by autopep8, pybeautifier)
 }
 ```
 
-#####  [Formater](#formater) 
+#####  [Formatter](#formatter) 
 
 **Namespace**: `python`
 
-**Key**: `formater`
+**Key**: `formatter`
 
 **Default**: `autopep8`
 
@@ -19981,14 +20582,14 @@ do not fix these errors/warnings (Supported by autopep8, pybeautifier)
 
 **Description**:
 
-formater used by pybeautifier (Supported by autopep8, pybeautifier)
+formatter used by pybeautifier (Supported by autopep8, pybeautifier)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
     "python": {
-        "formater": "autopep8"
+        "formatter": "autopep8"
     }
 }
 ```
@@ -20123,6 +20724,32 @@ Indentation size/length (Supported by sqlformat)
 {
     "sql": {
         "indent_size": 4
+    }
+}
+```
+
+#####  [Reindent](#reindent) 
+
+**Namespace**: `sql`
+
+**Key**: `reindent`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
+
+**Description**:
+
+Change indentations of the statements. Uncheck this option to preserve indentation (Supported by sqlformat)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "sql": {
+        "reindent": true
     }
 }
 ```

@@ -270,11 +270,7 @@ class Minimap {
     resulting in extra lines appearing at the end of the minimap.
     Forcing a whole repaint to fix that bug is suboptimal but works.
     */
-    const tokenizedBuffer = this.textEditor.tokenizedBuffer
-      ? this.textEditor.tokenizedBuffer
-      : this.textEditor.displayBuffer.tokenizedBuffer
-
-    subs.add(tokenizedBuffer.onDidTokenize(() => {
+    subs.add(this.textEditor.onDidTokenize(() => {
       this.emitter.emit('did-change-config')
     }))
   }
@@ -918,7 +914,11 @@ class Minimap {
    */
   updateScrollTop () {
     if (this.independentMinimapScroll) {
-      this.setScrollTop(this.getScrollTopFromEditor())
+      try {
+        this.setScrollTop(this.getScrollTopFromEditor())
+      } catch (err) {
+
+      }
       this.emitter.emit('did-change-scroll-top', this)
     }
   }
@@ -958,14 +958,18 @@ class Minimap {
    * @access private
    */
   onMouseWheel (event) {
-    if (!this.canScroll()) { return }
+    if (this.scrollIndependentlyOnMouseWheel()) {
+      event.stopPropagation()
 
-    const {wheelDeltaY} = event
-    const previousScrollTop = this.getScrollTop()
-    const updatedScrollTop = previousScrollTop - Math.round(wheelDeltaY * this.scrollSensitivity)
+      if (!this.canScroll()) { return }
 
-    event.preventDefault()
-    this.setScrollTop(updatedScrollTop)
+      const {wheelDeltaY} = event
+      const previousScrollTop = this.getScrollTop()
+      const updatedScrollTop = previousScrollTop - Math.round(wheelDeltaY * this.scrollSensitivity)
+
+      event.preventDefault()
+      this.setScrollTop(updatedScrollTop)
+    }
   }
 
   /**

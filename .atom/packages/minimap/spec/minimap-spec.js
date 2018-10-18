@@ -29,6 +29,10 @@ describe('Minimap', () => {
     minimap = new Minimap({textEditor: editor})
     largeSample = fs.readFileSync(dir.resolve('large-file.coffee')).toString()
     smallSample = fs.readFileSync(dir.resolve('sample.coffee')).toString()
+
+    if (editorElement.component.measurements) {
+      waitsFor(() => editorElement.component.measurements.clientContainerHeight)
+    }
   })
 
   it('has an associated editor', () => {
@@ -58,6 +62,7 @@ describe('Minimap', () => {
 
   it('measures the editor visible area size at minimap scale', () => {
     editor.setText(largeSample)
+
     expect(minimap.getTextEditorScaledHeight()).toEqual(50 * minimapVerticalScaleFactor)
   })
 
@@ -347,8 +352,8 @@ describe('Minimap', () => {
 
       it('creates a change only for the dif between the two ranges', () => {
         expect(changeSpy).toHaveBeenCalled()
-        expect(changeSpy.calls[1].args[0].start).toEqual(1)
-        expect(changeSpy.calls[1].args[0].end).toEqual(3)
+        expect(changeSpy.mostRecentCall.args[0].start).toEqual(1)
+        expect(changeSpy.mostRecentCall.args[0].end).toEqual(3)
       })
     })
 
@@ -503,6 +508,10 @@ describe('Stand alone minimap', () => {
 
     largeSample = fs.readFileSync(dir.resolve('large-file.coffee')).toString()
     smallSample = fs.readFileSync(dir.resolve('sample.coffee')).toString()
+
+    if (editorElement.component.measurements) {
+      waitsFor(() => editorElement.component.measurements.clientContainerHeight)
+    }
   })
 
   it('has an associated editor', () => {
