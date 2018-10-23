@@ -95,6 +95,7 @@ set lcs=tab:\ \ ,eol:$,trail:~,extends:>,precedes:<
 set noerrorbells " No noise.
 set laststatus=2 " Always show status line.
 set background=dark
+set number " Show line numbers
 
 set hidden
 set wildmenu
