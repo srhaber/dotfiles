@@ -69,6 +69,7 @@ plugins=(
   docker
   git
   go
+  ssh-agent
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -103,6 +104,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [[ -r ~/.dotfiles/aliases.sh ]] && source ~/.dotfiles/aliases.sh
+[[ -r ~/.secrets.sh ]] && source ~/.secrets.sh
 
 # Prompt expansion reference:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
