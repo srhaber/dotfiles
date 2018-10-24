@@ -7,18 +7,22 @@
   clean = git media clean %f
   smudge = git media smudge %f
 
+[diff]
 [color]
-  ui = true
+  ui = auto
 
 [alias]
   amend = commit --amend
   br = branch -vv
-  ci = commit
+  ci = commit --verbose
   co = checkout
   dc = diff --cached
   di = diff
   pom = push origin master
   st  = status -sb
+  ds = diff --stat=160,120
+  dh1 = diff HEAD~1
+
 
   # Logging aliases
   l = "!source ~/.githelpers && pretty_git_log"
@@ -27,6 +31,8 @@
   head = !git l -1
   h = !git head
   hp = "!source ~/.githelpers && show_git_head"
+  b = "!. ~/.githelpers && pretty_git_branch"
+  bs = "!. ~/.githelpers && pretty_git_branch_sorted"
 
 [core]
   excludesfile = ~/.gitignore_global
