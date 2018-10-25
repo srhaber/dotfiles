@@ -1,1 +1,1 @@
-alias ccat='ccat --bg=dark'
+alias c=ccat
