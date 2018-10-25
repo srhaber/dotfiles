@@ -74,8 +74,12 @@ plugins=(
   copyfile
   docker
   git
-  go
+  golang
+  jsontools
+  osx
   ssh-agent
+  urltools
+  zsh_reload
 )
 
 source $ZSH/oh-my-zsh.sh
