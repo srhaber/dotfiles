@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+# This script generates an updated Brewfile and commits it to dotfiles.
+# Rational is for posterity of packages and casks installed via brew for
+# ease of setting up new dev environments
+
+brewfile=`mktemp /tmp/Brewfile.XXXXX`
+trap "rm -f $brewfile" EXIT
+
+/usr/local/bin/brew bundle dump --file=$brewfile --force
+mv $brewfile ~/.dotfiles/Brewfile
+
+pushd ~/.dotfiles > /dev/null
+git add Brewfile
+git commit -m "Updated Brewfile"
+git push origin master
+popd > /dev/null
