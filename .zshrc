@@ -73,10 +73,12 @@ plugins=(
   copydir
   copyfile
   docker
+  encode64
   git
   golang
   jsontools
   osx
+  rsync
   ssh-agent
   urltools
   zsh_reload
