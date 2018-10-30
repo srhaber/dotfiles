@@ -19,6 +19,8 @@
     general:
       _analyticsUserId: "1360d0ff-ce01-4226-989d-412f420c5cc1"
   "autocomplete-plus": {}
+  "autocomplete-python":
+    useKite: false
   "autocomplete-ruby":
     rsensePath: "~/.rbenv/shims/rsense"
   core:
@@ -48,7 +50,10 @@
   "one-light-ui": {}
   "status-bar": {}
   tabs:
-    usePreviewTabs: true
+    addNewTabsAtEnd: true
+    enableVcsColoring: true
+    usePreviewTabs: false
+  "terraform-fmt": {}
   "tree-view":
     hideVcsIgnoredFiles: true
     squashDirectoryNames: true

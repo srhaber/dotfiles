@@ -1,0 +1,77 @@
+{
+  "_from": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+  "_id": "linter-terraform-syntax@1.2.4",
+  "_inBundle": false,
+  "_integrity": "sha512-6JUPBmYyNNHbwFqqUQtfNM2ijvd73wVC/022WUhnRnq3kUNQtO9CaSfkJ4tTbKrkzJUIS/1tnvALa+Faur641w==",
+  "_location": "/linter-terraform-syntax",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+  "_shasum": "89b4338630846196488fb9b86b93902b1abe4271",
+  "_spec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-118929-26635-4vid4r.h77t5",
+  "bugs": {
+    "url": "https://github.com/mschuchard/linter-terraform-syntax/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "atom-linter": "^5.0.2"
+  },
+  "deprecated": false,
+  "description": "Terraform lint via validate or plan",
+  "devDependencies": {
+    "babel-eslint": "latest",
+    "eslint": "latest"
+  },
+  "engines": {
+    "atom": ">0.95.0"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "rules": {
+      "strict": 0
+    },
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "atom": true
+    }
+  },
+  "homepage": "https://github.com/mschuchard/linter-terraform-syntax#readme",
+  "keywords": [
+    "lint",
+    "linter",
+    "terraform"
+  ],
+  "license": "MIT",
+  "main": "./lib/main.js",
+  "name": "linter-terraform-syntax",
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "2.0.0": "provideLinter"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mschuchard/linter-terraform-syntax.git"
+  },
+  "scripts": {
+    "test": "atom --test spec"
+  },
+  "version": "1.2.4"
+}
