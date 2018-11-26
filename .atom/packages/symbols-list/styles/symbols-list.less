@@ -1,0 +1,152 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+.symbols-list {
+    width: 200px;
+}
+
+.symbols-list .panel-resize-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    cursor: col-resize;
+    z-index: 3;
+}
+
+.symbols-list atom-text-editor[mini],
+.symbols-list atom-text-editor[mini].is-focused,{
+    height: 33px;
+    line-height: 33px;
+    box-shadow: none;
+    border-radius: 0;
+    font-family: inherit;
+    max-height: 33px;
+    border: 0;
+}
+
+.symbols-list .editor-contents--private{
+    height: 33px !important;
+    line-height: 33px;
+}
+.symbols-list .cursors .cursor{
+    height: 16px !important;
+    top: 9px;
+}
+
+.symbols-list .error-message,
+.symbols-list .loading{
+    padding: 10px;
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+}
+.symbols-list .error-message{
+    background: #700;
+}
+.symbols-list .select-list ol.list-group{
+    position: absolute;
+    max-height: none;
+    top: 33px;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 10px;
+}
+.symbols-list .list-group li{
+    padding: 2px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.symbols-list .list-group li:hover{
+    color: @text-color-highlight;
+    background-color: fade(#4182C4, 20%);
+    cursor: pointer;
+}
+.symbols-list span.pastille{
+    position: relative;
+    height: 15px;
+    width: 15px;
+    margin-right: 6px;
+    line-height: 14px;
+    display: inline-block;
+    vertical-align: sub;
+    border-radius: 2px;
+    font-weight: bold;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.5);
+}
+.symbols-list span.pastille::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 14px;
+    font-size: 10px;
+}
+
+.symbols-list .list-item-commentaire,
+.symbols-list .list-item-commentaire_multi,
+.symbols-list .list-item-commentaire_html{ background: #888 }
+.symbols-list .list-item-commentaire::before,
+.symbols-list .list-item-commentaire_multi::before,
+.symbols-list .list-item-commentaire_html::before{ content: "/"; color: #DDD;}
+.symbols-list .list-item-todo{ background: #888 }
+.symbols-list .list-item-todo::before{ content: "T"; color: #DDD;}
+.symbols-list .list-item-fixme{ background: #dd0000 }
+.symbols-list .list-item-fixme::before{ content: "!"; color: #FFF;}
+.symbols-list .list-item-hack{ background: #7c0000 }
+.symbols-list .list-item-hack::before{ content: "!"; color: #FFF;}
+.symbols-list .list-item-function{ background: #3996e3 }
+.symbols-list .list-item-protected_function{ background: #e39339 }
+.symbols-list .list-item-private_function{ background: #e35139 }
+.symbols-list .list-item-function::before,
+    .symbols-list .list-item-protected_function::before,
+    .symbols-list .list-item-private_function::before{ content: "F"; color: #FFF;}
+.symbols-list .list-item-attr{ background: #3996e3 }
+.symbols-list .list-item-attr::before{ content: "A"; color: #FFF;}
+.symbols-list .list-item-filter{ background: #839595 }
+.symbols-list .list-item-filter::before{ content: "f"; color: #FFF;}
+.symbols-list .list-item-classmethod,
+.symbols-list .list-item-method,
+.symbols-list .list-item-es6_method,
+.symbols-list .list-item-es6_async_method,
+.symbols-list .list-item-es6_static_method{ background: #823da2 }
+.symbols-list .list-item-es6_async_method::before{ content: "A"; color: #FFF;}
+.symbols-list .list-item-es6_static_method::before{ content: "S"; color: #FFF;}
+.symbols-list .list-item-classmethod::before,
+.symbols-list .list-item-method::before{ content: "M"; color: #FFF;}
+.symbols-list .list-item-instancemethod{ background: #b15edb }
+.symbols-list .list-item-instancemethod::before{ content: "I"; color: #FFF;}
+.symbols-list .list-item-methode_statique{ background: #823da2 }
+.symbols-list .list-item-methode_statique::before{ content: "::"; color: #FFF;}
+.symbols-list .list-item-class,
+.symbols-list .list-item-class_expression{ background: #ee8a1e }
+.symbols-list .list-item-class::before,
+.symbols-list .list-item-class_expression::before{ content: "C"; color: #FFF;}
+.symbols-list .list-item-module{ background: #ee8a1e }
+.symbols-list .list-item-module::before{ content: "M"; color: #FFF;}
+.symbols-list .list-item-constant{ background: #484748 }
+.symbols-list .list-item-constant::before{ content: "C"; color: #FFF;}
+.symbols-list .list-item-controller{ background: #46A8E8 }
+.symbols-list .list-item-controller::before{ content: "c"; color: #FFF;}
+.symbols-list .list-item-structure{ background: #258fa3 }
+.symbols-list .list-item-structure::before{ content: "•"; color: #FFF;}
+.symbols-list .list-item-setter{ background: #3053ad }
+.symbols-list .list-item-setter::before{ content: "S"; color: #FFF;}
+.symbols-list .list-item-getter{ background: #3053ad }
+.symbols-list .list-item-getter::before{ content: "G"; color: #FFF;}
+.symbols-list .list-item-entete{ background: #edba22 }
+.symbols-list .list-item-entete::before{ content: "H"; color: #333;}
+.symbols-list .list-item-anchor{ background: #de691a }
+.symbols-list .list-item-anchor::before{ content: "#"; color: #FFF;}
+.symbols-list .list-item-package{ background: #edba22 }
+.symbols-list .list-item-package::before{ content: "P"; color: #333;}
+.symbols-list .list-item-use{ background: #3996e3 }
+.symbols-list .list-item-use::before{ content: "U"; color: #FFF;}
+.symbols-list .list-item-our{ background: #3053ad }
+.symbols-list .list-item-our::before{ content: "O"; color: #FFF;}
+.symbols-list .list-item-subroutine{ background: #823da2 }
+.symbols-list .list-item-subroutine::before{ content: "S"; color: #FFF;}

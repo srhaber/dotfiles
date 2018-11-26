@@ -1,6 +1,6 @@
 "*":
   aligner:
-    ",-rightSpace": false
+    "-rightSpace": false
     ":-rightSpace": false
   "atom-alignment":
     addSpacePostfix: true
@@ -28,6 +28,100 @@
       "language-diff"
       "atom-live-grammar-reload"
       "language-song"
+      "linter-python"
+      "symbols-list"
+    ]
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      "*.d"
+      "*.ele"
+      "*.o"
+      "*.pbxproj"
+      "*.sublime-workspace"
+      "*.xcscheme"
+      "*_pyx.c"
+      "*_pyx.cpp"
+      "*_pyx.h"
+      "*_pyx_api.h"
+      "*~"
+      "desktop/win/*.dll"
+      "desktop/win/*.filters"
+      "desktop/win/*.gypi"
+      "desktop/win/*.sln"
+      "desktop/win/*.suo"
+      "desktop/win/*.txt"
+      "desktop/win/*.vcxproj"
+      "less.js"
+      "package-lock.json"
+      "proto/*.pb.*"
+      "proto/*.py"
+      "proto/int"
+      "settings/android-version-log"
+      "settings/ios-version-log"
+      "settings/schema/mysql_updates.prev"
+      "static/css/email/*.css"
+      "static/css/salesforce-lightning-design-system-ltng.css"
+      "static/css/salesforce-lightning-design-system-ltng.min.css"
+      "static/function_catalog.pbascii"
+      "static/js/marketing/marketing.js"
+      "static/less/marketing/marketing.css"
+      "syncer/include/proto/*.py"
+      "TAGS"
+      "yarn.lock"
+      "yarn-error.log"
+      ".gradle"
+      "android/.idea"
+      "android/.settings"
+      "android/assets"
+      "android/automator"
+      "android/chromium-android"
+      "android/jni/syncer"
+      "android/obj"
+      "apps/*/dist"
+      "buck-out"
+      "aws_lambda/sfdc_security_upload"
+      "build"
+      "cocoa/Include"
+      "desktop/mac/Web"
+      "desktop/win/Debug"
+      "desktop/win/Desktop/bin"
+      "desktop/win/Ext"
+      "desktop/win/include"
+      "desktop/win/libcef_dll"
+      "desktop/win/Release"
+      "desktop/win/Web"
+      "desktop/win/WTL"
+      "ext"
+      "htmlcov"
+      "ios/build"
+      "ios/Data"
+      "ios/Ext"
+      "ios/Include"
+      "ios/Quip/*lproj"
+      "ios/Quip/Images.xcassets"
+      "ios/Web"
+      "proto/ext"
+      "settings/names"
+      "settings/pdf"
+      "settings/translations"
+      "sims"
+      "sims/replays"
+      "static/fonts"
+      "static/js/proto/*pb*"
+      "static/less/ext"
+      "static/testdata"
+      "syncer/ext"
+      "syncer/ldb/include"
+      "syncer/syncer/include"
+      "templates/jinja2/docx"
+      "templates/jinja2/xlsx"
+      "tmp/es6-tool-cache"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"
@@ -43,12 +137,23 @@
     userId: "0b511319-0ddb-db5b-26e9-aa77d3d6b8d9"
   "git-diff":
     showIconsInEditorGutter: true
+  "highlight-selected":
+    hideHighlightOnSelectedWord: true
+    highlightBackground: true
+    lightTheme: true
+  "linter-ui-default":
+    showPanel: true
   "markdown-preview":
     useGitHubStyle: true
-  minimap: {}
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
   "one-dark-ui": {}
   "one-light-ui": {}
   "status-bar": {}
+  "symbols-tree-view":
+    zAutoHideTypes: "namespace variable"
   tabs:
     addNewTabsAtEnd: true
     enableVcsColoring: true

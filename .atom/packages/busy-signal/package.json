@@ -1,0 +1,73 @@
+{
+  "_from": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+  "_id": "busy-signal@1.4.3",
+  "_inBundle": false,
+  "_integrity": "sha512-zqzNipRnSb4pUb9fPuLDDrccn/aL1HCTCPzPFM7O9X03QoJpMlpTyjRnBL4QPRbuxJb8eEieytfMZ9zeeyLcvQ==",
+  "_location": "/busy-signal",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+  "_shasum": "6baf37a38bf9468d9bfd491817102a70b50e05f3",
+  "_spec": "https://www.atom.io/api/packages/busy-signal/versions/1.4.3/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-1181020-95186-1ygk1zu.b4pv",
+  "bugs": {
+    "url": "https://github.com/steelbrain/busy-signal/issues"
+  },
+  "bundleDependencies": false,
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "dependencies": {
+    "disposify": "^1.0.0",
+    "escape-html": "^1.0.3",
+    "ms": "^2.0.0"
+  },
+  "deprecated": false,
+  "description": "A package that provides an easy to use API to show your package is performing a task",
+  "devDependencies": {
+    "eslint-config-steelbrain": "^3.0.1",
+    "flow-bin": "^0.47.0",
+    "jasmine-fix": "^1.0.1"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/steelbrain/busy-signal#readme",
+  "keywords": [
+    "busy",
+    "signal"
+  ],
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "busy-signal",
+  "providedServices": {
+    "busy-signal": {
+      "versions": {
+        "1.0.0": "providerRegistry"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steelbrain/busy-signal.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "apm test"
+  },
+  "version": "1.4.3"
+}

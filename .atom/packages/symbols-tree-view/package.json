@@ -1,0 +1,58 @@
+{
+  "_from": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+  "_id": "symbols-tree-view@0.14.0",
+  "_inBundle": false,
+  "_integrity": "sha512-NCOJvBGPIClrTQeifLVUNhiGzNri/4zmO6LuCtqy+ZoLDSpDup5mgs+KdCgp/+aB3HkytNSd0DQPNkQ7lUb5ew==",
+  "_location": "/symbols-tree-view",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+  "_shasum": "43df0647b4f2107134a2e93de1164da6db9f42dd",
+  "_spec": "https://www.atom.io/api/packages/symbols-tree-view/versions/0.14.0/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-1181020-70484-pq9dwc.wacu9",
+  "bugs": {
+    "url": "https://github.com/xndcn/symbols-tree-view/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "atom-space-pen-views": "^2.0.0",
+    "event-kit": "latest",
+    "q": "~1.0.1"
+  },
+  "deprecated": false,
+  "description": "A symbols view like taglist",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "homepage": "https://github.com/xndcn/symbols-tree-view#readme",
+  "keywords": [
+    "taglist",
+    "tagbar",
+    "symbols"
+  ],
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "symbols-tree-view",
+  "providedServices": {
+    "hyperclick.provider": {
+      "versions": {
+        "0.0.0": "getProvider"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xndcn/symbols-tree-view.git"
+  },
+  "version": "0.14.0"
+}

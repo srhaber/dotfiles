@@ -1,0 +1,65 @@
+{
+  "_from": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+  "_id": "scroll-marker@0.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-rERhLeY2/COGonPVpxpZfVxmVomYf7S7kMcriTfL9ZDAvxRTrr3rwUrNEk39p8tsKuiR48zMhMhwIp7yY2qtjA==",
+  "_location": "/scroll-marker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+  "_shasum": "a2c72eaf3a2a88de6a32fd2607c6c3dffd898d75",
+  "_spec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-118101-37882-1exgx3j.3yye",
+  "bugs": {
+    "url": "https://github.com/surdu/scroll-marker/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "etch": "~0.14.0"
+  },
+  "deprecated": false,
+  "description": "Provides annotation functionality for the scroll bar",
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "yaspeller": "^4.1.0"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/surdu/scroll-marker#readme",
+  "keywords": [
+    "scroll annotation",
+    "highlight results",
+    "scrollbar",
+    "scrollbar highlight"
+  ],
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "scroll-marker",
+  "providedServices": {
+    "scroll-marker": {
+      "versions": {
+        "0.1.0": "provideService"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surdu/scroll-marker.git"
+  },
+  "scripts": {
+    "spellcheck": "npx yaspeller '{,!(node_modules)/**/}*.md' --config yaspeller.json --ignore-urls",
+    "test": "npx eslint **/*.js && npm run spellcheck"
+  },
+  "version": "0.2.0"
+}

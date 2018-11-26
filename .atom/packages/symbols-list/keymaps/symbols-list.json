@@ -1,0 +1,8 @@
+{
+  ".platform-darwin": {
+    "cmd-alt-l": "symbols-list:toggle"
+  },
+  ".platform-win32, .platform-linux": {
+    "ctrl-alt-l": "symbols-list:toggle"
+  }
+}

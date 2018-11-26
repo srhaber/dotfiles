@@ -1,0 +1,49 @@
+{
+  "_from": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+  "_id": "symbols-list@2.5.1",
+  "_inBundle": false,
+  "_integrity": "sha512-t8hyu7aLzAPp3QPSgo3Sv/8PtancEZTPov/5sZodUxIanxBNQ4lX+soK17A73wXAJdAV3cX1i76OCTjY3zfy2Q==",
+  "_location": "/symbols-list",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+  "_shasum": "2a7b1d3b5ba54c7dd3163a6a9f1206b551be1b20",
+  "_spec": "https://www.atom.io/api/packages/symbols-list/versions/2.5.1/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-1181020-98543-oaojma.4yu7",
+  "bugs": {
+    "url": "https://github.com/7ute/symbols-list/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "atom-space-pen-views": "^2.2.0"
+  },
+  "deprecated": false,
+  "description": "Alternate symbol sidebar for Atom.io",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/7ute/symbols-list#readme",
+  "keywords": [
+    "symbol",
+    "symbols-list",
+    "sidebar"
+  ],
+  "license": "MIT",
+  "main": "./lib/symbols-list",
+  "name": "symbols-list",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7ute/symbols-list.git"
+  },
+  "version": "2.5.1"
+}
