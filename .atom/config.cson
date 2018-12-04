@@ -141,8 +141,7 @@
     hideHighlightOnSelectedWord: true
     highlightBackground: true
     lightTheme: true
-  "linter-ui-default":
-    showPanel: true
+  "linter-ui-default": {}
   "markdown-preview":
     useGitHubStyle: true
   minimap:
