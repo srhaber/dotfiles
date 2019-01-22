@@ -1,3 +1,4 @@
 .atom/.apm/_*
 .atom/blob-store
 .atom/compile-cache
+.atom/packages
