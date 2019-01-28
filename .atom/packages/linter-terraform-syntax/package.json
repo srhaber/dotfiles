@@ -1,31 +1,31 @@
 {
-  "_from": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-  "_id": "linter-terraform-syntax@1.2.4",
+  "_from": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+  "_id": "linter-terraform-syntax@1.2.5",
   "_inBundle": false,
-  "_integrity": "sha512-6JUPBmYyNNHbwFqqUQtfNM2ijvd73wVC/022WUhnRnq3kUNQtO9CaSfkJ4tTbKrkzJUIS/1tnvALa+Faur641w==",
+  "_integrity": "sha512-DDYQzUJZ6kW4jpDWQLvSZCw2Kh5r54b8sLFabTbCZh8y14AXNYEzAE7+aROmHeILlsPpedr98jGyXcoeQVdhjw==",
   "_location": "/linter-terraform-syntax",
   "_phantomChildren": {},
   "_requested": {
     "type": "remote",
-    "raw": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-    "rawSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-    "saveSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-    "fetchSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball"
+    "raw": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-  "_shasum": "89b4338630846196488fb9b86b93902b1abe4271",
-  "_spec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.4/tarball",
-  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-118929-26635-4vid4r.h77t5",
+  "_resolved": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+  "_shasum": "5288cbca549b9bf835baba23edc7cb37ee4716bb",
+  "_spec": "https://www.atom.io/api/packages/linter-terraform-syntax/versions/1.2.5/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-119023-24563-1t6495v.7fr8",
   "bugs": {
     "url": "https://github.com/mschuchard/linter-terraform-syntax/issues"
   },
   "bundleDependencies": false,
   "dependencies": {
-    "atom-linter": "^5.0.2"
+    "atom-linter": "^10.0.0"
   },
   "deprecated": false,
   "description": "Terraform lint via validate or plan",
@@ -73,5 +73,5 @@
   "scripts": {
     "test": "atom --test spec"
   },
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

@@ -5,7 +5,7 @@
 
 This is a base package for [Atom](https://atom.io/) that provides the functionality for other atom packages (see list below) to highlight important things on the editor's scroll bar.
 
-<img width="664" alt="screen shot 2018-06-20 at 21 51 40" src="https://user-images.githubusercontent.com/11520795/41678646-40497f28-74d4-11e8-8625-d043f96e9bb8.png">
+![Screenshot](https://user-images.githubusercontent.com/11520795/41678646-40497f28-74d4-11e8-8625-d043f96e9bb8.png)
 
 That means, in order to get any use out of this package, you also need to install one of the packages bellow.
 
@@ -13,8 +13,9 @@ That means, in order to get any use out of this package, you also need to instal
 
 Name | What it highlights
 -----|------------------
- [`find-scroll-marker`](https://atom.io/packages/find-scroll-marker) | search results
- [`lint-scroll-marker`](https://atom.io/packages/lint-scroll-marker) | lint errors found by [linter](https://atom.io/packages/linter), [atom-ide-ui](https://atom.io/packages/atom-ide-ui) or [nuclide](https://atom.io/packages/nuclide)
+[`find-scroll-marker`](https://atom.io/packages/find-scroll-marker) | Search results.
+[`lint-scroll-marker`](https://atom.io/packages/lint-scroll-marker) | Lint errors found by [linter](https://atom.io/packages/linter), [atom-ide-ui](https://atom.io/packages/atom-ide-ui) or [nuclide](https://atom.io/packages/nuclide).
+[`highlight-selected`](https://atom.io/packages/highlight-selected) | Occurrences of the selected text. Scrollbar highlight requires enabling in the package settings.
 
 ## Developer documentation
 
@@ -112,7 +113,7 @@ consumeScrollMarker(api) {
 Sync the markers on the scroll marker layer with the markers on a [DisplayMarkerLayer](https://atom.io/docs/api/v1.9.5/DisplayMarkerLayer).
 
 **_Arguments:_**
- - **markerLayer** - an instance of [DisplayMarkerLayer](https://atom.io/docs/api/v1.9.5/DisplayMarkerLayer) that is used to highlight text in the editor
+ - **markerLayer** - an instance of [DisplayMarkerLayer](https://atom.io/docs/api/v1.9.5/DisplayMarkerLayer) that is usually used to highlight text in the editor
 
 **_Example:_**
 ```js

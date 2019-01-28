@@ -1,25 +1,25 @@
 {
-  "_from": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-  "_id": "scroll-marker@0.2.0",
+  "_from": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+  "_id": "scroll-marker@0.3.2",
   "_inBundle": false,
-  "_integrity": "sha512-rERhLeY2/COGonPVpxpZfVxmVomYf7S7kMcriTfL9ZDAvxRTrr3rwUrNEk39p8tsKuiR48zMhMhwIp7yY2qtjA==",
+  "_integrity": "sha512-/49c9Nf+3Xpag0KFZMnN6cnVMosczcZfWCrGo7BU96ewlPgnqtU4etMTm8hs5t0ngD3ndZAu5izVS8KkUpcbzg==",
   "_location": "/scroll-marker",
   "_phantomChildren": {},
   "_requested": {
     "type": "remote",
-    "raw": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-    "rawSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-    "saveSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-    "fetchSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball"
+    "raw": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-  "_shasum": "a2c72eaf3a2a88de6a32fd2607c6c3dffd898d75",
-  "_spec": "https://www.atom.io/api/packages/scroll-marker/versions/0.2.0/tarball",
-  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-118101-37882-1exgx3j.3yye",
+  "_resolved": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+  "_shasum": "45f6622669a0d33060bb051c94441d8a8962a593",
+  "_spec": "https://www.atom.io/api/packages/scroll-marker/versions/0.3.2/tarball",
+  "_where": "/private/var/folders/s9/ch629qfx28746ftb9wt85ct555k0r9/T/apm-install-dir-119023-24578-lsj03l.6huc8",
   "bugs": {
     "url": "https://github.com/surdu/scroll-marker/issues"
   },
@@ -61,5 +61,5 @@
     "spellcheck": "npx yaspeller '{,!(node_modules)/**/}*.md' --config yaspeller.json --ignore-urls",
     "test": "npx eslint **/*.js && npm run spellcheck"
   },
-  "version": "0.2.0"
+  "version": "0.3.2"
 }

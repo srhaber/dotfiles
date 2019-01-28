@@ -4,7 +4,13 @@ const $ = etch.dom;
 module.exports =
 class Marker {
 	constructor({layer, line}) {
-		var lineCount = layer.markerView.editor.getLineCount();
+		var linesScrollPastEnd = 0;
+		if (atom.config.get('editor.scrollPastEnd')) {
+			const fontSize = atom.config.get('editor.fontSize');
+			const lineHeight = atom.config.get('editor.lineHeight');
+			linesScrollPastEnd = (atom.windowDimensions.height - 96) / (fontSize * lineHeight);
+		}
+		var lineCount = layer.markerView.editor.getLineCount() + linesScrollPastEnd;
 		var percent = (line * 100) / lineCount;
 
 		this.style = {

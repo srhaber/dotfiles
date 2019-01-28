@@ -141,7 +141,8 @@
     hideHighlightOnSelectedWord: true
     highlightBackground: true
     lightTheme: true
-  "linter-ui-default": {}
+  "linter-ui-default":
+    showPanel: true
   "markdown-preview":
     useGitHubStyle: true
   minimap:
@@ -150,6 +151,8 @@
       "highlight-selectedDecorationsZIndex": 0
   "one-dark-ui": {}
   "one-light-ui": {}
+  "python-yapf":
+    yapfPath: "~/quip/bin/yapf"
   "status-bar": {}
   "symbols-tree-view":
     zAutoHideTypes: "namespace variable"
