@@ -79,18 +79,17 @@ plugins=(
   colored-man-pages
   colorize
   common-aliases
-  copydir
   copyfile
+  copypath
   docker
   encode64
   git
   golang
   jsontools
-  osx
+  macos
   rsync
   ssh-agent
   urltools
-  zsh_reload
 )
 
 source $ZSH/oh-my-zsh.sh
