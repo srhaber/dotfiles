@@ -44,6 +44,7 @@ brew "ruby"
 brew "terraform", link: false
 brew "terraform-docs"
 brew "terraform_landscape"
+brew "terraform-ls"
 brew "tfenv"
 brew "watch"
 brew "watchman"
