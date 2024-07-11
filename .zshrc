@@ -88,7 +88,8 @@ plugins=(
   jsontools
   macos
   rsync
-  ssh-agent
+  # This plugin conflicts with cassh daemon
+  # ssh-agent
   urltools
 )
 
@@ -135,3 +136,13 @@ PROMPT='
 
 # Current datetime and history event number
 RPROMPT='%{$fg[yellow]%}%D{%a %b %d %H:%M:%S}%{$reset_color%} [%h]'
+# PDE SETUP || 2022-04-22T14:06:32-0700
+##############################################
+/usr/bin/ssh-add --apple-load-keychain >/dev/null 2>&1
+##############################################
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source /Users/shaber/.docker/init-zsh.sh || true # Added by Docker Desktop
