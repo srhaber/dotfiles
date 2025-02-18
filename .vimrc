@@ -127,6 +127,6 @@ map <C-j> <C-W>j
 map <C-h> <C-W>h
 map <C-k> <C-W>k
 map <C-n>  :set invnu<CR>
-" colorscheme Tomorrow-Night-Bright
-colorscheme Tomorrow
+colorscheme Tomorrow-Night
+" colorscheme Tomorrow
 
