@@ -3,3 +3,5 @@
 .atom/compile-cache
 .atom/packages
 .vim/.netrwhist
+.claude/
+.vim/plugged/

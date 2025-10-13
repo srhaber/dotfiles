@@ -1,17 +1,24 @@
 #!/bin/bash -e
 
 # This script generates an updated Brewfile and commits it to dotfiles.
-# Rational is for posterity of packages and casks installed via brew for
+# Rationale is for posterity of packages and casks installed via brew for
 # ease of setting up new dev environments
+#
+# Usage: ~/.dotfiles/bin/brewdump
 
-brewfile=`mktemp /tmp/Brewfile.XXXXX`
+brewfile=$(mktemp /tmp/Brewfile.XXXXX)
 trap "rm -f $brewfile" EXIT
 
-/usr/local/bin/brew bundle dump --file=$brewfile --force
-mv $brewfile ~/.dotfiles/Brewfile
+# Use brew from PATH (supports both Intel /usr/local and Apple Silicon /opt/homebrew)
+brew bundle dump --file="$brewfile" --force --describe
+mv "$brewfile" ~/.dotfiles/Brewfile
 
 pushd ~/.dotfiles > /dev/null
 git add Brewfile
-git commit -m "Updated Brewfile"
+git commit -m "Update Brewfile from installed packages
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 git push origin master
 popd > /dev/null
+
+echo "✅ Brewfile updated and pushed to repository"

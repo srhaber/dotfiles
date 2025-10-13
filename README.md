@@ -130,7 +130,27 @@ brew bundle check              # Verify Brewfile matches installed packages
 
 # Maintenance
 brew doctor                    # Check for issues
+
+# Quick update script
+~/.dotfiles/bin/brewdump       # Update Brewfile and push to git
 ```
+
+## macOS System Preferences
+
+Run the `.macos` script to set sensible macOS defaults:
+
+```bash
+~/.dotfiles/.macos
+```
+
+This configures:
+- Finder settings (show hidden files, extensions, path bar)
+- Dock settings (auto-hide, animations)
+- Screenshot settings (PNG format, no shadow)
+- Keyboard and trackpad improvements
+- And more...
+
+**Note:** Some changes require logout/restart to take effect.
 
 ## Shell Configuration
 
