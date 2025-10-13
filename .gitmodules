@@ -1,9 +1,0 @@
-[submodule ".tomorrow-theme"]
-	path = .tomorrow-theme
-	url = https://github.com/chriskempson/tomorrow-theme.git
-[submodule "macos-terminal-themes"]
-	path = macos-terminal-themes
-	url = git@github.com:lysyi3m/macos-terminal-themes.git
-[submodule "iTerm2-Color-Schemes"]
-	path = iTerm2-Color-Schemes
-	url = git@github.com:mbadolato/iTerm2-Color-Schemes.git

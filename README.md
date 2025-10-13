@@ -85,6 +85,36 @@ source ~/.zshrc
 - `bat` - Better cat (if installed)
 - `ripgrep` - Fast grep (if installed)
 
+### Vim Setup
+This configuration uses **vim-plug** for modern plugin management.
+
+**Included plugins:**
+- `vim-sensible` - Sensible defaults
+- `vim-fugitive` - Git integration
+- `vim-commentary` - Easy commenting (use `gcc` to toggle comments)
+- `vim-surround` - Surround text objects
+- `vim-gitgutter` - Git diff indicators in gutter
+- `fzf.vim` - Fuzzy file finder
+- `ale` - Asynchronous linting and fixing
+- `nerdtree` - File explorer
+- `vim-airline` - Enhanced status line
+
+**Key bindings:**
+- `Ctrl-t` - Toggle NERDTree file explorer
+- `Ctrl-p` - Fuzzy find files
+- `Ctrl-b` - Switch between buffers
+- `Ctrl-f` - Search in files (ripgrep)
+- `gcc` - Toggle comment on current line
+- `F6` - Toggle paste mode
+
+**First-time setup:**
+After symlinking `.vimrc`, open vim and run:
+```bash
+vim +PlugInstall +qall
+```
+
+This will install all plugins automatically.
+
 ## Homebrew Commands
 
 ```bash

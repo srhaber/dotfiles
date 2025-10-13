@@ -1,24 +1,5 @@
-" Modern vim-plug plugin manager
-" Install plugins with :PlugInstall
-" Update plugins with :PlugUpdate
-" Remove unused plugins with :PlugClean
-call plug#begin('~/.vim/plugged')
-
-" Essential plugins for modern vim
-Plug 'tpope/vim-sensible'        " Sensible defaults
-Plug 'tpope/vim-fugitive'        " Git integration
-Plug 'tpope/vim-commentary'      " Easy commenting (gcc to toggle)
-Plug 'tpope/vim-surround'        " Surround text objects
-Plug 'airblade/vim-gitgutter'    " Git diff in gutter
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'          " Fuzzy finder
-Plug 'dense-analysis/ale'        " Asynchronous lint engine
-Plug 'preservim/nerdtree'        " File explorer
-Plug 'vim-airline/vim-airline'   " Status line
-Plug 'vim-airline/vim-airline-themes'
-
-call plug#end()
-
+execute pathogen#infect()
+execute pathogen#helptags()
 filetype plugin indent on
 
 " From /etc/vimrc
@@ -146,34 +127,6 @@ map <C-j> <C-W>j
 map <C-h> <C-W>h
 map <C-k> <C-W>k
 map <C-n>  :set invnu<CR>
-
-" Modern plugin key mappings
-" NERDTree toggle
-nnoremap <C-t> :NERDTreeToggle<CR>
-" FZF file finder
-nnoremap <C-p> :Files<CR>
-" FZF buffer finder
-nnoremap <C-b> :Buffers<CR>
-" FZF grep
-nnoremap <C-f> :Rg<CR>
-
-" Airline configuration
-let g:airline_theme='tomorrow'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
-" ALE (linting) configuration
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8', 'pylint'],
-\   'go': ['gopls'],
-\}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'python': ['black'],
-\}
-let g:ale_fix_on_save = 1
-
 colorscheme Tomorrow-Night
+" colorscheme Tomorrow
 
