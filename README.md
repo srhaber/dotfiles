@@ -2,7 +2,31 @@
 
 Modern development environment configuration for macOS (2025).
 
-## Initial Setup
+## Quick Setup
+
+### Automated Setup (Recommended)
+
+```bash
+git clone https://github.com/srhaber/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./setup.sh
+```
+
+The setup script will:
+- Install Homebrew (if not present)
+- Install all packages from Brewfile
+- Create symlinks for all dotfiles
+- Install Vim plugins
+- Install oh-my-zsh (if not present)
+- Optionally apply macOS system preferences
+
+**Safe & Idempotent:** The script checks before overwriting files and can be run multiple times safely.
+
+---
+
+## Manual Setup
+
+If you prefer to set up manually:
 
 ### 1. Install Homebrew
 ```bash
@@ -11,7 +35,7 @@ Modern development environment configuration for macOS (2025).
 
 ### 2. Clone this repository
 ```bash
-git clone https://github.com/yourusername/dotfiles ~/.dotfiles
+git clone https://github.com/srhaber/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
@@ -28,6 +52,7 @@ ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/.gemrc ~/.gemrc
+ln -s ~/.dotfiles/.terraformrc ~/.terraformrc
 ```
 
 ### 5. Configure iTerm2
