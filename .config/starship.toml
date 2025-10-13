@@ -11,6 +11,7 @@ $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
+$status\
 $line_break\
 $character"""
 
@@ -23,3 +24,10 @@ time_format = "%F %T"  # Date and time: YYYY-MM-DD HH:MM:SS
 # time_format = "%m/%d %T"  # MM/DD HH:MM:SS
 # time_format = "%b %d %T"  # Mon DD HH:MM:SS
 # time_format = "%F %H:%M"  # YYYY-MM-DD HH:MM (no seconds)
+
+# Show exit code when command fails
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+symbol = '✖ '
+style = 'bold red'

@@ -215,13 +215,6 @@ Current customizations:
 
 Visit [starship.rs/config](https://starship.rs/config/) for more configuration options.
 
-### Legacy Theme (srh-agnoster)
-If you prefer the old agnoster-based theme:
-1. Restore from backup: `cp ~/.dotfiles/.zshrc.backup ~/.zshrc`
-2. Install oh-my-zsh: https://ohmyz.sh/
-3. Link the theme: `ln -s ~/.dotfiles/srh-agnoster.zsh-theme ~/.oh-my-zsh/custom/themes/`
-4. Set `ZSH_THEME="srh-agnoster"` in `.zshrc`
-
 ## Updating
 
 To keep everything in sync:
