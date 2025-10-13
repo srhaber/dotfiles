@@ -133,7 +133,15 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 [[ -r ~/.dotfiles/aliases.sh ]] && source ~/.dotfiles/aliases.sh
 [[ -r ~/.secrets.sh ]] && source ~/.secrets.sh
 
-# Prompt configuration moved to Starship (see end of file)
+# Prompt expansion reference:
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+
+# Prompts for agnoster theme
+PROMPT='
+%{%f%b%k%}$(build_prompt) '
+
+# Current datetime and history event number
+RPROMPT='%{$fg[yellow]%}%D{%a %b %d %H:%M:%S}%{$reset_color%} [%h]'
 # PDE SETUP || 2022-04-22T14:06:32-0700
 ##############################################
 /usr/bin/ssh-add --apple-load-keychain >/dev/null 2>&1
@@ -143,11 +151,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Docker Desktop (only load if file exists)
-[[ -f /Users/shaber/.docker/init-zsh.sh ]] && source /Users/shaber/.docker/init-zsh.sh
-
-# Initialize Starship prompt (modern, cross-shell prompt)
-# https://starship.rs/
-if command -v starship &> /dev/null; then
-  eval "$(starship init zsh)"
-fi
+source /Users/shaber/.docker/init-zsh.sh || true # Added by Docker Desktop

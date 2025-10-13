@@ -1,41 +1,160 @@
 # Shaun's Dotfiles
 
-## Setup
+Modern development environment configuration for macOS (2025).
 
-* Create symlinks from home directory to desired dotfiles
-* `git submodule init && git submodule update`
+## Initial Setup
 
-## Brew commands
-
-Some useful homebrew commands.
-
-```
-brew doctor   # Check your system for potential problems
-brew update   # Fetch the newest version of Homebrew and all formulae
-brew upgrade  # Upgrade outdated, unpinned brews
-brew cleanup  # Remove stale lock files and outdated downloads
-brew prune    # Remove dead symlinks from the Homebrew prefix
-
-# Casks
-brew cask doctor
-brew cask upgrade
-
-# Bundle
-brew bundle dump  # Generate Brewfile
+### 1. Install Homebrew
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-## ZSH Theme
+### 2. Clone this repository
+```bash
+git clone https://github.com/yourusername/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+```
 
-**srh-agnoster**
+### 3. Install applications and tools
+```bash
+brew bundle install --file=~/.dotfiles/Brewfile
+```
 
-* Added newline to PROMPT
-* Removed leading whitespace in PROMPT
-* Added datetime and command history index to RPROMPT
+### 4. Create symlinks
+```bash
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
+ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
+ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/.gemrc ~/.gemrc
+```
 
-### Installation
+### 5. Configure iTerm2
 
-* Install oh-my-zsh: https://ohmyz.sh/
-* `ln -s ~/.dotfiles/srh-agnoster.zsh-theme ~/.oh-my-zsh/custom/themes/`
-* Install powerline font: https://github.com/Lokaltog/powerline-fonts
-* Set iTerm2 font to `Meslo LG M DZ for Powerline`
-  * Preferences > Profiles > Text > Font
+**Install color theme:**
+1. Open iTerm2
+2. Press `Cmd + ,` to open Preferences
+3. Go to **Profiles** → **Colors**
+4. Click **Color Presets** → **Import...**
+5. Navigate to `~/.dotfiles/iTerm2-Color-Schemes/schemes/`
+6. Import **Tomorrow Night.itermcolors**
+7. Select **Tomorrow Night** from the Color Presets dropdown
+
+**Set Nerd Font:**
+1. In Preferences, go to **Profiles** → **Text**
+2. Click **Change Font**
+3. Select **MesloLGM Nerd Font** or **MesloLGS Nerd Font**
+4. Recommended size: 13 or 14
+
+### 6. Reload shell
+```bash
+source ~/.zshrc
+```
+
+## Key Components
+
+### Shell Prompt
+- **Starship** - Modern, fast, cross-shell prompt with icons
+- Automatically shows git status, language versions, and execution time
+- No custom configuration needed (uses sensible defaults)
+
+### Applications Installed
+- **Raycast** - Spotlight replacement with powerful workflows
+- **AlDente** - Battery health management
+- **iTerm2** - Modern terminal emulator
+- **Warp** - AI-powered terminal (alternative to iTerm2)
+- **Visual Studio Code** - Code editor
+- **Cursor** - AI-powered code editor
+- **Docker Desktop** - Container management
+
+### Development Tools
+- Git, GitHub CLI (`gh`), Git LFS
+- Python (`pyenv`, Python 3.10, 3.11)
+- Node.js (`nvm`)
+- Go, Rust
+- Terraform (`tfenv`, `tgenv`)
+- AWS CLI, AWS Vault
+- Docker
+
+### Productivity CLI Tools
+- `jq` - JSON processor
+- `yq` - YAML/JSON/XML processor
+- `watchman` - File watching
+- `fzf` - Fuzzy finder (if installed)
+- `bat` - Better cat (if installed)
+- `ripgrep` - Fast grep (if installed)
+
+## Homebrew Commands
+
+```bash
+# Keep system updated
+brew update                    # Update Homebrew itself
+brew upgrade                   # Upgrade all packages
+brew cleanup                   # Remove old versions
+
+# Bundle management
+brew bundle dump --force       # Update Brewfile from installed packages
+brew bundle install            # Install packages from Brewfile
+brew bundle check              # Verify Brewfile matches installed packages
+
+# Maintenance
+brew doctor                    # Check for issues
+```
+
+## Shell Configuration
+
+This dotfile configuration uses **Starship** for the shell prompt instead of custom oh-my-zsh themes.
+
+### Why Starship?
+- Fast, modern, and cross-shell compatible
+- No custom fonts required for basic usage (but enhanced with Nerd Fonts)
+- Automatically detects and shows context: git status, language versions, etc.
+- Zero configuration needed - works great out of the box
+- Highly customizable via `~/.config/starship.toml` if desired
+
+### Customizing Starship (Optional)
+To customize your prompt, create a configuration file:
+```bash
+mkdir -p ~/.config
+touch ~/.config/starship.toml
+```
+
+Visit [starship.rs/config](https://starship.rs/config/) for configuration options.
+
+### Legacy Theme (srh-agnoster)
+If you prefer the old agnoster-based theme:
+1. Restore from backup: `cp ~/.dotfiles/.zshrc.backup ~/.zshrc`
+2. Install oh-my-zsh: https://ohmyz.sh/
+3. Link the theme: `ln -s ~/.dotfiles/srh-agnoster.zsh-theme ~/.oh-my-zsh/custom/themes/`
+4. Set `ZSH_THEME="srh-agnoster"` in `.zshrc`
+
+## Updating
+
+To keep everything in sync:
+
+```bash
+# Update Brewfile from what's currently installed
+cd ~/.dotfiles
+brew bundle dump --force
+
+# Commit changes
+git add Brewfile
+git commit -m "Update Brewfile"
+git push
+```
+
+## Troubleshooting
+
+### Starship prompt shows boxes/question marks
+Install a Nerd Font and configure your terminal to use it:
+```bash
+brew install font-meslo-lg-nerd-font
+```
+Then set the font in your terminal preferences.
+
+### Restore old shell configuration
+```bash
+cp ~/.dotfiles/.zshrc.backup ~/.zshrc
+source ~/.zshrc
+```
