@@ -12,6 +12,11 @@ cd ~/.dotfiles
 ./setup.sh
 ```
 
+**Non-interactive mode** (auto-accept all prompts):
+```bash
+./setup.sh -y
+```
+
 The setup script will:
 - Install Homebrew (if not present)
 - Install all packages from Brewfile
@@ -21,6 +26,10 @@ The setup script will:
 - Optionally apply macOS system preferences
 
 **Safe & Idempotent:** The script checks before overwriting files and can be run multiple times safely.
+
+**Command-line options:**
+- `-y, --yes` - Auto-accept all prompts (non-interactive mode)
+- `-h, --help` - Show usage information
 
 ---
 
@@ -48,11 +57,14 @@ brew bundle install --file=~/.dotfiles/Brewfile
 ```bash
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/.gemrc ~/.gemrc
 ln -s ~/.dotfiles/.terraformrc ~/.terraformrc
+
+# Create XDG-compliant config symlinks
+mkdir -p ~/.config
+ln -s ~/.dotfiles/.config/git ~/.config/git
+ln -s ~/.dotfiles/.config/starship.toml ~/.config/starship.toml
 ```
 
 ### 5. Configure iTerm2
@@ -79,10 +91,16 @@ source ~/.zshrc
 
 ## Key Components
 
+### Configuration Structure
+This dotfiles repo follows the XDG Base Directory specification where supported:
+- `~/.config/git/` - Git configuration (config, ignore patterns, helper scripts)
+- `~/.config/starship.toml` - Starship prompt configuration
+- Traditional dotfiles remain at `~/` for tools without XDG support (.zshrc, .vimrc, etc.)
+
 ### Shell Prompt
 - **Starship** - Modern, fast, cross-shell prompt with icons
 - Automatically shows git status, language versions, and execution time
-- No custom configuration needed (uses sensible defaults)
+- Configured at `~/.config/starship.toml` to show timestamps
 
 ### Applications Installed
 - **Raycast** - Spotlight replacement with powerful workflows
@@ -188,14 +206,14 @@ This dotfile configuration uses **Starship** for the shell prompt instead of cus
 - Zero configuration needed - works great out of the box
 - Highly customizable via `~/.config/starship.toml` if desired
 
-### Customizing Starship (Optional)
-To customize your prompt, create a configuration file:
-```bash
-mkdir -p ~/.config
-touch ~/.config/starship.toml
-```
+### Customizing Starship
+The prompt is configured via `~/.config/starship.toml` (symlinked from `~/.dotfiles/.config/starship.toml`).
 
-Visit [starship.rs/config](https://starship.rs/config/) for configuration options.
+Current customizations:
+- Shows date and time with each prompt
+- Custom format without "at" prefix
+
+Visit [starship.rs/config](https://starship.rs/config/) for more configuration options.
 
 ### Legacy Theme (srh-agnoster)
 If you prefer the old agnoster-based theme:

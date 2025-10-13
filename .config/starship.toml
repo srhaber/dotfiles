@@ -1,0 +1,25 @@
+# Starship prompt configuration
+# https://starship.rs/config/
+
+# Customize the prompt order to show time at the beginning
+format = """
+$time\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Add timestamp to prompt
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = "%F %T"  # Date and time: YYYY-MM-DD HH:MM:SS
+# Alternative formats:
+# time_format = "%m/%d %T"  # MM/DD HH:MM:SS
+# time_format = "%b %d %T"  # Mon DD HH:MM:SS
+# time_format = "%F %H:%M"  # YYYY-MM-DD HH:MM (no seconds)
