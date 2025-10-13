@@ -1,4 +1,22 @@
-# Modern gem configuration
+# Modern Ruby Gems configuration
+
+# Skip documentation generation (saves time and disk space)
 gem: --no-document
 install: --no-document
 update: --no-document
+
+# Use HTTPS for security
+:sources:
+- https://rubygems.org/
+
+# Enable concurrent downloads for faster installs (requires RubyGems 2.7+)
+:concurrent_downloads: 8
+
+# Always update gem sources on install/update
+:update_sources: true
+
+# Verbose output for debugging (comment out for quieter installs)
+# :verbose: true
+
+# Install gems to user directory (uncomment if not using rbenv/rvm)
+# gem: --user-install
