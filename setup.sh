@@ -223,6 +223,13 @@ main() {
     safe_symlink "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
     safe_symlink "$DOTFILES_DIR/.config/git" "$HOME/.config/git"
 
+    # Create .claude directory if it doesn't exist
+    mkdir -p "$HOME/.claude"
+
+    # Symlink Claude Code configuration
+    safe_symlink "$DOTFILES_DIR/.claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+    chmod +x "$HOME/.claude/statusline-command.sh"
+
     echo
 
     # Install Vim plugins
@@ -329,7 +336,8 @@ main() {
     echo "  1. Restart your terminal or run: source ~/.zshrc"
     echo "  2. Import iTerm2 color theme from $DOTFILES_DIR/iterm2/Tomorrow-Night.itermcolors (see README)"
     echo "  3. Set iTerm2 font to 'MesloLGM Nerd Font' (see README)"
-    echo "  4. Configure Raycast, AlDente, and other GUI apps"
+    echo "  4. Configure Claude Code statusline (see README for manual setup)"
+    echo "  5. Configure Raycast, AlDente, and other GUI apps"
     echo
     info "For more information, see: $DOTFILES_DIR/README.md"
     echo

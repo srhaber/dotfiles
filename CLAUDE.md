@@ -34,6 +34,7 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 ### Symlink Structure
 - Traditional dotfiles: `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/.gemrc`, `~/.terraformrc`
 - XDG-compliant: `~/.config/git/`, `~/.config/starship.toml`
+- Claude Code: `~/.claude/statusline-command.sh`
 
 ## Key Architecture
 
@@ -89,6 +90,13 @@ Modern CLI tools and shortcuts. Only includes aliases not provided by oh-my-zsh 
 
 ### Utility Scripts (bin/)
 - `brewdump`: Updates Brewfile from installed packages, commits, and pushes to git
+
+### Claude Code Configuration (.claude/)
+- `statusline-command.sh`: Custom statusline script for Claude Code
+  - Displays: timestamp with timezone, current directory, git branch
+  - Shows: model name, session duration, message count
+  - Auto-symlinked by `setup.sh` to `~/.claude/statusline-command.sh`
+  - Requires manual settings.json configuration (see README.md)
 
 ## Development Workflow
 
@@ -153,6 +161,8 @@ cd ~/.dotfiles
 ├── .config/
 │   ├── git/              # Git config, helpers, ignore
 │   └── starship.toml     # Starship prompt config
+├── .claude/
+│   └── statusline-command.sh  # Claude Code statusline script
 ├── .vim/                 # Vim plugins and runtime
 └── iterm2/               # iTerm2 color schemes
 ```

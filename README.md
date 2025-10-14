@@ -65,6 +65,11 @@ ln -s ~/.dotfiles/.terraformrc ~/.terraformrc
 mkdir -p ~/.config
 ln -s ~/.dotfiles/.config/git ~/.config/git
 ln -s ~/.dotfiles/.config/starship.toml ~/.config/starship.toml
+
+# Create Claude Code config symlinks
+mkdir -p ~/.claude
+ln -s ~/.dotfiles/.claude/statusline-command.sh ~/.claude/statusline-command.sh
+chmod +x ~/.claude/statusline-command.sh
 ```
 
 ### 5. Configure iTerm2
@@ -232,6 +237,49 @@ git add Brewfile
 git commit -m "Update Brewfile"
 git push
 ```
+
+## Claude Code Setup
+
+This repo includes a custom statusline configuration for [Claude Code](https://claude.com/claude-code).
+
+### What's Included
+
+The statusline displays:
+- **Timestamp with timezone** - Shows day, date, time, and timezone (e.g., `[Tue 2025-10-14 14:30:45 PDT]`)
+- **Current directory** - Full path to working directory
+- **Git branch** - Current branch if in a git repository
+- **Model name** - Which Claude model is being used
+- **Session duration** - How long the current session has been active
+- **Message count** - Number of messages in the current conversation
+
+### Setup Instructions
+
+After running `./setup.sh`, the statusline script will be symlinked to `~/.claude/statusline-command.sh`.
+
+To enable it in Claude Code, you need to manually configure the settings:
+
+1. Create or edit `~/.claude/settings.json`:
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/YOUR_USERNAME/.claude/statusline-command.sh"
+  }
+}
+```
+
+2. Replace `YOUR_USERNAME` with your actual username
+
+3. Restart Claude Code to see the new statusline
+
+### Example Output
+
+```
+[Tue 2025-10-14 14:30:45 PDT] /Users/shaber/dotfiles on master
+Claude 3.5 Sonnet (15m23s) (52 msgs)
+```
+
+The statusline updates automatically as you work, showing real-time session information.
 
 ## Troubleshooting
 
