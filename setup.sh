@@ -327,7 +327,7 @@ main() {
     echo
     info "Next steps:"
     echo "  1. Restart your terminal or run: source ~/.zshrc"
-    echo "  2. Install iTerm2 color theme manually (see README)"
+    echo "  2. Import iTerm2 color theme from $DOTFILES_DIR/iterm2/Tomorrow-Night.itermcolors (see README)"
     echo "  3. Set iTerm2 font to 'MesloLGM Nerd Font' (see README)"
     echo "  4. Configure Raycast, AlDente, and other GUI apps"
     echo

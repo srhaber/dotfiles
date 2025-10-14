@@ -70,13 +70,13 @@ ln -s ~/.dotfiles/.config/starship.toml ~/.config/starship.toml
 ### 5. Configure iTerm2
 
 **Install color theme:**
-1. Open iTerm2
-2. Press `Cmd + ,` to open Preferences
-3. Go to **Profiles** → **Colors**
-4. Click **Color Presets** → **Import...**
-5. Navigate to `~/.dotfiles/iTerm2-Color-Schemes/schemes/`
-6. Import **Tomorrow Night.itermcolors**
-7. Select **Tomorrow Night** from the Color Presets dropdown
+1. Open iTerm2 and press `Cmd + ,` to open Preferences
+2. Go to **Profiles** → **Colors**
+3. Click **Color Presets** → **Import...**
+4. Navigate to `~/.dotfiles/iterm2/Tomorrow-Night.itermcolors`
+5. Select **Tomorrow Night** from the Color Presets dropdown
+
+*Browse 425+ alternative color schemes at: https://github.com/mbadolato/iTerm2-Color-Schemes*
 
 **Set Nerd Font:**
 1. In Preferences, go to **Profiles** → **Text**
@@ -100,7 +100,7 @@ This dotfiles repo follows the XDG Base Directory specification where supported:
 ### Shell Prompt
 - **Starship** - Modern, fast, cross-shell prompt with icons
 - Automatically shows git status, language versions, and execution time
-- Configured at `~/.config/starship.toml` to show timestamps
+- Configured at `~/.config/starship.toml` to show timestamps and exit codes
 
 ### Applications Installed
 - **Raycast** - Spotlight replacement with powerful workflows
@@ -114,19 +114,22 @@ This dotfiles repo follows the XDG Base Directory specification where supported:
 ### Development Tools
 - Git, GitHub CLI (`gh`), Git LFS
 - Python (`pyenv`, Python 3.10, 3.11)
-- Node.js (`nvm`)
-- Go, Rust
+- Node.js (via `nvm` - install separately using official script: https://github.com/nvm-sh/nvm#installing-and-updating)
+- Go
+- Rust
 - Terraform (`tfenv`, `tgenv`)
 - AWS CLI, AWS Vault
 - Docker
+
+**Note on nvm**: This dotfiles repo is configured to load nvm if present (see .zshrc), but does not install it automatically. Install nvm using the official installation script rather than Homebrew to avoid conflicts.
 
 ### Productivity CLI Tools
 - `jq` - JSON processor
 - `yq` - YAML/JSON/XML processor
 - `watchman` - File watching
-- `fzf` - Fuzzy finder (if installed)
-- `bat` - Better cat (if installed)
-- `ripgrep` - Fast grep (if installed)
+- `fzf` - Fuzzy finder (included in Vim setup)
+- `bat` - cat with syntax highlighting (use `b` or `bcat` aliases)
+- `ripgrep` - Fast grep (install via `brew install ripgrep` if desired)
 
 ### Vim Setup
 This configuration uses **vim-plug** for modern plugin management.

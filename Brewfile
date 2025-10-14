@@ -7,6 +7,8 @@ brew "aws-vault"
 brew "awscli"
 # User-friendly launcher for Bazel
 brew "bazelisk"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
 # Object-file caching compiler wrapper
 brew "ccache"
 # Cross-platform make
@@ -23,6 +25,8 @@ brew "gh"
 brew "git"
 # Git extension for versioning large files
 brew "git-lfs"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # Add GitHub support to git on the command-line
 brew "hub"
 # Command-line interface for JFrog products

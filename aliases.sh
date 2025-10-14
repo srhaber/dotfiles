@@ -2,14 +2,12 @@
 # Only includes aliases not provided by oh-my-zsh plugins
 
 # ===========================
-# Modern CLI tool overrides
+# Modern CLI tool shortcuts
 # ===========================
-# Use modern alternatives if installed
+# bat - better cat with syntax highlighting (keep cat pure for scripts)
 if command -v bat >/dev/null 2>&1; then
-    alias cat='bat --paging=never'
-    alias c='bat --paging=never'
-else
-    alias c='cat'
+    alias b='bat'
+    alias bcat='bat --paging=never'
 fi
 
 # ===========================
