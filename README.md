@@ -241,9 +241,3 @@ Install a Nerd Font and configure your terminal to use it:
 brew install font-meslo-lg-nerd-font
 ```
 Then set the font in your terminal preferences.
-
-### Restore old shell configuration
-```bash
-cp ~/.dotfiles/.zshrc.backup ~/.zshrc
-source ~/.zshrc
-```
