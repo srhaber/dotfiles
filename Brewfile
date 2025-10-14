@@ -49,6 +49,8 @@ brew "nss"
 brew "openblas"
 # Development kit for the Java programming language
 brew "openjdk@11", link: true
+# PDF rendering library
+brew "poppler"
 # Library for JPEG-2000 image manipulation
 brew "openjpeg"
 # Colored logcat script to show entries only for specified app
