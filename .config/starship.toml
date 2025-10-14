@@ -4,6 +4,7 @@
 # Customize the prompt order to show time at the beginning
 format = """
 $time\
+${custom.timezone}\
 $username\
 $hostname\
 $directory\
@@ -18,12 +19,19 @@ $character"""
 # Add timestamp to prompt
 [time]
 disabled = false
-format = '[$time]($style) '
-time_format = "%F %T"  # Date and time: YYYY-MM-DD HH:MM:SS
+format = '[$time]($style)'
+time_format = "%a %F %T"  # Day, date and time: Mon YYYY-MM-DD HH:MM:SS
 # Alternative formats:
-# time_format = "%m/%d %T"  # MM/DD HH:MM:SS
-# time_format = "%b %d %T"  # Mon DD HH:MM:SS
-# time_format = "%F %H:%M"  # YYYY-MM-DD HH:MM (no seconds)
+# time_format = "%A %F %T"  # Full day name: Monday YYYY-MM-DD HH:MM:SS
+# Note: %Z only shows numeric offset due to Chrono library limitation
+# Using custom_timezone module below for timezone abbreviation
+
+# Custom timezone abbreviation (e.g., PDT, EST)
+[custom.timezone]
+command = "date +%Z"
+when = true
+format = ' [$output]($style) '
+style = 'bold yellow'
 
 # Show exit code when command fails
 [status]
