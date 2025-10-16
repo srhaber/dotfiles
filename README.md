@@ -102,39 +102,13 @@ This dotfiles repo follows the XDG Base Directory specification where supported:
 - `~/.config/starship.toml` - Starship prompt configuration
 - Traditional dotfiles remain at `~/` for tools without XDG support (.zshrc, .vimrc, etc.)
 
-### Shell Prompt
-- **Starship** - Modern, fast, cross-shell prompt with icons
-- Automatically shows git status, language versions, and execution time
-- Configured at `~/.config/starship.toml` to show timestamps and exit codes
+### Installed Packages
 
-### Applications Installed
-- **Raycast** - Spotlight replacement with powerful workflows
-- **AlDente** - Battery health management
-- **iTerm2** - Modern terminal emulator
-- **Warp** - AI-powered terminal (alternative to iTerm2)
-- **Visual Studio Code** - Code editor
-- **Cursor** - AI-powered code editor
-- **Docker Desktop** - Container management
-
-### Development Tools
-- Git, GitHub CLI (`gh`), Git LFS
-- Python (`pyenv`, Python 3.10, 3.11)
-- Node.js (via `nvm` - install separately using official script: https://github.com/nvm-sh/nvm#installing-and-updating)
-- Go
-- Rust
-- Terraform (`tfenv`, `tgenv`)
-- AWS CLI, AWS Vault
-- Docker
-
-**Note on nvm**: This dotfiles repo is configured to load nvm if present (see .zshrc), but does not install it automatically. Install nvm using the official installation script rather than Homebrew to avoid conflicts.
-
-### Productivity CLI Tools
-- `jq` - JSON processor
-- `yq` - YAML/JSON/XML processor
-- `watchman` - File watching
-- `fzf` - Fuzzy finder (included in Vim setup)
-- `bat` - cat with syntax highlighting (use `b` or `bcat` aliases)
-- `ripgrep` - Fast grep (install via `brew install ripgrep` if desired)
+**See [PACKAGES.md](PACKAGES.md)** for comprehensive package documentation including:
+- All brews, casks, and VS Code extensions
+- Descriptions, usage examples, and official links
+- Package management commands
+- Why each tool was included
 
 ### Vim Setup
 This configuration uses **vim-plug** for modern plugin management.
@@ -166,23 +140,13 @@ vim +PlugInstall +qall
 
 This will install all plugins automatically.
 
-## Homebrew Commands
+## Package Management
 
+See **[PACKAGES.md](PACKAGES.md)** for complete package management guide including Homebrew commands and version manager usage.
+
+**Quick commands:**
 ```bash
-# Keep system updated
-brew update                    # Update Homebrew itself
-brew upgrade                   # Upgrade all packages
-brew cleanup                   # Remove old versions
-
-# Bundle management
-brew bundle dump --force       # Update Brewfile from installed packages
-brew bundle install            # Install packages from Brewfile
-brew bundle check              # Verify Brewfile matches installed packages
-
-# Maintenance
-brew doctor                    # Check for issues
-
-# Quick update script
+brew bundle install            # Install from Brewfile
 ~/.dotfiles/bin/brewdump       # Update Brewfile and push to git
 ```
 
@@ -203,40 +167,6 @@ This configures:
 
 **Note:** Some changes require logout/restart to take effect.
 
-## Shell Configuration
-
-This dotfile configuration uses **Starship** for the shell prompt instead of custom oh-my-zsh themes.
-
-### Why Starship?
-- Fast, modern, and cross-shell compatible
-- No custom fonts required for basic usage (but enhanced with Nerd Fonts)
-- Automatically detects and shows context: git status, language versions, etc.
-- Zero configuration needed - works great out of the box
-- Highly customizable via `~/.config/starship.toml` if desired
-
-### Customizing Starship
-The prompt is configured via `~/.config/starship.toml` (symlinked from `~/.dotfiles/.config/starship.toml`).
-
-Current customizations:
-- Shows date and time with each prompt
-- Custom format without "at" prefix
-
-Visit [starship.rs/config](https://starship.rs/config/) for more configuration options.
-
-## Updating
-
-To keep everything in sync:
-
-```bash
-# Update Brewfile from what's currently installed
-cd ~/.dotfiles
-brew bundle dump --force
-
-# Commit changes
-git add Brewfile
-git commit -m "Update Brewfile"
-git push
-```
 
 ## Claude Code Setup
 
@@ -280,12 +210,3 @@ Claude 3.5 Sonnet (15m23s) (52 msgs)
 ```
 
 The statusline updates automatically as you work, showing real-time session information.
-
-## Troubleshooting
-
-### Starship prompt shows boxes/question marks
-Install a Nerd Font and configure your terminal to use it:
-```bash
-brew install font-meslo-lg-nerd-font
-```
-Then set the font in your terminal preferences.

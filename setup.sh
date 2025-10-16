@@ -294,6 +294,36 @@ main() {
     fi
     echo
 
+    # Install Claude Code
+    info "Checking for Claude Code..."
+    if ! command_exists claude; then
+        warning "Claude Code not found!"
+        if [ "$AUTO_YES" = true ]; then
+            info "Auto-accepting: installing Claude Code"
+            if npm install -g @anthropics/claude-code 2>/dev/null; then
+                success "Claude Code installed"
+            else
+                error "Failed to install Claude Code. Make sure Node.js/npm is installed."
+            fi
+        else
+            read -p "Install Claude Code via npm? (requires Node.js) (y/n) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                info "Installing Claude Code..."
+                if npm install -g @anthropics/claude-code 2>/dev/null; then
+                    success "Claude Code installed"
+                else
+                    error "Failed to install Claude Code. Make sure Node.js/npm is installed."
+                fi
+            else
+                warning "Claude Code not installed (required for AI-assisted development)"
+            fi
+        fi
+    else
+        success "Claude Code found: $(claude --version 2>/dev/null || echo 'version unknown')"
+    fi
+    echo
+
     # Apply macOS defaults
     if [ -f "$DOTFILES_DIR/.macos" ]; then
         info "macOS system preferences script found"
