@@ -50,7 +50,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Track errors but don't fail the entire script
+# Track errors
 ERROR_COUNT=0
 
 # Helper functions
@@ -71,311 +71,226 @@ error() {
     ((ERROR_COUNT++))
 }
 
-# Check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Create symlink if it doesn't exist or is different
+# Prompt helper - returns 0 for yes, 1 for no
+prompt_or_auto() {
+    local prompt="$1"
+    if [ "$AUTO_YES" = true ]; then
+        return 0
+    fi
+    read -p "$prompt (y/n) " -n 1 -r
+    echo
+    [[ $REPLY =~ ^[Yy]$ ]]
+}
+
+# Backup existing file with timestamp
+backup_file() {
+    local file="$1"
+    local backup="${file}.backup-$(date +%Y%m%d-%H%M%S)"
+    mv "$file" "$backup"
+    info "Backed up: $backup"
+}
+
+# Create symlink with proper handling
 safe_symlink() {
     local source="$1"
     local target="$2"
 
+    # Already correctly linked
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+        return 0
+    fi
+
+    # Existing symlink pointing elsewhere
     if [ -L "$target" ]; then
-        # It's already a symlink
-        local current_source=$(readlink "$target")
-        if [ "$current_source" = "$source" ]; then
-            info "Symlink already correct: $target -> $source"
+        warning "Symlink exists but points to: $(readlink "$target")"
+        if prompt_or_auto "Replace with $source?"; then
+            rm "$target"
+        else
             return 0
-        else
-            warning "Symlink exists but points elsewhere: $target -> $current_source"
-            if [ "$AUTO_YES" = true ]; then
-                info "Auto-accepting: replacing symlink"
-                rm "$target"
-            else
-                read -p "Replace with $source? (y/n) " -n 1 -r
-                echo
-                if [[ $REPLY =~ ^[Yy]$ ]]; then
-                    rm "$target"
-                else
-                    warning "Skipping $target"
-                    return 0  # Don't fail the script, just skip
-                fi
-            fi
         fi
-    elif [ -e "$target" ]; then
-        # File exists but is not a symlink
+    fi
+
+    # Regular file exists
+    if [ -e "$target" ]; then
         warning "File exists: $target"
-        if [ "$AUTO_YES" = true ]; then
-            info "Auto-accepting: backing up and replacing"
-            mv "$target" "${target}.backup-$(date +%Y%m%d-%H%M%S)"
-            success "Backed up existing file"
+        if prompt_or_auto "Backup and replace with symlink?"; then
+            backup_file "$target"
         else
-            read -p "Backup and replace with symlink? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                mv "$target" "${target}.backup-$(date +%Y%m%d-%H%M%S)"
-                success "Backed up existing file to ${target}.backup-$(date +%Y%m%d-%H%M%S)"
-            else
-                warning "Skipping $target"
-                return 0  # Don't fail the script, just skip
-            fi
+            return 0
         fi
     fi
 
     ln -s "$source" "$target"
-    success "Created symlink: $target -> $source"
+    success "Linked: $target"
+}
+
+# Generic component installer
+install_component() {
+    local name="$1"
+    local check_cmd="$2"
+    local install_cmd="$3"
+    local prompt_msg="$4"
+
+    if eval "$check_cmd"; then
+        success "$name found"
+        return 0
+    fi
+
+    warning "$name not found"
+    if prompt_or_auto "$prompt_msg"; then
+        if eval "$install_cmd"; then
+            success "$name installed"
+            return 0
+        else
+            error "Failed to install $name"
+            return 1
+        fi
+    else
+        warning "$name not installed"
+        return 1
+    fi
 }
 
 # Main setup
 main() {
-    echo
     info "Starting dotfiles setup..."
     echo
 
-    # Get the directory where this script is located
+    # Get script directory
     DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     info "Dotfiles directory: $DOTFILES_DIR"
     echo
 
-    # Check if Homebrew is installed
-    if ! command_exists brew; then
-        warning "Homebrew not found!"
-        if [ "$AUTO_YES" = true ]; then
-            info "Auto-accepting: installing Homebrew"
-            if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
-                # Add Homebrew to PATH for this session
-                if [[ $(uname -m) == "arm64" ]]; then
-                    eval "$(/opt/homebrew/bin/brew shellenv)"
-                else
-                    eval "$(/usr/local/bin/brew shellenv)"
-                fi
-                success "Homebrew installed"
-            else
-                error "Failed to install Homebrew"
-            fi
-        else
-            read -p "Install Homebrew? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                info "Installing Homebrew..."
-                if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
-                    # Add Homebrew to PATH for this session
-                    if [[ $(uname -m) == "arm64" ]]; then
-                        eval "$(/opt/homebrew/bin/brew shellenv)"
-                    else
-                        eval "$(/usr/local/bin/brew shellenv)"
-                    fi
-                    success "Homebrew installed"
-                else
-                    error "Failed to install Homebrew"
-                fi
-            else
-                warning "Homebrew not installed (required for package management)"
-            fi
-        fi
-    else
-        success "Homebrew found: $(brew --version | head -n1)"
-    fi
+    # Install Homebrew
+    install_component \
+        "Homebrew" \
+        "command_exists brew" \
+        "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\" && \
+         if [[ \$(uname -m) == 'arm64' ]]; then eval \"\$(/opt/homebrew/bin/brew shellenv)\"; \
+         else eval \"\$(/usr/local/bin/brew shellenv)\"; fi" \
+        "Install Homebrew?"
     echo
 
     # Install packages from Brewfile
     if [ -f "$DOTFILES_DIR/Brewfile" ]; then
-        info "Installing packages from Brewfile..."
-        if [ "$AUTO_YES" = true ]; then
+        if prompt_or_auto "Install/update Homebrew packages?"; then
+            info "Installing packages from Brewfile..."
             if brew bundle install --file="$DOTFILES_DIR/Brewfile"; then
                 success "Homebrew packages installed"
             else
                 error "Some Homebrew packages failed to install"
             fi
         else
-            read -p "Install/update Homebrew packages? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                if brew bundle install --file="$DOTFILES_DIR/Brewfile"; then
-                    success "Homebrew packages installed"
-                else
-                    error "Some Homebrew packages failed to install"
-                fi
-            else
-                warning "Skipped Homebrew package installation"
-            fi
+            warning "Skipped Homebrew package installation"
         fi
     else
         warning "Brewfile not found, skipping package installation"
     fi
     echo
 
-    # Create symlinks for dotfiles
+    # Create symlinks
     info "Creating symlinks for dotfiles..."
-    echo
 
-    safe_symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-    safe_symlink "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
-    safe_symlink "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
-    safe_symlink "$DOTFILES_DIR/.gemrc" "$HOME/.gemrc"
-    safe_symlink "$DOTFILES_DIR/.terraformrc" "$HOME/.terraformrc"
+    # Traditional dotfiles
+    declare -a DOTFILES=(
+        ".zshrc"
+        ".vimrc"
+        ".tmux.conf"
+        ".gemrc"
+        ".terraformrc"
+    )
 
-    # Create .config directory if it doesn't exist
+    for file in "${DOTFILES[@]}"; do
+        safe_symlink "$DOTFILES_DIR/$file" "$HOME/$file"
+    done
+
+    # XDG-compliant configs
     mkdir -p "$HOME/.config"
-
-    # Symlink XDG-compliant configs
     safe_symlink "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
     safe_symlink "$DOTFILES_DIR/.config/git" "$HOME/.config/git"
 
-    # Create .claude directory if it doesn't exist
+    # Claude Code configuration
     mkdir -p "$HOME/.claude"
-
-    # Symlink Claude Code configuration
     safe_symlink "$DOTFILES_DIR/.claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
-    chmod +x "$HOME/.claude/statusline-command.sh"
-
+    chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     echo
 
     # Install Vim plugins
-    if [ -f "$HOME/.vimrc" ]; then
+    if [ -f "$HOME/.vimrc" ] && prompt_or_auto "Install Vim plugins with vim-plug?"; then
         info "Installing Vim plugins..."
-        if [ "$AUTO_YES" = true ]; then
-            if vim +PlugInstall +qall 2>/dev/null; then
-                success "Vim plugins installed"
-            else
-                error "Failed to install Vim plugins"
-            fi
+        if vim +PlugInstall +qall 2>/dev/null; then
+            success "Vim plugins installed"
         else
-            read -p "Install Vim plugins with vim-plug? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                if vim +PlugInstall +qall 2>/dev/null; then
-                    success "Vim plugins installed"
-                else
-                    error "Failed to install Vim plugins"
-                fi
-            else
-                warning "Skipped Vim plugin installation"
-            fi
+            error "Failed to install Vim plugins"
         fi
     fi
     echo
 
-    # Check for oh-my-zsh
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        warning "oh-my-zsh not found!"
-        if [ "$AUTO_YES" = true ]; then
-            info "Auto-accepting: installing oh-my-zsh"
-            if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
-                success "oh-my-zsh installed"
-            else
-                error "Failed to install oh-my-zsh"
-            fi
-        else
-            read -p "Install oh-my-zsh? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                info "Installing oh-my-zsh..."
-                if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
-                    success "oh-my-zsh installed"
-                else
-                    error "Failed to install oh-my-zsh"
-                fi
-            else
-                warning "oh-my-zsh not installed (required for shell configuration)"
-            fi
-        fi
-    else
-        success "oh-my-zsh found"
-    fi
+    # Install oh-my-zsh
+    install_component \
+        "oh-my-zsh" \
+        "[ -d \"\$HOME/.oh-my-zsh\" ]" \
+        "sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended" \
+        "Install oh-my-zsh?"
     echo
 
-    # Check for Starship
-    if ! command_exists starship; then
-        warning "Starship not found (should be installed via Brewfile)"
-    else
+    # Verify Starship
+    if command_exists starship; then
         success "Starship found: $(starship --version)"
+    else
+        warning "Starship not found (should be installed via Brewfile)"
     fi
     echo
 
     # Install Claude Code
-    info "Checking for Claude Code..."
-    if ! command_exists claude; then
-        warning "Claude Code not found!"
-        if [ "$AUTO_YES" = true ]; then
-            info "Auto-accepting: installing Claude Code"
-            if npm install -g @anthropics/claude-code 2>/dev/null; then
-                success "Claude Code installed"
-            else
-                error "Failed to install Claude Code. Make sure Node.js/npm is installed."
-            fi
-        else
-            read -p "Install Claude Code via npm? (requires Node.js) (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                info "Installing Claude Code..."
-                if npm install -g @anthropics/claude-code 2>/dev/null; then
-                    success "Claude Code installed"
-                else
-                    error "Failed to install Claude Code. Make sure Node.js/npm is installed."
-                fi
-            else
-                warning "Claude Code not installed (required for AI-assisted development)"
-            fi
-        fi
-    else
-        success "Claude Code found: $(claude --version 2>/dev/null || echo 'version unknown')"
-    fi
+    install_component \
+        "Claude Code" \
+        "command_exists claude" \
+        "npm install -g @anthropics/claude-code 2>/dev/null" \
+        "Install Claude Code via npm? (requires Node.js)"
     echo
 
     # Apply macOS defaults
     if [ -f "$DOTFILES_DIR/.macos" ]; then
-        info "macOS system preferences script found"
-        if [ "$AUTO_YES" = true ]; then
+        if prompt_or_auto "Apply macOS defaults? (requires restart/logout for some changes)"; then
+            info "Applying macOS defaults..."
             if bash "$DOTFILES_DIR/.macos"; then
                 success "macOS defaults applied"
             else
                 error "Failed to apply some macOS defaults"
             fi
         else
-            read -p "Apply macOS defaults? (requires restart/logout for some changes) (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                if bash "$DOTFILES_DIR/.macos"; then
-                    success "macOS defaults applied"
-                else
-                    error "Failed to apply some macOS defaults"
-                fi
-            else
-                warning "Skipped macOS defaults"
-            fi
+            warning "Skipped macOS defaults"
         fi
     fi
     echo
 
-    # Final message
-    echo
+    # Final summary
     if [ $ERROR_COUNT -eq 0 ]; then
         success "=========================================="
         success "Dotfiles setup complete!"
         success "=========================================="
     else
         warning "=========================================="
-        warning "Dotfiles setup complete with $ERROR_COUNT error(s)"
+        warning "Setup complete with $ERROR_COUNT error(s)"
         warning "=========================================="
-        warning "Some steps failed but the script continued. Review errors above."
     fi
-    echo
-    info "Next steps:"
-    echo "  1. Restart your terminal or run: source ~/.zshrc"
-    echo "  2. Import iTerm2 color theme from $DOTFILES_DIR/iterm2/Tomorrow-Night.itermcolors (see README)"
-    echo "  3. Set iTerm2 font to 'MesloLGM Nerd Font' (see README)"
-    echo "  4. Configure Claude Code statusline (see README for manual setup)"
-    echo "  5. Configure Raycast, AlDente, and other GUI apps"
-    echo
-    info "For more information, see: $DOTFILES_DIR/README.md"
     echo
 
-    # Exit with error code if there were errors, but still show completion message
-    if [ $ERROR_COUNT -gt 0 ]; then
-        exit 1
-    fi
+    info "Next steps:"
+    echo "  1. Restart your terminal or run: source ~/.zshrc"
+    echo "  2. Import iTerm2 color theme from $DOTFILES_DIR/iterm2/"
+    echo "  3. Set iTerm2 font to 'MesloLGM Nerd Font'"
+    echo "  4. Configure GUI apps (Raycast, AlDente, etc.)"
+    echo
+    info "For more information, see: $DOTFILES_DIR/README.md"
+
+    [ $ERROR_COUNT -gt 0 ] && exit 1
+    exit 0
 }
 
 # Run main function
