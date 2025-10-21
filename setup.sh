@@ -250,7 +250,7 @@ main() {
     install_component \
         "Claude Code" \
         "command_exists claude" \
-        "npm install -g @anthropics/claude-code 2>/dev/null" \
+        "npm install -g @anthropic-ai/claude-code 2>/dev/null" \
         "Install Claude Code via npm? (requires Node.js)"
     echo
 
