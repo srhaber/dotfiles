@@ -198,6 +198,7 @@ main() {
     # Traditional dotfiles
     declare -a DOTFILES=(
         ".zshrc"
+        ".vim"
         ".vimrc"
         ".tmux.conf"
         ".gemrc"
