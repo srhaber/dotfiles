@@ -83,6 +83,7 @@ plugins=(
   copyfile
   copypath
   docker
+  docker-compose
   encode64
   git
   golang
@@ -150,3 +151,4 @@ export NVM_DIR="$HOME/.nvm"
 if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"

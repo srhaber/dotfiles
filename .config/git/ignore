@@ -45,3 +45,5 @@ Thumbs.db
 # Private key files #
 #####################
 *.pem
+
+**/.claude/settings.local.json
