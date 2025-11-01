@@ -77,6 +77,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   fzf-tab
+  zsh-autosuggestions
   brew
   colored-man-pages
   colorize
@@ -94,9 +95,38 @@ plugins=(
   # This plugin conflicts with cassh daemon
   # ssh-agent
   urltools
+  zsh-syntax-highlighting  # Must be last plugin
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# zsh-autosuggestions color customization for Tomorrow Night theme
+# Uses Tomorrow Night's comment color for subtle but visible suggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#969896'
+
+# zsh-autosuggestions key bindings
+# Default: Right arrow and End accept suggestions
+# Additional: Ctrl+Space to accept suggestion (easier to reach)
+bindkey '^ ' autosuggest-accept
+
+# zsh-syntax-highlighting color customization for Tomorrow Night theme
+# See: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,underline'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=white,underline'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
 
 # User configuration
 
@@ -152,4 +182,11 @@ export NVM_DIR="$HOME/.nvm"
 if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
+
+# Initialize zoxide (smart cd - jumps to frequent/recent directories)
+# https://github.com/ajeetdsouza/zoxide
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"

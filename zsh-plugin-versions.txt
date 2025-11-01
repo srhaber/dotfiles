@@ -1,0 +1,18 @@
+# Pinned versions for custom oh-my-zsh plugins
+# Format: plugin_name=git_ref (commit hash or tag)
+# Update with: ~/.dotfiles/bin/update-zsh-plugins
+
+# fzf-tab: Fuzzy completion for zsh
+# Repo: https://github.com/Aloxaf/fzf-tab
+# No versioned releases - using commit hash
+fzf-tab=fac145167f7ec1861233c54de0c8900b09c650fe
+
+# zsh-autosuggestions: Command suggestions from history
+# Repo: https://github.com/zsh-users/zsh-autosuggestions
+# Using commit hash (can also use tags like v0.7.0)
+zsh-autosuggestions=85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5
+
+# zsh-syntax-highlighting: Real-time syntax validation
+# Repo: https://github.com/zsh-users/zsh-syntax-highlighting
+# No versioned releases - using commit hash
+zsh-syntax-highlighting=5eb677bb0fa9a3e60f0eff031dc13926e093df92

@@ -142,6 +142,68 @@ vim +PlugInstall +qall
 
 This will install all plugins automatically.
 
+## Shell Enhancements
+
+This configuration includes modern zsh plugins and tools for an enhanced shell experience.
+
+### Custom oh-my-zsh Plugins
+
+Three custom plugins are automatically installed by `setup.sh`:
+
+**fzf-tab** - Replaces zsh's default completion with fuzzy finder
+- Press `Tab` to trigger fuzzy search on completions
+- Works with all commands (cd, git, kubectl, etc.)
+- Preview windows for files and directories
+- Use arrow keys to navigate, `Enter` to select
+
+**zsh-autosuggestions** - Command suggestions from history
+- Ghost text appears as you type based on command history
+- Accept with `Ctrl+Space`, `→` (right arrow), or `End`
+- Suggestions based on command history
+- Example: Type `cd d` → see "dotfiles" in gray → press `Ctrl+Space` to accept
+
+**zsh-syntax-highlighting** - Real-time syntax validation
+- Valid commands appear in green as you type
+- Invalid commands appear in red
+- Catches typos before you hit enter
+
+### Plugin Version Management
+
+Custom plugins are **pinned to specific commits** for security and reproducibility. Versions are tracked in `zsh-plugin-versions.txt`.
+
+**Updating plugins:**
+```bash
+~/.dotfiles/bin/update-zsh-plugins
+```
+
+This script will:
+1. Fetch latest commits from each plugin's repository
+2. Show you the changelog and diff for each update
+3. Prompt you to accept or skip each update
+4. Update `zsh-plugin-versions.txt` with new commits
+5. Remind you to commit the version file
+
+This approach prevents supply chain attacks and ensures you review changes before they affect your shell.
+
+### zoxide - Smart Directory Navigation
+
+Zoxide replaces `cd` with intelligent directory jumping based on frequency and recency.
+
+**Usage:**
+```bash
+z dotfiles          # Jump to ~/.dotfiles
+z doc               # Jump to most frequent/recent directory matching "doc"
+zi dotfiles         # Interactive selection with fzf
+```
+
+**Learning:** zoxide learns from your `cd` usage over time. The more you navigate, the smarter it gets.
+
+### Additional Features
+
+- **Starship prompt** - Shows git status, command duration, exit codes
+- **fzf** - Fuzzy finder integrated with Ctrl-R (history), Ctrl-T (files)
+- **Modern CLI tools** - bat, ripgrep, fd, eza (see [PACKAGES.md](PACKAGES.md))
+
 ## Package Management
 
 See **[PACKAGES.md](PACKAGES.md)** for complete package management guide including Homebrew commands and version manager usage.

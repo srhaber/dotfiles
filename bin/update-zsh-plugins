@@ -1,0 +1,175 @@
+#!/bin/bash
+
+# Update Custom oh-my-zsh Plugins with Version Pinning
+# Reviews changes before updating and maintains zsh-plugin-versions.txt
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Get script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+VERSIONS_FILE="$DOTFILES_DIR/zsh-plugin-versions.txt"
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+PLUGIN_DIR="$ZSH_CUSTOM/plugins"
+
+# Check prerequisites
+if [ ! -d "$PLUGIN_DIR" ]; then
+    echo -e "${YELLOW}No custom plugins directory found at: $PLUGIN_DIR${NC}"
+    exit 0
+fi
+
+if [ ! -f "$VERSIONS_FILE" ]; then
+    echo -e "${RED}Version file not found: $VERSIONS_FILE${NC}"
+    echo "Cannot update plugins without version tracking."
+    exit 1
+fi
+
+echo -e "${BOLD}${BLUE}Checking for plugin updates...${NC}"
+echo
+
+# Read current pinned versions
+declare -A PINNED_VERSIONS
+while IFS='=' read -r plugin_name git_ref; do
+    # Skip comments and empty lines
+    [[ "$plugin_name" =~ ^#.*$ ]] || [ -z "$plugin_name" ] && continue
+    # Trim whitespace
+    plugin_name=$(echo "$plugin_name" | xargs)
+    git_ref=$(echo "$git_ref" | xargs)
+    PINNED_VERSIONS[$plugin_name]=$git_ref
+done < "$VERSIONS_FILE"
+
+updated=0
+skipped=0
+uptodate=0
+
+# Track which versions to update in file
+declare -A NEW_VERSIONS
+
+# Process each pinned plugin
+for plugin_name in "${!PINNED_VERSIONS[@]}"; do
+    plugin_path="$PLUGIN_DIR/$plugin_name"
+    pinned_version="${PINNED_VERSIONS[$plugin_name]}"
+
+    if [ ! -d "$plugin_path" ]; then
+        echo -e "${YELLOW}⊘ $plugin_name not installed (skipping)${NC}"
+        echo
+        ((skipped++))
+        continue
+    fi
+
+    if [ ! -d "$plugin_path/.git" ]; then
+        echo -e "${YELLOW}⊘ $plugin_name not a git repository (skipping)${NC}"
+        echo
+        ((skipped++))
+        continue
+    fi
+
+    echo -e "${BOLD}${CYAN}━━━ $plugin_name ━━━${NC}"
+
+    # Get current commit
+    current_commit=$(git -C "$plugin_path" rev-parse HEAD 2>/dev/null)
+
+    # Fetch latest from remote
+    echo -e "${BLUE}Fetching latest from remote...${NC}"
+    if ! git -C "$plugin_path" fetch --quiet 2>/dev/null; then
+        echo -e "${RED}✗ Failed to fetch from remote${NC}"
+        echo
+        ((skipped++))
+        continue
+    fi
+
+    # Get latest commit on default branch
+    default_branch=$(git -C "$plugin_path" remote show origin | grep "HEAD branch" | cut -d' ' -f5)
+    latest_commit=$(git -C "$plugin_path" rev-parse "origin/$default_branch" 2>/dev/null)
+
+    # Check if already on latest
+    if [ "$current_commit" = "$latest_commit" ]; then
+        echo -e "${GREEN}✓ Already on latest version (${latest_commit:0:7})${NC}"
+        echo
+        ((uptodate++))
+        continue
+    fi
+
+    # Show version information
+    echo -e "${YELLOW}Pinned:  ${pinned_version:0:7}${NC}"
+    echo -e "${CYAN}Current: ${current_commit:0:7}${NC}"
+    echo -e "${GREEN}Latest:  ${latest_commit:0:7}${NC}"
+    echo
+
+    # Show commit log between current and latest
+    echo -e "${BOLD}Changes since current version:${NC}"
+    git -C "$plugin_path" log --oneline --graph --decorate \
+        "${current_commit}..${latest_commit}" | head -20
+    echo
+
+    # Show stats
+    echo -e "${BOLD}Diff stats:${NC}"
+    git -C "$plugin_path" diff --stat "${current_commit}..${latest_commit}"
+    echo
+
+    # Prompt for update
+    read -p "Update $plugin_name to latest? [y/N] " -n 1 -r
+    echo
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Checkout latest commit
+        if git -C "$plugin_path" checkout "$latest_commit" --quiet 2>/dev/null; then
+            echo -e "${GREEN}✓ Updated to ${latest_commit:0:7}${NC}"
+            NEW_VERSIONS[$plugin_name]=$latest_commit
+            ((updated++))
+        else
+            echo -e "${RED}✗ Failed to checkout $latest_commit${NC}"
+            ((skipped++))
+        fi
+    else
+        echo -e "${YELLOW}⊘ Skipped${NC}"
+        ((skipped++))
+    fi
+    echo
+done
+
+# Update versions file if any plugins were updated
+if [ $updated -gt 0 ]; then
+    echo -e "${BOLD}${BLUE}Updating version file...${NC}"
+
+    # Create backup
+    cp "$VERSIONS_FILE" "$VERSIONS_FILE.backup"
+
+    # Update versions in file
+    for plugin_name in "${!NEW_VERSIONS[@]}"; do
+        new_version="${NEW_VERSIONS[$plugin_name]}"
+        # Use sed to replace the version line
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' "s|^$plugin_name=.*|$plugin_name=$new_version|" "$VERSIONS_FILE"
+        else
+            sed -i "s|^$plugin_name=.*|$plugin_name=$new_version|" "$VERSIONS_FILE"
+        fi
+    done
+
+    echo -e "${GREEN}✓ Updated $VERSIONS_FILE${NC}"
+    echo -e "${YELLOW}  Backup saved: $VERSIONS_FILE.backup${NC}"
+    echo
+    echo -e "${BOLD}Don't forget to commit the updated versions file:${NC}"
+    echo -e "  ${CYAN}cd $DOTFILES_DIR${NC}"
+    echo -e "  ${CYAN}git add zsh-plugin-versions.txt${NC}"
+    echo -e "  ${CYAN}git commit -m \"Update zsh plugin versions\"${NC}"
+    echo
+fi
+
+# Summary
+echo -e "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BOLD}Summary:${NC}"
+echo -e "  Updated:     ${GREEN}$updated${NC}"
+echo -e "  Up-to-date:  ${CYAN}$uptodate${NC}"
+echo -e "  Skipped:     ${YELLOW}$skipped${NC}"
+echo -e "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"

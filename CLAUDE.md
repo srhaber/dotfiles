@@ -39,8 +39,15 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 ## Key Architecture
 
 ### Shell Configuration (.zshrc)
-- Uses **oh-my-zsh** for base shell functionality with plugins: brew, git, docker, golang, jsontools, macos, etc.
+- Uses **oh-my-zsh** with built-in plugins: brew, git, docker, docker-compose, golang, jsontools, macos, colored-man-pages, colorize, common-aliases, copyfile, copypath, encode64, rsync, urltools
+- Uses **custom oh-my-zsh plugins** (installed by setup.sh with version pinning):
+  - **fzf-tab**: Fuzzy completion for all commands
+  - **zsh-autosuggestions**: Command suggestions from history
+  - **zsh-syntax-highlighting**: Real-time syntax validation (must be last plugin)
+  - **Version pinning**: Plugins are pinned to specific commits in `zsh-plugin-versions.txt` for security and reproducibility
+  - **Security model**: Manual review required before updates (prevents supply chain attacks)
 - Uses **Starship** for modern cross-shell prompt (replaces oh-my-zsh themes)
+- Uses **zoxide** for smart directory navigation (`z` command)
 - Loads custom aliases from `aliases.sh`
 - Loads secrets from `~/.secrets.sh` (if exists)
 - Automatically loads nvm if installed at `~/.nvm/`
@@ -90,6 +97,12 @@ Modern CLI tools and shortcuts. Only includes aliases not provided by oh-my-zsh 
 
 ### Utility Scripts (bin/)
 - `brewdump`: Updates Brewfile from installed packages, commits, and pushes to git
+- `update-zsh-plugins`: Updates custom oh-my-zsh plugins with security review
+  - Fetches latest commits from plugin repositories
+  - Shows changelog and diff for each available update
+  - Prompts for approval before updating
+  - Updates `zsh-plugin-versions.txt` with new commit hashes
+  - Prevents supply chain attacks by requiring manual review
 
 ### Claude Code Configuration (.claude/)
 - `statusline-command.sh`: Custom statusline script for Claude Code
@@ -165,6 +178,7 @@ This separation allows you to have personal preferences that apply everywhere, w
 .
 ├── setup.sh              # Main installation script
 ├── Brewfile              # Homebrew packages/casks
+├── zsh-plugin-versions.txt # Pinned versions for custom zsh plugins
 ├── .zshrc                # Zsh configuration
 ├── .vimrc                # Vim configuration
 ├── .tmux.conf            # Tmux configuration
@@ -173,7 +187,8 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── .macos                # macOS system preferences script
 ├── aliases.sh            # Custom shell aliases
 ├── bin/
-│   └── brewdump          # Brewfile update/commit script
+│   ├── brewdump          # Brewfile update/commit script
+│   └── update-zsh-plugins # Update custom oh-my-zsh plugins
 ├── .config/
 │   ├── git/              # Git config, helpers, ignore
 │   └── starship.toml     # Starship prompt config

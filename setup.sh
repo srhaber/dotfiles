@@ -241,6 +241,74 @@ main() {
         "Install oh-my-zsh?"
     echo
 
+    # Install custom oh-my-zsh plugins (pinned to specific versions)
+    if [ -d "$HOME/.oh-my-zsh" ]; then
+        info "Installing custom oh-my-zsh plugins (pinned versions)..."
+        ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+        VERSIONS_FILE="$DOTFILES_DIR/zsh-plugin-versions.txt"
+
+        # Plugin configuration: name|repo_url
+        declare -a PLUGINS=(
+            "fzf-tab|https://github.com/Aloxaf/fzf-tab"
+            "zsh-autosuggestions|https://github.com/zsh-users/zsh-autosuggestions"
+            "zsh-syntax-highlighting|https://github.com/zsh-users/zsh-syntax-highlighting.git"
+        )
+
+        # Read pinned versions from file
+        declare -A PINNED_VERSIONS
+        if [ -f "$VERSIONS_FILE" ]; then
+            while IFS='=' read -r plugin_name git_ref; do
+                # Skip comments and empty lines
+                [[ "$plugin_name" =~ ^#.*$ ]] || [ -z "$plugin_name" ] && continue
+                PINNED_VERSIONS[$plugin_name]=$git_ref
+            done < "$VERSIONS_FILE"
+        else
+            warning "Version file not found: $VERSIONS_FILE"
+            warning "Plugins will be installed but not pinned to specific versions"
+        fi
+
+        # Install each plugin
+        for plugin_config in "${PLUGINS[@]}"; do
+            plugin_name="${plugin_config%%|*}"
+            plugin_url="${plugin_config##*|}"
+            plugin_dir="$ZSH_CUSTOM/plugins/$plugin_name"
+            pinned_version="${PINNED_VERSIONS[$plugin_name]}"
+
+            if [ ! -d "$plugin_dir" ]; then
+                info "Installing $plugin_name..."
+                if git clone "$plugin_url" "$plugin_dir" 2>/dev/null; then
+                    if [ -n "$pinned_version" ]; then
+                        if git -C "$plugin_dir" checkout "$pinned_version" 2>/dev/null; then
+                            success "Installed $plugin_name (pinned to ${pinned_version:0:7})"
+                        else
+                            error "Failed to checkout $pinned_version for $plugin_name"
+                        fi
+                    else
+                        success "Installed $plugin_name (no version pin)"
+                    fi
+                else
+                    error "Failed to clone $plugin_name"
+                fi
+            else
+                # Already installed - verify it's on correct version
+                if [ -n "$pinned_version" ]; then
+                    current_commit=$(git -C "$plugin_dir" rev-parse HEAD 2>/dev/null)
+                    if [ "$current_commit" = "$pinned_version" ]; then
+                        success "$plugin_name already installed (pinned to ${pinned_version:0:7})"
+                    else
+                        warning "$plugin_name installed but not on pinned version (${pinned_version:0:7})"
+                        info "Run ~/.dotfiles/bin/update-zsh-plugins to sync versions"
+                    fi
+                else
+                    success "$plugin_name already installed"
+                fi
+            fi
+        done
+    else
+        warning "oh-my-zsh not found, skipping custom plugin installation"
+    fi
+    echo
+
     # Verify Starship
     if command_exists starship; then
         success "Starship found: $(starship --version)"
