@@ -34,7 +34,7 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 ### Symlink Structure
 - Traditional dotfiles: `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/.gemrc`, `~/.terraformrc`
 - XDG-compliant: `~/.config/git/`, `~/.config/starship.toml`
-- Claude Code: `~/.claude/statusline-command.sh`
+- Claude Code global: `claude-global/*` → `~/.claude/*` (CLAUDE.md, commands/, statusline-command.sh)
 
 ## Key Architecture
 
@@ -143,6 +143,22 @@ cd ~/.dotfiles
 - **Secrets**: Store sensitive config in `~/.secrets.sh` (sourced by .zshrc, not tracked in git)
 - **iTerm2 theme**: Manual import required from `iterm2/Tomorrow-Night.itermcolors`
 
+## Claude Code Configuration Structure
+
+This repo uses a two-tier configuration system for Claude Code:
+
+### Global Configuration (`claude-global/`)
+Symlinked to `~/.claude/` and applies to **all projects** on your machine:
+- `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
+- `claude-global/commands/` - Global slash commands like `/save-session`
+- `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
+
+### Project-Specific Configuration (`CLAUDE.md`)
+Applies **only** when working in the dotfiles repository:
+- `CLAUDE.md` - Instructions specific to this dotfiles repo (architecture, workflows, setup)
+
+This separation allows you to have personal preferences that apply everywhere, while still maintaining project-specific documentation and commands for individual repositories.
+
 ## File Organization
 
 ```
@@ -161,8 +177,12 @@ cd ~/.dotfiles
 ├── .config/
 │   ├── git/              # Git config, helpers, ignore
 │   └── starship.toml     # Starship prompt config
-├── .claude/
-│   └── statusline-command.sh  # Claude Code statusline script
+├── claude-global/        # Global Claude Code config (symlinked to ~/.claude/)
+│   ├── CLAUDE.md         # Personal preferences for all projects
+│   ├── commands/         # Global slash commands
+│   │   └── save-session.md
+│   └── statusline-command.sh
+├── CLAUDE.md             # Project-specific Claude instructions (this repo only)
 ├── .vim/                 # Vim plugins and runtime
 └── iterm2/               # iTerm2 color schemes
 ```

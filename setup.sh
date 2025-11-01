@@ -214,9 +214,11 @@ main() {
     safe_symlink "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
     safe_symlink "$DOTFILES_DIR/.config/git" "$HOME/.config/git"
 
-    # Claude Code configuration
+    # Claude Code global configuration (applies to all projects)
     mkdir -p "$HOME/.claude"
-    safe_symlink "$DOTFILES_DIR/.claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+    safe_symlink "$DOTFILES_DIR/claude-global/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+    safe_symlink "$DOTFILES_DIR/claude-global/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+    safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     echo
 

@@ -66,9 +66,11 @@ mkdir -p ~/.config
 ln -s ~/.dotfiles/.config/git ~/.config/git
 ln -s ~/.dotfiles/.config/starship.toml ~/.config/starship.toml
 
-# Create Claude Code config symlinks
+# Create Claude Code global config symlinks
 mkdir -p ~/.claude
-ln -s ~/.dotfiles/.claude/statusline-command.sh ~/.claude/statusline-command.sh
+ln -s ~/.dotfiles/claude-global/statusline-command.sh ~/.claude/statusline-command.sh
+ln -s ~/.dotfiles/claude-global/CLAUDE.md ~/.claude/CLAUDE.md
+ln -s ~/.dotfiles/claude-global/commands ~/.claude/commands
 chmod +x ~/.claude/statusline-command.sh
 ```
 
@@ -170,11 +172,22 @@ This configures:
 
 ## Claude Code Setup
 
-This repo includes a custom statusline configuration for [Claude Code](https://claude.com/claude-code).
+This repo includes both **global** and **project-specific** Claude Code configuration:
 
-### What's Included
+### Global Configuration (`claude-global/`)
+Applies to all projects on your machine (symlinked to `~/.claude/`):
+- **`claude-global/CLAUDE.md`** - Personal preferences and instructions for Claude across all projects
+- **`claude-global/commands/`** - Global slash commands (e.g., `/save-session`)
+- **`claude-global/statusline-command.sh`** - Custom statusline script
 
-The statusline displays:
+### Project-Specific Configuration (`.claude/`, `CLAUDE.md`)
+Applies only when working in the dotfiles repo:
+- **`.claude/`** - Project-specific slash commands or overrides (if needed)
+- **`CLAUDE.md`** - Instructions specific to managing this dotfiles repository
+
+### Statusline
+
+The custom statusline displays:
 - **Timestamp with timezone** - Shows day, date, time, and timezone (e.g., `[Tue 2025-10-14 14:30:45 PDT]`)
 - **Current directory** - Full path to working directory
 - **Git branch** - Current branch if in a git repository
@@ -184,9 +197,14 @@ The statusline displays:
 
 ### Setup Instructions
 
-After running `./setup.sh`, the statusline script will be symlinked to `~/.claude/statusline-command.sh`.
+After running `./setup.sh`, the global configuration from `claude-global/` will be symlinked to `~/.claude/`:
+- `statusline-command.sh` - Custom statusline script
+- `CLAUDE.md` - Personal Claude preferences and instructions
+- `commands/` - Global slash commands directory
 
-To enable it in Claude Code, you need to manually configure the settings:
+These configs will apply to all Claude Code sessions on your machine.
+
+To enable the statusline, you need to manually configure the settings:
 
 1. Create or edit `~/.claude/settings.json`:
 ```json
