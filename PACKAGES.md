@@ -30,6 +30,7 @@ Modern alternatives to traditional Unix tools with better UX, performance, and f
 | **eza** | ls | Colors, icons, git status, tree view | [github.com/eza-community/eza](https://github.com/eza-community/eza) |
 | **fd** | find | Simpler syntax, faster, respects .gitignore, colored output | [github.com/sharkdp/fd](https://github.com/sharkdp/fd) |
 | **fzf** | - | Fuzzy finder for files/history/commands (essential for shell/vim) | [github.com/junegunn/fzf](https://github.com/junegunn/fzf) |
+| **glow** | - | Render markdown on the CLI with syntax highlighting and formatting | [github.com/charmbracelet/glow](https://github.com/charmbracelet/glow) |
 | **htop** | top | Interactive, colored, mouse support, tree view | [htop.dev](https://htop.dev) |
 | **ripgrep** | grep | 10-100x faster, respects .gitignore, better regex | [github.com/BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep) |
 | **tree** | - | Visual directory tree structure | Standard Unix utility |
@@ -350,9 +351,17 @@ Essential extensions for VS Code development.
 
 | Extension | ID | Purpose |
 |-----------|-----|---------|
+| **Claude Code** | `anthropic.claude-code` | AI pair programming with Claude directly in VS Code |
 | **GitLens** | `eamodio.gitlens` | Enhanced git integration, blame annotations, history exploration |
 | **Prettier** | `esbenp.prettier-vscode` | Code formatter for JS/TS/CSS/HTML/JSON/Markdown |
+| **GitHub Copilot** | `github.copilot` | AI pair programmer for code suggestions and completions |
+| **GitHub Copilot Chat** | `github.copilot-chat` | Chat interface for GitHub Copilot |
 | **Terraform** | `hashicorp.terraform` | Terraform syntax highlighting, validation, formatting, IntelliSense |
+| **Azure Container Tools** | `ms-azuretools.vscode-containers` | Docker and container management tools |
+| **Python Debugger** | `ms-python.debugpy` | Python debugging support |
+| **Python** | `ms-python.python` | Python language support with IntelliSense, linting, debugging |
+| **Pylance** | `ms-python.vscode-pylance` | Fast Python language server with type checking |
+| **Python Environments** | `ms-python.vscode-python-envs` | Manage Python virtual environments and interpreters |
 | **Remote - Containers** | `ms-vscode-remote.remote-containers` | Develop inside Docker containers |
 | **Remote - SSH** | `ms-vscode-remote.remote-ssh` | Open folders on remote machines via SSH |
 | **Remote - SSH: Editing** | `ms-vscode-remote.remote-ssh-edit` | Edit SSH configuration files |
@@ -360,6 +369,10 @@ Essential extensions for VS Code development.
 | **Remote Development** | `ms-vscode-remote.vscode-remote-extensionpack` | Extension pack for remote development |
 | **Remote Explorer** | `ms-vscode.remote-explorer` | View and manage remote connections |
 | **Remote - Tunnels** | `ms-vscode.remote-server` | Connect to remote machines via tunnels |
+
+**AI Assistants:** Claude Code and GitHub Copilot provide AI-powered code suggestions, completions, and chat interfaces for pair programming.
+
+**Python Development:** The Python extensions provide a complete development environment with IntelliSense, debugging, linting, formatting, and virtual environment management.
 
 **Remote Development:** The suite of remote extensions allows seamless development on remote machines, in containers, or in WSL as if working locally.
 
