@@ -189,4 +189,10 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# Initialize pyenv (Python version manager)
+# https://github.com/pyenv/pyenv
+if [[ -d "$HOME/.pyenv" ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
