@@ -71,6 +71,7 @@ mkdir -p ~/.claude
 ln -s ~/.dotfiles/claude-global/statusline-command.sh ~/.claude/statusline-command.sh
 ln -s ~/.dotfiles/claude-global/CLAUDE.md ~/.claude/CLAUDE.md
 ln -s ~/.dotfiles/claude-global/commands ~/.claude/commands
+ln -s ~/.dotfiles/claude-global/agents ~/.claude/agents
 chmod +x ~/.claude/statusline-command.sh
 ```
 
@@ -239,7 +240,8 @@ This repo includes both **global** and **project-specific** Claude Code configur
 ### Global Configuration (`claude-global/`)
 Applies to all projects on your machine (symlinked to `~/.claude/`):
 - **`claude-global/CLAUDE.md`** - Personal preferences and instructions for Claude across all projects
-- **`claude-global/commands/`** - Global slash commands (e.g., `/save-session`)
+- **`claude-global/commands/`** - Global slash commands: `/commit`, `/push`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`
+- **`claude-global/agents/`** - Custom agents: commit-message-generator, pr-description-generator, session-documenter, convention-analyzer
 - **`claude-global/statusline-command.sh`** - Custom statusline script
 
 ### Project-Specific Configuration (`.claude/`, `CLAUDE.md`)
@@ -262,7 +264,8 @@ The custom statusline displays:
 After running `./setup.sh`, the global configuration from `claude-global/` will be symlinked to `~/.claude/`:
 - `statusline-command.sh` - Custom statusline script
 - `CLAUDE.md` - Personal Claude preferences and instructions
-- `commands/` - Global slash commands directory
+- `commands/` - Global slash commands for git workflows and session management
+- `agents/` - Custom agents that power the slash commands
 
 These configs will apply to all Claude Code sessions on your machine.
 

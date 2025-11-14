@@ -163,8 +163,8 @@ This repo uses a two-tier configuration system for Claude Code:
 ### Global Configuration (`claude-global/`)
 Symlinked to `~/.claude/` and applies to **all projects** on your machine:
 - `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
-- `claude-global/commands/` - Global slash commands like `/save-session`
-- `claude-global/agents/` - Custom agent definitions (convention-analyzer, git-committer)
+- `claude-global/commands/` - Global slash commands (`/commit`, `/push`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`)
+- `claude-global/agents/` - Custom agent definitions (commit-message-generator, pr-description-generator, session-documenter, convention-analyzer)
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
 
 ### Project-Specific Configuration (`CLAUDE.md`)
@@ -196,10 +196,17 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── claude-global/        # Global Claude Code config (symlinked to ~/.claude/)
 │   ├── CLAUDE.md         # Personal preferences for all projects
 │   ├── commands/         # Global slash commands
+│   │   ├── commit.md
+│   │   ├── push.md
+│   │   ├── pr.md
+│   │   ├── review-branch.md
+│   │   ├── review-changes.md
 │   │   └── save-session.md
 │   ├── agents/           # Custom agent definitions
-│   │   ├── convention-analyzer.md
-│   │   └── git-committer.md
+│   │   ├── commit-message-generator.md
+│   │   ├── pr-description-generator.md
+│   │   ├── session-documenter.md
+│   │   └── convention-analyzer.md
 │   └── statusline-command.sh
 ├── CLAUDE.md             # Project-specific Claude instructions (this repo only)
 ├── .vim/                 # Vim plugins and runtime
