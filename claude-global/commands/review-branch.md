@@ -1,5 +1,5 @@
 ---
-description: Comprehensive review of all changes on current branch using convention analysis
+description: Comprehensive review of all changes on current branch (uses convention-analyzer agent)
 ---
 
 Perform a comprehensive review of all changes on the current branch.

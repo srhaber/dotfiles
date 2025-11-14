@@ -1,5 +1,5 @@
 ---
-description: Analyze staged changes and commit with AI-generated message
+description: Analyze staged changes and commit with AI-generated message (uses commit-message-generator agent)
 ---
 
 Use the Task tool to invoke the commit-message-generator subagent to analyze staged changes and generate a conventional commit message. The agent does the analysis work but returns the message to you - you handle all user interaction.
