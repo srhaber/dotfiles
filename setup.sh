@@ -219,6 +219,7 @@ main() {
     safe_symlink "$DOTFILES_DIR/claude-global/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
     safe_symlink "$DOTFILES_DIR/claude-global/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
+    safe_symlink "$DOTFILES_DIR/claude-global/agents" "$HOME/.claude/agents"
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     echo
 
@@ -323,6 +324,14 @@ main() {
         "command_exists claude" \
         "npm install -g @anthropic-ai/claude-code 2>/dev/null" \
         "Install Claude Code via npm? (requires Node.js)"
+    echo
+
+    # Install OpenAI Codex
+    install_component \
+        "OpenAI Codex" \
+        "command_exists codex" \
+        "npm install -g @openai/codex 2>/dev/null" \
+        "Install OpenAI Codex via npm? (requires Node.js)"
     echo
 
     # Apply macOS defaults

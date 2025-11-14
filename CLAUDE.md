@@ -34,7 +34,7 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 ### Symlink Structure
 - Traditional dotfiles: `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/.gemrc`, `~/.terraformrc`
 - XDG-compliant: `~/.config/git/`, `~/.config/starship.toml`
-- Claude Code global: `claude-global/*` → `~/.claude/*` (CLAUDE.md, commands/, statusline-command.sh)
+- Claude Code global: `claude-global/*` → `~/.claude/*` (CLAUDE.md, commands/, agents/, statusline-command.sh)
 
 ## Key Architecture
 
@@ -164,6 +164,7 @@ This repo uses a two-tier configuration system for Claude Code:
 Symlinked to `~/.claude/` and applies to **all projects** on your machine:
 - `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
 - `claude-global/commands/` - Global slash commands like `/save-session`
+- `claude-global/agents/` - Custom agent definitions (convention-analyzer, git-committer)
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
 
 ### Project-Specific Configuration (`CLAUDE.md`)
@@ -196,6 +197,9 @@ This separation allows you to have personal preferences that apply everywhere, w
 │   ├── CLAUDE.md         # Personal preferences for all projects
 │   ├── commands/         # Global slash commands
 │   │   └── save-session.md
+│   ├── agents/           # Custom agent definitions
+│   │   ├── convention-analyzer.md
+│   │   └── git-committer.md
 │   └── statusline-command.sh
 ├── CLAUDE.md             # Project-specific Claude instructions (this repo only)
 ├── .vim/                 # Vim plugins and runtime

@@ -60,7 +60,7 @@ You are helping the user document this Claude Code session for their personal kn
 4. Write the file and confirm to the user where it was saved.
 
 **Important:**
-- CRITICAL: Check the "Today's date" field in your <env> context and use that exact date (YYYY-MM-DD format). Do NOT use any hardcoded date.
+- Always use the current date from your environment context (YYYY-MM-DD format) for filenames and date fields
 - Keep it concise but informative (aim for 1-2 pages)
 - Include specific file paths and line numbers where relevant using the format `file:line`
 - If there were no activities in a section, write "N/A" instead of leaving it empty
