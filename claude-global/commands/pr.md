@@ -4,45 +4,58 @@ description: Create pull request for current branch (uses pr-description-generat
 
 Create a pull request on GitHub for the current branch.
 
+## Usage
+
+- `/pr` - Create a normal PR
+- `/pr wip` - Create a WIP (work-in-progress) PR with "WIP: " prefix in title
+
 ## Workflow
 
-1. **Check branch state** (run in parallel):
+1. **Parse command arguments:**
+   - Check if `wip` flag is present after `/pr`
+   - Store flag for later title modification
+
+2. **Check branch state** (run in parallel):
    - `git branch --show-current` → Current branch name
    - `git rev-parse --abbrev-ref @{upstream} 2>&1` → Check upstream tracking
    - `git status --short --branch` → Check if ahead/behind remote
    - `git log main..HEAD --oneline` → Preview commits (assume main as base)
 
-2. **Validate prerequisites:**
+3. **Validate prerequisites:**
    - Must be on a branch (not detached HEAD)
    - Branch must not be main/master
    - Must have commits to push
 
-3. **Push to remote if needed:**
+4. **Push to remote if needed:**
    - If no upstream configured: Use AskUserQuestion to confirm push with `-u origin <branch>`
    - If local is ahead: Run `git push` to sync
    - If push fails, show error and abort
 
-4. **Invoke pr-description-generator agent:**
-   - Pass any user-provided context after `/pr` command
+5. **Invoke pr-description-generator agent:**
+   - Pass any user-provided context after `/pr` command (excluding `wip` flag)
    - Agent analyzes branch and returns PR title + body
 
-5. **Present proposed PR to user:**
-   - Show the generated title and body
+6. **Modify title if WIP flag present:**
+   - If `wip` flag was provided, prepend "WIP: " to the generated title
+   - Example: "Add new feature" → "WIP: Add new feature"
+
+7. **Present proposed PR to user:**
+   - Show the generated title (with WIP prefix if applicable) and body
    - Display commits that will be included
    - Show base branch (main/master)
 
-6. **Get user approval with AskUserQuestion:**
+8. **Get user approval with AskUserQuestion:**
    - "Create PR as-is" → Execute gh pr create
    - "Edit description" → Ask for changes and re-invoke agent with feedback
    - "Cancel" → Abort
 
-7. **Create PR:**
+9. **Create PR:**
    - Use `gh pr create --title "<title>" --body "$(cat <<'EOF' ... EOF)"`
    - Ensure body includes Summary, Test plan, and attribution footer
    - Keep the test plan short, avoid creating too many list items
    - Display PR URL when created
 
-8. **Handle errors:**
+10. **Handle errors:**
    - If `gh` not installed: Prompt to install GitHub CLI
    - If not authenticated: Prompt to run `gh auth login`
    - If PR already exists: Show existing PR URL
