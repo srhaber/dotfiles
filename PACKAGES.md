@@ -429,7 +429,7 @@ tgenv list
 ### Custom Scripts
 ```bash
 # Update Brewfile and commit to git
-~/.dotfiles/bin/brewdump
+~/.dotfiles/scripts/brewdump
 ```
 
 ---
@@ -475,7 +475,7 @@ To add a new package to this environment:
 
 Or use the convenience script:
 ```bash
-~/.dotfiles/bin/brewdump
+~/.dotfiles/scripts/brewdump
 ```
 
 ---

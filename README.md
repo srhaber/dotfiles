@@ -174,7 +174,7 @@ Custom plugins are **pinned to specific commits** for security and reproducibili
 
 **Updating plugins:**
 ```bash
-~/.dotfiles/bin/update-zsh-plugins
+~/.dotfiles/scripts/update-zsh-plugins
 ```
 
 This script will:
@@ -211,8 +211,8 @@ See **[PACKAGES.md](PACKAGES.md)** for complete package management guide includi
 
 **Quick commands:**
 ```bash
-brew bundle install            # Install from Brewfile
-~/.dotfiles/bin/brewdump       # Update Brewfile and push to git
+brew bundle install               # Install from Brewfile
+~/.dotfiles/scripts/brewdump      # Update Brewfile and push to git
 ```
 
 ## macOS System Preferences

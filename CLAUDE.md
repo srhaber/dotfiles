@@ -20,7 +20,7 @@ brew bundle check                      # Verify installation
 brew bundle dump --force               # Update Brewfile from installed packages
 
 # Shortcut to update and push Brewfile
-./bin/brewdump
+./scripts/brewdump
 ```
 
 The `setup.sh` script is idempotent and safe to run multiple times. It:
@@ -95,9 +95,9 @@ Modern CLI tools and shortcuts. Only includes aliases not provided by oh-my-zsh 
 - `reload`: Reload zsh configuration
 - Various utilities: `myip`, `localip`, `ports`, `weather`
 
-### Utility Scripts (bin/)
-- `brewdump`: Updates Brewfile from installed packages, commits, and pushes to git
-- `update-zsh-plugins`: Updates custom oh-my-zsh plugins with security review
+### Utility Scripts (scripts/)
+- `brewdump`: Updates Brewfile from installed packages, commits, and pushes to git (repo-specific)
+- `update-zsh-plugins`: Updates custom oh-my-zsh plugins with security review (repo-specific)
   - Fetches latest commits from plugin repositories
   - Shows changelog and diff for each available update
   - Prompts for approval before updating
@@ -119,7 +119,7 @@ Modern CLI tools and shortcuts. Only includes aliases not provided by oh-my-zsh 
 brew install <package>
 
 # Update Brewfile and commit
-./bin/brewdump
+./scripts/brewdump
 ```
 
 ### Modifying Configuration
@@ -187,9 +187,11 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── .terraformrc          # Terraform configuration
 ├── .macos                # macOS system preferences script
 ├── aliases.sh            # Custom shell aliases
-├── bin/
+├── scripts/              # Dotfiles repo maintenance scripts (off PATH)
 │   ├── brewdump          # Brewfile update/commit script
 │   └── update-zsh-plugins # Update custom oh-my-zsh plugins
+├── bin/                  # System-wide utility scripts (on PATH)
+├── lib/                  # Support code and shared libraries (off PATH)
 ├── .config/
 │   ├── git/              # Git config, helpers, ignore
 │   └── starship.toml     # Starship prompt config

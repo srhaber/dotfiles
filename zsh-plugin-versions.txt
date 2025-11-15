@@ -1,6 +1,6 @@
 # Pinned versions for custom oh-my-zsh plugins
 # Format: plugin_name=git_ref (commit hash or tag)
-# Update with: ~/.dotfiles/bin/update-zsh-plugins
+# Update with: ~/.dotfiles/scripts/update-zsh-plugins
 
 # fzf-tab: Fuzzy completion for zsh
 # Repo: https://github.com/Aloxaf/fzf-tab

@@ -298,7 +298,7 @@ main() {
                         success "$plugin_name already installed (pinned to ${pinned_version:0:7})"
                     else
                         warning "$plugin_name installed but not on pinned version (${pinned_version:0:7})"
-                        info "Run ~/.dotfiles/bin/update-zsh-plugins to sync versions"
+                        info "Run ~/.dotfiles/scripts/update-zsh-plugins to sync versions"
                     fi
                 else
                     success "$plugin_name already installed"

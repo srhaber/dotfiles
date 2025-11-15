@@ -32,6 +32,12 @@ alias aliases='vim ~/.dotfiles/aliases.sh'
 alias reload='source ~/.zshrc'
 
 # ===========================
+# Dotfiles maintenance scripts
+# ===========================
+alias brewdump='~/.dotfiles/scripts/brewdump'
+alias update-zsh-plugins='~/.dotfiles/scripts/update-zsh-plugins'
+
+# ===========================
 # Utilities
 # ===========================
 alias grep='grep --color'
