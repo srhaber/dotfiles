@@ -39,6 +39,7 @@ Create a pull request on GitHub for the current branch.
 7. **Create PR:**
    - Use `gh pr create --title "<title>" --body "$(cat <<'EOF' ... EOF)"`
    - Ensure body includes Summary, Test plan, and attribution footer
+   - Keep the test plan short, avoid creating too many list items
    - Display PR URL when created
 
 8. **Handle errors:**
