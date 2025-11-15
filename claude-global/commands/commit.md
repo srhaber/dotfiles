@@ -10,16 +10,17 @@ The command supports auto-staging and custom context:
 - `/commit` → Standard commit with auto-generated message (prompts if unstaged files exist)
 - `/commit add` → Auto-stage all files, then commit
 - `/commit -A` → Auto-stage all files, then commit
+- `/commit all` → Auto-stage all files, then commit
 - `/commit fix race condition in webhook processing` → Commit with custom context (prompts if unstaged files exist)
 - `/commit add fix race condition` → Auto-stage and commit with custom context
 
-**Auto-staging keywords:** If the first argument is `add`, `-A`, `--all`, or `-a`, automatically run `git add -A` without prompting.
+**Auto-staging keywords:** If the first argument is `add`, `-A`, `--all`, `-a`, or `all`, automatically run `git add -A` without prompting.
 
 **Custom context:** Any other arguments are passed to the agent as context for the commit message.
 
 Workflow:
 1. Check git status for unstaged files (modified, deleted, or untracked)
-2. Check if first argument is an auto-staging keyword (`add`, `-A`, `--all`, `-a`)
+2. Check if first argument is an auto-staging keyword (`add`, `-A`, `--all`, `-a`, `all`)
 3. If auto-staging keyword provided: run `git add -A` without prompting
 4. If unstaged files exist and no auto-staging keyword: ask user if they want to stage them (use AskUserQuestion)
 5. If user wants to stage files, run `git add -A` before proceeding
