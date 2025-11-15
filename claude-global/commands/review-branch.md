@@ -4,15 +4,41 @@ description: Comprehensive review of all changes on current branch (uses convent
 
 Perform a comprehensive review of all changes on the current branch.
 
+## Arguments
+
+- `/review-branch` → Review all committed changes on branch (includes uncommitted if present)
+- `/review-branch add` → Stage modified files first, then review (prompts if untracked files exist)
+- `/review-branch -A` → Stage all files including untracked, then review (no prompt)
+- `/review-branch --all` → Stage all files including untracked, then review (no prompt)
+- `/review-branch -a` → Stage all files including untracked, then review (no prompt)
+- `/review-branch all` → Stage all files including untracked, then review (no prompt)
+
+**Auto-staging keywords:** `add`, `-A`, `--all`, `-a`, `all`
+
+**Auto-staging logic:**
+- If keyword is `-A`, `--all`, `-a`, or `all`: Run `git add -A` without prompting
+- If keyword is `add`: Follow smart staging logic:
+  - Check `git status --short` for file states
+  - If only modified/deleted files: Run `git add -u` (tracked files only)
+  - If untracked files exist: Use AskUserQuestion with options:
+    - "Add all files" → Run `git add -A`
+    - "Add tracked files only" → Run `git add -u`
+    - "Cancel" → Abort operation
+- After staging, proceed with review
+
 ## Phase 1: Data Gathering (Main Agent)
 
-1. **Get branch context in parallel:**
+1. **Handle auto-staging if requested:**
+   - If `add` argument provided, follow `/add` command logic (see Arguments section)
+   - Run `git status --short` after staging to confirm
+
+2. **Get branch context in parallel:**
    - `git status` → Commit state and working tree
    - `git diff main --stat` → Overview of changes
    - `git log main..HEAD --oneline` → Commits
    - `git diff main --name-only` → Changed files
 
-2. **Show user what's being reviewed:**
+3. **Show user what's being reviewed:**
    - Number of files changed
    - Types of changes (new files, modifications, deletions)
    - Scope (which modules/areas affected)
