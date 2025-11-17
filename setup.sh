@@ -220,6 +220,7 @@ main() {
     safe_symlink "$DOTFILES_DIR/claude-global/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
     safe_symlink "$DOTFILES_DIR/claude-global/agents" "$HOME/.claude/agents"
+    safe_symlink "$DOTFILES_DIR/claude-global/skills" "$HOME/.claude/skills"
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     echo
 
