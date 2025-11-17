@@ -256,35 +256,40 @@ cmd_cleanup() {
     local worktrees_to_remove=()
     local reasons=()
 
-    for wt_entry in "${worktrees[@]}"; do
-        local wt_path wt_branch
-        IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
+    # Only process if there are worktrees to check
+    if [[ ${#worktrees[@]} -gt 0 ]]; then
+        for wt_entry in "${worktrees[@]}"; do
+            local wt_path wt_branch
+            IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
 
-        local reason=""
+            local reason=""
 
-        # Check if branch is merged
-        for merged in "${merged_branches[@]}"; do
-            if [[ "$wt_branch" == "$merged" ]]; then
-                reason="merged into main"
-                break
+            # Check if branch is merged
+            if [[ ${#merged_branches[@]} -gt 0 ]]; then
+                for merged in "${merged_branches[@]}"; do
+                    if [[ "$wt_branch" == "$merged" ]]; then
+                        reason="merged into main"
+                        break
+                    fi
+                done
+            fi
+
+            # Check if remote was deleted
+            if [[ -z "$reason" && ${#orphaned_branches[@]} -gt 0 ]]; then
+                for orphaned in "${orphaned_branches[@]}"; do
+                    if [[ "$wt_branch" == "$orphaned" ]]; then
+                        reason="remote branch deleted"
+                        break
+                    fi
+                done
+            fi
+
+            if [[ -n "$reason" ]]; then
+                worktrees_to_remove+=("$wt_path|$wt_branch")
+                reasons+=("$reason")
             fi
         done
-
-        # Check if remote was deleted
-        if [[ -z "$reason" ]]; then
-            for orphaned in "${orphaned_branches[@]}"; do
-                if [[ "$wt_branch" == "$orphaned" ]]; then
-                    reason="remote branch deleted"
-                    break
-                fi
-            done
-        fi
-
-        if [[ -n "$reason" ]]; then
-            worktrees_to_remove+=("$wt_path|$wt_branch")
-            reasons+=("$reason")
-        fi
-    done
+    fi
 
     # Display findings
     if [[ ${#worktrees_to_remove[@]} -eq 0 ]]; then
