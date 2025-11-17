@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# git-worktree - Manage git worktrees for feature branch development
+# worktree - Manage git worktrees for feature branch development
 #
 # Worktree Structure:
 # - Main repo: Current directory (stays on main)
@@ -78,10 +78,10 @@ Commands:
   help               Show this help message
 
 Examples:
-  git-worktree create feature-fixes
-  git-worktree list
-  git-worktree cleanup
-  git-worktree switch feature-fixes
+  worktree create feature-fixes
+  worktree list
+  worktree cleanup
+  worktree switch feature-fixes
 
 Current location: $(pwd) (main branch)
 Worktree location: ../${repo_name}-worktrees/<feature>
@@ -90,7 +90,7 @@ EOF
 
 cmd_create() {
     local feature="$1"
-    [[ -z "$feature" ]] && error "Feature name required. Usage: git-worktree create <feature>"
+    [[ -z "$feature" ]] && error "Feature name required. Usage: worktree create <feature>"
 
     local repo_name branch_name feature_name worktree_parent worktree_path
     repo_name=$(get_repo_name)
@@ -133,7 +133,7 @@ cmd_list() {
 
 cmd_remove() {
     local feature="$1"
-    [[ -z "$feature" ]] && error "Feature name required. Usage: git-worktree remove <feature>"
+    [[ -z "$feature" ]] && error "Feature name required. Usage: worktree remove <feature>"
 
     local repo_name branch_name feature_name worktree_parent worktree_path
     repo_name=$(get_repo_name)
@@ -189,7 +189,7 @@ cmd_clean() {
 
 cmd_switch() {
     local feature="$1"
-    [[ -z "$feature" ]] && error "Feature name required. Usage: git-worktree switch <feature>"
+    [[ -z "$feature" ]] && error "Feature name required. Usage: worktree switch <feature>"
 
     local repo_name branch_name feature_name worktree_parent worktree_path
     repo_name=$(get_repo_name)
@@ -381,7 +381,7 @@ main() {
             show_help
             ;;
         *)
-            error "Unknown command: $subcommand\n\nRun 'git-worktree help' for usage."
+            error "Unknown command: $subcommand\n\nRun 'worktree help' for usage."
             ;;
     esac
 }

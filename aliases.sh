@@ -47,7 +47,6 @@ alias myip='curl -s ifconfig.me'
 alias localip='ipconfig getifaddr en0'
 alias ports='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias path='echo $PATH | tr ":" "\n"'
-alias tf='terraform'
 
 # ===========================
 # Datetime utilities

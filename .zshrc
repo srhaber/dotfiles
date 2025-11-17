@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.dotfiles/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
 if [[ -d $HOME/go/bin ]]; then
 	export PATH=$HOME/go/bin:$PATH
@@ -92,9 +92,8 @@ plugins=(
   jsontools
   macos
   rsync
-  # This plugin conflicts with cassh daemon
-  # ssh-agent
   urltools
+  ssh-agent
   zsh-syntax-highlighting  # Must be last plugin
 )
 

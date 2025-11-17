@@ -1,0 +1,240 @@
+#!/usr/bin/env bash
+#
+# tf - Terraform wrapper with enhanced plan/apply workflow
+#
+# Usage:
+#   tf plan [args]   - Save plan to file with timestamp
+#   tf apply [args]  - Apply most recent saved plan (or run normally if no plan exists)
+#   tf list          - List saved plan files
+#   tf clean         - Remove old plan files
+#   tf <cmd> [args]  - Pass through to terraform
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# Plan storage directory (relative to current dir)
+PLANS_DIR=".terraform/plans"
+
+# Helper functions
+error() {
+    echo -e "${RED}Error: $*${NC}" >&2
+    exit 1
+}
+
+warning() {
+    echo -e "${YELLOW}Warning: $*${NC}" >&2
+}
+
+success() {
+    echo -e "${GREEN}$*${NC}"
+}
+
+info() {
+    echo -e "${BLUE}$*${NC}"
+}
+
+# Ensure we're in a terraform directory
+check_terraform_dir() {
+    if [[ ! -f "*.tf" ]] && [[ ! -d ".terraform" ]]; then
+        warning "Not in a terraform directory (no .tf files or .terraform dir found)"
+    fi
+}
+
+# Get the most recent plan file
+get_latest_plan() {
+    if [[ ! -d "$PLANS_DIR" ]]; then
+        return 1
+    fi
+
+    local latest
+    latest=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null | sort -r | head -1)
+
+    if [[ -z "$latest" ]]; then
+        return 1
+    fi
+
+    echo "$latest"
+}
+
+# Enhanced plan command
+cmd_plan() {
+    check_terraform_dir
+
+    # Create plans directory if it doesn't exist
+    mkdir -p "$PLANS_DIR"
+
+    # Generate plan filename with timestamp
+    local timestamp plan_file
+    timestamp=$(date +%Y%m%d-%H%M%S)
+    plan_file="${PLANS_DIR}/plan-${timestamp}.tfplan"
+
+    info "Running terraform plan and saving to: $plan_file"
+    echo
+
+    # Run terraform plan with -out flag
+    if command terraform plan -out="$plan_file" "$@"; then
+        echo
+        success "✓ Plan saved to: $plan_file"
+        info "Run 'tf apply' to apply this plan"
+    else
+        # Clean up empty plan file if command failed
+        [[ -f "$plan_file" ]] && rm -f "$plan_file"
+        exit 1
+    fi
+}
+
+# Enhanced apply command
+cmd_apply() {
+    check_terraform_dir
+
+    # Check if user provided arguments (plan file or terraform args)
+    if [[ $# -gt 0 ]]; then
+        # If user specified arguments, pass through to terraform
+        info "Running terraform apply with provided arguments..."
+        command terraform apply "$@"
+        return $?
+    fi
+
+    # Try to get the latest plan file
+    local latest_plan
+    if latest_plan=$(get_latest_plan); then
+        local plan_name
+        plan_name=$(basename "$latest_plan")
+
+        info "Applying saved plan: $plan_name"
+        echo
+
+        if command terraform apply "$latest_plan"; then
+            success "✓ Plan applied successfully"
+
+            # Ask if user wants to clean up the plan file
+            echo
+            read -rp "Remove applied plan file? [Y/n] " response
+            if [[ ! "$response" =~ ^[Nn]$ ]]; then
+                rm -f "$latest_plan"
+                success "✓ Plan file removed"
+            fi
+        else
+            exit 1
+        fi
+    else
+        # No saved plan found, run normal apply
+        info "No saved plan found. Running terraform apply..."
+        echo
+        command terraform apply
+    fi
+}
+
+# List saved plans
+cmd_list() {
+    if [[ ! -d "$PLANS_DIR" ]]; then
+        info "No plans directory found"
+        return 0
+    fi
+
+    local plans
+    plans=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null | sort -r)
+
+    if [[ -z "$plans" ]]; then
+        info "No saved plans found"
+        return 0
+    fi
+
+    info "Saved plans:"
+    echo
+
+    while IFS= read -r plan; do
+        local plan_name plan_size plan_date
+        plan_name=$(basename "$plan")
+        plan_size=$(du -h "$plan" | cut -f1)
+        plan_date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$plan" 2>/dev/null || stat -c "%y" "$plan" 2>/dev/null | cut -d'.' -f1)
+
+        echo -e "  ${CYAN}${plan_name}${NC}"
+        echo "    Size: $plan_size"
+        echo "    Created: $plan_date"
+        echo
+    done <<< "$plans"
+}
+
+# Clean old plan files
+cmd_clean() {
+    if [[ ! -d "$PLANS_DIR" ]]; then
+        info "No plans directory found"
+        return 0
+    fi
+
+    local plans
+    plans=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null)
+
+    if [[ -z "$plans" ]]; then
+        info "No plans to clean"
+        return 0
+    fi
+
+    local count
+    count=$(echo "$plans" | wc -l | xargs)
+
+    warning "Found $count plan file(s) to remove"
+    echo
+
+    while IFS= read -r plan; do
+        echo "  $(basename "$plan")"
+    done <<< "$plans"
+
+    echo
+    read -rp "Remove all plan files? [y/N] " response
+
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        while IFS= read -r plan; do
+            rm -f "$plan"
+        done <<< "$plans"
+
+        # Remove plans directory if empty
+        rmdir "$PLANS_DIR" 2>/dev/null || true
+
+        success "✓ Removed $count plan file(s)"
+    else
+        echo "Cancelled"
+    fi
+}
+
+# Main command dispatcher
+main() {
+    local subcommand="${1:-}"
+
+    # If no arguments, pass through to terraform (shows help)
+    if [[ -z "$subcommand" ]]; then
+        command terraform
+        return $?
+    fi
+
+    case "$subcommand" in
+        plan)
+            shift
+            cmd_plan "$@"
+            ;;
+        apply)
+            shift
+            cmd_apply "$@"
+            ;;
+        list)
+            cmd_list
+            ;;
+        clean)
+            cmd_clean
+            ;;
+        *)
+            # Pass through to terraform
+            command terraform "$@"
+            ;;
+    esac
+}
+
+main "$@"
