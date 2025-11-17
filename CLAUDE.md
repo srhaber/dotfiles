@@ -163,7 +163,7 @@ This repo uses a two-tier configuration system for Claude Code:
 ### Global Configuration (`claude-global/`)
 Symlinked to `~/.claude/` and applies to **all projects** on your machine:
 - `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
-- `claude-global/commands/` - Global slash commands (`/commit`, `/push`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`)
+- `claude-global/commands/` - Global slash commands (`/commit`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`)
 - `claude-global/agents/` - Custom agent definitions (commit-message-generator, pr-description-generator, session-documenter, convention-analyzer)
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
 
@@ -199,7 +199,6 @@ This separation allows you to have personal preferences that apply everywhere, w
 │   ├── CLAUDE.md         # Personal preferences for all projects
 │   ├── commands/         # Global slash commands
 │   │   ├── commit.md
-│   │   ├── push.md
 │   │   ├── pr.md
 │   │   ├── review-branch.md
 │   │   ├── review-changes.md
