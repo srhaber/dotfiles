@@ -5,6 +5,8 @@
 # Usage:
 #   tf plan [args]   - Save plan to file with timestamp
 #   tf apply [args]  - Apply most recent saved plan (or run normally if no plan exists)
+#   tf show [file]   - Show latest plan, specific plan file, or pass through to terraform show
+#   tf summary       - Show high-level summary of plan changes
 #   tf list          - List saved plan files
 #   tf clean         - Remove old plan files
 #   tf <cmd> [args]  - Pass through to terraform
@@ -82,6 +84,11 @@ cmd_plan() {
     if command terraform plan -out="$plan_file" "$@"; then
         echo
         success "✓ Plan saved to: $plan_file"
+
+        # Create/update symlink to latest plan
+        local latest_link="${PLANS_DIR}/latest.tfplan"
+        ln -sf "$(basename "$plan_file")" "$latest_link"
+
         info "Run 'tf apply' to apply this plan"
     else
         # Clean up empty plan file if command failed
@@ -93,6 +100,21 @@ cmd_plan() {
 # Enhanced apply command
 cmd_apply() {
     check_terraform_dir
+
+    local auto_clean=false
+
+    # Check for flags
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -y|--auto-clean)
+                auto_clean=true
+                shift
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
 
     # Check if user provided arguments (plan file or terraform args)
     if [[ $# -gt 0 ]]; then
@@ -114,12 +136,17 @@ cmd_apply() {
         if command terraform apply "$latest_plan"; then
             success "✓ Plan applied successfully"
 
-            # Ask if user wants to clean up the plan file
-            echo
-            read -rp "Remove applied plan file? [Y/n] " response
-            if [[ ! "$response" =~ ^[Nn]$ ]]; then
+            # Clean up the plan file
+            if [[ "$auto_clean" == true ]]; then
                 rm -f "$latest_plan"
                 success "✓ Plan file removed"
+            else
+                echo
+                read -rp "Remove applied plan file? [Y/n] " response
+                if [[ ! "$response" =~ ^[Nn]$ ]]; then
+                    rm -f "$latest_plan"
+                    success "✓ Plan file removed"
+                fi
             fi
         else
             exit 1
@@ -134,8 +161,25 @@ cmd_apply() {
 
 # List saved plans
 cmd_list() {
+    local names_only=false
+
+    # Check for flags
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -n|--names-only)
+                names_only=true
+                shift
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
     if [[ ! -d "$PLANS_DIR" ]]; then
-        info "No plans directory found"
+        if [[ "$names_only" == false ]]; then
+            info "No plans directory found"
+        fi
         return 0
     fi
 
@@ -143,24 +187,371 @@ cmd_list() {
     plans=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null | sort -r)
 
     if [[ -z "$plans" ]]; then
-        info "No saved plans found"
+        if [[ "$names_only" == false ]]; then
+            info "No saved plans found"
+        fi
         return 0
     fi
 
-    info "Saved plans:"
+    if [[ "$names_only" == true ]]; then
+        # Condensed output: just plan names
+        while IFS= read -r plan; do
+            basename "$plan"
+        done <<< "$plans"
+    else
+        # Detailed output
+        info "Saved plans:"
+        echo
+
+        while IFS= read -r plan; do
+            local plan_name plan_size plan_date
+            plan_name=$(basename "$plan")
+            plan_size=$(du -h "$plan" | cut -f1)
+            plan_date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$plan" 2>/dev/null || stat -c "%y" "$plan" 2>/dev/null | cut -d'.' -f1)
+
+            echo -e "  ${CYAN}${plan_name}${NC}"
+            echo "    Size: $plan_size"
+            echo "    Created: $plan_date"
+            echo "    Path: $plan"
+            echo
+        done <<< "$plans"
+    fi
+}
+
+# Compare plans
+cmd_diff() {
+    check_terraform_dir
+
+    local plan1 plan2
+
+    if [[ $# -eq 0 ]]; then
+        # No args: compare latest two plans
+        local plans
+        plans=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null | sort -r | head -2)
+
+        local plan_count
+        plan_count=$(echo "$plans" | wc -l | xargs)
+
+        if [[ $plan_count -lt 2 ]]; then
+            error "Need at least 2 plans to compare. Found: $plan_count"
+        fi
+
+        plan1=$(echo "$plans" | sed -n 1p)
+        plan2=$(echo "$plans" | sed -n 2p)
+
+    elif [[ $# -eq 1 ]]; then
+        # One arg: compare specified plan to previous plan
+        if [[ -f "$1" ]]; then
+            plan1="$1"
+        elif [[ -f "${PLANS_DIR}/$1" ]]; then
+            plan1="${PLANS_DIR}/$1"
+        else
+            error "Plan file not found: $1"
+        fi
+
+        # Find the plan created before plan1
+        local plan1_time
+        plan1_time=$(stat -f "%m" "$plan1" 2>/dev/null || stat -c "%Y" "$plan1" 2>/dev/null)
+
+        plan2=$(find "$PLANS_DIR" -name "*.tfplan" -type f 2>/dev/null | while read -r p; do
+            local p_time
+            p_time=$(stat -f "%m" "$p" 2>/dev/null || stat -c "%Y" "$p" 2>/dev/null)
+            if [[ "$p_time" -lt "$plan1_time" ]]; then
+                echo "$p_time $p"
+            fi
+        done | sort -rn | head -1 | cut -d' ' -f2)
+
+        if [[ -z "$plan2" ]]; then
+            error "No previous plan found to compare with"
+        fi
+
+    elif [[ $# -eq 2 ]]; then
+        # Two args: compare the two specified plans
+        if [[ -f "$1" ]]; then
+            plan1="$1"
+        elif [[ -f "${PLANS_DIR}/$1" ]]; then
+            plan1="${PLANS_DIR}/$1"
+        else
+            error "Plan file not found: $1"
+        fi
+
+        if [[ -f "$2" ]]; then
+            plan2="$2"
+        elif [[ -f "${PLANS_DIR}/$2" ]]; then
+            plan2="${PLANS_DIR}/$2"
+        else
+            error "Plan file not found: $2"
+        fi
+    else
+        error "Too many arguments. Usage: tf diff [plan1] [plan2]"
+    fi
+
+    local plan1_name plan2_name
+    plan1_name=$(basename "$plan1")
+    plan2_name=$(basename "$plan2")
+
+    info "Comparing plans:"
+    echo -e "  ${CYAN}Newer:${NC}  $plan1_name"
+    echo -e "  ${CYAN}Older:${NC}  $plan2_name"
     echo
 
-    while IFS= read -r plan; do
-        local plan_name plan_size plan_date
-        plan_name=$(basename "$plan")
-        plan_size=$(du -h "$plan" | cut -f1)
-        plan_date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$plan" 2>/dev/null || stat -c "%y" "$plan" 2>/dev/null | cut -d'.' -f1)
+    # Generate diffs using terraform show
+    local diff_output
+    diff_output=$(diff -u \
+        <(command terraform show -no-color "$plan2") \
+        <(command terraform show -no-color "$plan1") \
+    )
 
+    if [[ -z "$diff_output" ]]; then
+        success "Plans are identical"
+    else
+        # Colorize diff output
+        echo "$diff_output" | while IFS= read -r line; do
+            if [[ "$line" =~ ^@@  ]]; then
+                echo -e "${CYAN}${line}${NC}"
+            elif [[ "$line" =~ ^- ]]; then
+                echo -e "${RED}${line}${NC}"
+            elif [[ "$line" =~ ^\+ ]]; then
+                echo -e "${GREEN}${line}${NC}"
+            else
+                echo "$line"
+            fi
+        done
+    fi
+}
+
+# Show current plan metadata
+cmd_current() {
+    check_terraform_dir
+
+    local latest_plan
+    if latest_plan=$(get_latest_plan); then
+        local plan_name plan_size plan_date
+        plan_name=$(basename "$latest_plan")
+        plan_size=$(du -h "$latest_plan" | cut -f1)
+        plan_date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$latest_plan" 2>/dev/null || stat -c "%y" "$latest_plan" 2>/dev/null | cut -d'.' -f1)
+
+        info "Current plan:"
+        echo
         echo -e "  ${CYAN}${plan_name}${NC}"
         echo "    Size: $plan_size"
         echo "    Created: $plan_date"
+        echo "    Path: $latest_plan"
+    else
+        error "No saved plan found. Run 'tf plan' first."
+    fi
+}
+
+# Show plan or state
+cmd_show() {
+    check_terraform_dir
+
+    # If no arguments, show latest plan
+    if [[ $# -eq 0 ]]; then
+        local latest_plan
+        if latest_plan=$(get_latest_plan); then
+            local plan_name
+            plan_name=$(basename "$latest_plan")
+
+            info "Showing saved plan: $plan_name"
+            echo
+
+            command terraform show "$latest_plan"
+        else
+            error "No saved plan found. Run 'tf plan' first."
+        fi
+        return $?
+    fi
+
+    # If argument is provided, determine what to show
+    local target="$1"
+
+    # Special case: 'tf show state' explicitly shows state, not plan
+    if [[ "$target" == "state" ]]; then
+        shift
+        command terraform show "$@"
+        return $?
+    fi
+
+    # If first arg is a flag (starts with -), apply it to latest plan
+    if [[ "$target" == -* ]]; then
+        local latest_plan
+        if latest_plan=$(get_latest_plan); then
+            local plan_name
+            plan_name=$(basename "$latest_plan")
+
+            info "Showing saved plan: $plan_name"
+            echo
+
+            command terraform show "$@" "$latest_plan"
+        else
+            error "No saved plan found. Run 'tf plan' first."
+        fi
+        return $?
+    fi
+
+    shift
+
+    # If it's an existing file, show it
+    if [[ -f "$target" ]]; then
+        command terraform show "$target" "$@"
+        return $?
+    fi
+
+    # If it looks like a plan file (ends with .tfplan), check plans directory
+    if [[ "$target" == *.tfplan ]]; then
+        local plan_path="${PLANS_DIR}/${target}"
+        if [[ -f "$plan_path" ]]; then
+            info "Showing saved plan: $target"
+            echo
+            command terraform show "$plan_path" "$@"
+            return $?
+        fi
+    fi
+
+    # Otherwise, pass through to terraform show
+    command terraform show "$target" "$@"
+}
+
+# Show summary of most recent plan
+cmd_summary() {
+    check_terraform_dir
+
+    # Try to get the latest plan file
+    local latest_plan
+    if latest_plan=$(get_latest_plan); then
+        local plan_name
+        plan_name=$(basename "$latest_plan")
+
+        info "Plan summary: $plan_name"
         echo
-    done <<< "$plans"
+
+        # Get the plan output and extract resource changes (no color for easier parsing)
+        local plan_output
+        plan_output=$(command terraform show -no-color "$latest_plan" 2>&1)
+
+        # Extract the summary line (e.g., "Plan: 3 to add, 1 to change, 2 to destroy.")
+        local summary
+        summary=$(grep -E "^Plan: " <<< "$plan_output" || echo "")
+
+        if [[ -n "$summary" ]]; then
+            echo -e "${GREEN}$summary${NC}"
+            echo
+
+            # Extract resource addresses by action type
+            local resources_to_create resources_to_update resources_to_replace resources_to_destroy
+
+            # Resources to be created (will be created)
+            resources_to_create=$(grep "# .* will be created" <<< "$plan_output" | sed 's/.*# \(.*\) will be created/\1/' || echo "")
+
+            # Resources to be updated (will be updated in-place)
+            resources_to_update=$(grep "# .* will be updated in-place" <<< "$plan_output" | sed 's/.*# \(.*\) will be updated in-place/\1/' || echo "")
+
+            # Resources to be replaced (must be replaced)
+            resources_to_replace=$(grep "# .* must be replaced" <<< "$plan_output" | sed 's/.*# \(.*\) must be replaced/\1/' || echo "")
+
+            # Resources to be destroyed (will be destroyed)
+            resources_to_destroy=$(grep "# .* will be destroyed" <<< "$plan_output" | sed 's/.*# \(.*\) will be destroyed/\1/' || echo "")
+
+            # Display resources to be replaced (separate section)
+            if [[ -n "$resources_to_replace" ]]; then
+                local replace_count
+                replace_count=$(echo "$resources_to_replace" | wc -l | xargs)
+                echo -e "  ${CYAN}↻${NC} ${replace_count} to replace"
+
+                # Try to detect create_before_destroy vs destroy_before_create
+                # Look for the resource declaration lines to see if they're +/- or -/+
+                while IFS= read -r resource; do
+                    # Escape dots and brackets for grep pattern
+                    local pattern
+                    pattern=$(echo "$resource" | sed 's/\./\\./g; s/\[/\\[/g; s/\]/\\]/g')
+
+                    # Look for the line after the comment to see the operation order
+                    # -/+ means destroy then create, +/- means create then destroy
+                    local op_line
+                    op_line=$(grep -A1 "# ${pattern} must be replaced" <<< "$plan_output" | tail -1 || echo "")
+
+                    if [[ "$op_line" =~ ^[[:space:]]*\+/- ]]; then
+                        echo -e "    ${CYAN}↻${NC} $resource ${GREEN}(create before destroy)${NC}"
+                    elif [[ "$op_line" =~ ^[[:space:]]*-/\+ ]]; then
+                        echo -e "    ${CYAN}↻${NC} $resource ${YELLOW}(destroy before create)${NC}"
+                    else
+                        echo -e "    ${CYAN}↻${NC} $resource"
+                    fi
+                done <<< "$resources_to_replace"
+                echo
+            fi
+
+            # Display resources to add (pure creates, not replacements)
+            if [[ -n "$resources_to_create" ]]; then
+                local create_count
+                create_count=$(echo "$resources_to_create" | wc -l | xargs)
+                echo -e "  ${GREEN}+${NC} ${create_count} to add"
+                while IFS= read -r resource; do
+                    echo -e "    ${GREEN}+${NC} $resource"
+                done <<< "$resources_to_create"
+                echo
+            fi
+
+            # Display resources to change (in-place updates)
+            if [[ -n "$resources_to_update" ]]; then
+                local change_count
+                change_count=$(echo "$resources_to_update" | wc -l | xargs)
+                echo -e "  ${YELLOW}~${NC} ${change_count} to change"
+                while IFS= read -r resource; do
+                    echo -e "    ${YELLOW}~${NC} $resource"
+                done <<< "$resources_to_update"
+                echo
+            fi
+
+            # Display resources to destroy (pure destroys, not replacements)
+            if [[ -n "$resources_to_destroy" ]]; then
+                local destroy_count
+                destroy_count=$(echo "$resources_to_destroy" | wc -l | xargs)
+                echo -e "  ${RED}-${NC} ${destroy_count} to destroy"
+                while IFS= read -r resource; do
+                    echo -e "    ${RED}-${NC} $resource"
+                done <<< "$resources_to_destroy"
+            fi
+        else
+            # Try to detect if there are no changes
+            if echo "$plan_output" | grep -q "No changes"; then
+                success "✓ No changes. Infrastructure matches the configuration."
+            else
+                warning "Could not extract plan summary"
+                echo
+                echo "Run 'tf show' to see the full plan details"
+            fi
+        fi
+    else
+        error "No saved plan found. Run 'tf plan' first."
+    fi
+}
+
+# Show help for tf wrapper
+cmd_help() {
+    echo -e "${BLUE}tf${NC} - Terraform wrapper with enhanced plan/apply workflow"
+    echo
+    echo -e "${CYAN}Usage:${NC}"
+    echo "  tf plan [args]        Save plan to file with timestamp"
+    echo "  tf apply [args]       Apply most recent saved plan (or run normally if no plan)"
+    echo "  tf apply -y           Apply and auto-remove plan without prompting"
+    echo "  tf current            Show current plan metadata (name, size, date, path)"
+    echo "  tf diff [p1] [p2]     Compare plans (defaults to latest two)"
+    echo "  tf show [target]      Show latest plan, specific plan file, or state"
+    echo "  tf summary            Show high-level summary of plan changes with resources"
+    echo "  tf list               List saved plan files with details"
+    echo "  tf list -n            List saved plan names only"
+    echo "  tf clean              Remove old plan files"
+    echo "  tf help               Show this help message"
+    echo -e "  tf <cmd> [args]       Pass through to terraform (e.g., ${GREEN}tf init${NC}, ${GREEN}tf validate${NC})"
+    echo
+    echo -e "${CYAN}Plan Storage:${NC}"
+    echo -e "  Plans are saved to ${YELLOW}.terraform/plans/${NC} with timestamps"
+    echo -e "  A ${YELLOW}latest.tfplan${NC} symlink always points to the most recent plan"
+    echo
+    echo -e "${CYAN}Note:${NC} For terraform's built-in help, use ${GREEN}terraform --help${NC}"
+    echo
 }
 
 # Clean old plan files
@@ -209,10 +600,10 @@ cmd_clean() {
 main() {
     local subcommand="${1:-}"
 
-    # If no arguments, pass through to terraform (shows help)
+    # If no arguments, show help
     if [[ -z "$subcommand" ]]; then
-        command terraform
-        return $?
+        cmd_help
+        return 0
     fi
 
     case "$subcommand" in
@@ -224,11 +615,29 @@ main() {
             shift
             cmd_apply "$@"
             ;;
+        current)
+            cmd_current
+            ;;
+        diff)
+            shift
+            cmd_diff "$@"
+            ;;
+        show)
+            shift
+            cmd_show "$@"
+            ;;
+        summary)
+            cmd_summary
+            ;;
         list)
-            cmd_list
+            shift
+            cmd_list "$@"
             ;;
         clean)
             cmd_clean
+            ;;
+        help)
+            cmd_help
             ;;
         *)
             # Pass through to terraform
