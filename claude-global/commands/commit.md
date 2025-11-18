@@ -33,6 +33,7 @@ Workflow:
     - "Request changes" → Ask for feedback and re-invoke agent with updated context
     - "Cancel" → Abort the commit
 11. If approved, execute the commit using `git commit` with the generated message
+    **IMPORTANT: NEVER use `--amend`. Always create a new commit.**
 12. Confirm success and display the commit hash
 
 The agent handles analysis and message generation. You handle all user interaction and git operations.

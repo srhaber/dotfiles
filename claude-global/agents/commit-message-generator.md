@@ -84,6 +84,8 @@ Your final response MUST be structured as follows so the parent Claude instance 
 
 Do NOT create the commit yourself. Do NOT use AskUserQuestion. Simply return the above structured information so the parent Claude instance can handle user interaction and execute the commit.
 
+**IMPORTANT:** The parent Claude instance must NEVER use `git commit --amend`. Always create a new commit.
+
 Edge cases:
 - If changes span multiple unrelated concerns, note this in Analysis Notes and suggest splitting
 - If changes appear to be work-in-progress, note this concern in Analysis Notes
