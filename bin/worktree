@@ -220,16 +220,25 @@ cmd_cleanup() {
 
     # Get all worktrees (excluding main)
     local worktrees=()
-    while IFS= read -r line; do
-        local path branch
-        path=$(echo "$line" | awk '{print $1}')
-        branch=$(echo "$line" | awk '{print $3}' | sed 's/[][]//g')
+    local current_path=""
+    local current_branch=""
 
-        # Skip main directory
-        if [[ "$path" != "$(git rev-parse --show-toplevel)" ]]; then
-            worktrees+=("$path|$branch")
+    while IFS= read -r line; do
+        if [[ "$line" =~ ^worktree\ (.+)$ ]]; then
+            current_path="${BASH_REMATCH[1]}"
+        elif [[ "$line" =~ ^branch\ refs/heads/(.+)$ ]]; then
+            current_branch="${BASH_REMATCH[1]}"
+
+            # Skip main directory
+            if [[ "$current_path" != "$(git rev-parse --show-toplevel)" ]]; then
+                worktrees+=("$current_path|$current_branch")
+            fi
+
+            # Reset for next worktree
+            current_path=""
+            current_branch=""
         fi
-    done < <(git worktree list --porcelain | grep -E "^worktree |^branch " | paste -d " " - -)
+    done < <(git worktree list --porcelain)
 
     # Find merged branches
     local merged_branches=()
@@ -240,17 +249,23 @@ cmd_cleanup() {
     done < <(git branch --merged main 2>/dev/null || git branch --merged master 2>/dev/null || true)
 
     # Find branches with deleted remotes (shaun/* branches only)
+    # This catches both:
+    # 1. Manually deleted remote branches
+    # 2. Branches merged via rebase/squash (GitHub deletes remote after merge)
     local orphaned_branches=()
-    while IFS= read -r branch; do
-        branch=$(echo "$branch" | xargs | sed 's/^* //')
+    while IFS= read -r line; do
+        # Parse git branch -vv output: "* branch  hash [tracking: gone]"
+        # Remove leading markers (* or +) and whitespace, then extract branch name
+        local branch
+        branch=$(echo "$line" | sed 's/^[* +]*//' | awk '{print $1}')
         [[ ! "$branch" =~ ^shaun/ ]] && continue
         [[ "$branch" == "main" || "$branch" == "master" ]] && continue
 
-        # Check if remote branch exists
-        if ! git branch -r | grep -qw "origin/${branch}"; then
+        # Check if tracking branch is marked as "gone" or doesn't exist
+        if echo "$line" | grep -q "gone]" || ! git branch -r | grep -qw "origin/${branch}"; then
             orphaned_branches+=("$branch")
         fi
-    done < <(git branch)
+    done < <(git branch -vv)
 
     # Categorize worktrees
     local worktrees_to_remove=()
