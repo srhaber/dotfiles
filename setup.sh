@@ -372,7 +372,7 @@ main() {
     echo "  1. Restart your terminal or run: source ~/.zshrc"
     echo "  2. Import iTerm2 color theme from $DOTFILES_DIR/iterm2/"
     echo "  3. Set iTerm2 font to 'MesloLGM Nerd Font'"
-    echo "  4. Configure GUI apps (Raycast, AlDente, etc.)"
+    echo "  4. Configure GUI apps (Raycast, etc.)"
     echo
     info "For more information, see: $DOTFILES_DIR/README.md"
 

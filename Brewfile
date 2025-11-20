@@ -102,8 +102,6 @@ brew "wget"
 brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Menu bar tool to limit maximum charging percentage
-cask "aldente"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # App to build and share containerised applications and microservices

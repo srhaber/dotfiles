@@ -325,7 +325,6 @@ GUI applications installed via Homebrew.
 
 | Application | Category | Purpose | Website |
 |-------------|----------|---------|---------|
-| **AlDente** | Utility | Battery health management - Limit max charge to extend battery life | [apphousekitchen.com](https://apphousekitchen.com/) |
 | **font-meslo-lg-nerd-font** | Font | Nerd Font with icons for Starship prompt and terminal | [nerdfonts.com](https://www.nerdfonts.com/) |
 | **Cursor** | Editor | AI-powered code editor (fork of VS Code) with built-in AI chat | [cursor.sh](https://cursor.sh/) |
 | **Docker Desktop** | Development | Container management with GUI, includes Docker Engine and Kubernetes | [docker.com](https://www.docker.com/products/docker-desktop/) |
