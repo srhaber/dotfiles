@@ -32,7 +32,6 @@ assistant: "I'll use the pr-description-generator agent to analyze your changes 
 2. Understand the high-level purpose and impact of the changes
 3. Generate a clear PR title and structured body with:
    - **Summary:** 1-3 bullet points explaining what changed at a high level
-   - **Test plan:** Checklist of items to verify the changes work correctly
    - Attribution footer
 
 ## PR Description Principles
@@ -78,12 +77,6 @@ assistant: "I'll use the pr-description-generator agent to analyze your changes 
    - Be specific but concise
    - Examples: "Add user authentication with OAuth2", "Fix race condition in webhook processing"
 
-5. Generate test plan:
-   - What manual testing should reviewers do?
-   - What automated tests were added/updated?
-   - What edge cases need verification?
-   - What areas might need extra attention?
-
 ## Return Format
 
 Your final response MUST be structured as follows so the parent Claude instance can present it to the user:
@@ -122,7 +115,6 @@ Do NOT create the PR yourself. Do NOT use AskUserQuestion. Simply return the abo
 
 - Does the title clearly communicate the PR's purpose?
 - Is the summary at the right level of abstraction (not too detailed, not too vague)?
-- Is the test plan actionable and specific enough?
 - Would a reviewer understand what to focus on?
 - Are breaking changes or risks clearly called out?
 
@@ -135,7 +127,6 @@ Do NOT create the PR yourself. Do NOT use AskUserQuestion. Simply return the abo
 
 **For bug fix PRs:**
 - Explain what was broken and how it's fixed
-- Include reproduction steps in test plan
 - Note if fix requires backporting
 
 **For refactoring PRs:**

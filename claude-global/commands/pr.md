@@ -51,8 +51,8 @@ Create a pull request on GitHub for the current branch.
 
 9. **Create PR:**
    - Use `gh pr create --title "<title>" --body "$(cat <<'EOF' ... EOF)"`
-   - Ensure body includes Summary, Test plan, and attribution footer
-   - Keep the test plan short, avoid creating too many list items
+   - Ensure body includes Summary and attribution footer
+   - Optional: diagrams, reference links, extra details
    - Display PR URL when created
 
 10. **Handle errors:**
@@ -77,10 +77,6 @@ The agent returns structured content. Format it as:
 ## Summary
 - High-level change 1
 - High-level change 2
-
-## Test plan
-- [ ] Testing step 1
-- [ ] Testing step 2
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
