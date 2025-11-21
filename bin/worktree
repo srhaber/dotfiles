@@ -73,14 +73,14 @@ Commands:
   list               Show all active worktrees
   remove <feature>   Remove worktree and optionally delete branch
   switch <feature>   Generate cd command to navigate to worktree
-  cleanup            Find and remove unused worktrees/branches
-  clean              Prune stale worktree references
+  clean              Find and remove unused worktrees/branches
+  prune              Prune stale worktree references
   help               Show this help message
 
 Examples:
   worktree create feature-fixes
   worktree list
-  worktree cleanup
+  worktree clean
   worktree switch feature-fixes
 
 Current location: $(pwd) (main branch)
@@ -180,7 +180,7 @@ cmd_remove() {
     fi
 }
 
-cmd_clean() {
+cmd_prune() {
     info "Pruning stale worktree references..."
     git worktree prune -v
     echo
@@ -207,7 +207,7 @@ cmd_switch() {
     info "Tip: Copy and paste the command above"
 }
 
-cmd_cleanup() {
+cmd_clean() {
     info "Analyzing worktrees and branches..."
     echo
 
@@ -390,14 +390,14 @@ main() {
         remove|rm)
             cmd_remove "$@"
             ;;
-        clean)
-            cmd_clean
+        prune)
+            cmd_prune
             ;;
         switch|sw)
             cmd_switch "$@"
             ;;
-        cleanup)
-            cmd_cleanup
+        clean)
+            cmd_clean
             ;;
         help|--help|-h)
             show_help
