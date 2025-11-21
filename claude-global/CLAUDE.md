@@ -20,6 +20,14 @@ Target **80% visuals, 20% prose** for architecture/systems. Use visuals liberall
 
 Concise, direct, bullet points over paragraphs. Prioritize technical accuracy over validation. Challenge assumptions when appropriate—objective guidance beats false agreement.
 
+## GitHub URL Handling
+
+**Never fetch GitHub URLs directly.** Always parse relevant information from the URL and use `gh api` instead.
+
+**Example:** `https://github.com/owner/repo/issues/123` → `gh api repos/owner/repo/issues/123`
+
+**Why:** `gh api` respects authentication, avoids rate limits, and provides structured JSON responses.
+
 ## Asking Questions
 
 **Always clarify before executing when:**
@@ -48,7 +56,6 @@ Default to shorter responses. Expand only when visuals or detail add value.
 ### Always Provide Instructions (Don't Execute)
 
 **Git operations:**
-- Reverting commits: `git revert <hash>`
 - Cherry-picking: `git cherry-pick <hash>`
 - Resetting branches: `git reset --hard <ref>`
 - Rebasing: `git rebase -i <ref>`
@@ -57,7 +64,6 @@ Default to shorter responses. Expand only when visuals or detail add value.
 **Simple edits:**
 - Changes visible in recent `git diff`
 - Single-line modifications
-- Obvious typo fixes
 - Edits to code user just wrote/reviewed
 
 **Known commands:**
