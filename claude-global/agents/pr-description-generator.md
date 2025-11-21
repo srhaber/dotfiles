@@ -47,10 +47,11 @@ assistant: "I'll use the pr-description-generator agent to analyze your changes 
 - Focus on user-facing changes, new features, bug fixes, refactoring goals
 - Avoid low-level implementation details
 
-**Test plan section:**
-- Bulleted markdown checklist (use `- [ ]` format)
-- Include manual testing steps, automated test coverage, edge cases to verify
-- Be specific and actionable
+**Visuals section:**
+- Optional. Include a text-based diagram, flow-chart, etc. if helpful
+
+**References section:**
+- Link to Linear ticket, GitHub issue, other PRs, etc.
 
 ## Workflow
 
@@ -97,12 +98,6 @@ Your final response MUST be structured as follows so the parent Claude instance 
 - [High-level bullet point 1]
 - [High-level bullet point 2]
 - [High-level bullet point 3, if needed]
-
-### Test plan
-- [ ] [Specific testing step 1]
-- [ ] [Specific testing step 2]
-- [ ] [Specific testing step 3]
-- [ ] [Additional steps as needed]
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
