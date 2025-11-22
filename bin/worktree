@@ -184,6 +184,43 @@ cmd_prune() {
     info "Pruning stale worktree references..."
     git worktree prune -v
     echo
+
+    # Find and remove local branches with deleted remotes
+    info "Checking for branches with deleted remotes..."
+    local gone_branches=()
+    while IFS= read -r line; do
+        local branch
+        branch=$(echo "$line" | awk '{print $1}')
+        [[ -z "$branch" ]] && continue
+        gone_branches+=("$branch")
+    done < <(git branch -vv | grep ': gone]' | awk '{print $1}')
+
+    if [[ ${#gone_branches[@]} -gt 0 ]]; then
+        echo
+        echo "Found ${#gone_branches[@]} local branch(es) with deleted remotes:"
+        for branch in "${gone_branches[@]}"; do
+            echo "  - $branch"
+        done
+        echo
+
+        read -rp "Delete these branches? [y/N] " response
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            for branch in "${gone_branches[@]}"; do
+                # Use -D to force delete since remote is already gone
+                if git branch -D "$branch" 2>/dev/null; then
+                    success "  ✓ Deleted $branch"
+                else
+                    warning "  ✗ Failed to delete $branch"
+                fi
+            done
+        else
+            echo "Skipped branch deletion"
+        fi
+    else
+        success "✓ No branches with deleted remotes found"
+    fi
+
+    echo
     cmd_list
 }
 
