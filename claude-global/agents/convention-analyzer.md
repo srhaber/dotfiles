@@ -2,7 +2,7 @@
 name: convention-analyzer
 description: Analyzes code to extract established conventions, patterns, and practices. Can analyze specific files or answer general questions about codebase conventions by inferring relevant patterns from context.
 tools: Read, Grep, Glob
-model: haiku
+model: sonnet
 color: green
 ---
 

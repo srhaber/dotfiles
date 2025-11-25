@@ -2,7 +2,7 @@
 name: session-documenter
 description: Analyzes conversation history and generates structured session documentation with key activities, decisions, and learnings. Returns markdown content for user approval - does not write files.
 tools: Bash, Read
-model: haiku
+model: sonnet
 color: green
 ---
 
