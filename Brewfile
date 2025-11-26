@@ -107,6 +107,8 @@ cask "cursor"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 cask "font-meslo-lg-nerd-font"
+# SDK for building Flutter apps
+cask "flutter"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Control your tools with a few keystrokes
