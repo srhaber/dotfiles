@@ -337,8 +337,13 @@ cmd_clean() {
             fi
 
             if [[ -n "$reason" ]]; then
-                worktrees_to_remove+=("$wt_path|$wt_branch")
-                reasons+=("$reason")
+                # Check for .worktree_keep file
+                if [[ -f "$wt_path/.worktree_keep" ]]; then
+                    info "  Skipping $wt_branch (has .worktree_keep file)"
+                else
+                    worktrees_to_remove+=("$wt_path|$wt_branch")
+                    reasons+=("$reason")
+                fi
             fi
         done
     fi
@@ -373,10 +378,11 @@ cmd_clean() {
 What would you like to do?
 1) Remove all worktrees and delete branches
 2) Remove all worktrees only (keep branches)
-3) Cancel
+3) Select specific worktrees to remove
+4) Cancel
 
 EOF
-    read -rp "Choice [1-3]: " choice
+    read -rp "Choice [1-4]: " choice
 
     case "$choice" in
         1)
@@ -400,7 +406,60 @@ EOF
             git worktree prune
             success "✓ Cleanup complete (branches preserved)"
             ;;
-        *)
+        3)
+            echo
+            echo "Select worktrees to remove (space-separated numbers, e.g., '1 3 5'):"
+            read -rp "Selection: " selection
+
+            # Parse selection into array
+            local selected_indices=()
+            for num in $selection; do
+                # Validate number is in range
+                if [[ "$num" =~ ^[0-9]+$ ]] && [[ "$num" -ge 1 ]] && [[ "$num" -le "${#worktrees_to_remove[@]}" ]]; then
+                    selected_indices+=($((num - 1))) # Convert to 0-based index
+                else
+                    warning "Invalid selection: $num (skipping)"
+                fi
+            done
+
+            if [[ ${#selected_indices[@]} -eq 0 ]]; then
+                echo "No valid selections. Cancelled."
+                exit 0
+            fi
+
+            echo
+            echo "Selected worktrees:"
+            for idx in "${selected_indices[@]}"; do
+                local wt_entry="${worktrees_to_remove[$idx]}"
+                IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
+                echo "  - $wt_branch"
+            done
+            echo
+            read -rp "Delete branches too? [y/N] " delete_branches
+
+            echo
+            if [[ "$delete_branches" =~ ^[Yy]$ ]]; then
+                info "Removing worktrees and deleting branches..."
+                for idx in "${selected_indices[@]}"; do
+                    local wt_entry="${worktrees_to_remove[$idx]}"
+                    IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
+                    echo "  - Removing $wt_branch..."
+                    git worktree remove "$wt_path" --force 2>/dev/null || true
+                    git branch -D "$wt_branch" 2>/dev/null || true
+                done
+            else
+                info "Removing worktrees only..."
+                for idx in "${selected_indices[@]}"; do
+                    local wt_entry="${worktrees_to_remove[$idx]}"
+                    IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
+                    echo "  - Removing worktree for $wt_branch..."
+                    git worktree remove "$wt_path" --force 2>/dev/null || true
+                done
+            fi
+            git worktree prune
+            success "✓ Cleanup complete"
+            ;;
+        4|*)
             echo "Cancelled"
             exit 0
             ;;
