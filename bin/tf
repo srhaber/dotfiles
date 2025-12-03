@@ -4,7 +4,7 @@
 #
 # Usage:
 #   tf plan [args]   - Save plan to file with timestamp
-#   tf apply [args]  - Apply most recent saved plan (or run normally if no plan exists)
+#   tf apply [args]  - Apply most recent saved plan (auto-cleans old plans >1 day)
 #   tf show [file]   - Show latest plan, specific plan file, or pass through to terraform show
 #   tf summary       - Show high-level summary of plan changes
 #   tf list          - List saved plan files
@@ -101,21 +101,6 @@ cmd_plan() {
 cmd_apply() {
     check_terraform_dir
 
-    local auto_clean=false
-
-    # Check for flags
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            -y|--auto-clean)
-                auto_clean=true
-                shift
-                ;;
-            *)
-                break
-                ;;
-        esac
-    done
-
     # Check if user provided arguments (plan file or terraform args)
     if [[ $# -gt 0 ]]; then
         # If user specified arguments, pass through to terraform
@@ -136,17 +121,19 @@ cmd_apply() {
         if command terraform apply "$latest_plan"; then
             success "✓ Plan applied successfully"
 
-            # Clean up the plan file
-            if [[ "$auto_clean" == true ]]; then
-                rm -f "$latest_plan"
-                success "✓ Plan file removed"
-            else
-                echo
-                read -rp "Remove applied plan file? [Y/n] " response
-                if [[ ! "$response" =~ ^[Nn]$ ]]; then
-                    rm -f "$latest_plan"
-                    success "✓ Plan file removed"
-                fi
+            # Auto-clean old plan files (older than 1 day)
+            local old_plans
+            old_plans=$(find "$PLANS_DIR" -name "*.tfplan" -type f -mtime +1 2>/dev/null || true)
+
+            if [[ -n "$old_plans" ]]; then
+                local count
+                count=$(echo "$old_plans" | wc -l | xargs)
+
+                while IFS= read -r old_plan; do
+                    rm -f "$old_plan"
+                done <<< "$old_plans"
+
+                info "✓ Cleaned up $count old plan file(s) (>1 day old)"
             fi
         else
             exit 1
@@ -535,7 +522,7 @@ cmd_help() {
     echo -e "${CYAN}Usage:${NC}"
     echo "  tf plan [args]        Save plan to file with timestamp"
     echo "  tf apply [args]       Apply most recent saved plan (or run normally if no plan)"
-    echo "  tf apply -y           Apply and auto-remove plan without prompting"
+    echo "                        (Auto-cleans plan files older than 1 day)"
     echo "  tf current            Show current plan metadata (name, size, date, path)"
     echo "  tf diff [p1] [p2]     Compare plans (defaults to latest two)"
     echo "  tf show [target]      Show latest plan, specific plan file, or state"
