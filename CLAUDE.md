@@ -198,16 +198,9 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── claude-global/        # Global Claude Code config (symlinked to ~/.claude/)
 │   ├── CLAUDE.md         # Personal preferences for all projects
 │   ├── commands/         # Global slash commands
-│   │   ├── commit.md
-│   │   ├── pr.md
-│   │   ├── review-branch.md
-│   │   ├── review-changes.md
+│   │   ├── branch-diff.md
 │   │   └── save-session.md
-│   ├── agents/           # Custom agent definitions
-│   │   ├── commit-message-generator.md
-│   │   ├── pr-description-generator.md
-│   │   ├── session-documenter.md
-│   │   └── convention-analyzer.md
+│   ├── plugins.json      # Tracked list of enabled plugins
 │   └── statusline-command.sh
 ├── CLAUDE.md             # Project-specific Claude instructions (this repo only)
 ├── .vim/                 # Vim plugins and runtime

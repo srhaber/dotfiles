@@ -1,0 +1,39 @@
+#!/bin/bash -e
+
+# This script extracts the plugins section from ~/.claude/settings.json
+# and saves it to claude-global/plugins.json for version control.
+#
+# Usage: <dotfiles>/scripts/export-claude-plugins
+
+# Get script directory and derive dotfiles root
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
+SETTINGS_FILE="$HOME/.claude/settings.json"
+PLUGINS_FILE="$DOTFILES_DIR/claude-global/plugins.json"
+
+# Check if settings.json exists
+if [[ ! -f "$SETTINGS_FILE" ]]; then
+  echo "❌ Error: $SETTINGS_FILE not found"
+  exit 1
+fi
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "❌ Error: jq is required but not installed"
+  echo "   Install with: brew install jq"
+  exit 1
+fi
+
+# Extract plugins section
+jq '.enabledPlugins' "$SETTINGS_FILE" > "$PLUGINS_FILE"
+
+pushd "$DOTFILES_DIR" > /dev/null
+git add claude-global/plugins.json
+git commit -m "chore(claude): update plugins config
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)"
+git push origin master
+popd > /dev/null
+
+echo "✅ Claude plugins config updated and pushed to repository"

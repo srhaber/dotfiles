@@ -211,8 +211,9 @@ See **[PACKAGES.md](PACKAGES.md)** for complete package management guide includi
 
 **Quick commands:**
 ```bash
-brew bundle install               # Install from Brewfile
-~/.dotfiles/scripts/brewdump      # Update Brewfile and push to git
+brew bundle install                      # Install from Brewfile
+~/.dotfiles/scripts/brewdump             # Update Brewfile and push to git
+~/.dotfiles/scripts/export-claude-plugins # Export Claude plugins and push to git
 ```
 
 ## macOS System Preferences
@@ -240,9 +241,9 @@ This repo includes both **global** and **project-specific** Claude Code configur
 ### Global Configuration (`claude-global/`)
 Applies to all projects on your machine (symlinked to `~/.claude/`):
 - **`claude-global/CLAUDE.md`** - Personal preferences and instructions for Claude across all projects
-- **`claude-global/commands/`** - Global slash commands: `/commit`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`
-- **`claude-global/agents/`** - Custom agents: commit-message-generator, pr-description-generator, session-documenter, convention-analyzer
+- **`claude-global/commands/`** - Global slash commands: `/save-session`, `/branch-diff`
 - **`claude-global/statusline-command.sh`** - Custom statusline script
+- **`claude-global/plugins.json`** - Tracked list of enabled Claude Code plugins (documentation only)
 
 ### Project-Specific Configuration (`.claude/`, `CLAUDE.md`)
 Applies only when working in the dotfiles repo:
@@ -264,14 +265,15 @@ The custom statusline displays:
 After running `./setup.sh`, the global configuration from `claude-global/` will be symlinked to `~/.claude/`:
 - `statusline-command.sh` - Custom statusline script
 - `CLAUDE.md` - Personal Claude preferences and instructions
-- `commands/` - Global slash commands for git workflows and session management
-- `agents/` - Custom agents that power the slash commands
+- `commands/` - Global slash commands (`/save-session` for session documentation, `/branch-diff` for git utilities)
 
-These configs will apply to all Claude Code sessions on your machine.
+These configs will apply to all Claude Code sessions on your machine. Additional git workflow commands (`/commit`, `/pr`, code review) are provided by installed plugins.
 
-To enable the statusline, you need to manually configure the settings:
+### Manual Settings Configuration
 
-1. Create or edit `~/.claude/settings.json`:
+After `setup.sh` symlinks the global config, you need to manually configure `~/.claude/settings.json`:
+
+**1. Statusline:**
 ```json
 {
   "statusLine": {
@@ -281,9 +283,27 @@ To enable the statusline, you need to manually configure the settings:
 }
 ```
 
-2. Replace `YOUR_USERNAME` with your actual username
+Replace `YOUR_USERNAME` with your actual username, then restart Claude Code.
 
-3. Restart Claude Code to see the new statusline
+**2. Plugins:**
+
+Copy the `enabledPlugins` section from `claude-global/plugins.json` into your `~/.claude/settings.json`:
+
+```json
+{
+  "statusLine": { ... },
+  "enabledPlugins": {
+    "pr-review-toolkit@claude-code-plugins": true,
+    "code-review@claude-code-plugins": true,
+    "commit-commands@claude-code-plugins": true
+  }
+}
+```
+
+**Managing plugins:**
+- Add/remove plugins via Claude Code UI
+- Run `./scripts/export-claude-plugins` to update `plugins.json` in git
+- On new machines, manually copy from `plugins.json` to `settings.json`
 
 ### Example Output
 

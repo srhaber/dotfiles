@@ -1,34 +1,85 @@
 ---
-description: Save an interactive summary of the current session to ~/claude-sessions/ (uses session-documenter agent)
+description: Save an interactive summary of the current session to ~/claude-sessions/
 ---
 
-You are helping the user document this Claude Code session for their personal knowledge base.
+You are helping document this Claude Code session for the user's personal knowledge base.
 
 **Workflow:**
 
 1. Use AskUserQuestion to gather:
-   - A short label/slug for this session (e.g., "setup-knowledge-base", "fix-auth-bug", "api-refactoring")
-   - What they'd like you to document: key decisions, code changes, learnings, problems solved, or all of the above
+   - Short slug (e.g., "setup-auth", "fix-bug", "api-refactor")
+   - What to document: key decisions, code changes, learnings, problems solved, or all of the above
 
-2. Invoke the `session-documenter` agent with Task tool:
-   - Pass the slug and documentation preferences as context
-   - The agent will analyze the conversation and return structured markdown
+2. Analyze the conversation history directly:
+   - Identify major tasks completed
+   - Extract technical decisions and rationale
+   - Note learnings, gotchas, insights discovered
+   - Capture outcomes and what was achieved
+   - Identify next steps or follow-up items
 
-3. Review the agent's output and present it to the user
+3. Generate structured markdown using the template below:
+   - Use **visual-first approach**: 80% visuals for architecture/systems, liberal use for clarity
+   - Include `file.py:123` line references throughout
+   - Flows: `Client → API → DB`, `[State] → [State]`
+   - Diagrams: `┌─────┐ ─→ ┌─────┐` for components
+   - Trees: File hierarchies with `├──` and `└──`
+   - Tables: Only for multi-dimensional comparisons
 
-4. Use AskUserQuestion to get approval:
+4. Present the generated documentation to the user
+
+5. Use AskUserQuestion for approval:
    - "Save as-is" → Write the file
-   - "Request changes" → Ask for feedback and re-invoke agent with updated context
+   - "Request changes" → Regenerate with user feedback
    - "Cancel" → Abort
 
-5. If approved, write to `~/claude-sessions/YYYY-MM-DD-{slug}.md`
+6. If approved:
+   - Ensure `~/claude-sessions/` directory exists
+   - Write to `~/claude-sessions/YYYY-MM-DD-{slug}.md` (use current date from environment)
+   - Confirm success and show the file path
 
-6. Confirm success and show the file path
+**Documentation Template:**
 
-The agent handles all analysis and content generation. You handle user interaction and file writing.
+```markdown
+# {Session Title}
+
+**Date:** {YYYY-MM-DD}
+**Project:** {project name or "General"}
+**Duration:** {approximate duration if inferable}
+
+## Overview
+{1-2 sentence summary of what was accomplished}
+
+## Context
+{Relevant background: what prompted this session, what problem was being solved}
+
+## Key Activities
+- {Major tasks completed}
+- {Bulleted list}
+
+## Technical Details
+{Implementation details using visual-first approach}
+{Use ASCII diagrams, flows, trees for architecture/systems}
+{Use prose for debugging/decisions/concepts}
+
+## Decisions Made
+{Architectural/design/technical decisions with brief rationale}
+
+## Learnings & Insights
+{What was learned, gotchas discovered, useful patterns}
+
+## Outcomes
+{What was achieved, what works now that didn't before}
+
+## Next Steps
+{Follow-up tasks, open questions, or future work}
+
+## References
+{Links to docs, file paths with :line numbers, related PRs}
+```
 
 **Important Notes:**
 - Always use current date (YYYY-MM-DD) from environment for filenames
-- Ensure `~/claude-sessions/` directory exists before writing
-- The agent applies visual-first approach (80/20 for architecture, liberal use otherwise)
-- Include file:line references throughout documentation
+- For architecture/system sessions: Prioritize ASCII diagrams showing component relationships
+- For debugging sessions: Explain problem, investigation, root cause, solution
+- For feature implementation: Show architecture, design decisions, trade-offs
+- Prioritize clarity, conciseness, and future utility
