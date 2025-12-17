@@ -42,6 +42,11 @@ determine_tf_cmd() {
 
 TF_CMD=$(determine_tf_cmd)
 
+# Terragrunt: add --log-format bare for clean output (no timestamps/prefixes)
+if [[ "$TF_CMD" == "terragrunt" ]]; then
+    TF_CMD="terragrunt --log-format bare"
+fi
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -446,6 +451,10 @@ cmd_summary() {
         local plan_output
         plan_output=$(command $TF_CMD show -no-color "$latest_plan" 2>&1)
 
+        # Strip terragrunt timestamp prefixes (e.g., "11:55:56.132 STDOUT terraform: ")
+        # This normalizes output for both terraform and terragrunt
+        plan_output=$(echo "$plan_output" | sed 's/^[0-9:.]*[[:space:]]*STDOUT[[:space:]]*terraform:[[:space:]]*//')
+
         # Extract the summary line (e.g., "Plan: 3 to add, 1 to change, 2 to destroy.")
         local summary
         summary=$(grep -E "^Plan: " <<< "$plan_output" || echo "")
@@ -708,7 +717,7 @@ main() {
             cmd_help
             ;;
         *)
-            # Pass through to terraform
+            # Pass through to terraform/terragrunt
             command $TF_CMD "$@"
             ;;
     esac
