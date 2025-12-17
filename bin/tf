@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# tf - Terraform wrapper with enhanced plan/apply workflow
+# tf - Terraform/Terragrunt wrapper with enhanced plan/apply workflow
 #
 # Usage:
 #   tf plan [args]   - Save plan to file with timestamp
@@ -9,9 +9,38 @@
 #   tf summary       - Show high-level summary of plan changes
 #   tf list          - List saved plan files
 #   tf clean         - Remove old plan files
-#   tf <cmd> [args]  - Pass through to terraform
+#   tf <cmd> [args]  - Pass through to terraform/terragrunt
+#
+# Environment:
+#   USE_TERRAGRUNT=1  - Force use of terragrunt even if not auto-detected
 
 set -euo pipefail
+
+# Determine which command to use: terragrunt or terraform
+# Priority: USE_TERRAGRUNT env var > terragrunt.hcl exists > terragrunt available > terraform
+determine_tf_cmd() {
+    # If USE_TERRAGRUNT is explicitly set
+    if [[ -n "${USE_TERRAGRUNT:-}" ]]; then
+        if command -v terragrunt &>/dev/null; then
+            echo "terragrunt"
+        else
+            echo "terraform"
+            echo "Warning: USE_TERRAGRUNT set but terragrunt not found, falling back to terraform" >&2
+        fi
+        return
+    fi
+
+    # Auto-detect: if terragrunt.hcl exists in current dir, use terragrunt
+    if [[ -f "terragrunt.hcl" ]] && command -v terragrunt &>/dev/null; then
+        echo "terragrunt"
+        return
+    fi
+
+    # Default to terraform
+    echo "terraform"
+}
+
+TF_CMD=$(determine_tf_cmd)
 
 # Colors
 RED='\033[0;31m'
@@ -44,8 +73,8 @@ info() {
 
 # Ensure we're in a terraform directory
 check_terraform_dir() {
-    if [[ ! -f "*.tf" ]] && [[ ! -d ".terraform" ]]; then
-        warning "Not in a terraform directory (no .tf files or .terraform dir found)"
+    if ! ls *.tf &>/dev/null && [[ ! -d ".terraform" ]] && [[ ! -f "terragrunt.hcl" ]]; then
+        warning "Not in a terraform directory (no .tf files, .terraform dir, or terragrunt.hcl found)"
     fi
 }
 
@@ -77,11 +106,11 @@ cmd_plan() {
     timestamp=$(date +%Y%m%d-%H%M%S)
     plan_file="${PLANS_DIR}/plan-${timestamp}.tfplan"
 
-    info "Running terraform plan and saving to: $plan_file"
+    info "Running $TF_CMD plan and saving to: $plan_file"
     echo
 
     # Run terraform plan with -out flag
-    if command terraform plan -out="$plan_file" "$@"; then
+    if command $TF_CMD plan -out="$plan_file" "$@"; then
         echo
         success "✓ Plan saved to: $plan_file"
 
@@ -103,9 +132,9 @@ cmd_apply() {
 
     # Check if user provided arguments (plan file or terraform args)
     if [[ $# -gt 0 ]]; then
-        # If user specified arguments, pass through to terraform
-        info "Running terraform apply with provided arguments..."
-        command terraform apply "$@"
+        # If user specified arguments, pass through
+        info "Running $TF_CMD apply with provided arguments..."
+        command $TF_CMD apply "$@"
         return $?
     fi
 
@@ -118,7 +147,7 @@ cmd_apply() {
         info "Applying saved plan: $plan_name"
         echo
 
-        if command terraform apply "$latest_plan"; then
+        if command $TF_CMD apply "$latest_plan"; then
             success "✓ Plan applied successfully"
 
             # Auto-clean old plan files (older than 1 day)
@@ -140,9 +169,9 @@ cmd_apply() {
         fi
     else
         # No saved plan found, run normal apply
-        info "No saved plan found. Running terraform apply..."
+        info "No saved plan found. Running $TF_CMD apply..."
         echo
-        command terraform apply
+        command $TF_CMD apply
     fi
 }
 
@@ -285,8 +314,8 @@ cmd_diff() {
     # Generate diffs using terraform show
     local diff_output
     diff_output=$(diff -u \
-        <(command terraform show -no-color "$plan2") \
-        <(command terraform show -no-color "$plan1") \
+        <(command $TF_CMD show -no-color "$plan2") \
+        <(command $TF_CMD show -no-color "$plan1") \
     )
 
     if [[ -z "$diff_output" ]]; then
@@ -343,7 +372,7 @@ cmd_show() {
             info "Showing saved plan: $plan_name"
             echo
 
-            command terraform show "$latest_plan"
+            command $TF_CMD show "$latest_plan"
         else
             error "No saved plan found. Run 'tf plan' first."
         fi
@@ -356,7 +385,7 @@ cmd_show() {
     # Special case: 'tf show state' explicitly shows state, not plan
     if [[ "$target" == "state" ]]; then
         shift
-        command terraform show "$@"
+        command $TF_CMD show "$@"
         return $?
     fi
 
@@ -370,7 +399,7 @@ cmd_show() {
             info "Showing saved plan: $plan_name"
             echo
 
-            command terraform show "$@" "$latest_plan"
+            command $TF_CMD show "$@" "$latest_plan"
         else
             error "No saved plan found. Run 'tf plan' first."
         fi
@@ -381,7 +410,7 @@ cmd_show() {
 
     # If it's an existing file, show it
     if [[ -f "$target" ]]; then
-        command terraform show "$target" "$@"
+        command $TF_CMD show "$target" "$@"
         return $?
     fi
 
@@ -391,13 +420,13 @@ cmd_show() {
         if [[ -f "$plan_path" ]]; then
             info "Showing saved plan: $target"
             echo
-            command terraform show "$plan_path" "$@"
+            command $TF_CMD show "$plan_path" "$@"
             return $?
         fi
     fi
 
     # Otherwise, pass through to terraform show
-    command terraform show "$target" "$@"
+    command $TF_CMD show "$target" "$@"
 }
 
 # Show summary of most recent plan
@@ -415,7 +444,7 @@ cmd_summary() {
 
         # Get the plan output and extract resource changes (no color for easier parsing)
         local plan_output
-        plan_output=$(command terraform show -no-color "$latest_plan" 2>&1)
+        plan_output=$(command $TF_CMD show -no-color "$latest_plan" 2>&1)
 
         # Extract the summary line (e.g., "Plan: 3 to add, 1 to change, 2 to destroy.")
         local summary
@@ -517,7 +546,9 @@ cmd_summary() {
 
 # Show help for tf wrapper
 cmd_help() {
-    echo -e "${BLUE}tf${NC} - Terraform wrapper with enhanced plan/apply workflow"
+    echo -e "${BLUE}tf${NC} - Terraform/Terragrunt wrapper with enhanced plan/apply workflow"
+    echo
+    echo -e "${CYAN}Current backend:${NC} ${GREEN}${TF_CMD}${NC}"
     echo
     echo -e "${CYAN}Usage:${NC}"
     echo "  tf plan [args]        Save plan to file with timestamp"
@@ -530,15 +561,61 @@ cmd_help() {
     echo "  tf list               List saved plan files with details"
     echo "  tf list -n            List saved plan names only"
     echo "  tf clean              Remove old plan files"
+    echo "  tf run-all <cmd>      Run terragrunt command across layers (use alone for help)"
     echo "  tf help               Show this help message"
-    echo -e "  tf <cmd> [args]       Pass through to terraform (e.g., ${GREEN}tf init${NC}, ${GREEN}tf validate${NC})"
+    echo -e "  tf <cmd> [args]       Pass through to ${TF_CMD} (e.g., ${GREEN}tf init${NC}, ${GREEN}tf validate${NC})"
+    echo
+    echo -e "${CYAN}Backend Selection:${NC}"
+    echo "  Automatically uses terragrunt if terragrunt.hcl exists in current directory."
+    echo -e "  Force terragrunt with: ${YELLOW}USE_TERRAGRUNT=1${NC}"
     echo
     echo -e "${CYAN}Plan Storage:${NC}"
     echo -e "  Plans are saved to ${YELLOW}.terraform/plans/${NC} with timestamps"
     echo -e "  A ${YELLOW}latest.tfplan${NC} symlink always points to the most recent plan"
     echo
-    echo -e "${CYAN}Note:${NC} For terraform's built-in help, use ${GREEN}terraform --help${NC}"
+    echo -e "${CYAN}Shell Completion:${NC}"
+    echo "  Bash: source /path/to/tf-completion.bash"
+    echo "  Zsh:  source /path/to/tf-completion.zsh"
     echo
+    echo -e "${CYAN}Note:${NC} For ${TF_CMD}'s built-in help, use ${GREEN}${TF_CMD} --help${NC}"
+    echo
+}
+
+# Terragrunt run-all command
+cmd_run_all() {
+    if [[ "$TF_CMD" != "terragrunt" ]]; then
+        error "run-all is only available with terragrunt"
+    fi
+
+    if [[ $# -eq 0 ]]; then
+        echo -e "${CYAN}Usage:${NC} tf run-all <command> [options]"
+        echo
+        echo -e "${CYAN}Commands:${NC}"
+        echo "  init, validate, plan, apply, destroy, output"
+        echo
+        echo -e "${CYAN}Scope by directory:${NC}"
+        echo "  cd acct-popcorn-prod && tf run-all plan     # Only prod account"
+        echo "  cd acct-popcorn-prod/us-west-2 && tf run-all plan  # Only prod us-west-2"
+        echo
+        echo -e "${CYAN}Filter options:${NC}"
+        echo "  --terragrunt-include-dir */vpc-*            # Only vpc layers"
+        echo "  --terragrunt-exclude-dir */admin            # Skip admin layers"
+        echo "  --terragrunt-strict-include                 # Only explicit includes"
+        echo
+        echo -e "${CYAN}Examples:${NC}"
+        echo "  tf run-all plan                             # All layers from cwd"
+        echo "  tf run-all plan --terragrunt-include-dir '*/global'  # Only global layers"
+        echo "  tf run-all apply --terragrunt-parallelism 2 # Limit parallel runs"
+        return 1
+    fi
+
+    local subcmd="$1"
+    shift
+
+    info "Running terragrunt run-all $subcmd..."
+    echo
+
+    command terragrunt run-all "$subcmd" "$@"
 }
 
 # Clean old plan files
@@ -623,12 +700,16 @@ main() {
         clean)
             cmd_clean
             ;;
+        run-all)
+            shift
+            cmd_run_all "$@"
+            ;;
         help)
             cmd_help
             ;;
         *)
             # Pass through to terraform
-            command terraform "$@"
+            command $TF_CMD "$@"
             ;;
     esac
 }
