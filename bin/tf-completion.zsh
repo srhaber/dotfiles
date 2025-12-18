@@ -105,4 +105,5 @@ _tf() {
     esac
 }
 
-_tf "$@"
+# Register completion function (when sourced directly)
+compdef _tf tf

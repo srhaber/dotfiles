@@ -188,6 +188,9 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# Initialize tf wrapper completion (terraform/terragrunt)
+[[ -r ~/.dotfiles/bin/tf-completion.zsh ]] && source ~/.dotfiles/bin/tf-completion.zsh
+
 # Initialize pyenv (Python version manager)
 # https://github.com/pyenv/pyenv
 if [[ -d "$HOME/.pyenv" ]]; then
