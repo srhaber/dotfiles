@@ -217,8 +217,13 @@ main() {
     # Dotfiles directory symlink (allows both ~/dotfiles and ~/.dotfiles to work)
     safe_symlink "$DOTFILES_DIR" "$HOME/.dotfiles"
 
-    # Bin directory for utility scripts
-    safe_symlink "$DOTFILES_DIR/bin" "$HOME/bin"
+    # Create personal bin directory for user scripts (takes precedence over dotfiles/bin)
+    if [ ! -d "$HOME/bin" ]; then
+        mkdir -p "$HOME/bin"
+        success "Created $HOME/bin directory"
+    else
+        success "$HOME/bin directory exists"
+    fi
 
     # Claude Code global configuration (applies to all projects)
     mkdir -p "$HOME/.claude"
@@ -314,6 +319,18 @@ main() {
         done
     else
         warning "oh-my-zsh not found, skipping custom plugin installation"
+    fi
+    echo
+
+    # Configure pyenv Python version
+    if command_exists pyenv && pyenv versions --bare | grep -q "3.11.14"; then
+        info "Setting pyenv global to 3.11.14..."
+        pyenv global 3.11.14
+        pyenv rehash
+        success "Python 3.11.14 set as global"
+    else
+        warning "pyenv or Python 3.11.14 not found"
+        info "Install with: pyenv install 3.11.14 && pyenv global 3.11.14"
     fi
     echo
 
