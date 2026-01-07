@@ -192,6 +192,9 @@ fi
 # Initialize tf wrapper completion (terraform/terragrunt)
 [[ -r ~/.dotfiles/bin/tf-completion.zsh ]] && source ~/.dotfiles/bin/tf-completion.zsh
 
+# Terraform provider cache (speeds up init by sharing providers across workspaces)
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+
 # Initialize pyenv (Python version manager)
 # https://github.com/pyenv/pyenv
 if [[ -d "$HOME/.pyenv" ]]; then
