@@ -55,7 +55,7 @@ if [[ -d "$projects_root" ]]; then
 fi
 
 # Parse workspace information
-current=$(echo "$input" | jq -r '.workspace.current_dir')
+current=$(echo "$input" | jq -r '.workspace.current_dir' | sed "s|^$HOME|~|")
 project=$(echo "$input" | jq -r '.workspace.project_dir')
 
 # Get timestamp
