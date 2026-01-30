@@ -189,6 +189,12 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# Initialize direnv (auto-load .envrc files for per-project environments)
+# https://direnv.net/
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
 # Initialize tf wrapper completion (terraform/terragrunt)
 [[ -r ~/.dotfiles/bin/tf-completion.zsh ]] && source ~/.dotfiles/bin/tf-completion.zsh
 

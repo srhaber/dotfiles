@@ -342,6 +342,14 @@ main() {
     fi
     echo
 
+    # Verify direnv
+    if command_exists direnv; then
+        success "direnv found: $(direnv --version)"
+    else
+        warning "direnv not found (should be installed via Brewfile)"
+    fi
+    echo
+
     # Install Claude Code
     install_component \
         "Claude Code" \

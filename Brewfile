@@ -14,6 +14,8 @@ brew "ccache"
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Diff that operates at the word level
 brew "dwdiff"
 # Modern, maintained replacement for ls
