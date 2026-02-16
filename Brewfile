@@ -10,6 +10,8 @@ brew "bat"
 brew "bazelisk"
 # Object-file caching compiler wrapper
 brew "ccache"
+# Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
+brew "caddy"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities

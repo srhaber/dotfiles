@@ -20,40 +20,6 @@ if [[ "$current_usage" != "null" ]]; then
 fi
 context_remaining=$((context_window_size - context_used))
 
-# Get 5-hour block end time from JSONL files
-projects_root="$HOME/.claude/projects"
-session_block_end_time=0
-
-if [[ -d "$projects_root" ]]; then
-  current_time=$(date -u '+%s')
-
-  # Find the active 5-hour block end time
-  session_block_end_time=$(cat "$projects_root"/*/*.jsonl 2>/dev/null | \
-    jq -s --arg now "$current_time" '
-    [.[] | select(.type == "assistant" and .message.usage and .requestId and .timestamp)] |
-    unique_by(.requestId) |
-    map(.timestamp | sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) |
-    sort |
-    reduce .[] as $ts (
-      {blocks: [], current_block: null};
-      ($ts - ($ts % 3600)) as $hour_start |
-      if .current_block == null or
-         ($ts > .current_block.end_time) or
-         ($ts - .current_block.last > 18000) then
-        .blocks += [.current_block] |
-        .current_block = {end_time: ($hour_start + 18000), last: $ts}
-      else
-        .current_block.last = $ts
-      end
-    ) |
-    .blocks += [.current_block] |
-    (.blocks | map(select(. != null)) |
-      (map(select(.end_time > ($now | tonumber))) | .[0].end_time) //
-      (sort_by(.last) | .[-1].end_time) // 0
-    )
-  ' 2>/dev/null)
-fi
-
 # Parse workspace information
 current=$(echo "$input" | jq -r '.workspace.current_dir' | sed "s|^$HOME|~|")
 project=$(echo "$input" | jq -r '.workspace.project_dir')
@@ -106,25 +72,6 @@ if [[ "$model" != "null" && -n "$model" ]]; then
       ctx_color="\033[32m"    # green
     fi
     claude_info="${claude_info} $(printf "$ctx_color")[ctx: ${remaining_display} left]$(printf '\033[0m')"
-  fi
-
-  # 5-hour block time remaining
-  if [[ "$session_block_end_time" -gt 0 ]]; then
-    current_epoch=$(date -u '+%s')
-    seconds_remaining=$((session_block_end_time - current_epoch))
-
-    if [[ $seconds_remaining -gt 0 ]]; then
-      hours=$((seconds_remaining / 3600))
-      minutes=$(((seconds_remaining % 3600) / 60))
-
-      if [[ $hours -gt 0 ]]; then
-        time_remaining=$(printf "%dh%dm" "$hours" "$minutes")
-      else
-        time_remaining=$(printf "%dm" "$minutes")
-      fi
-
-      claude_info="${claude_info} $(printf '\033[36m')[5hr: ⏱${time_remaining}]$(printf '\033[0m')"
-    fi
   fi
 
   # 200k token warning in red
