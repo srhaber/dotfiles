@@ -4,7 +4,7 @@
 #
 # Worktree Structure:
 # - Main repo: Current directory (stays on main)
-# - Worktrees: ../<repo-name>-worktrees/<branch-name>
+# - Worktrees: .worktrees/<feature>
 # - Branch naming: Always use shaun/<feature> prefix
 # - Directory naming: Use <feature> only (no username prefix)
 
@@ -40,9 +40,7 @@ get_repo_name() {
 }
 
 get_worktree_parent() {
-    local repo_name
-    repo_name=$(get_repo_name)
-    echo "$(git rev-parse --show-toplevel)/../${repo_name}-worktrees"
+    echo "$(git rev-parse --show-toplevel)/.worktrees"
 }
 
 normalize_branch_name() {
@@ -84,7 +82,7 @@ Examples:
   worktree switch feature-fixes
 
 Current location: $(pwd) (main branch)
-Worktree location: ../${repo_name}-worktrees/<feature>
+Worktree location: .worktrees/<feature>
 EOF
 }
 
@@ -92,8 +90,7 @@ cmd_create() {
     local feature="$1"
     [[ -z "$feature" ]] && error "Feature name required. Usage: worktree create <feature>"
 
-    local repo_name branch_name feature_name worktree_parent worktree_path
-    repo_name=$(get_repo_name)
+    local branch_name feature_name worktree_parent worktree_path
     branch_name=$(normalize_branch_name "$feature")
     feature_name=$(get_feature_name "$branch_name")
     worktree_parent=$(get_worktree_parent)
@@ -135,8 +132,7 @@ cmd_remove() {
     local feature="$1"
     [[ -z "$feature" ]] && error "Feature name required. Usage: worktree remove <feature>"
 
-    local repo_name branch_name feature_name worktree_parent worktree_path
-    repo_name=$(get_repo_name)
+    local branch_name feature_name worktree_parent worktree_path
     branch_name=$(normalize_branch_name "$feature")
     feature_name=$(get_feature_name "$branch_name")
     worktree_parent=$(get_worktree_parent)
@@ -228,8 +224,7 @@ cmd_switch() {
     local feature="$1"
     [[ -z "$feature" ]] && error "Feature name required. Usage: worktree switch <feature>"
 
-    local repo_name branch_name feature_name worktree_parent worktree_path
-    repo_name=$(get_repo_name)
+    local branch_name feature_name worktree_parent worktree_path
     branch_name=$(normalize_branch_name "$feature")
     feature_name=$(get_feature_name "$branch_name")
     worktree_parent=$(get_worktree_parent)
@@ -251,8 +246,7 @@ cmd_clean() {
     # Fetch and prune
     git fetch --prune
 
-    local repo_name worktree_parent
-    repo_name=$(get_repo_name)
+    local worktree_parent
     worktree_parent=$(get_worktree_parent)
 
     # Get all worktrees (excluding main)

@@ -145,6 +145,17 @@ Still want me to do it? (I can if you prefer)
 - Marginal token difference (file already read, <5K additional tokens)
 - Part of larger complex task in progress
 
+## Git Worktrees
+
+**Convention:** All worktrees live in `.worktrees/` at the repo root (not `.claude/worktrees/`).
+
+- **Do not use the built-in `EnterWorktree` tool** — use the `worktree` CLI instead
+- Create: `worktree create <feature>` (branches as `shaun/<feature>`)
+- List: `worktree list`
+- Remove: `worktree remove <feature>`
+- Clean: `worktree clean`
+- `.worktrees/` should be gitignored in every repo
+
 ## Agent Usage
 
 ### When to Use Task Tool
