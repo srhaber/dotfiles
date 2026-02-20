@@ -147,9 +147,8 @@ Still want me to do it? (I can if you prefer)
 
 ## Git Worktrees
 
-**Convention:** All worktrees live in `.worktrees/` at the repo root (not `.claude/worktrees/`).
+**Convention:** All worktrees live in `.worktrees/` at the repo root
 
-- **Do not use the built-in `EnterWorktree` tool** — use the `worktree` CLI instead
 - Create: `worktree create <feature>` (branches as `shaun/<feature>`)
 - List: `worktree list`
 - Remove: `worktree remove <feature>`
