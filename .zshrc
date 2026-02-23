@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # Personal bin takes precedence over dotfiles bin
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:/opt/homebrew/sbin:$PATH
 
 if [[ -d $HOME/go/bin ]]; then
 	export PATH=$HOME/go/bin:$PATH
@@ -130,7 +130,7 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
 
 # User configuration
 
-export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/opt/homebrew/share/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -142,12 +142,7 @@ else
   export EDITOR='vim'
 fi
 
-# Compilation flags - support both Intel and Apple Silicon
-if [[ $(uname -m) == "arm64" ]]; then
-  export ARCHFLAGS="-arch arm64"
-else
-  export ARCHFLAGS="-arch x86_64"
-fi
+export ARCHFLAGS="-arch arm64"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"

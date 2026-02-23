@@ -52,7 +52,7 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 - Loads secrets from `~/.secrets.sh` (if exists)
 - Automatically loads nvm if installed at `~/.nvm/`
 - Sets up SSH keychain loading and Docker Desktop integration
-- Supports both Intel and Apple Silicon Macs
+- Targets Apple Silicon (ARM64) only
 
 ### Starship Prompt (.config/starship.toml)
 - Custom format showing: timestamp, username, hostname, directory, git info, command duration, exit status
