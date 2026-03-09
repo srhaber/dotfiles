@@ -191,7 +191,7 @@ if command -v direnv &> /dev/null; then
 fi
 
 # Initialize tf wrapper completion (terraform/terragrunt)
-[[ -r ~/.dotfiles/bin/tf-completion.zsh ]] && source ~/.dotfiles/bin/tf-completion.zsh
+[[ -r ~/.dotfiles/bin/tf-completion.zsh ]] && source ~/.dotfiles/bin/tf-completion.zsh && compdef _tf tf
 
 # Terraform provider cache (speeds up init by sharing providers across workspaces)
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
