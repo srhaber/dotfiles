@@ -165,7 +165,10 @@ Symlinked to `~/.claude/` and applies to **all projects** on your machine:
 - `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
 - `claude-global/commands/` - Global slash commands (`/commit`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`)
 - `claude-global/agents/` - Custom agent definitions (commit-message-generator, pr-description-generator, session-documenter, convention-analyzer)
+- `claude-global/skills/` - Tracked skill files symlinked individually into `~/.claude/skills/`
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
+
+**Note:** `~/.claude/skills/` is a real directory (not a symlink). Only tracked files from `claude-global/skills/` are symlinked in by `setup.sh`. Project-specific skills (e.g., popcorn-backend) live directly in `~/.claude/skills/` and are not managed by this repo.
 
 ### Project-Specific Configuration (`CLAUDE.md`)
 Applies **only** when working in the dotfiles repository:
@@ -200,6 +203,7 @@ This separation allows you to have personal preferences that apply everywhere, w
 │   ├── commands/         # Global slash commands
 │   │   ├── branch-diff.md
 │   │   └── save-session.md
+│   ├── skills/           # Tracked skills (symlinked individually into ~/.claude/skills/)
 │   ├── plugins.json      # Tracked list of enabled plugins
 │   └── statusline-command.sh
 ├── CLAUDE.md             # Project-specific Claude instructions (this repo only)

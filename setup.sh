@@ -230,7 +230,12 @@ main() {
     safe_symlink "$DOTFILES_DIR/claude-global/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
     safe_symlink "$DOTFILES_DIR/claude-global/agents" "$HOME/.claude/agents"
-    safe_symlink "$DOTFILES_DIR/claude-global/skills" "$HOME/.claude/skills"
+    # Skills dir is a real directory (not a symlink) — individual skills may be
+    # project-specific and managed outside this repo. Only symlink tracked files.
+    mkdir -p "$HOME/.claude/skills"
+    for f in "$DOTFILES_DIR/claude-global/skills/"*; do
+        [ -e "$f" ] && safe_symlink "$f" "$HOME/.claude/skills/$(basename "$f")"
+    done
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
     echo
 
