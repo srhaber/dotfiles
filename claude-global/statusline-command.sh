@@ -8,9 +8,6 @@ model=$(echo "$input" | jq -r '.model.display_name')
 output_style=$(echo "$input" | jq -r '.output_style.name')
 transcript_path=$(echo "$input" | jq -r '.transcript_path')
 
-# Parse additional information from JSON
-exceeds_200k=$(echo "$input" | jq -r '.exceeds_200k_tokens // false')
-
 # Parse context window usage (current conversation)
 context_window_size=$(echo "$input" | jq -r '.context_window.context_window_size // 200000')
 current_usage=$(echo "$input" | jq -r '.context_window.current_usage // null')
@@ -72,11 +69,6 @@ if [[ "$model" != "null" && -n "$model" ]]; then
       ctx_color="\033[32m"    # green
     fi
     claude_info="${claude_info} $(printf "$ctx_color")[ctx: ${remaining_display} left]$(printf '\033[0m')"
-  fi
-
-  # 200k token warning in red
-  if [[ "$exceeds_200k" == "true" ]]; then
-    claude_info="$claude_info $(printf '\033[1;31m')[>200K]$(printf '\033[0m')"
   fi
 
   # Output style in yellow (if not default)
