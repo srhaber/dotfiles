@@ -207,4 +207,7 @@ fi
 # Added by Antigravity
 [[ -d "$HOME/.antigravity/antigravity/bin" ]] && export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
+# Copy full path of a file to clipboard
+fp() { echo "$(pwd)/$1" | pbcopy && echo "Copied: $(pbpaste)"; }
+
 true
