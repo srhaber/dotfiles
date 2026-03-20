@@ -8,10 +8,10 @@ brew "awscli"
 brew "bat"
 # User-friendly launcher for Bazel
 brew "bazelisk"
+# Powerful, enterprise-ready, open source web server with automatic HTTPS
+brew "caddy"
 # Object-file caching compiler wrapper
 brew "ccache"
-# Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
-brew "caddy"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities
@@ -24,6 +24,10 @@ brew "dwdiff"
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Monitor a directory for changes and run a shell command
+brew "fswatch"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -40,6 +44,10 @@ brew "glow"
 brew "go"
 # Improved top (interactive process viewer)
 brew "htop"
+# Add GitHub support to git on the command-line
+brew "hub"
+# Interactive computing in Python
+brew "ipython"
 # Command-line interface for JFrog products
 brew "jfrog-cli"
 # Image manipulation library
@@ -48,6 +56,10 @@ brew "jpeg"
 brew "jq"
 # Domain specific configuration language for defining JSON data
 brew "jsonnet"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Interactive environments for writing and running code
+brew "jupyterlab"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
 # Kubernetes command-line interface
@@ -58,8 +70,8 @@ brew "libtool"
 brew "make"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
+# Port scanning utility for large networks
+brew "nmap"
 # Node.js version manager
 brew "nodenv"
 # Libraries for security-enabled client and server applications
@@ -72,12 +84,20 @@ brew "openjdk@11", link: true
 brew "openjpeg"
 # Colored logcat script to show entries only for specified app
 brew "pidcat"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Service monitoring system and time series database
 brew "prometheus"
 # Python version management
 brew "pyenv"
+# Generic syntax highlighter
+brew "pygments"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
@@ -106,13 +126,15 @@ brew "wget"
 brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Virtual Audio Driver
+cask "blackhole-2ch"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
-cask "font-meslo-lg-nerd-font"
-# SDK for building Flutter apps
+# UI toolkit for building applications for mobile, web and desktop
 cask "flutter"
+cask "font-meslo-lg-nerd-font"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Control your tools with a few keystrokes
