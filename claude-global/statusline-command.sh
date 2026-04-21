@@ -27,11 +27,18 @@ tz=$(date '+%Z')
 
 # Get git branch information
 git_info=""
-if git -C "$current" rev-parse --git-dir >/dev/null 2>&1; then
-  branch=$(git -C "$current" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || \
-           git -C "$current" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
+current_raw=$(echo "$input" | jq -r '.workspace.current_dir')
+if git -C "$current_raw" rev-parse --git-dir >/dev/null 2>&1; then
+  branch=$(git -C "$current_raw" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || \
+           git -C "$current_raw" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
   if [[ -n "$branch" ]]; then
     git_info=" on $(printf '\033[35m')$branch$(printf '\033[0m')"
+    # Detect worktree
+    git_dir=$(git -C "$current_raw" --no-optional-locks rev-parse --git-dir 2>/dev/null)
+    if [[ "$git_dir" == *".git/worktrees/"* ]]; then
+      wt_name=$(basename "$git_dir")
+      git_info="${git_info} $(printf '\033[33m')[wt:${wt_name}]$(printf '\033[0m')"
+    fi
   fi
 fi
 
