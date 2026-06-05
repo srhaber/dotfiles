@@ -1,5 +1,6 @@
 ---
 description: Generate a prompt to resume this work in a new session
+disallowed-tools: Edit, Write, NotebookEdit
 ---
 
 Generate a concise handoff prompt I can paste into a new Claude Code session to resume this work.

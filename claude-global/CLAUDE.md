@@ -30,16 +30,13 @@ Concise, direct, bullet points over paragraphs. Prioritize technical accuracy ov
 
 ## Asking Questions
 
-**Always clarify before executing when:**
-- Multiple valid approaches exist
-- Requirements are ambiguous
-- Irreversible operations (force push, data deletion)
-- Security/permission implications
+**Default: act on the most reasonable interpretation.** For most tasks, executing and getting redirected costs less than a clarifying turn.
 
-**Make reasonable assumptions for:**
-- Standard conventions (variable naming, file structure)
-- Common patterns in the codebase
-- Low-risk decisions (formatting preferences)
+**For prompts that are not unambiguous one-liners:** briefly echo your understanding (1-2 lines) and list any material assumptions before acting. Proceed unless I redirect in the next turn. This externalizes the interpretation so I can catch a wrong read early without blocking work. Skip the echo for trivial prompts — single commands, fact lookups, simple tweaks.
+
+**Pause and ask before** any of: irreversible operations (force push, data deletion, shared-state writes), new auth/security surface, scope expansion beyond what was asked, new endpoints/services/dependencies, schema changes, or when proceeding would require 2+ material assumptions about intent. See `feedback_check_before_major_decisions.md` for rationale.
+
+**If you do need to ask, batch all questions into one message** with your best-guess for each. Never drip-feed.
 
 ## Response Length
 
@@ -49,101 +46,35 @@ Concise, direct, bullet points over paragraphs. Prioritize technical accuracy ov
 
 Default to shorter responses. Expand only when visuals or detail add value.
 
-## Token Efficiency: Instructions vs. Execution
+## Effort and thinking depth
 
-**Principle:** Provide instructions instead of doing work when manual execution is faster/cheaper. Optimize for user's token quota and context limits.
+Default effort is `high` — Opus 4.8's default for coding/agentic work (as of CC 2.1.151; Opus 4.7 defaulted to `xhigh`). The harness controls the level. Bump to `xhigh` only for genuinely hard problems (algorithm design, deep debugging); the top level is prone to overthinking with diminishing returns. Drop to `medium` when running concurrent sessions where cost matters more than depth. Fast mode (`/fast`) on Opus 4.8 is 2x standard rate for 2.5x output speed — worth toggling for long mechanical phases.
 
-### Always Provide Instructions (Don't Execute)
+Within an effort level, the model picks thinking depth adaptively. Two override patterns to use when the default doesn't match the task:
+- "Think carefully and step-by-step — this is harder than it looks." → tricky problems, deep refactors, when an earlier attempt missed something.
+- "Prioritize responding quickly over thinking deeply." → status checks, quick lookups, momentum over rigor.
 
-**Git operations:**
-- Cherry-picking: `git cherry-pick <hash>`
-- Resetting branches: `git reset --hard <ref>`
-- Rebasing: `git rebase -i <ref>`
-- Single-file reverts from history
+If a task feels harder than the current level seems calibrated for, say so explicitly ("this might benefit from `xhigh`").
 
-**Simple edits:**
-- Changes visible in recent `git diff`
-- Single-line modifications
-- Edits to code user just wrote/reviewed
+## When to execute vs. hand back the command
 
-**Known commands:**
-- Running existing scripts: `./script.sh`
-- Package management: `npm install`, `brew install`
-- Standard workflows user has done before
-- File operations: `mv`, `cp`, `rm`
+**Default: execute.** Treat me as a capable engineer — run the command, edit the file, write the code. The wrong-direction call is much cheaper than a turn spent classifying which lane a task is in.
 
-**Repetitive tasks:**
-- Operations user will do multiple times
-- Workflows worth documenting
-- Pattern-based changes user can apply
+**Hand back a command instead only when ALL of:**
+1. It's a single shell command (or 2–3 chained)
+2. You'd recognize it on sight — no explanation needed
+3. The execution context is mine anyway (interactive auth, force operations, anything that needs my keyboard)
 
-### Provide Both Options (Let User Decide)
+Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `brew install <pkg>`. Output format: one code block, no preamble, no token-cost framing, no "⚡ more efficient" banner.
 
-- Multi-file refactors with clear patterns
-- Moderate complexity (3-5 file edits)
-- Tasks requiring 5-10 commands
-- Migrations/upgrades with known steps
+**Always execute, never hand back:**
+- Multi-file edits, even with a clear pattern
+- Anything requiring search or exploration first
+- Tasks phrased as "fix…", "change X to Y", "implement…", "refactor…" — these mean *do it*
 
-### Execute Directly (Use LLM)
-
-- Unfamiliar codebases requiring exploration
-- Complex cross-file logic changes
-- Uncertain scope (need search/analysis first)
-- Debugging unknown issues
-- Writing new substantial code
-- Pattern matching with unclear boundaries
-
-### Trigger Phrases → Provide Instructions
-
-**Definite instruction mode:**
-- "help me..."
-- "how do I..."
-- "what's the command to..."
-- "show me how to..."
-- "walk me through..."
-- "what should I run..."
-
-**Probable instruction mode (assess first):**
-- "revert..." / "undo..."
-- "fix..." (if simple/obvious)
-- "change X to Y" (if single location)
-- "run..." / "execute..."
-
-**Execute directly:**
-- "implement..."
-- "add feature..."
-- "refactor..."
-- "find all..." / "search for..."
-- "debug why..."
-
-### Instruction Format
-
-When providing instructions instead of executing:
-
-⚡ **More efficient to do manually**
-
-**Token cost:** Manual ~0 tokens vs LLM ~30-40K tokens
-**Time:** ~1-2 minutes
-
-**Procedure:**
-```bash
-# Step 1: Description
-command here
-
-# Step 2: Description
-another command
-```
-
-**Why this is better:** [brief explanation]
-
-Still want me to do it? (I can if you prefer)
-
-### Exceptions (Execute Even If Simple)
-
-- User explicitly says "do it for me" / "make the change"
-- User seems stuck or frustrated
-- Marginal token difference (file already read, <5K additional tokens)
-- Part of larger complex task in progress
+The earlier separate rules still apply on top of this:
+- **Risky/irreversible operations** still need confirmation before executing (force push, data deletion, shared-state changes — see "Executing actions with care").
+- **Terraform** is mine alone — land the .tf edits and stop (per `feedback_terraform_ownership.md`).
 
 ## Git Worktrees
 
@@ -154,6 +85,19 @@ Still want me to do it? (I can if you prefer)
 - Remove: `worktree remove <feature>`
 - Clean: `worktree clean`
 - `.worktrees/` should be gitignored in every repo
+
+## Skill invocation
+
+**Skills are tools, not mandates.** Invoke a skill when the task genuinely benefits from its workflow — e.g. `superpowers:systematic-debugging` for a real debugging session, `superpowers:dispatching-parallel-agents` for actual parallel work, `superpowers:verification-before-completion` before claiming a non-trivial task done. Skip them for simple tasks where the workflow would be ceremony.
+
+This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 picks skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
+
+The exceptions where skill invocation is still load-bearing:
+- `update-config` — anything that touches `settings.json`
+- `superpowers:writing-skills` — when authoring/editing a skill
+- Any skill the user explicitly names in their prompt
+
+**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline.
 
 ## Agent Usage
 
@@ -167,24 +111,6 @@ Direct tools               → Specific file/class lookups, known patterns
 
 **Explore thoroughness:** `quick` | `medium` | `very thorough`
 
-### Agent + Visual Workflow
+**Don't spawn an agent for what a single tool call would answer.** A `grep`, `Read`, or `Glob` is faster than dispatching an Explore agent and waiting for its summary.
 
-**Use for:** Architecture questions, "how does X work?", system overviews
-
-**Process:**
-1. Launch Task(Explore) with: *"Return component list with file:line refs, flow sequence, key patterns"*
-2. Convert findings to visual format (80/20 ratio)
-3. Add prose only for decisions/gotchas
-
-**Example:**
-```
-Agent output → List of components with locations and relationships
-Your response → Flow diagram with arrows showing connections
-```
-
-### Skills + Agents
-
-Combine for repeatable workflows in `.claude/commands/`:
-1. Task(Explore) with structured output request
-2. Convert to diagram per visual preferences
-3. Add prose for decisions/gotchas
+For architecture questions where you do dispatch an Explore agent, ask it to return file:line refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visual-First").

@@ -6,9 +6,9 @@ You are helping document this Claude Code session for the user's personal knowle
 
 **Workflow:**
 
-1. Use AskUserQuestion to gather:
+1. Use AskUserQuestion to gather (batch both questions in one call):
    - Short slug (e.g., "setup-auth", "fix-bug", "api-refactor")
-   - What to document: key decisions, code changes, learnings, problems solved, or all of the above
+   - What to document — use `multiSelect: true` with options: key decisions, code changes, learnings, problems solved (any combination)
 
 2. Analyze the conversation history directly:
    - Identify major tasks completed
