@@ -48,7 +48,11 @@ Default to shorter responses. Expand only when visuals or detail add value.
 
 ## Effort and thinking depth
 
-Default effort is `high` — Opus 4.8's default for coding/agentic work (as of CC 2.1.151; Opus 4.7 defaulted to `xhigh`). The harness controls the level. Bump to `xhigh` only for genuinely hard problems (algorithm design, deep debugging); the top level is prone to overthinking with diminishing returns. Drop to `medium` when running concurrent sessions where cost matters more than depth. Fast mode (`/fast`) on Opus 4.8 is 2x standard rate for 2.5x output speed — worth toggling for long mechanical phases.
+Current lineup (verified against CC 2.1.202, 2026-07): **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus) and Sonnet 5 (near-Opus coding quality at Sonnet cost) — plus Opus 4.8 and Haiku 4.5. Opus 4.7 is previous-gen and sunsetting.
+
+Default effort is `high` on Fable 5, Sonnet 5, and Opus 4.8 (Opus 4.7 defaulted to `xhigh`). Levels run `low` → `max`. The harness controls the level. Bump to `xhigh` only for genuinely hard problems (algorithm design, deep debugging); `max` is prone to overthinking with diminishing returns. Drop to `medium` when running concurrent sessions where cost matters more than depth — on Claude 5 models, lower effort often matches prior models' `xhigh`, so step down sooner than old instincts suggest.
+
+Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus 4.8 only (4.7 fast deprecated, removed 2026-07-24; no Fable 5 fast mode, so toggling on a Fable session means an Opus swap). Worth it for long mechanical phases where model tier doesn't matter.
 
 Within an effort level, the model picks thinking depth adaptively. Two override patterns to use when the default doesn't match the task:
 - "Think carefully and step-by-step — this is harder than it looks." → tricky problems, deep refactors, when an earlier attempt missed something.
@@ -90,27 +94,37 @@ The earlier separate rules still apply on top of this:
 
 **Skills are tools, not mandates.** Invoke a skill when the task genuinely benefits from its workflow — e.g. `superpowers:systematic-debugging` for a real debugging session, `superpowers:dispatching-parallel-agents` for actual parallel work, `superpowers:verification-before-completion` before claiming a non-trivial task done. Skip them for simple tasks where the workflow would be ceremony.
 
-This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 picks skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
+This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 and the Claude 5 models pick skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
+
+Skills chain (CC ≥2.1.199): up to 6 in one prompt — `/skill-a /skill-b do XYZ`. Custom slash commands are now skills; there's no separate command system.
 
 The exceptions where skill invocation is still load-bearing:
 - `update-config` — anything that touches `settings.json`
 - `superpowers:writing-skills` — when authoring/editing a skill
 - Any skill the user explicitly names in their prompt
 
-**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline.
+**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline. For deep multi-system planning before a plan exists, `/ultraplan` is available — reserve it for genuinely cross-cutting work.
 
 ## Agent Usage
 
-### When to Use Task Tool
+### When to Use the Agent Tool
+
+(Renamed from Task in CC 2.1.63 — `Task(...)` references below still resolve.)
 
 ```
-Task(Explore)              → "How does X work?", architecture questions, open-ended exploration
-Task(general-purpose)      → Multi-step research, complex searches
+Agent(Explore)             → "How does X work?", architecture questions, open-ended exploration
+Agent(general-purpose)     → Multi-step research, complex searches
 Direct tools               → Specific file/class lookups, known patterns
 ```
 
 **Explore thoroughness:** `quick` | `medium` | `very thorough`
 
-**Don't spawn an agent for what a single tool call would answer.** A `grep`, `Read`, or `Glob` is faster than dispatching an Explore agent and waiting for its summary.
+**Subagents run in the background by default** (CC ≥2.1.198) — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
+
+**Don't spawn an agent for what a single tool call would answer.** A `grep`, `Read`, or `Glob` is faster than dispatching an Explore agent for its summary.
 
 For architecture questions where you do dispatch an Explore agent, ask it to return file:line refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visual-First").
+
+### Multi-agent orchestration (Workflow)
+
+The Workflow tool runs deterministic multi-agent scripts (fan-out, adversarial verify, synthesize) but is opt-in — it fires only when I say "use a workflow" or "ultracode" in the prompt. For large audits/migrations/exhaustive reviews, propose one with a rough cost estimate instead of running it unprompted. `superpowers:dispatching-parallel-agents` remains the default for ordinary 2–5-agent parallel work.
