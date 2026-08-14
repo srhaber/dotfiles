@@ -29,11 +29,36 @@ def is_recursive_flag(token: str) -> bool:
     return any(ch in "rR" for ch in token[1:])
 
 
+# Tokens that can legitimately precede the real `rm` command without changing what it is.
+# Anything else before `rm` means it's a subcommand of another tool (`git rm`, `docker image rm`),
+# whose deletions are that tool's business — and are recoverable in a way `rm -rf` is not.
+RM_PREFIXES = {"sudo", "doas", "env", "time", "nohup", "command", "xargs", "exec", "then", "do", "&&", "||"}
+
+
+def is_rm_in_command_position(tokens: list[str], i: int) -> bool:
+    if i == 0:
+        return True
+    if tokens[i - 1] in ("-exec", "-execdir"):  # find . -exec rm -r {} +
+        return True
+    for t in tokens[:i]:
+        base = t.split("/")[-1]
+        if base in RM_PREFIXES:
+            continue
+        if "=" in t and not t.startswith("-"):  # FOO=bar rm ...
+            continue
+        if t.startswith("-"):  # flags belonging to an allowed prefix, e.g. xargs -0
+            continue
+        return False
+    return True
+
+
 def segment_has_recursive_rm(segment: str) -> bool:
     tokens = segment.split()
     for i, token in enumerate(tokens):
         # basename, so /bin/rm and sudo/xargs/find -exec prefixes all resolve
         if token.split("/")[-1] != "rm":
+            continue
+        if not is_rm_in_command_position(tokens, i):
             continue
         for arg in tokens[i + 1:]:
             if arg == "--":
