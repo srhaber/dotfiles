@@ -2,6 +2,15 @@
 # Only includes aliases not provided by oh-my-zsh plugins
 
 # ===========================
+# Undo oh-my-zsh aliases
+# ===========================
+# The common-aliases plugin sets rm/cp/mv to -i. The confirmation prompt
+# can't be answered from a non-interactive context, so anything driving
+# the shell programmatically hangs until it times out. This file is
+# sourced after oh-my-zsh, so these win.
+unalias rm cp mv 2>/dev/null
+
+# ===========================
 # Modern CLI tool shortcuts
 # ===========================
 # bat - better cat with syntax highlighting (keep cat pure for scripts)
