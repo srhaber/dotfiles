@@ -14,7 +14,16 @@ Target **80% visuals, 20% prose** for architecture/systems. Use visuals liberall
 **Trees:** File hierarchies with `├──` and `└──`
 **Tables:** Only for multi-dimensional comparisons, code locations
 
-**Symbols:** `→` flow, `↓` next step, `├──▶` branch. Always include `file.py:123` line numbers.
+**Symbols:** `→` flow, `↓` next step, `├──▶` branch.
+
+**Pointing at code:** always say where. How precisely depends on how long the text lives:
+
+| Where it's written | Form |
+|---|---|
+| Chat replies, PR/review comments, commit messages, notes tied to one commit | `file.py:123` — clickable, and it dies with the turn |
+| CLAUDE.md, READMEs, specs, plans, saved session summaries, memory files | `file.py — funcName` or `file.py:Class.method` |
+
+Line numbers drift the moment anything above them changes, so anything that outlives the session references a **symbol or section name** instead. When editing an existing doc, strip line numbers you find there even if they were right when written.
 
 ## Communication Style
 
@@ -48,11 +57,11 @@ Default to shorter responses. Expand only when visuals or detail add value.
 
 ## Effort and thinking depth
 
-Current lineup (verified against CC 2.1.202, 2026-07): **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus) and Sonnet 5 (near-Opus coding quality at Sonnet cost) — plus Opus 4.8 and Haiku 4.5. Opus 4.7 is previous-gen and sunsetting.
+Current lineup (verified against CC 2.1.231, 2026-08): the **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus), Opus 5 (`claude-opus-5`), and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Opus 4.8 is previous-gen. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
 
-Default effort is `high` on Fable 5, Sonnet 5, and Opus 4.8 (Opus 4.7 defaulted to `xhigh`). Levels run `low` → `max`. The harness controls the level. Bump to `xhigh` only for genuinely hard problems (algorithm design, deep debugging); `max` is prone to overthinking with diminishing returns. Drop to `medium` when running concurrent sessions where cost matters more than depth — on Claude 5 models, lower effort often matches prior models' `xhigh`, so step down sooner than old instincts suggest.
+Default effort is `high` across the Claude 5 models. Levels run `low` → `max`. The harness controls the level. Bump to `xhigh` only for genuinely hard problems (algorithm design, deep debugging); `max` is prone to overthinking with diminishing returns. Drop to `medium` when running concurrent sessions where cost matters more than depth — on Claude 5 models, lower effort often matches prior models' `xhigh`, so step down sooner than old instincts suggest.
 
-Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus 4.8 only (4.7 fast deprecated, removed 2026-07-24; no Fable 5 fast mode, so toggling on a Fable session means an Opus swap). Worth it for long mechanical phases where model tier doesn't matter.
+Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus 5 and Opus 4.8 (no Fable 5 fast mode, so toggling on a Fable session means an Opus swap). Worth it for long mechanical phases where model tier doesn't matter.
 
 Within an effort level, the model picks thinking depth adaptively. Two override patterns to use when the default doesn't match the task:
 - "Think carefully and step-by-step — this is harder than it looks." → tricky problems, deep refactors, when an earlier attempt missed something.
@@ -123,7 +132,7 @@ Direct tools               → Specific file/class lookups, known patterns
 
 **Don't spawn an agent for what a single tool call would answer.** A `grep`, `Read`, or `Glob` is faster than dispatching an Explore agent for its summary.
 
-For architecture questions where you do dispatch an Explore agent, ask it to return file:line refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visual-First").
+For architecture questions where you do dispatch an Explore agent, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visual-First"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
 
 ### Multi-agent orchestration (Workflow)
 

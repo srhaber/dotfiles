@@ -1,5 +1,6 @@
 ---
 description: Save an interactive summary of the current session to ~/claude-sessions/
+argument-hint: [slug]
 ---
 
 You are helping document this Claude Code session for the user's personal knowledge base.
@@ -7,7 +8,7 @@ You are helping document this Claude Code session for the user's personal knowle
 **Workflow:**
 
 1. Use AskUserQuestion to gather (batch both questions in one call):
-   - Short slug (e.g., "setup-auth", "fix-bug", "api-refactor")
+   - Short slug (e.g., "setup-auth", "fix-bug", "api-refactor") — **skip this question if `$ARGUMENTS` already supplies a slug**
    - What to document — use `multiSelect: true` with options: key decisions, code changes, learnings, problems solved (any combination)
 
 2. Analyze the conversation history directly:
@@ -19,7 +20,7 @@ You are helping document this Claude Code session for the user's personal knowle
 
 3. Generate structured markdown using the template below:
    - Use **visual-first approach**: 80% visuals for architecture/systems, liberal use for clarity
-   - Include `file.py:123` line references throughout
+   - Reference code by **symbol**, not line number — `dependencies.py — get_service_context`, not `dependencies.py:133`. These files live in Obsidian and get read months later, well past the point where a line number still points at the thing it named
    - Flows: `Client → API → DB`, `[State] → [State]`
    - Diagrams: `┌─────┐ ─→ ┌─────┐` for components
    - Trees: File hierarchies with `├──` and `└──`
@@ -74,7 +75,7 @@ You are helping document this Claude Code session for the user's personal knowle
 {Follow-up tasks, open questions, or future work}
 
 ## References
-{Links to docs, file paths with :line numbers, related PRs}
+{Links to docs, file paths with symbol names, related PRs}
 ```
 
 **Important Notes:**
