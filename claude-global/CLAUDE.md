@@ -51,7 +51,9 @@ Finished documents go to **disk** — a file in the repo, or `~/claude-sessions/
 
 ## Communication Style
 
-Concise, direct, bullet points over paragraphs. Prioritize technical accuracy over validation. Challenge assumptions when appropriate—objective guidance beats false agreement.
+Concise, direct, bullet points over paragraphs. Prioritize technical accuracy over validation. Challenge assumptions when appropriate — objective guidance beats false agreement.
+
+When you explain something, give the high-level summary unless I ask for depth. Keep caveats and disclaimers short and spend the response on the answer itself.
 
 ### Narration during agentic work
 
@@ -77,9 +79,13 @@ Before the first tool call, one sentence on what you're about to do — for non-
 
 **If you do need to ask, batch all questions into one message** with your best-guess for each. Never drip-feed.
 
+### Delivering the scope I asked for
+
+Deliver what was asked, at the scope intended. Make routine judgment calls yourself. If the request looks mistaken, or you see a better approach, say so in a sentence and then build the thing I asked for — don't quietly narrow it, widen it, or turn it into a different task. Finish the whole task rather than the parts that are easy; if one piece is genuinely blocked, complete everything else and say plainly what you left out and why. Scaling the work down is my call, not yours.
+
 ## Effort and thinking depth
 
-Current lineup (verified against CC 2.1.238, 2026-08): the **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus), Opus 5 (`claude-opus-5`), and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Opus 4.8 is previous-gen. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
+Current lineup (verified against CC 2.1.238, 2026-08): the **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus), Opus 5 (`claude-opus-5`), and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Opus 4.8 is previous-gen. Opus 5's context window is 1M tokens — both the default and the maximum, with instruction-following and tool calling holding across it; Claude Code reports the id with a `[1m]` suffix. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
 
 Default effort is `high` across the Claude 5 models. Levels run `low` → `max`. The harness controls the level.
 
@@ -111,7 +117,7 @@ Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `b
 
 The earlier separate rules still apply on top of this:
 - **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes.
-- **Terraform** is mine alone. I run every `tf plan`, `tf apply`, and `terragrunt` command myself — never offer to, and never put one in `run_in_background`. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first.
+- **Terraform** is mine alone. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — never offer to, and never put one in `run_in_background`. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first.
 
 ## Git Worktrees
 
@@ -131,7 +137,11 @@ The earlier separate rules still apply on top of this:
 
 ## Code review requests
 
-**Don't self-limit review scope.** "Only report high-severity issues" or "be conservative" gets followed literally and suppresses real findings. Claude 5 review precision is high enough that the extra findings are mostly real bugs, not noise — so report everything found and filter in a separate pass. Precision also holds at lower effort, which makes `/code-review` at `low`/`medium` a legitimate fast pass — narrower coverage, not worse precision.
+**Don't self-limit review scope.** "Only report high-severity issues" or "be conservative" gets followed literally and suppresses real findings. Claude 5 review precision is high enough that the extra findings are mostly real bugs, not noise — so report everything found and filter in a separate pass. Precision also holds at lower effort, which makes `/code-review` at `low`/`medium` a legitimate fast pass — narrower coverage, not worse precision. The cadence that follows: a fast pass when I ask for review, and a thorough pass later if the change earns one.
+
+## UI and visual work
+
+When the work is visual — a UI change, a chart, a rendered page — **look at it instead of reasoning about it.** Screenshot it, crop in on the part in question, and iterate against what you actually see. Tools beat thinking here; `/run` exists for this.
 
 ## Skill invocation
 
@@ -148,7 +158,7 @@ The exceptions where skill invocation is still load-bearing:
 - `superpowers:writing-skills` — when authoring/editing a skill
 - Any skill the user explicitly names in their prompt
 
-**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. Its per-task review is the one verification step I do want kept: it reviews *another agent's* output, which is the case the self-verification caveat above doesn't cover. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline. For planning before a plan exists, `superpowers:brainstorming` then `superpowers:writing-plans` — reserve the full pass for genuinely cross-cutting work.
+**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. Its per-task review is the one verification step I do want kept: it reviews *another agent's* output, which is the case the self-verification caveat above doesn't cover. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline — that pipeline comes from a plugin, so if `/ship` isn't installed on this machine, stop after implementing and tell me rather than improvising a substitute. For planning before a plan exists, `superpowers:brainstorming` then `superpowers:writing-plans` — reserve the full pass for genuinely cross-cutting work.
 
 ## Memory
 
