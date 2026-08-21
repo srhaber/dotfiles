@@ -1,0 +1,9 @@
+{
+  "pr-review-toolkit@claude-code-plugins": true,
+  "code-review@claude-code-plugins": false,
+  "commit-commands@claude-code-plugins": false,
+  "superpowers@claude-plugins-official": true,
+  "popcorn@popcorn": true,
+  "frontend-design@claude-code-plugins": true,
+  "shaun@dev-toolkit": true
+}
