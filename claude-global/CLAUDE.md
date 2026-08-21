@@ -23,9 +23,11 @@ The failure mode is abstraction — a diagram that's technically correct and tel
 
 **What a good answer looks like.** Asked "why is the test suite slow?":
 
-> The bottleneck is `conftest.py — db_fixture`: it's function-scoped, so the schema is rebuilt for all 400 tests instead of once. Session-scoping it takes the suite from 6m to ~40s.
->
-> Where the time goes: `pytest → db_fixture (×400) → create_all → seed → teardown`
+<example>
+The bottleneck is `conftest.py — db_fixture`: it's function-scoped, so the schema is rebuilt for all 400 tests instead of once. Session-scoping it takes the suite from 6m to ~40s.
+
+Where the time goes: `pytest → db_fixture (×400) → create_all → seed → teardown`
+</example>
 
 The sentence naming the cause comes first. The flow sits underneath as context, every node is a real symbol, and there's one visual rather than three. When the whole story is "A calls B," that's a sentence — write the sentence.
 
@@ -99,9 +101,7 @@ Default effort is `high` across the Claude 5 models. Levels run `low` → `max`.
 
 Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus 5 and Opus 4.8 (no Fable 5 fast mode, so toggling on a Fable session means an Opus swap). Worth it for long mechanical phases where model tier doesn't matter.
 
-Within an effort level, the model picks thinking depth adaptively. Two override patterns to use when the default doesn't match the task:
-- "Think carefully and step-by-step — this is harder than it looks." → tricky problems, deep refactors, when an earlier attempt missed something.
-- "Prioritize responding quickly over thinking deeply." → status checks, quick lookups, momentum over rigor.
+Within an effort level, thinking depth is adaptive — calibrated on effort and query complexity together — so "think step by step" prompting is close to a no-op. The override worth keeping is the down-lever: "Prioritize responding quickly over thinking deeply," for status checks, quick lookups, and momentum over rigor.
 
 If a task feels harder than the current level seems calibrated for, say so explicitly ("this might benefit from `xhigh`").
 
@@ -122,7 +122,7 @@ Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `b
 - Tasks phrased as "fix…", "change X to Y", "implement…", "refactor…" — these mean *do it*
 
 The earlier separate rules still apply on top of this:
-- **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes.
+- **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes. When something blocks you, solve it rather than routing around it destructively: no `--no-verify`, and no discarding unfamiliar files that may be in-progress work.
 - **Terraform** is mine alone. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — so never offer to run one, and never put one in `run_in_background`.
 
 ## Git Worktrees
@@ -140,6 +140,12 @@ The earlier separate rules still apply on top of this:
 `-n`/`--dry-run` prints destructive commands instead of running them; use it before any `clean`. `-y`/`--yes` skips prompts. A worktree containing `.worktree_keep` is never auto-removed. Narration goes to stderr, so `path` and `list` stay pipeable.
 
 **Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree`,** and over whatever `superpowers:using-git-worktrees` reaches for on its own. Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention.
+
+## Working in code
+
+**Read before you answer.** If I name a file, open it before answering about it. Ground every claim about the codebase in something you've actually read.
+
+**Tests verify correctness; they don't define it.** Implement the general case with the standard tools. If a test looks wrong, or the task looks infeasible, tell me instead of shaping the code around the assertions. Removing or weakening a test to get a suite green is off the table — a deleted assertion is missing functionality that nobody notices. Name the test you think is wrong and why, and let me decide.
 
 ## Code review requests
 
@@ -191,7 +197,7 @@ Direct tools               → Specific file/class lookups, known patterns
 
 **Subagents run in the background by default** (CC ≥2.1.198) — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
 
-**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, and one agent beats three. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (CC ≥2.1.217).
+**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Isolated context counts too — work that would otherwise flood this conversation. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, one agent beats three, and anything needing context carried across steps stays with me. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (CC ≥2.1.217).
 
 For architecture questions where you do dispatch an Explore agent, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visuals and Prose"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
 
