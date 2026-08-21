@@ -4,14 +4,9 @@
 
 **No fixed ratio.** Lead with a visual when *structure* is the point; use prose when *reasoning* is the point. A ratio target just produces diagrams — what I want is diagrams that carry information.
 
-**A visual earns its place when it holds something prose can't:**
-- **Topology** — what talks to what, and which direction
-- **Sequence** — ordering, especially with branches, retries, or failure paths
-- **Hierarchy** — file trees, nesting, ownership
-- **Multi-dimensional comparison** — 3+ things across 2+ axes (a table)
-- **State transitions** — what moves the system between states
+A visual earns its place when it holds something prose can't: topology, meaning what talks to what and in which direction; sequence, especially with branches, retries, or failure paths; hierarchy, as in file trees, nesting, and ownership; a comparison of three or more things across two or more axes, which is a table; or the transitions that move a system between states.
 
-**Prose carries everything else, and that's usually the valuable part:** why this design over the alternative, what the bug actually was, what an edge case costs, what I should be worried about, what you're uncertain about. A diagram cannot argue or qualify. Don't make one try.
+Prose carries everything else, and that's usually the valuable part — why this design over the alternative, what the bug actually was, what an edge case costs, what I should be worried about, what you're uncertain about. A diagram cannot argue or qualify, so don't make one try. This paragraph is the shape I mean: the reasoning runs in sentences, and the list above became one too.
 
 ### Keeping visuals concrete
 
@@ -67,7 +62,7 @@ When you explain something, give the high-level summary unless I ask for depth. 
 
 Before the first tool call, one sentence on what you're about to do — for non-trivial prompts that's the same sentence as the understanding echo under "Asking Questions." One preamble, not two. While working, update me when you find something important or change direction — not a play-by-play of each step. When you finish, lead with the outcome: the first sentence answers "what happened" or "what did you find," with supporting detail after it.
 
-**Corrections:** flag an earlier statement only when the error would change my code, conclusions, or decisions. State it plainly in a sentence and continue. For slips that change nothing for me, make the fix and move on without noting it.
+**Corrections:** flag one only when the error would change my code, conclusions, or decisions. Otherwise fix it silently and continue.
 
 ## GitHub URL Handling
 
@@ -87,13 +82,11 @@ Before the first tool call, one sentence on what you're about to do — for non-
 
 **If you do need to ask, batch all questions into one message** with your best-guess for each.
 
-### Delivering the scope I asked for
-
-Deliver what was asked, at the scope intended. Make routine judgment calls yourself. If the request looks mistaken, or you see a better approach, say so in a sentence and then build the thing I asked for — don't quietly narrow it, widen it, or turn it into a different task. Finish the whole task rather than the parts that are easy; if one piece is genuinely blocked, complete everything else and say plainly what you left out and why. Scaling the work down is my call, not yours.
+**On disagreement:** if the request looks mistaken or you see a better approach, say so in one sentence and then build what I asked for anyway.
 
 ## Effort and thinking depth
 
-Current lineup (verified against CC 2.1.238, 2026-08): the **Claude 5 family** — Fable 5 (`claude-fable-5`, Mythos-class tier above Opus), Opus 5 (`claude-opus-5`), and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Opus 4.8 is previous-gen. Opus 5's context window is 1M tokens — both the default and the maximum, with instruction-following and tool calling holding across it; Claude Code reports the id with a `[1m]` suffix. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
+Current lineup (verified against CC 2.1.238, 2026-08): the **Claude 5 family** — Fable 5 (`claude-fable-5`) and Mythos 5, the tier above Opus, where thinking is always on and adaptive is the only mode; Opus 5 (`claude-opus-5`); and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Opus 4.8 is previous-gen. Opus 5's context window is 1M tokens — both the default and the maximum, with instruction-following and tool calling holding across it; Claude Code reports the id with a `[1m]` suffix. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
 
 Default effort is `high` across the Claude 5 models. Levels run `low` → `max`. The harness controls the level.
 
@@ -133,25 +126,23 @@ The earlier separate rules still apply on top of this:
 - **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes. When something blocks you, solve it rather than routing around it destructively: no `--no-verify`, and no discarding unfamiliar files that may be in-progress work.
 - **Terraform** is mine alone. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — so never offer to run one, and never put one in `run_in_background`.
 
+## Commits and staging
+
+**Read `git log` before writing a commit message** and match what's there: a scope prefix (`claude:`, `worktree:`, `git:`), then a body explaining why the change was needed rather than restating the diff. Anything non-trivial gets a body.
+
+**Stage by path.** When the tree holds work I didn't ask you to commit, add the specific files and say which ones you left alone. `git commit -a` is how in-flight work gets swept into an unrelated commit.
+
 ## Git Worktrees
 
-**Convention:** worktrees live at `.worktrees/<feature>` in the repo root, on branch `shaun/<feature>`. `.worktrees/` should be gitignored in every repo.
-
-- Create: `worktree create <feature>`
-- List: `worktree list` (`ls`)
-- Path only: `worktree path <feature>` — stdout, for scripting and the `wt()` shell function
-- Switch: `worktree switch <feature>` (`sw`) — prints the `cd` command, since a subprocess can't cd for me
-- Remove: `worktree remove <feature>` (`rm`) — optionally deletes the branch
-- Prune: `worktree prune` — stale worktree refs, plus local branches whose remote is gone
-- Clean: `worktree clean` — unused worktrees and branches
-
-`-n`/`--dry-run` prints destructive commands instead of running them; use it before any `clean`. `-y`/`--yes` skips prompts. A worktree containing `.worktree_keep` is never auto-removed. Narration goes to stderr, so `path` and `list` stay pipeable.
+**Convention:** worktrees live at `.worktrees/<feature>` in the repo root, on branch `shaun/<feature>`. `.worktrees/` should be gitignored in every repo. Run `worktree help` for the subcommands and flags — use `--dry-run` before any `clean`.
 
 **Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree`,** and over whatever `superpowers:using-git-worktrees` reaches for on its own. Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention.
 
 ## Working in code
 
 **Read before you answer.** If I name a file, open it before answering about it. Ground every claim about the codebase in something you've actually read.
+
+**Keep the solution the size of the problem.** A bug fix doesn't need the surrounding code cleaned up, and a small feature doesn't need configurability. Add docstrings, comments, and type annotations to code you changed, not to code you passed through. Validate at system boundaries — user input, external APIs — and trust internal calls and framework guarantees instead of handling cases that can't occur. Write the helper when there's a second caller, not in anticipation of one.
 
 **Tests verify correctness; they don't define it.** Implement the general case with the standard tools. If a test looks wrong, or the task looks infeasible, tell me instead of shaping the code around the assertions. Removing or weakening a test to get a suite green is off the table — a deleted assertion is missing functionality that nobody notices. Name the test you think is wrong and why, and let me decide.
 
@@ -171,7 +162,7 @@ When the work is visual — a UI change, a chart, a rendered page — **look at 
 
 This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 and the Claude 5 models pick skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
 
-Skills chain (CC ≥2.1.199): up to 6 in one prompt — `/skill-a /skill-b do XYZ`. Custom slash commands are now skills; there's no separate command system.
+Skills chain: up to 6 in one prompt — `/skill-a /skill-b do XYZ`. Custom slash commands are now skills; there's no separate command system.
 
 The exceptions where skill invocation is still load-bearing:
 - `update-config` — anything that touches `settings.json`. Resolve the path first: on some machines it's a symlink into a separate repo, which makes the edit a change to *that* repo and puts it under the confirm-before-shared-state-writes rule above
@@ -203,9 +194,9 @@ Direct tools               → Specific file/class lookups, known patterns
 
 **Continue an agent, don't respawn one.** `SendMessage` to a running or finished agent keeps its context; a fresh `Agent` call starts cold. Pass `isolation: "worktree"` when parallel agents would otherwise edit the same files.
 
-**Subagents run in the background by default** (CC ≥2.1.198) — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
+**Subagents run in the background by default** — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
 
-**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Isolated context counts too — work that would otherwise flood this conversation. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, one agent beats three, and anything needing context carried across steps stays with me. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (CC ≥2.1.217).
+**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Isolated context counts too — work that would otherwise flood this conversation. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, one agent beats three, and anything needing context carried across steps stays with me. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`.
 
 For architecture questions where you do dispatch an Explore agent, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visuals and Prose"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
 
