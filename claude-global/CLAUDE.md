@@ -19,9 +19,15 @@ The failure mode is abstraction — a diagram that's technically correct and tel
 
 - **Name real things.** Nodes are `worktree create` and `settings.json`, not `[Command]` and `[Config]`. If a box's label could describe any codebase, it's decoration.
 - **Annotate the edges.** A bare arrow asserts only "related." Put the mechanism on it — the function called, the event emitted, the file written.
-- **Don't diagram a sentence.** `A → B` where the whole story is "A calls B" is a sentence with extra characters. Write the sentence.
 - **One visual per idea, then stop.** One good diagram plus a paragraph beats three views of the same system.
-- **Never a visual *instead of* the answer.** If I ask why something is slow, the answer is a sentence naming the bottleneck. A flow diagram is supporting context, and it doesn't go first.
+
+**What a good answer looks like.** Asked "why is the test suite slow?":
+
+> The bottleneck is `conftest.py — db_fixture`: it's function-scoped, so the schema is rebuilt for all 400 tests instead of once. Session-scoping it takes the suite from 6m to ~40s.
+>
+> Where the time goes: `pytest → db_fixture (×400) → create_all → seed → teardown`
+
+The sentence naming the cause comes first. The flow sits underneath as context, every node is a real symbol, and there's one visual rather than three. When the whole story is "A calls B," that's a sentence — write the sentence.
 
 ### Visual Types
 
@@ -77,7 +83,7 @@ Before the first tool call, one sentence on what you're about to do — for non-
 
 **Pause and ask before** any of: irreversible operations (force push, data deletion, shared-state writes), new auth/security surface, scope expansion beyond what was asked, new endpoints/services/dependencies, schema changes, or when proceeding would require 2+ material assumptions about intent. Present concrete options with benefits and risks and let me pick. Flagging it in the PR description afterwards is not the same as asking first — by then the work is done and reverting costs real effort.
 
-**If you do need to ask, batch all questions into one message** with your best-guess for each. Never drip-feed.
+**If you do need to ask, batch all questions into one message** with your best-guess for each.
 
 ### Delivering the scope I asked for
 
@@ -89,7 +95,7 @@ Current lineup (verified against CC 2.1.238, 2026-08): the **Claude 5 family** �
 
 Default effort is `high` across the Claude 5 models. Levels run `low` → `max`. The harness controls the level.
 
-`low` and `medium` are the **primary lever** for token cost and latency, not an emergency measure — reach for them wherever quality holds (status checks, mechanical edits, code review passes, concurrent sessions). On Claude 5 models lower effort often matches prior models' `xhigh`, so step down sooner than old instincts suggest. Step up to `xhigh` for demanding coding and agentic work — multi-file features, large refactors, deep debugging, algorithm design — not merely for problems that *feel* hard. `max` is prone to overthinking with diminishing returns. Effort defaults carried over from a prior model generation are probably miscalibrated; re-check rather than inherit.
+`low` and `medium` are the **primary lever** for token cost and latency, not an emergency measure — reach for them wherever quality holds (status checks, mechanical edits, code review passes, concurrent sessions). On Claude 5 models lower effort often matches prior models' `xhigh`, so step down sooner than old instincts suggest. Step up to `xhigh` for demanding coding and agentic work — multi-file features, large refactors, deep debugging, algorithm design. Judge by the shape of the work, not by how hard it feels. `max` is prone to overthinking with diminishing returns. Effort defaults carried over from a prior model generation are probably miscalibrated; re-check rather than inherit.
 
 Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus 5 and Opus 4.8 (no Fable 5 fast mode, so toggling on a Fable session means an Opus swap). Worth it for long mechanical phases where model tier doesn't matter.
 
@@ -108,7 +114,7 @@ If a task feels harder than the current level seems calibrated for, say so expli
 2. You'd recognize it on sight — no explanation needed
 3. The execution context is mine anyway (interactive auth, force operations, anything that needs my keyboard)
 
-Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `brew install <pkg>`. Output format: one code block, no preamble, no token-cost framing, no "⚡ more efficient" banner.
+Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `brew install <pkg>`. Output format: the code block alone, nothing before or after it.
 
 **Always execute, never hand back:**
 - Multi-file edits, even with a clear pattern
@@ -117,7 +123,7 @@ Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `b
 
 The earlier separate rules still apply on top of this:
 - **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes.
-- **Terraform** is mine alone. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — never offer to, and never put one in `run_in_background`. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first.
+- **Terraform** is mine alone. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — so never offer to run one, and never put one in `run_in_background`.
 
 ## Git Worktrees
 
@@ -145,9 +151,9 @@ When the work is visual — a UI change, a chart, a rendered page — **look at 
 
 ## Skill invocation
 
-**Skills are tools, not mandates.** Invoke a skill when the task genuinely benefits from its workflow — e.g. `superpowers:systematic-debugging` for a real debugging session, `superpowers:dispatching-parallel-agents` for actual parallel work. Skip them for simple tasks where the workflow would be ceremony.
+**Skills are tools, not mandates.** Invoke a skill when the task genuinely benefits from its workflow — e.g. `superpowers:systematic-debugging` for a real debugging session, `superpowers:dispatching-parallel-agents` for actual parallel work. For simple tasks, work directly — the workflow would be ceremony.
 
-**Don't bolt on verification you'd perform anyway.** Claude 5 models verify and self-correct without being asked; an added verification step compounds with that and burns tokens for no quality gain. So no `superpowers:verification-before-completion` as a reflex on every non-trivial task, and never a subagent whose only job is double-checking your own output. Reserve it for ship-time gates where I want the evidence in the transcript — before a commit, a PR, or a deploy.
+**Verify as you go, then report.** Claude 5 models verify and self-correct without being asked, so a bolted-on verification step compounds with that and burns tokens for no quality gain. Reserve `superpowers:verification-before-completion` for ship-time gates where I want the evidence in the transcript — before a commit, a PR, or a deploy. Verification is your own work, not a job to hand to a subagent.
 
 This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 and the Claude 5 models pick skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
 
@@ -158,7 +164,7 @@ The exceptions where skill invocation is still load-bearing:
 - `superpowers:writing-skills` — when authoring/editing a skill
 - Any skill the user explicitly names in their prompt
 
-**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Don't ask whether I want checkpoints — the answer is no. Its per-task review is the one verification step I do want kept: it reviews *another agent's* output, which is the case the self-verification caveat above doesn't cover. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline — that pipeline comes from a plugin, so if `/ship` isn't installed on this machine, stop after implementing and tell me rather than improvising a substitute. For planning before a plan exists, `superpowers:brainstorming` then `superpowers:writing-plans` — reserve the full pass for genuinely cross-cutting work.
+**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Run it start to finish; no checkpoint prompts. Its per-task review is the one verification step I do want kept: it reviews *another agent's* output, which is the case the self-verification caveat above doesn't cover. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline — that pipeline comes from a plugin, so if `/ship` isn't installed on this machine, stop after implementing and tell me rather than improvising a substitute. For planning before a plan exists, `superpowers:brainstorming` then `superpowers:writing-plans` — reserve the full pass for genuinely cross-cutting work.
 
 ## Memory
 
@@ -185,9 +191,7 @@ Direct tools               → Specific file/class lookups, known patterns
 
 **Subagents run in the background by default** (CC ≥2.1.198) — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
 
-**Don't spawn an agent for what a single tool call would answer.** A `grep`, `Read`, or `Glob` is faster than dispatching an Explore agent for its summary.
-
-**Delegate for large, genuinely independent, parallelizable tracks** — a wide multi-file investigation, several unrelated subsystems. Not for work you'd finish in a handful of tool calls, and not to check your own output. If one agent can do it, use one rather than several. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (CC ≥2.1.217).
+**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, and one agent beats three. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (CC ≥2.1.217).
 
 For architecture questions where you do dispatch an Explore agent, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visuals and Prose"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
 
