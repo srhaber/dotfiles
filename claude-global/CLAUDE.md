@@ -114,7 +114,15 @@ If a task feels harder than the current level seems calibrated for, say so expli
 2. You'd recognize it on sight — no explanation needed
 3. The execution context is mine anyway (interactive auth, force operations, anything that needs my keyboard)
 
-Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `brew install <pkg>`. Output format: the code block alone, nothing before or after it.
+Fits: `git cherry-pick <hash>`, `git reset --hard <ref>`, `mv old.py new.py`, `brew install <pkg>`. The whole response is the code block:
+
+<example>
+```
+git cherry-pick a1b2c3d
+```
+</example>
+
+Nothing before it, nothing after it.
 
 **Always execute, never hand back:**
 - Multi-file edits, even with a clear pattern
