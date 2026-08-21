@@ -28,19 +28,99 @@ warning() {
 }
 
 success() {
-    echo -e "${GREEN}$*${NC}"
+    echo -e "${GREEN}$*${NC}" >&2
 }
 
 info() {
-    echo -e "${BLUE}$*${NC}"
+    echo -e "${BLUE}$*${NC}" >&2
+}
+
+# Global flags (set by main)
+ASSUME_YES=false
+DRY_RUN=false
+
+# Ask a yes/no question. Auto-answers yes under --yes.
+confirm() {
+    local prompt="$1" response
+    if [[ "$ASSUME_YES" == true ]]; then
+        info "$prompt [auto-yes]"
+        return 0
+    fi
+    read -rp "$prompt [y/N] " response
+    [[ "$response" =~ ^[Yy]$ ]]
+}
+
+# Run a destructive command, or describe it under --dry-run.
+run() {
+    if [[ "$DRY_RUN" == true ]]; then
+        echo "  [dry-run] $*" >&2
+        return 0
+    fi
+    "$@"
+}
+
+# Like run(), but silences the command's own stderr. Call sites must not add
+# their own 2>/dev/null — that would swallow the [dry-run] notice too.
+run_quiet() {
+    if [[ "$DRY_RUN" == true ]]; then
+        echo "  [dry-run] $*" >&2
+        return 0
+    fi
+    "$@" 2>/dev/null
+}
+
+# The main repo root, even when invoked from inside a worktree.
+# --show-toplevel would return the worktree's own root, which nests .worktrees/.
+get_main_repo_root() {
+    local common_dir
+    common_dir=$(git rev-parse --git-common-dir)
+    # Relative (".git") when run from the main repo root; absolute from a worktree.
+    [[ "$common_dir" != /* ]] && common_dir="$(cd "$common_dir" && pwd)"
+    dirname "$common_dir"
 }
 
 get_repo_name() {
-    basename "$(git rev-parse --show-toplevel)"
+    basename "$(get_main_repo_root)"
 }
 
 get_worktree_parent() {
-    echo "$(git rev-parse --show-toplevel)/.worktrees"
+    echo "$(get_main_repo_root)/.worktrees"
+}
+
+# Exact ref lookups. `git branch -r | grep -w` collides on hyphen suffixes:
+# the pattern origin/shaun/feat matches the line origin/shaun/feat-2.
+remote_branch_exists() {
+    git show-ref --verify --quiet "refs/remotes/origin/$1"
+}
+
+local_branch_exists() {
+    git show-ref --verify --quiet "refs/heads/$1"
+}
+
+# True if a branch is checked out in any worktree (including the main repo).
+# git refuses to delete these, so prune should skip rather than fail on them.
+branch_is_checked_out() {
+    git worktree list --porcelain | grep -qx "branch refs/heads/$1"
+}
+
+# Preferred base for merge/ahead comparisons, remote first: local main goes
+# stale because `git fetch` never fast-forwards it.
+default_base_ref() {
+    local ref
+    for ref in origin/main origin/master; do
+        git show-ref --verify --quiet "refs/remotes/$ref" && { echo "$ref"; return 0; }
+    done
+    for ref in main master; do
+        git show-ref --verify --quiet "refs/heads/$ref" && { echo "$ref"; return 0; }
+    done
+    return 1
+}
+
+# Commits on $1 that are not reachable from the base ref.
+unpushed_commit_count() {
+    local branch="$1" base
+    base=$(default_base_ref) || { echo 0; return 0; }
+    git rev-list --count "${base}..${branch}" 2>/dev/null || echo 0
 }
 
 normalize_branch_name() {
@@ -71,18 +151,32 @@ Commands:
   list               Show all active worktrees
   remove <feature>   Remove worktree and optionally delete branch
   switch <feature>   Generate cd command to navigate to worktree
+  path <feature>     Print the worktree path only (for shell functions)
   clean              Find and remove unused worktrees/branches
   prune              Prune stale worktree references
   help               Show this help message
 
+Flags:
+  -y, --yes          Skip prompts. 'clean' removes everything without
+                     uncommitted changes, and reports what it skipped.
+  -n, --dry-run      Print destructive commands instead of running them
+
 Examples:
   worktree create feature-fixes
   worktree list
-  worktree clean
+  worktree clean --dry-run
+  worktree clean --yes
   worktree switch feature-fixes
 
-Current location: $(pwd) (main branch)
-Worktree location: .worktrees/<feature>
+Shell function for cd:
+  wt() { cd "\$(worktree path "\$1")"; }
+
+Notes:
+  A worktree containing a .worktree_keep file is never auto-removed.
+  Narration goes to stderr; 'path' and 'list' write to stdout.
+
+Repo: ${repo_name}
+Worktree location: $(get_worktree_parent 2>/dev/null || echo '<repo>/.worktrees')/<feature>
 EOF
 }
 
@@ -107,10 +201,17 @@ cmd_create() {
     # Create parent directory if needed
     mkdir -p "$worktree_parent"
 
-    # Check if branch exists remotely
-    if git branch -r | grep -qw "origin/${branch_name}"; then
+    # Local branch wins: git allows only one branch of a given name, so an
+    # existing local branch is what we check out whether or not it has a remote.
+    if local_branch_exists "$branch_name"; then
+        info "Checking out existing local branch: ${branch_name}"
+        git worktree add "$worktree_path" "$branch_name"
+    elif remote_branch_exists "$branch_name"; then
+        # --track -b creates a real local branch. Passing origin/<branch> as a
+        # bare commit-ish instead lands the worktree in detached HEAD, which
+        # also hides it from `clean` (no branch line in --porcelain output).
         info "Checking out existing remote branch: origin/${branch_name}"
-        git worktree add "$worktree_path" "origin/${branch_name}"
+        git worktree add --track -b "$branch_name" "$worktree_path" "origin/${branch_name}"
     else
         info "Creating new branch: ${branch_name}"
         git worktree add -b "$branch_name" "$worktree_path"
@@ -143,33 +244,35 @@ cmd_remove() {
         error "Worktree not found at: $worktree_path"
     fi
 
+    # Respect the same opt-out marker `clean` honors
+    if [[ -f "$worktree_path/.worktree_keep" ]]; then
+        warning "Worktree is marked .worktree_keep"
+        confirm "Remove it anyway?" || { echo "Aborted." >&2; exit 0; }
+    fi
+
     # Check for uncommitted changes
     if [[ -n "$(git -C "$worktree_path" status --short)" ]]; then
         warning "Worktree has uncommitted changes!"
-        git -C "$worktree_path" status --short
+        git -C "$worktree_path" status --short >&2
         echo
-        read -rp "Continue with removal? [y/N] " response
-        if [[ ! "$response" =~ ^[Yy]$ ]]; then
-            echo "Aborted."
-            exit 0
-        fi
+        confirm "Continue with removal?" || { echo "Aborted." >&2; exit 0; }
     fi
 
     info "Removing worktree..."
-    git worktree remove "$worktree_path"
-    git worktree prune
+    run git worktree remove "$worktree_path"
+    run git worktree prune
 
     success "✓ Worktree removed: $worktree_path"
 
     # Ask about deleting the branch
     echo
-    read -rp "Delete branch ${branch_name}? [y/N] " response
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-        git branch -d "$branch_name" 2>/dev/null || {
-            warning "Branch has unmerged commits. Use -D to force delete."
-            read -rp "Force delete? [y/N] " force_response
-            if [[ "$force_response" =~ ^[Yy]$ ]]; then
-                git branch -D "$branch_name"
+    if confirm "Delete branch ${branch_name}?"; then
+        run_quiet git branch -d "$branch_name" || {
+            local ahead
+            ahead=$(unpushed_commit_count "$branch_name")
+            warning "Branch has unmerged commits ($ahead not reachable from $(default_base_ref || echo main))."
+            if confirm "Force delete?"; then
+                run git branch -D "$branch_name"
                 success "✓ Branch deleted: $branch_name"
             fi
         }
@@ -178,18 +281,33 @@ cmd_remove() {
 
 cmd_prune() {
     info "Pruning stale worktree references..."
-    git worktree prune -v
+    run git worktree prune -v
     echo
 
     # Find and remove local branches with deleted remotes
     info "Checking for branches with deleted remotes..."
     local gone_branches=()
+    local skipped_checked_out=()
     while IFS= read -r line; do
         local branch
-        branch=$(echo "$line" | awk '{print $1}')
+        # Strip the leading "* " (current) / "+ " (checked out elsewhere) markers
+        # before taking the name, or the current branch parses as literally "*".
+        branch=$(echo "$line" | sed 's/^[* +]*//' | awk '{print $1}')
         [[ -z "$branch" ]] && continue
+        if branch_is_checked_out "$branch"; then
+            skipped_checked_out+=("$branch")
+            continue
+        fi
         gone_branches+=("$branch")
-    done < <(git branch -vv | grep ': gone]' | awk '{print $1}')
+    done < <(git branch -vv | grep ': gone]' || true)
+
+    if [[ ${#skipped_checked_out[@]} -gt 0 ]]; then
+        echo
+        warning "Skipped ${#skipped_checked_out[@]} branch(es) still checked out (use 'worktree clean'):"
+        for branch in "${skipped_checked_out[@]}"; do
+            echo "  - $branch" >&2
+        done
+    fi
 
     if [[ ${#gone_branches[@]} -gt 0 ]]; then
         echo
@@ -199,18 +317,17 @@ cmd_prune() {
         done
         echo
 
-        read -rp "Delete these branches? [y/N] " response
-        if [[ "$response" =~ ^[Yy]$ ]]; then
+        if confirm "Delete these branches?"; then
             for branch in "${gone_branches[@]}"; do
                 # Use -D to force delete since remote is already gone
-                if git branch -D "$branch" 2>/dev/null; then
+                if run_quiet git branch -D "$branch"; then
                     success "  ✓ Deleted $branch"
                 else
                     warning "  ✗ Failed to delete $branch"
                 fi
             done
         else
-            echo "Skipped branch deletion"
+            echo "Skipped branch deletion" >&2
         fi
     else
         success "✓ No branches with deleted remotes found"
@@ -236,7 +353,23 @@ cmd_switch() {
 
     echo "cd $worktree_path"
     echo
-    info "Tip: Copy and paste the command above"
+    info "Tip: add a shell function to cd directly:"
+    info "  wt() { cd \"\$(worktree path \"\$1\")\"; }"
+}
+
+# Print only the worktree path, for shell functions and scripts.
+# All narration goes to stderr, so stdout here is safe to capture.
+cmd_path() {
+    local feature="$1"
+    [[ -z "$feature" ]] && error "Feature name required. Usage: worktree path <feature>"
+
+    local branch_name feature_name worktree_path
+    branch_name=$(normalize_branch_name "$feature")
+    feature_name=$(get_feature_name "$branch_name")
+    worktree_path="$(get_worktree_parent)/${feature_name}"
+
+    [[ ! -d "$worktree_path" ]] && error "Worktree not found at: $worktree_path"
+    echo "$worktree_path"
 }
 
 cmd_clean() {
@@ -261,7 +394,7 @@ cmd_clean() {
             current_branch="${BASH_REMATCH[1]}"
 
             # Skip main directory
-            if [[ "$current_path" != "$(git rev-parse --show-toplevel)" ]]; then
+            if [[ "$current_path" != "$(get_main_repo_root)" ]]; then
                 worktrees+=("$current_path|$current_branch")
             fi
 
@@ -271,13 +404,19 @@ cmd_clean() {
         fi
     done < <(git worktree list --porcelain)
 
-    # Find merged branches
+    # Find merged branches. Compare against the remote base — `git fetch` above
+    # refreshes origin/main but never fast-forwards local main, so a local-main
+    # comparison misses branches that merged upstream.
+    local base_ref
+    base_ref=$(default_base_ref) || error "Could not find a main/master branch to compare against"
+    info "Comparing against ${base_ref}"
+
     local merged_branches=()
     while IFS= read -r branch; do
-        branch=$(echo "$branch" | xargs) # trim whitespace
+        branch=$(echo "$branch" | sed 's/^[* +]*//' | xargs) # strip markers + whitespace
         [[ "$branch" == "main" || "$branch" == "master" ]] && continue
         merged_branches+=("$branch")
-    done < <(git branch --merged main 2>/dev/null || git branch --merged master 2>/dev/null || true)
+    done < <(git branch --merged "$base_ref" 2>/dev/null || true)
 
     # Find branches with deleted remotes (shaun/* branches only)
     # This catches both:
@@ -292,9 +431,17 @@ cmd_clean() {
         [[ ! "$branch" =~ ^shaun/ ]] && continue
         [[ "$branch" == "main" || "$branch" == "master" ]] && continue
 
-        # Check if tracking branch is marked as "gone" or doesn't exist
-        if echo "$line" | grep -q "gone]" || ! git branch -r | grep -qw "origin/${branch}"; then
+        if echo "$line" | grep -q "gone]"; then
+            # Had an upstream, and it is gone: a genuine leftover.
             orphaned_branches+=("$branch")
+        elif ! remote_branch_exists "$branch"; then
+            # No remote ref and no upstream config — this is equally true of a
+            # branch that was never pushed at all. Only call it orphaned when it
+            # carries no commits of its own, otherwise `clean` would offer to
+            # force-delete unpushed work that no warning covers.
+            if [[ "$(unpushed_commit_count "$branch")" -eq 0 ]]; then
+                orphaned_branches+=("$branch")
+            fi
         fi
     done < <(git branch -vv)
 
@@ -314,7 +461,7 @@ cmd_clean() {
             if [[ ${#merged_branches[@]} -gt 0 ]]; then
                 for merged in "${merged_branches[@]}"; do
                     if [[ "$wt_branch" == "$merged" ]]; then
-                        reason="merged into main"
+                        reason="merged into ${base_ref}"
                         break
                     fi
                 done
@@ -351,6 +498,9 @@ cmd_clean() {
     echo "Found ${#worktrees_to_remove[@]} worktree(s) to clean up:"
     echo
 
+    # Flag entries carrying work that only exists here. Under --yes these are
+    # skipped rather than force-removed, since nobody is reading the warnings.
+    local risky=()
     for i in "${!worktrees_to_remove[@]}"; do
         local wt_entry="${worktrees_to_remove[$i]}"
         local reason="${reasons[$i]}"
@@ -360,12 +510,50 @@ cmd_clean() {
         echo "   Path: $wt_path"
         echo "   Reason: $reason"
 
+        local is_risky=false
+
         # Check for uncommitted changes
         if [[ -n "$(git -C "$wt_path" status --short 2>/dev/null)" ]]; then
             warning "   ⚠ Has uncommitted changes"
+            is_risky=true
         fi
+
+        # Informational only. A squash merge leaves every original commit
+        # unreachable from the base, so this is nonzero for most merged
+        # branches and cannot gate --yes without blocking the common case.
+        # Genuinely unpushed branches are excluded earlier, at classification.
+        local ahead
+        ahead=$(unpushed_commit_count "$wt_branch")
+        if [[ "$ahead" -gt 0 ]]; then
+            echo "   $ahead commit(s) not reachable from ${base_ref} (normal after a squash merge; also true if never merged)" >&2
+        fi
+
+        risky+=("$is_risky")
         echo
     done
+
+    # Non-interactive: remove everything that carries no unique work, and say
+    # plainly what was left behind.
+    if [[ "$ASSUME_YES" == true ]]; then
+        local removed=0 skipped=0
+        info "Removing worktrees and deleting branches (--yes)..."
+        for i in "${!worktrees_to_remove[@]}"; do
+            IFS='|' read -r wt_path wt_branch <<< "${worktrees_to_remove[$i]}"
+            if [[ "${risky[$i]}" == true ]]; then
+                warning "  - Skipping $wt_branch (uncommitted changes)"
+                skipped=$((skipped + 1))
+                continue
+            fi
+            echo "  - Removing $wt_branch..." >&2
+            run_quiet git worktree remove "$wt_path" --force || true
+            run_quiet git branch -D "$wt_branch" || true
+            removed=$((removed + 1))
+        done
+        run git worktree prune
+        success "✓ Cleanup complete — removed ${removed}, skipped ${skipped}"
+        [[ "$skipped" -gt 0 ]] && info "Re-run without --yes to handle the skipped worktrees."
+        return 0
+    fi
 
     # Prompt for action
     cat <<EOF
@@ -384,10 +572,10 @@ EOF
             for wt_entry in "${worktrees_to_remove[@]}"; do
                 IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                 echo "  - Removing $wt_branch..."
-                git worktree remove "$wt_path" --force 2>/dev/null || true
-                git branch -D "$wt_branch" 2>/dev/null || true
+                run_quiet git worktree remove "$wt_path" --force || true
+                run_quiet git branch -D "$wt_branch" || true
             done
-            git worktree prune
+            run git worktree prune
             success "✓ Cleanup complete"
             ;;
         2)
@@ -395,9 +583,9 @@ EOF
             for wt_entry in "${worktrees_to_remove[@]}"; do
                 IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                 echo "  - Removing worktree for $wt_branch..."
-                git worktree remove "$wt_path" --force 2>/dev/null || true
+                run_quiet git worktree remove "$wt_path" --force || true
             done
-            git worktree prune
+            run git worktree prune
             success "✓ Cleanup complete (branches preserved)"
             ;;
         3)
@@ -438,8 +626,8 @@ EOF
                     local wt_entry="${worktrees_to_remove[$idx]}"
                     IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                     echo "  - Removing $wt_branch..."
-                    git worktree remove "$wt_path" --force 2>/dev/null || true
-                    git branch -D "$wt_branch" 2>/dev/null || true
+                    run_quiet git worktree remove "$wt_path" --force || true
+                    run_quiet git branch -D "$wt_branch" || true
                 done
             else
                 info "Removing worktrees only..."
@@ -447,10 +635,10 @@ EOF
                     local wt_entry="${worktrees_to_remove[$idx]}"
                     IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                     echo "  - Removing worktree for $wt_branch..."
-                    git worktree remove "$wt_path" --force 2>/dev/null || true
+                    run_quiet git worktree remove "$wt_path" --force || true
                 done
             fi
-            git worktree prune
+            run git worktree prune
             success "✓ Cleanup complete"
             ;;
         4|*)
@@ -466,6 +654,20 @@ main() {
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
         error "Not in a git repository"
     fi
+
+    # Pull global flags out of the arg list, wherever they appear
+    local args=()
+    local arg
+    for arg in "$@"; do
+        case "$arg" in
+            -y|--yes)     ASSUME_YES=true ;;
+            -n|--dry-run) DRY_RUN=true ;;
+            *)            args+=("$arg") ;;
+        esac
+    done
+    set -- ${args[@]+"${args[@]}"}
+
+    [[ "$DRY_RUN" == true ]] && info "Dry run — no changes will be made"
 
     local subcommand="${1:-help}"
     shift || true
@@ -485,6 +687,9 @@ main() {
             ;;
         switch|sw)
             cmd_switch "$@"
+            ;;
+        path)
+            cmd_path "$@"
             ;;
         clean)
             cmd_clean
