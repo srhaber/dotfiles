@@ -35,6 +35,7 @@ The `setup.sh` script is idempotent and safe to run multiple times. It:
 - Traditional dotfiles: `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/.gemrc`, `~/.terraformrc`
 - XDG-compliant: `~/.config/git/`, `~/.config/starship.toml`
 - Claude Code global: `claude-global/*` → `~/.claude/*` (CLAUDE.md, commands/, agents/, statusline-command.sh)
+- **Not managed here:** `~/.claude/settings.json`, `~/.claude/hooks/`, and `~/.claude/plugins/`. These are machine-local — a plain file/directory on some machines, a symlink into a separate repo on others. `setup.sh` never creates or overwrites them.
 
 ## Key Architecture
 
@@ -104,12 +105,14 @@ Modern CLI tools and shortcuts. Only includes aliases not provided by oh-my-zsh 
   - Updates `zsh-plugin-versions.txt` with new commit hashes
   - Prevents supply chain attacks by requiring manual review
 
-### Claude Code Configuration (.claude/)
+### Claude Code Configuration (claude-global/)
 - `statusline-command.sh`: Custom statusline script for Claude Code
   - Displays: timestamp with timezone, current directory, git branch
   - Shows: model name, session duration, message count
   - Auto-symlinked by `setup.sh` to `~/.claude/statusline-command.sh`
-  - Requires manual settings.json configuration (see README.md)
+  - Takes effect only once a `statusLine` entry points at it in `~/.claude/settings.json` (see README.md) — that file is machine-local, so this repo can't wire it up for you
+- `statusline-test.sh`: One-line stub that prints a fixed string. Point `statusLine` at it to confirm the harness is invoking the configured command at all, then switch back
+- `notify.sh`: Reads a JSON payload on stdin (`title`, `message`) and raises a macOS notification via `osascript`. Written for a Claude Code notification hook. Tracked here but **not** symlinked by `setup.sh` — link it by hand on machines whose hook config references `~/.claude/notify.sh`
 
 ## Development Workflow
 
@@ -158,17 +161,18 @@ cd ~/.dotfiles
 
 ## Claude Code Configuration Structure
 
-This repo uses a two-tier configuration system for Claude Code:
+This repo manages two tiers of Claude Code configuration. A third tier — `settings.json`, hooks, and plugins — is machine-local and deliberately outside the repo (see below).
 
 ### Global Configuration (`claude-global/`)
 Symlinked to `~/.claude/` and applies to **all projects** on your machine:
-- `claude-global/CLAUDE.md` - Personal preferences and documentation style (visual over prose)
-- `claude-global/commands/` - Global slash commands (`/commit`, `/pr`, `/review-branch`, `/review-changes`, `/save-session`)
-- `claude-global/agents/` - Custom agent definitions (commit-message-generator, pr-description-generator, session-documenter, convention-analyzer)
-- `claude-global/skills/` - Tracked skill files symlinked individually into `~/.claude/skills/`
+- `claude-global/CLAUDE.md` - Personal preferences: documentation style, effort/model guidance, question and delegation policy
+- `claude-global/commands/` - Global slash commands (`/handoff`, `/save-session`)
+- `claude-global/agents/` - Custom agent definitions. Currently empty; `setup.sh` symlinks the directory itself, so a new agent file is live as soon as it's added — no re-run needed
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
 
-**Note:** `~/.claude/skills/` is a real directory (not a symlink). Only tracked files from `claude-global/skills/` are symlinked in by `setup.sh`. Project-specific skills (e.g., popcorn-backend) live directly in `~/.claude/skills/` and are not managed by this repo.
+**Skills and plugins are not managed by this repo.** Every other slash command — `/commit`, `/ship`, `/code-review`, the `superpowers:*` family — comes from an installed Claude Code plugin. Plugins live in `~/.claude/plugins/`, are enabled through `~/.claude/settings.json`, and are recorded per-machine in `~/.claude/plugins/installed_plugins.json`. `scripts/export-claude-plugins` snapshots the enabled-plugin list into `claude-global/plugins.json` for reference; that file exists only after you run it.
+
+**There is no `~/.claude/skills/` in this setup.** Skills arrive with plugins, or are dropped into a project's own `.claude/skills/`.
 
 ### Project-Specific Configuration (`CLAUDE.md`)
 Applies **only** when working in the dotfiles repository:
@@ -192,6 +196,7 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── aliases.sh            # Custom shell aliases
 ├── scripts/              # Dotfiles repo maintenance scripts (off PATH)
 │   ├── brewdump          # Brewfile update/commit script
+│   ├── export-claude-plugins # Snapshot enabled plugins to claude-global/plugins.json
 │   └── update-zsh-plugins # Update custom oh-my-zsh plugins
 ├── bin/                  # System-wide utility scripts (on PATH)
 ├── lib/                  # Support code and shared libraries (off PATH)
@@ -201,11 +206,12 @@ This separation allows you to have personal preferences that apply everywhere, w
 ├── claude-global/        # Global Claude Code config (symlinked to ~/.claude/)
 │   ├── CLAUDE.md         # Personal preferences for all projects
 │   ├── commands/         # Global slash commands
-│   │   ├── branch-diff.md
+│   │   ├── handoff.md
 │   │   └── save-session.md
-│   ├── skills/           # Tracked skills (symlinked individually into ~/.claude/skills/)
-│   ├── plugins.json      # Tracked list of enabled plugins
-│   └── statusline-command.sh
+│   ├── agents/           # Custom agent definitions (empty; dir is symlinked)
+│   ├── notify.sh         # macOS notification helper for a notification hook
+│   ├── statusline-command.sh
+│   └── statusline-test.sh
 ├── CLAUDE.md             # Project-specific Claude instructions (this repo only)
 ├── .vim/                 # Vim plugins and runtime
 └── iterm2/               # iTerm2 color schemes

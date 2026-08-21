@@ -241,13 +241,17 @@ This repo includes both **global** and **project-specific** Claude Code configur
 ### Global Configuration (`claude-global/`)
 Applies to all projects on your machine (symlinked to `~/.claude/`):
 - **`claude-global/CLAUDE.md`** - Personal preferences and instructions for Claude across all projects
-- **`claude-global/commands/`** - Global slash commands: `/save-session`, `/branch-diff`
+- **`claude-global/commands/`** - Global slash commands: `/handoff`, `/save-session`
+- **`claude-global/agents/`** - Custom agent definitions (currently empty; the directory itself is symlinked, so new agents need no re-run)
 - **`claude-global/statusline-command.sh`** - Custom statusline script
-- **`claude-global/plugins.json`** - Tracked list of enabled Claude Code plugins (documentation only)
+- **`claude-global/statusline-test.sh`** - Stub that prints a fixed string, to confirm the harness is calling your configured `statusLine` command
+- **`claude-global/notify.sh`** - macOS notification helper for a notification hook (tracked, but not symlinked by `setup.sh`)
+
+`~/.claude/settings.json`, `~/.claude/hooks/`, and `~/.claude/plugins/` are **not** managed by this repo — they're machine-local, and may be plain files on one machine and symlinks into a separate repo on another. `claude-global/plugins.json` is a generated snapshot rather than a tracked source of truth; it exists only after you run `./scripts/export-claude-plugins`.
 
 ### Project-Specific Configuration (`.claude/`, `CLAUDE.md`)
 Applies only when working in the dotfiles repo:
-- **`.claude/`** - Project-specific slash commands or overrides (if needed)
+- **`.claude/settings.local.json`** - Machine-local permissions for this repo (untracked)
 - **`CLAUDE.md`** - Instructions specific to managing this dotfiles repository
 
 ### Statusline
@@ -265,9 +269,10 @@ The custom statusline displays:
 After running `./setup.sh`, the global configuration from `claude-global/` will be symlinked to `~/.claude/`:
 - `statusline-command.sh` - Custom statusline script
 - `CLAUDE.md` - Personal Claude preferences and instructions
-- `commands/` - Global slash commands (`/save-session` for session documentation, `/branch-diff` for git utilities)
+- `commands/` - Global slash commands (`/save-session` to write a session summary, `/handoff` to generate a resume prompt for a fresh session)
+- `agents/` - Custom agent definitions
 
-These configs will apply to all Claude Code sessions on your machine. Additional git workflow commands (`/commit`, `/pr`, code review) are provided by installed plugins.
+These configs apply to all Claude Code sessions on your machine. Every other command — `/commit`, `/ship`, `/code-review`, the `superpowers:*` skills — comes from an installed plugin, not from this repo.
 
 ### Manual Settings Configuration
 
@@ -287,7 +292,7 @@ Replace `YOUR_USERNAME` with your actual username, then restart Claude Code.
 
 **2. Plugins:**
 
-Copy the `enabledPlugins` section from `claude-global/plugins.json` into your `~/.claude/settings.json`:
+Copy the `enabledPlugins` section from `claude-global/plugins.json` into your `~/.claude/settings.json`. That file is generated, so create it first by running `./scripts/export-claude-plugins` on a machine where your plugins are already enabled. The list below is an example — yours will differ per machine:
 
 ```json
 {
@@ -301,15 +306,15 @@ Copy the `enabledPlugins` section from `claude-global/plugins.json` into your `~
 ```
 
 **Managing plugins:**
-- Add/remove plugins via Claude Code UI
-- Run `./scripts/export-claude-plugins` to update `plugins.json` in git
+- Add/remove plugins via the `/plugin` UI in Claude Code
+- Run `./scripts/export-claude-plugins` to write or refresh `plugins.json` from `~/.claude/settings.json`
 - On new machines, manually copy from `plugins.json` to `settings.json`
 
 ### Example Output
 
 ```
 [Tue 2025-10-14 14:30:45 PDT] /Users/shaber/dotfiles on master
-Claude 3.5 Sonnet (15m23s) (52 msgs)
+Claude Opus 5 (15m23s) (52 msgs)
 ```
 
 The statusline updates automatically as you work, showing real-time session information.
