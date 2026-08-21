@@ -170,7 +170,7 @@ Symlinked to `~/.claude/` and applies to **all projects** on your machine:
 - `claude-global/agents/` - Custom agent definitions. Currently empty; `setup.sh` symlinks the directory itself, so a new agent file is live as soon as it's added — no re-run needed
 - `claude-global/statusline-command.sh` - Custom statusline with git, time, session info
 
-**Skills and plugins are not managed by this repo.** Every other slash command — `/commit`, `/ship`, `/code-review`, the `superpowers:*` family — comes from an installed Claude Code plugin. Plugins live in `~/.claude/plugins/`, are enabled through `~/.claude/settings.json`, and are recorded per-machine in `~/.claude/plugins/installed_plugins.json`. `scripts/export-claude-plugins` snapshots the enabled-plugin list into `claude-global/plugins.json` for reference; that file exists only after you run it.
+**Skills and plugins are not managed by this repo.** Every other slash command — `/ship`, `/code-review`, `/security-review`, the `superpowers:*` family — comes from an installed Claude Code plugin. Plugins live in `~/.claude/plugins/`, are enabled through `~/.claude/settings.json`, and are recorded per-machine in `~/.claude/plugins/installed_plugins.json`. `scripts/export-claude-plugins` snapshots the enabled-plugin list into `claude-global/plugins.json` for reference; that file exists only after you run it.
 
 **There is no `~/.claude/skills/` in this setup.** Skills arrive with plugins, or are dropped into a project's own `.claude/skills/`.
 

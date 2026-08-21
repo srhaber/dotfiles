@@ -272,7 +272,7 @@ After running `./setup.sh`, the global configuration from `claude-global/` will 
 - `commands/` - Global slash commands (`/save-session` to write a session summary, `/handoff` to generate a resume prompt for a fresh session)
 - `agents/` - Custom agent definitions
 
-These configs apply to all Claude Code sessions on your machine. Every other command — `/commit`, `/ship`, `/code-review`, the `superpowers:*` skills — comes from an installed plugin, not from this repo.
+These configs apply to all Claude Code sessions on your machine. Every other command — `/ship`, `/code-review`, `/security-review`, the `superpowers:*` skills — comes from an installed plugin, not from this repo.
 
 ### Manual Settings Configuration
 
