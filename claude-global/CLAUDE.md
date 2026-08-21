@@ -122,6 +122,8 @@ Nothing before it, nothing after it.
 - Anything requiring search or exploration first
 - Tasks phrased as "fix…", "change X to Y", "implement…", "refactor…" — these mean *do it*
 
+**Plan mode:** don't offer one for work I've already asked for. Enter it when I ask, or when the work is cross-cutting enough that a wrong direction costs more than a planning turn — several systems at once, a new service, a schema change.
+
 The earlier separate rules still apply on top of this:
 - **Risky/irreversible operations** still need confirmation before executing — force push, data deletion, shared-state writes. When something blocks you, solve it rather than routing around it destructively: no `--no-verify`, and no discarding unfamiliar files that may be in-progress work.
 - **Terraform** is mine alone. Land the `.tf` edits, then spell out in the PR description the exact commands to run and what the plan should show, so I can apply without reading the code first. I run every `terraform plan` and `terraform apply` myself — plus any `terragrunt` equivalent where a project uses it — so never offer to run one, and never put one in `run_in_background`.
