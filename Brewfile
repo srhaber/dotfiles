@@ -1,3 +1,4 @@
+tap "gbevin/tools", trusted: { formulae: ["sendmidi"] }
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
 # Securely store and access AWS credentials in development environments
@@ -79,7 +80,7 @@ brew "nss"
 # Optimized BLAS library
 brew "openblas"
 # Development kit for the Java programming language
-brew "openjdk@11", link: true
+brew "openjdk"
 # Library for JPEG-2000 image manipulation
 brew "openjpeg"
 # Colored logcat script to show entries only for specified app
@@ -166,3 +167,5 @@ vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "ms-vscode.remote-explorer"
 vscode "ms-vscode.remote-server"
 vscode "tamasfe.even-better-toml"
+npm "@anthropic-ai/claude-code"
+npm "@openai/codex"
