@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # Personal bin takes precedence over dotfiles bin
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:/opt/homebrew/sbin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 if [[ -d $HOME/go/bin ]]; then
 	export PATH=$HOME/go/bin:$PATH
