@@ -47,3 +47,10 @@ Thumbs.db
 *.pem
 
 **/.claude/settings.local.json
+
+# Git worktrees #
+#################
+# Convention: worktrees live at <repo>/.worktrees/<feature> on branch
+# shaun/<feature>. Ignoring it globally means a new clone needs no per-repo
+# .gitignore edit before `worktree create` is safe to run.
+.worktrees/

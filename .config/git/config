@@ -41,6 +41,7 @@
 
 [push]
   default = simple
+  autoSetupRemote = true
 
 [branch]
 	autosetuprebase = always
@@ -49,3 +50,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[fetch]
+	prune = true
+[rerere]
+	enabled = true
