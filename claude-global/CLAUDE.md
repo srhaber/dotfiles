@@ -146,6 +146,14 @@ The earlier separate rules still apply on top of this:
 
 **Keep the solution the size of the problem.** A bug fix doesn't need the surrounding code cleaned up, and a small feature doesn't need configurability. Add docstrings, comments, and type annotations to code you changed, not to code you passed through. Validate at system boundaries — user input, external APIs — and trust internal calls and framework guarantees instead of handling cases that can't occur. Write the helper when there's a second caller, not in anticipation of one.
 
+**Write comments to outlive the session that produced them.** A comment states *why* the code is the way it is; the code already says what it does. Measurements taken while writing it — byte sizes, file or line counts, percentages, benchmark timings, a dependency's current version, "there are three callers" — are facts about one afternoon, and nobody re-measures them. Once stale they are worse than nothing: they read as authoritative and make correct code look wrong.
+
+Prefer the durable form of the same claim. "build/ holds duplicate copies of handler source" survives the directory changing size; "build/ is 806M / 7,147 files" does not. "The stock limit is smaller than this repo's source tree" survives growth in either direction; "the default is 2000 and we have 2,028 files" stops making sense the moment someone adds a module.
+
+When a specific figure genuinely carries the argument, keep it and mark it: `(as of 2026-09-01)`. Better still, point at something that gets maintained — a Linear ticket, a Notion page, a design doc in `design-docs/`, an ADR — and let the comment carry the reasoning while the reference carries the data. Names of real things (`a2ats`, `flake8`, a module or symbol) are not measurements; they stay.
+
+This applies to comments and docstrings in source, and to config files that take comments. PR descriptions and commit messages are the exception — they are a record of a specific change at a specific time, so the measurements belong there.
+
 **Tests verify correctness; they don't define it.** Implement the general case with the standard tools. If a test looks wrong, or the task looks infeasible, tell me instead of shaping the code around the assertions. Removing or weakening a test to get a suite green is off the table — a deleted assertion is missing functionality that nobody notices. Name the test you think is wrong and why, and let me decide.
 
 ## Code review requests
