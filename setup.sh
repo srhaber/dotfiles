@@ -231,9 +231,24 @@ main() {
     safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
     safe_symlink "$DOTFILES_DIR/claude-global/agents" "$HOME/.claude/agents"
     # Skills are not managed here — they arrive with installed plugins, or live in
-    # a project's own .claude/skills/. settings.json, hooks/ and plugins/ are
-    # machine-local; this script never touches them.
+    # a project's own .claude/skills/. settings.json, hooks/ and skills/ are not
+    # machine-local either: on this machine they symlink into the PopcornAiHq
+    # dev-toolkit checkout, which is a work repo and deliberately out of scope
+    # for personal dotfiles. This script never touches them.
     chmod +x "$HOME/.claude/statusline-command.sh" 2>/dev/null
+    echo
+
+    # VS Code user settings (personal + machine-agnostic; per-project settings
+    # live in each repo's .vscode/). VS Code rewrites settings.json when you
+    # change a setting through the UI — if it ever replaces the file instead of
+    # writing through it, this symlink turns into a regular file and the repo
+    # copy silently stops updating. Worth an `ls -la` after a UI change.
+    VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+    if [ -d "$(dirname "$VSCODE_USER_DIR")" ]; then
+        mkdir -p "$VSCODE_USER_DIR"
+        safe_symlink "$DOTFILES_DIR/vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
+        info "Restore extensions with: xargs -n1 code --install-extension < $DOTFILES_DIR/vscode/extensions.txt"
+    fi
     echo
 
     # Install Vim plugins

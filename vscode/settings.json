@@ -1,0 +1,22 @@
+{
+  "errorLens.enabledDiagnosticLevels": ["error"],
+  "terminal.integrated.fontFamily": "MesloLGL Nerd Font Mono, Menlo, monospace",
+  "workbench.iconTheme": "material-icon-theme",
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.persistSession": false,
+  "github.copilot.enable": {
+    "*": false,
+  },
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+  ],
+  "claudeCode.selectedModel": "default",
+  "files.associations": {
+    "*.jinja": "markdown",
+  },
+  "claudeCode.preferredLocation": "panel",
+  "search.followSymlinks": false,
+}
