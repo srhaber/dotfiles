@@ -1,50 +1,43 @@
 #!/bin/bash
-# Claude Code Notification hook -> macOS Notification Center.
+# Claude Code Notification hook -> macOS Notification Center + iTerm2 status.
 #
 # Payload on stdin: {session_id, transcript_path, cwd, hook_event_name,
 #                    title, message, notification_type}
 #
 # Also runnable as `notify.sh --focus <iterm-session-uuid>`, which is what a
 # terminal-notifier banner runs when clicked.
+#
+# Lives in dotfiles; setup.sh symlinks it to ~/.claude/notify.sh, which is the
+# path the Notification hook in settings.json names.
 
 set -uo pipefail
 
 LOG="${TMPDIR:-/tmp}/claude-notify.log"
 log() { printf '%s\t%s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "${1//$'\n'/ }" >>"$LOG"; }
 
-# Every AppleScript below takes its strings through `on run argv`. Payload text
+# ------------------------------------------------------------------- iTerm2 CLI
+# `it2` drives the same API as the bundled Claude Code integration, which is how
+# this script reaches the session-status toolbelt. iTerm2 ships it outside PATH,
+# and an iTerm2 old enough to lack it also lacks the toolbelt - so every call
+# goes through this wrapper, and a missing binary degrades to a plain banner.
+IT2=$(command -v it2 2>/dev/null || true)
+if [[ -z $IT2 && -x /Applications/iTerm.app/Contents/Resources/utilities/it2 ]]; then
+  IT2=/Applications/iTerm.app/Contents/Resources/utilities/it2
+fi
+it2() {
+  [[ -n $IT2 ]] || { log "it2 unavailable, skipped: $*"; return 0; }
+  "$IT2" "$@" >/dev/null 2>&1 || log "it2 $* failed"
+}
+
+# Each AppleScript below takes its strings through `on run argv`. Payload text
 # is never interpolated into script source: permission prompts quote the command
 # they ask about, and an embedded " would both break the compile (banner
 # silently lost) and let message text execute as AppleScript.
 
-# Raise the exact window/tab/pane that posted the banner.
-as_focus() {
-  cat <<'APPLESCRIPT'
-on run argv
-  set target to item 1 of argv
-  tell application "iTerm2"
-    repeat with w in windows
-      repeat with t in tabs of w
-        repeat with s in sessions of t
-          if (id of s) is target then
-            select w
-            select t
-            select s
-            activate
-            return "focused"
-          end if
-        end repeat
-      end repeat
-    end repeat
-  end tell
-  return "not-found"
-end run
-APPLESCRIPT
-}
-
 # Where a session lives *right now*. Resolved from the UUID rather than read
 # out of the wNtNpN in $ITERM_SESSION_ID - that string is fixed at shell start
-# and goes stale the moment tabs are moved or closed.
+# and goes stale the moment tabs are moved or closed. Still AppleScript because
+# `it2 session list` knows ids and names but not window/tab/pane coordinates.
 as_locate() {
   cat <<'APPLESCRIPT'
 on run argv
@@ -92,8 +85,12 @@ APPLESCRIPT
 }
 
 # ---------------------------------------------------------------- focus mode
+# `session focus` selects the tab inside iTerm2; `app activate` is what brings
+# the window forward when another app holds focus. Both are needed - selecting
+# a tab in a background app changes nothing the user can see.
 if [[ ${1:-} == --focus ]]; then
-  as_focus | osascript - "${2:-}" >/dev/null 2>&1
+  it2 session focus "${2:-}"
+  it2 app activate
   exit 0
 fi
 
@@ -124,12 +121,20 @@ CWD=${CWD:-$PWD}
 PROJECT=${CWD##*/}
 [[ -z $PROJECT ]] && PROJECT="Claude Code"
 
+# LABEL and SOUND drive the banner; STATUS and DOT drive the toolbelt row.
+# `waiting` is the fallback because an unrecognized notification_type is far
+# likelier to be a new flavor of "Claude wants something" than one of "done".
 case "$KIND" in
-  permission_prompt|worker_permission_prompt) LABEL="permission needed"; SOUND=Glass ;;
-  agent_needs_input)                          LABEL="needs input";      SOUND=Glass ;;
-  agent_completed)                            LABEL="done";             SOUND=Pop   ;;
-  idle_prompt)                                LABEL="idle";             SOUND=Tink  ;;
-  *)                                          LABEL="";                 SOUND=Pop   ;;
+  permission_prompt|worker_permission_prompt)
+    LABEL="permission needed"; SOUND=Glass; STATUS=waiting; DOT='#ff5f5f' ;;
+  agent_needs_input)
+    LABEL="needs input";       SOUND=Glass; STATUS=waiting; DOT='#ff5f5f' ;;
+  agent_completed)
+    LABEL="done";              SOUND=Pop;   STATUS=idle;    DOT='#5fd75f' ;;
+  idle_prompt)
+    LABEL="idle";              SOUND=Tink;  STATUS=idle;    DOT='#d7af5f' ;;
+  *)
+    LABEL="";                  SOUND=Pop;   STATUS=waiting; DOT='#ff5f5f' ;;
 esac
 
 UUID=""
@@ -143,6 +148,25 @@ fi
 if   [[ -n $WHERE && -n $LABEL ]]; then SUBTITLE="$WHERE — $LABEL"
 elif [[ -n $WHERE ]];              then SUBTITLE="$WHERE"
 else                                    SUBTITLE="$LABEL"
+fi
+
+# ------------------------------------------------------- iTerm2 status detail
+# The bundled cc-status shim reports working/waiting/idle but never sees the
+# message text, so its toolbelt row says a pane wants attention without saying
+# why - and why is what decides whether to switch tabs now or finish the
+# thought first.
+#
+# Last write wins, and hooks in separate matcher groups are not serialized, so
+# cc-status is deliberately unregistered from Notification in settings.json to
+# leave this the only writer for the event. No other hook fires while Claude
+# waits on the user, so the detail survives the whole wait.
+if [[ -n $UUID ]]; then
+  DETAIL=${MSG//$'\n'/ }
+  # The row is one line in a narrow toolbelt, and a permission prompt quotes the
+  # whole command it asks about - so it gets cut here rather than mid-word there.
+  [[ ${#DETAIL} -gt 72 ]] && DETAIL="${DETAIL:0:71}…"
+  it2 session set-status -s "$UUID" \
+    --status "$STATUS" --detail "$DETAIL" --dot-color "$DOT"
 fi
 
 # ---------------------------------------------------------------- deliver it

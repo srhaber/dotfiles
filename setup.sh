@@ -230,6 +230,9 @@ main() {
     safe_symlink "$DOTFILES_DIR/claude-global/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     safe_symlink "$DOTFILES_DIR/claude-global/commands" "$HOME/.claude/commands"
     safe_symlink "$DOTFILES_DIR/claude-global/agents" "$HOME/.claude/agents"
+    # notify.sh was tracked here but never linked, so ~/.claude held a copy kept
+    # in sync by hand — which is how it ended up forked into a work repo.
+    safe_symlink "$DOTFILES_DIR/claude-global/notify.sh" "$HOME/.claude/notify.sh"
     # Skills are not managed here — they arrive with installed plugins, or live in
     # a project's own .claude/skills/. settings.json, hooks/ and skills/ are not
     # machine-local either: on this machine they symlink into the PopcornAiHq
