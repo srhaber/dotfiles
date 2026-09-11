@@ -207,6 +207,14 @@ fi
 # Added by Antigravity
 [[ -d "$HOME/.antigravity/antigravity/bin" ]] && export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
+# iTerm2 shell integration (prompt marks, command status, cwd/host reporting)
+# Unlocks Captured Output, command history, prompt navigation, status-bar
+# components and Automatic Profile Switching. Vendored so a fresh machine picks
+# it up from setup.sh; refresh from https://iterm2.com/shell_integration/zsh
+if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
+  [[ -r ~/.dotfiles/iterm2/shell_integration.zsh ]] && source ~/.dotfiles/iterm2/shell_integration.zsh
+fi
+
 # Copy full path of a file to clipboard
 fp() { echo "$(pwd)/$1" | pbcopy && echo "Copied: $(pbpaste)"; }
 
