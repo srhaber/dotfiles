@@ -134,6 +134,12 @@ The earlier separate rules still apply on top of this:
 
 **Stage by path.** When the tree holds work I didn't ask you to commit, add the specific files and say which ones you left alone. `git commit -a` is how in-flight work gets swept into an unrelated commit.
 
+## Linear
+
+**Assign new tickets to me.** Every Linear issue you create gets `assignee: "me"` unless I name someone else. Unassigned tickets I filed myself fall out of "my issues" views and stop getting triaged.
+
+**Bulk assignee writes need verifying.** Parallel `save_issue` calls silently no-op on the assignee often enough to matter — the response comes back successful, with no `assignee` field and an unchanged `updatedAt`. Read each result and retry the misses rather than trusting the call count.
+
 ## Git Worktrees
 
 **Convention:** worktrees live at `.worktrees/<feature>` in the repo root, on branch `shaun/<feature>`. `.worktrees/` should be gitignored in every repo. Run `worktree help` for the subcommands and flags — use `--dry-run` before any `clean`.
