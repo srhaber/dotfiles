@@ -41,8 +41,10 @@ it2() {
 # only the transient layer. Mix them and clearing reveals the profile value
 # instead of removing the colour, leaving a tab stuck crimson for good.
 #
-# The escape goes to the session's own tty, resolved from the UUID, rather than
-# to /dev/tty - a hook has no controlling terminal, so /dev/tty is unopenable.
+# The escape goes to the session's own tty, looked up from the UUID, rather than
+# to /dev/tty. Addressing by UUID needs no inherited terminal at all, which is
+# what makes it safe to call from a hook, and it matches how the rest of this
+# script reaches a session - so it survives a tab being moved.
 tab_color() {
   local tty
   [[ -n $IT2 && -n $UUID ]] || return 0
