@@ -215,36 +215,11 @@ if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
   [[ -r ~/.dotfiles/iterm2/shell_integration.zsh ]] && source ~/.dotfiles/iterm2/shell_integration.zsh
 fi
 
-# iTerm2 tab colour as an environment signal, set for the duration of any
-# command naming a popcorn environment and cleared at the next prompt.
-#
-# Colour has two orthogonal jobs here and they must not share a value. Crimson
-# and amber are reserved for session *state* that wants a human — a blocked
-# prompt, an error, a warning — so environment identity gets green and blue
-# instead. Adding a state signal later means leaving these two alone.
-#
-# Matching the command text rather than wrapping a command name is deliberate:
-# backend/scripts is not on PATH, so its scripts are invoked by path, and this
-# also catches a bare `aws --profile popcorn-prod ...`.
-if [[ "$TERM_PROGRAM" == "iTerm.app" ]] && command -v it2setcolor &> /dev/null; then
-  _popcorn_env_tab_preexec() {
-    case "$1" in
-      *popcorn-prod*|*"-exec.sh prod"*|*"-run.sh prod"*|*"-vm.sh prod"*)
-        it2setcolor tab 3fb950; _popcorn_env_tab=1 ;;
-      *popcorn-dev*|*"-exec.sh dev"*|*"-run.sh dev"*|*"-vm.sh dev"*)
-        it2setcolor tab 1f6feb; _popcorn_env_tab=1 ;;
-    esac
-  }
-  # Reverting here rather than after the command means an interrupted session
-  # still clears: whatever happens, the next prompt resets the tab.
-  _popcorn_env_tab_precmd() {
-    (( ${_popcorn_env_tab:-0} )) || return
-    it2setcolor tab default
-    _popcorn_env_tab=0
-  }
-  preexec_functions+=(_popcorn_env_tab_preexec)
-  precmd_functions+=(_popcorn_env_tab_precmd)
-fi
+# iTerm2 tab colour as a session-state signal: orange idle, green running,
+# crimson blocked or failed, with purple and blue overriding while a command
+# names a popcorn environment. Claude Code sessions carry the same colours,
+# written from its hooks instead — see iterm2/tab_state.zsh.
+[[ -r ~/.dotfiles/iterm2/tab_state.zsh ]] && source ~/.dotfiles/iterm2/tab_state.zsh
 
 # Copy full path of a file to clipboard
 fp() { echo "$(pwd)/$1" | pbcopy && echo "Copied: $(pbpaste)"; }

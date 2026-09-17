@@ -16,43 +16,28 @@ LOG="${TMPDIR:-/tmp}/claude-notify.log"
 log() { printf '%s\t%s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "${1//$'\n'/ }" >>"$LOG"; }
 
 # ------------------------------------------------------------------- iTerm2 CLI
-# `it2` drives the same API as the bundled Claude Code integration, which is how
-# this script reaches the session-status toolbelt. iTerm2 ships it outside PATH,
-# and an iTerm2 old enough to lack it also lacks the toolbelt - so every call
-# goes through this wrapper, and a missing binary degrades to a plain banner.
-IT2=$(command -v it2 2>/dev/null || true)
-if [[ -z $IT2 && -x /Applications/iTerm.app/Contents/Resources/utilities/it2 ]]; then
-  IT2=/Applications/iTerm.app/Contents/Resources/utilities/it2
-fi
+# The palette, the it2 lookup and the tab-colour writer are shared with the
+# shell prompt hooks and the Claude Code status hook, so all three agree on what
+# a colour means and on which iTerm2 layer it is written to.
+DOTFILES_DIR=$(cd "$(dirname "$(readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")")/.." && pwd)
+. "$DOTFILES_DIR/iterm2/tab_colors.sh"
+
 it2() {
-  [[ -n $IT2 ]] || { log "it2 unavailable, skipped: $*"; return 0; }
-  "$IT2" "$@" >/dev/null 2>&1 || log "it2 $* failed"
+  tab_it2 "$@" >/dev/null 2>&1 || log "it2 $* failed"
 }
 
 # ------------------------------------------------------------- iTerm2 tab colour
-# Tab colour carries session *state* - the counterpart to the environment colours
-# .zshrc paints around popcorn commands. Crimson and amber mean a human is
-# wanted; green and blue belong to the environment channel, so a glance at a tab
-# never has to disambiguate the two.
-#
-# Set and clear must go through the same layer, and that is the whole trick.
-# iTerm2 keeps two: `it2 session set-color` writes a session profile override,
-# while the sequence below is a transient one, and SetColors=tab=default resets
-# only the transient layer. Mix them and clearing reveals the profile value
-# instead of removing the colour, leaving a tab stuck crimson for good.
-#
-# The escape goes to the session's own tty, looked up from the UUID, rather than
-# to /dev/tty. Addressing by UUID needs no inherited terminal at all, which is
-# what makes it safe to call from a hook, and it matches how the rest of this
-# script reaches a session - so it survives a tab being moved.
+# Tab colour carries session state, the same three colours the shell prompt
+# hooks paint. The escape goes to the session's own tty, looked up from the
+# UUID rather than to /dev/tty: addressing by UUID needs no inherited terminal
+# at all, which is what makes it safe to call from a hook, and it survives a tab
+# being moved.
 tab_color() {
   local tty
-  [[ -n $IT2 && -n $UUID ]] || return 0
-  tty=$("$IT2" session list 2>/dev/null |
-        awk -F'\t' -v s="$UUID" '$1==s { gsub(/\\/, "", $NF); print $NF }')
-  [[ -n $tty && -w $tty ]] || { log "tab colour: no writable tty for $UUID"; return 0; }
-  printf '\033]1337;SetColors=tab=%s\a' "${1:-default}" >"$tty" 2>/dev/null ||
-    log "tab colour write failed"
+  [[ -n $UUID ]] || return 0
+  tty=$(tab_tty_for_uuid "$UUID")
+  [[ -n $tty ]] || { log "tab colour: no tty for $UUID"; return 0; }
+  tab_color_write "$tty" "$1"
 }
 
 # Each AppleScript below takes its strings through `on run argv`. Payload text
@@ -152,15 +137,15 @@ PROJECT=${CWD##*/}
 # likelier to be a new flavor of "Claude wants something" than one of "done".
 case "$KIND" in
   permission_prompt|worker_permission_prompt)
-    LABEL="permission needed"; SOUND=Glass; STATUS=waiting; DOT='#ff5f5f'; TAB=d7263d ;;
+    LABEL="permission needed"; SOUND=Glass; STATUS=waiting; DOT=$DOT_ATTENTION; TAB=$TAB_STATE_ATTENTION ;;
   agent_needs_input)
-    LABEL="needs input";       SOUND=Glass; STATUS=waiting; DOT='#ff5f5f'; TAB=d7263d ;;
+    LABEL="needs input";       SOUND=Glass; STATUS=waiting; DOT=$DOT_ATTENTION; TAB=$TAB_STATE_ATTENTION ;;
   agent_completed)
-    LABEL="done";              SOUND=Pop;   STATUS=idle;    DOT='#5fd75f'; TAB=       ;;
+    LABEL="done";              SOUND=Pop;   STATUS=idle;    DOT=$DOT_IDLE;     TAB=$TAB_STATE_IDLE ;;
   idle_prompt)
-    LABEL="idle";              SOUND=Tink;  STATUS=idle;    DOT='#d7af5f'; TAB=ff8c00 ;;
+    LABEL="idle";              SOUND=Tink;  STATUS=idle;    DOT=$DOT_IDLE;     TAB=$TAB_STATE_IDLE ;;
   *)
-    LABEL="";                  SOUND=Pop;   STATUS=waiting; DOT='#ff5f5f'; TAB=d7263d ;;
+    LABEL="";                  SOUND=Pop;   STATUS=waiting; DOT=$DOT_ATTENTION; TAB=$TAB_STATE_ATTENTION ;;
 esac
 
 UUID=""
@@ -192,7 +177,7 @@ if [[ -n $UUID ]]; then
   # whole command it asks about - so it gets cut here rather than mid-word there.
   [[ ${#DETAIL} -gt 72 ]] && DETAIL="${DETAIL:0:71}…"
   it2 session set-status -s "$UUID" \
-    --status "$STATUS" --detail "$DETAIL" --dot-color "$DOT"
+    --status "$STATUS" --detail "$DETAIL" --dot-color "$DOT" --text-color "$DOT"
   tab_color "$TAB"
 fi
 
