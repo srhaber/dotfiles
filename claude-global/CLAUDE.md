@@ -64,6 +64,8 @@ Before the first tool call, one sentence on what you're about to do — for non-
 
 **Corrections:** flag one only when the error would change my code, conclusions, or decisions. Otherwise fix it silently and continue.
 
+**Don't end a turn while work you can still do is owed.** A reply with no tool call ends the turn, and nothing happens until I answer. Four endings stall work I'd rather see continue: a summary that closes by announcing the next step instead of taking it; an offer to carry on "unless you'd prefer otherwise"; a list of decisions for me when none of them blocks the remaining work; and stopping because a milestone or a long turn felt like a good place to report. Put the status note or recommendation in the same message as the next tool call and keep going. The stops I do want: anything under "Pause and ask before," a genuine blocker I have to clear, and the task being done.
+
 ## GitHub URL Handling
 
 **Never fetch GitHub URLs directly.** Always parse relevant information from the URL and use `gh api` instead.
@@ -86,13 +88,13 @@ Before the first tool call, one sentence on what you're about to do — for non-
 
 ## Effort and thinking depth
 
-Current lineup (as of 2026-09-28, from the platform docs): the **Claude 5 family** — Fable 5.1 (`claude-fable-5-1`) and Mythos 5.1, the tier above Opus; Opus 5.5 (`claude-opus-5-5`); and Sonnet 5 (`claude-sonnet-5`, near-Opus coding quality at Sonnet cost) — plus Haiku 4.5 (`claude-haiku-4-5-20251001`). Thinking is always on and adaptive on Fable and on Opus 5.5 — it can't be disabled, so effort is the only thinking control. Opus 5 and Fable 5 are previous-gen. Opus 5.5's context window is 1M tokens — both the default and the maximum, with instruction-following and tool calling holding across it; Claude Code reports the id with a `[1m]` suffix. When building anything that calls a model, default to the newest tier rather than whatever this file last recorded — and check `/model`, since a lineup written down is a lineup already going stale.
+The harness states the current model lineup and IDs each session; when building anything that calls a model, default to the newest tier it lists, not to a model named in code or docs. On Opus 5.5 thinking is always on and adaptive, so effort is the only thinking control.
 
 Default effort is **`medium` on Opus 5.5** and `high` on Fable 5.1 and Sonnet 5. Levels run `low` → `max`. The harness controls the level. Effort names don't mean the same amount of thinking across models: Opus 5.5 at `medium` matches or beats Opus 5 at `high` on coding, and at any given level it thinks *more* per turn than Opus 5 did — so a level carried over from Opus 5 buys longer turns, not better work.
 
 `low` and `medium` are the **primary lever** for token cost and latency, not an emergency measure — reach for them wherever quality holds (status checks, mechanical edits, code review passes, concurrent sessions). On Opus 5.5, `low` comes close to `medium` on many coding tasks, so step down sooner than old instincts suggest. Reserve `xhigh` and `max` for work where a lower level has visibly fallen short — shallow analysis, a missed root cause, a long autonomous run that loses the thread — not for work that merely sounds hard. Those two levels are where Opus 5.5's extra per-turn thinking is largest, and `max` is prone to overthinking with diminishing returns. Effort defaults carried over from a prior model generation are probably miscalibrated; re-check rather than inherit.
 
-Fast mode (`/fast`) runs Opus at 2x standard rate for up to 2.5x output speed — Opus only, no Fable fast mode, so toggling it on a Fable session means an Opus swap. Which Opus versions support it changes by release; check `/fast` rather than this file. Worth it for long mechanical phases where model tier doesn't matter.
+Fast mode (`/fast`) is Opus-only at a higher rate for faster output — worth it for long mechanical phases where model tier doesn't matter.
 
 Within an effort level, thinking depth is adaptive — calibrated on effort and query complexity together — so "think step by step" prompting is close to a no-op. To get *less* thinking, lower the effort level first — it cuts thinking more reliably than any prompt wording. When effort can't change mid-turn, the prompt-level fallback is "Answer directly without deliberating," for status checks, quick lookups, and momentum over rigor.
 
@@ -144,7 +146,7 @@ The earlier separate rules still apply on top of this:
 
 **Convention:** worktrees live at `.worktrees/<feature>` in the repo root, on branch `shaun/<feature>`. `.worktrees/` should be gitignored in every repo. Run `worktree help` for the subcommands and flags — use `--dry-run` before any `clean`.
 
-**Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree`,** and over whatever `superpowers:using-git-worktrees` reaches for on its own. Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention.
+**Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree` and `isolation: "worktree"`.** Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention.
 
 ## Working in code
 
@@ -170,22 +172,13 @@ This applies to comments and docstrings in source, and to config files that take
 
 When the work is visual — a UI change, a chart, a rendered page — **look at it instead of reasoning about it.** Screenshot it, crop in on the part in question, and iterate against what you actually see. Tools beat thinking here; `/run` exists for this.
 
-## Skill invocation
+## Skills and plan execution
 
-**Skills are tools, not mandates.** Invoke a skill when the task genuinely benefits from its workflow — e.g. `superpowers:systematic-debugging` for a real debugging session, `superpowers:dispatching-parallel-agents` for actual parallel work. For simple tasks, work directly — the workflow would be ceremony.
+**Skills are tools, not mandates.** Invoke one when the task genuinely benefits from its workflow; for simple tasks, work directly — the workflow would be ceremony. Always invoke a skill I name, and `update-config` for anything touching `settings.json` — resolve the path first: on some machines it's a symlink into a separate repo, which makes the edit a change to *that* repo and puts it under the confirm-before-shared-state-writes rule above.
 
-**Verify as you go, then report.** Claude 5 models verify and self-correct without being asked, so a bolted-on verification step compounds with that and burns tokens for no quality gain. Reserve `superpowers:verification-before-completion` for ship-time gates where I want the evidence in the transcript — before a commit, a PR, or a deploy. Verification is your own work, not a job to hand to a subagent.
+**Verify as you go, then report.** You verify and self-correct without being asked, so a bolted-on verification pass burns tokens for no quality gain. Put explicit evidence in the transcript only at ship-time gates — before a commit, a PR, or a deploy. Verification is your own work, not a job to hand to a subagent.
 
-This **overrides** the `superpowers:using-superpowers` bootstrap rule that says "even 1% chance a skill might apply, you ABSOLUTELY MUST invoke." That framing is calibrated for older models — Opus 4.8 and the Claude 5 models pick skill relevance adaptively. The user-instruction priority means this section wins over the bootstrap.
-
-Skills chain: up to 6 in one prompt — `/skill-a /skill-b do XYZ`. Custom slash commands are now skills; there's no separate command system.
-
-The exceptions where skill invocation is still load-bearing:
-- `update-config` — anything that touches `settings.json`. Resolve the path first: on some machines it's a symlink into a separate repo, which makes the edit a change to *that* repo and puts it under the confirm-before-shared-state-writes rule above
-- `superpowers:writing-skills` — when authoring/editing a skill
-- Any skill the user explicitly names in their prompt
-
-**Plan execution default:** when there's a written implementation plan to execute, use `superpowers:subagent-driven-development` (autonomous, current session, two-stage review per task). Run it start to finish; no checkpoint prompts. Its per-task review is the one verification step I do want kept: it reviews *another agent's* output, which is the case the self-verification caveat above doesn't cover. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline — that pipeline comes from a plugin, so if `/ship` isn't installed on this machine, stop after implementing and tell me rather than improvising a substitute. For planning before a plan exists, `superpowers:brainstorming` then `superpowers:writing-plans` — reserve the full pass for genuinely cross-cutting work.
+**Executing a written plan:** run it start to finish in this session, with no checkpoint prompts. Hand independent tasks to subagents when that's faster, and review each one's output before building on it — reviewing *another agent's* work is the one extra verification step I want kept. After implementation, hand off to `/ship` for the smoke-test → check-pr → commit/PR → watch-pr pipeline; if `/ship` isn't installed on this machine, stop after implementing and tell me rather than improvising a substitute. Write a plan first only for genuinely cross-cutting work.
 
 ## Memory
 
@@ -193,32 +186,14 @@ Memories are **project-scoped**: a memory written while working in one repo is i
 
 - Rules that should hold everywhere go in **this file**, not in memory.
 - Project-specific facts go in memory, and shouldn't be cited from this file by filename. A global pointer to a project-scoped memory resolves nowhere in every other repo.
-- Don't save what the repo already records. If I ask you to remember something the code or git history already says, ask what was non-obvious about it and save that instead.
 
-## Agent Usage
+## Agent usage
 
-### When to Use the Agent Tool
+**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Isolated context counts too — work that would otherwise flood this conversation. Below that bar, work inline: a `grep` or `Read` beats an Explore agent's summary, one agent beats three, and anything needing context carried across steps stays with me. The bias to correct is over-delegation, not under-.
 
-```
-Agent(Explore)             → "How does X work?", architecture questions, open-ended exploration
-Agent(general-purpose)     → Multi-step research, complex searches
-Agent(fork)                → Continue *this* conversation off the main thread (inherits full context)
-Direct tools               → Specific file/class lookups, known patterns
-```
+When you dispatch an Explore agent for an architecture question, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visuals and Prose"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
 
-**Explore breadth:** `medium` for moderate exploration, `very thorough` for multiple locations and naming conventions — those are the two the tool advertises. It reads excerpts, not whole files, so it locates code rather than reviewing it.
-
-**Continue an agent, don't respawn one.** `SendMessage` to a running or finished agent keeps its context; a fresh `Agent` call starts cold. Pass `isolation: "worktree"` when parallel agents would otherwise edit the same files.
-
-**Subagents run in the background by default** — dispatching one doesn't block the main thread, so parallel fan-out across independent questions is cheap. Nesting goes up to 5 levels.
-
-**Delegate when the work is a wide sweep you'd otherwise read serially** — several unrelated subsystems, or a multi-file investigation whose file list you don't know yet. Isolated context counts too — work that would otherwise flood this conversation. Below that bar, work inline: a `grep`, `Read`, or `Glob` beats an Explore agent's summary, one agent beats three, and anything needing context carried across steps stays with me. Verification stays yours. Claude 5 models delegate more readily than prior generations, so the bias to correct is over-delegation, not under-. Hard caps exist if it ever gets away from us: `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`.
-
-For architecture questions where you do dispatch an Explore agent, ask it to return `file — symbol` refs + a flow sequence + key patterns — that converts cleanly to visuals (per "Documentation Style: Visuals and Prose"). Line numbers are fine in its reply to you; strip them from anything you then write to a file.
-
-### Multi-agent orchestration (Workflow)
-
-The Workflow tool runs deterministic multi-agent scripts (fan-out, adversarial verify, synthesize) but is opt-in — it fires only when I say "use a workflow" or "ultracode" in the prompt. For large audits/migrations/exhaustive reviews, propose one with a rough cost estimate instead of running it unprompted. `superpowers:dispatching-parallel-agents` remains the default for ordinary 2–5-agent parallel work.
+For large audits, migrations, or exhaustive reviews, propose a Workflow with a rough cost estimate instead of running one unprompted.
 
 ## Closing reminder
 
