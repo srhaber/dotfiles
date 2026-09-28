@@ -136,6 +136,8 @@ The earlier separate rules still apply on top of this:
 
 **Stage by path.** When the tree holds work I didn't ask you to commit, add the specific files and say which ones you left alone. `git commit -a` is how in-flight work gets swept into an unrelated commit.
 
+**PR scope:** when several changes share a theme, propose one bundled PR first and offer splits second. Strict scoping is overhead when no reviewer has to switch between unrelated concerns; still split out a surface with its own blast radius, like IAM.
+
 ## Linear
 
 **Assign new tickets to me.** Every Linear issue you create gets `assignee: "me"` unless I name someone else. Unassigned tickets I filed myself fall out of "my issues" views and stop getting triaged.
@@ -146,7 +148,7 @@ The earlier separate rules still apply on top of this:
 
 **Convention:** worktrees live at `.worktrees/<feature>` in the repo root, on branch `shaun/<feature>`. `.worktrees/` should be gitignored in every repo. Run `worktree help` for the subcommands and flags — use `--dry-run` before any `clean`.
 
-**Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree` and `isolation: "worktree"`.** Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention.
+**Prefer this script over the harness's native `EnterWorktree`/`ExitWorktree` and `isolation: "worktree"`.** Only the script enforces the `shaun/<feature>` branch name and the `.worktrees/` location — native worktree tools pick their own and silently break the convention. Use a worktree even for sequential work that doesn't need isolation, so the main checkout stays free for me and other sessions, and push the branch early on long runs — the environment can prune a worktree and its branch ref overnight, leaving the commits recoverable only by SHA.
 
 ## Working in code
 
@@ -163,6 +165,10 @@ When a specific figure genuinely carries the argument, keep it and mark it: `(as
 This applies to comments and docstrings in source, and to config files that take comments. PR descriptions and commit messages are the exception — they are a record of a specific change at a specific time, so the measurements belong there.
 
 **Tests verify correctness; they don't define it.** Implement the general case with the standard tools. If a test looks wrong, or the task looks infeasible, tell me instead of shaping the code around the assertions. Removing or weakening a test to get a suite green is off the table — a deleted assertion is missing functionality that nobody notices. Name the test you think is wrong and why, and let me decide.
+
+**A guard test proves nothing until it has failed with the fix reverted.** Run a regression guard with and without the fix and report both. The same goes for any check: if its output would look the same with the thing broken, it isn't verification. Redirect long test runs to a file and read the exit code and summary from there — `pytest … | tail` reports `tail`'s exit code, and the failure can scroll off.
+
+**A gap isn't a convention.** When the repo lacks something (alarm targets, a test category), don't cite existing instances of the gap as the pattern to match. Say it's missing and offer: match it as-is, add the missing piece now, or defer with a ticket — and let me pick.
 
 ## Code review requests
 
