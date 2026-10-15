@@ -123,6 +123,75 @@ unpushed_commit_count() {
     git rev-list --count "${base}..${branch}" 2>/dev/null || echo 0
 }
 
+has_compose_file() {
+    local f
+    for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do
+        [[ -f "$1/$f" ]] && return 0
+    done
+    return 1
+}
+
+# Compose's default project name: the directory basename, lowercased, with
+# anything outside [a-z0-9_-] dropped.
+compose_project_name() {
+    basename "$1" | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9_-' | sed 's/^[^a-z0-9]*//'
+}
+
+# Remove the containers, images and volumes of the compose projects a worktree
+# owns, so they don't outlive it. Without this, every removed worktree leaves
+# a full set of built images behind in the Docker VM until it fills.
+#
+# The project name is derived from the worktree's directory name. That name is
+# not unique: one feature often has a worktree in several repos, and all of
+# them map to the same project. So:
+#   - only a worktree with its own compose file can own a project
+#   - a project with any container started from another directory is skipped
+#
+# popcorn-test-<dir> is backend's `make test-integration` project. Its
+# containers and volumes are already gone after a run, but its images remain.
+docker_teardown() {
+    local wt_path="$1" name project
+    has_compose_file "$wt_path" || return 0
+    command -v docker >/dev/null 2>&1 || return 0
+    docker info >/dev/null 2>&1 || { warning "Docker not running; skipped image/volume cleanup for $wt_path"; return 0; }
+
+    name=$(compose_project_name "$wt_path")
+    [[ -z "$name" ]] && return 0
+
+    for project in "$name" "popcorn-test-${name}"; do
+        local label="label=com.docker.compose.project=${project}"
+        local dir foreign=""
+        while IFS= read -r dir; do
+            [[ -z "$dir" || "$dir" == "$wt_path" || "$dir" == "$wt_path"/* ]] && continue
+            foreign="$dir"
+            break
+        done < <(docker ps -a --filter "$label" --format '{{.Label "com.docker.compose.project.working_dir"}}')
+        if [[ -n "$foreign" ]]; then
+            warning "  Docker project '$project' also runs from $foreign; left it alone"
+            continue
+        fi
+
+        local containers images volumes
+        containers=$(docker ps -aq --filter "$label")
+        images=$(docker images -q --filter "$label" | sort -u)
+        volumes=$(docker volume ls -q --filter "$label")
+        [[ -z "$containers$images$volumes" ]] && continue
+
+        info "  Docker project '$project': $(wc -w <<< "$containers" | xargs) container(s), $(wc -w <<< "$images" | xargs) image(s), $(wc -w <<< "$volumes" | xargs) volume(s)"
+        # Word-splitting the ID lists is intended: IDs contain no spaces.
+        # Containers go first; an image or volume in use can't be removed.
+        local failed=false
+        # shellcheck disable=SC2086
+        if [[ -n "$containers" ]]; then run_quiet docker rm -f $containers >/dev/null || failed=true; fi
+        # shellcheck disable=SC2086
+        if [[ -n "$images" ]]; then run_quiet docker rmi -f $images >/dev/null || failed=true; fi
+        # shellcheck disable=SC2086
+        if [[ -n "$volumes" ]]; then run_quiet docker volume rm $volumes >/dev/null || failed=true; fi
+        [[ "$failed" == true ]] && warning "  Some of '$project' could not be removed; see 'docker system df'"
+    done
+    return 0
+}
+
 normalize_branch_name() {
     local branch="$1"
     # Add shaun/ prefix if not present
@@ -259,6 +328,7 @@ cmd_remove() {
     fi
 
     info "Removing worktree..."
+    docker_teardown "$worktree_path"
     run git worktree remove "$worktree_path"
     run git worktree prune
 
@@ -545,6 +615,7 @@ cmd_clean() {
                 continue
             fi
             echo "  - Removing $wt_branch..." >&2
+            docker_teardown "$wt_path"
             run_quiet git worktree remove "$wt_path" --force || true
             run_quiet git branch -D "$wt_branch" || true
             removed=$((removed + 1))
@@ -572,6 +643,7 @@ EOF
             for wt_entry in "${worktrees_to_remove[@]}"; do
                 IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                 echo "  - Removing $wt_branch..."
+                docker_teardown "$wt_path"
                 run_quiet git worktree remove "$wt_path" --force || true
                 run_quiet git branch -D "$wt_branch" || true
             done
@@ -583,6 +655,7 @@ EOF
             for wt_entry in "${worktrees_to_remove[@]}"; do
                 IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                 echo "  - Removing worktree for $wt_branch..."
+                docker_teardown "$wt_path"
                 run_quiet git worktree remove "$wt_path" --force || true
             done
             run git worktree prune
@@ -626,6 +699,7 @@ EOF
                     local wt_entry="${worktrees_to_remove[$idx]}"
                     IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                     echo "  - Removing $wt_branch..."
+                    docker_teardown "$wt_path"
                     run_quiet git worktree remove "$wt_path" --force || true
                     run_quiet git branch -D "$wt_branch" || true
                 done
@@ -635,6 +709,7 @@ EOF
                     local wt_entry="${worktrees_to_remove[$idx]}"
                     IFS='|' read -r wt_path wt_branch <<< "$wt_entry"
                     echo "  - Removing worktree for $wt_branch..."
+                    docker_teardown "$wt_path"
                     run_quiet git worktree remove "$wt_path" --force || true
                 done
             fi
